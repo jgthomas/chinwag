@@ -4,15 +4,15 @@ package server;
 public abstract class Command {
         private final ConnectionTracker connectionTracker;
 
-        public Command(ConnectionTracker connectionTracker) {
+        Command(ConnectionTracker connectionTracker) {
                 this.connectionTracker = connectionTracker;
         }
 
-        public MessageSender getMessageSender() {
+        MessageSender getMessageSender() {
                 return connectionTracker.getMessageSender();
         }
 
-        public ConnectionTracker getConnectionTracker() {
+        ConnectionTracker getConnectionTracker() {
                 return connectionTracker;
         }
 
