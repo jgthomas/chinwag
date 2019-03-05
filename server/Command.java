@@ -1,3 +1,4 @@
+package server;
 
 
 public abstract class Command {

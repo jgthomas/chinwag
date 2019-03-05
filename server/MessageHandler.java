@@ -1,3 +1,4 @@
+package server;
 
 
 public interface MessageHandler extends Runnable {

@@ -1,3 +1,4 @@
+package server;
 
 
 public class SwitchCommand extends Command {

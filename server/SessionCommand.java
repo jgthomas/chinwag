@@ -1,3 +1,4 @@
+package server;
 
 
 public class SessionCommand extends Command {

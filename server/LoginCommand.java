@@ -1,3 +1,4 @@
+package server;
 
 
 public class LoginCommand extends Command {
