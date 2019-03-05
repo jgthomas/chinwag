@@ -59,7 +59,7 @@ public class MessageBox implements Serializable {
          *
          */
         public MessageBox(Action command, String data) {
-                this(command, new String(), data);
+                this(command, "", data);
         }
 
         /*
@@ -67,7 +67,7 @@ public class MessageBox implements Serializable {
          *
          */
         public MessageBox(String data) {
-                this(Action.CHAT, new String(), data);
+                this(Action.CHAT, "", data);
         }
 
         /*
@@ -75,7 +75,7 @@ public class MessageBox implements Serializable {
          *
          */
         public MessageBox(Action command) {
-                this(command, new String(), new String());
+                this(command, "", "");
         }
 
         public Action getCommand() {
