@@ -78,15 +78,15 @@ public class MessageBox implements Serializable {
                 this(command, "", "");
         }
 
-        public Action getCommand() {
+        Action getCommand() {
                 return command;
         }
 
-        public String getTarget() {
+        String getTarget() {
                 return target;
         }
 
-        public String getData() {
+        String getData() {
                 return data;
         }
 }
