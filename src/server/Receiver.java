@@ -13,11 +13,11 @@ import java.net.*;
  * Runs until it recieves the command to quit.
  *
  * */
-public class Receiver implements MessageReceiver {
+class Receiver implements MessageReceiver {
         private final Socket clientSocket;
         private final MessageHandler messageHandler;
 
-        public Receiver(Socket clientSocket, MessageHandler messageHandler) {
+        Receiver(Socket clientSocket, MessageHandler messageHandler) {
                 this.clientSocket = clientSocket;
                 this.messageHandler = messageHandler;
         }

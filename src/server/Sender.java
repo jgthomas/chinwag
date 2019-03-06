@@ -9,11 +9,11 @@ import java.net.*;
  * or clients.
  *
  * */
-public class Sender implements MessageSender {
+class Sender implements MessageSender {
         private final User user;
         private ObjectOutputStream out = null;
 
-        public Sender(Socket clientSocket, User user) {
+        Sender(Socket clientSocket, User user) {
                 this.user = user;
 
                 try {
