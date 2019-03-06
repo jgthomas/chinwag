@@ -4,7 +4,8 @@ import database.Database;
 
 import java.io.*;
 import java.net.*;
-import java.sql.Time;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.*;
 
@@ -22,13 +23,21 @@ public class Server {
         private final int port;
         private final ExecutorService threadPool;
         private final ChatContext global;
-        private Map<String, Integer> failedAttempts;
-        private Map<String, Time> lockedAccounts;
+        private static Map<String, Integer> failedAttempts = new HashMap<>();
+        private static Map<String, Date> lockedAccounts = new HashMap<>();
 
         public Server(int port) {
                 this.port = port;
                 threadPool = Executors.newFixedThreadPool(MAX_THREADS);
                 global = new ChatSession("global");
+        }
+
+        public static synchronized Map<String, Integer> getFailedAttempts(){
+                return failedAttempts;
+        }
+
+        public static synchronized Map<String, Date> getLockedAccounts(){
+                return lockedAccounts;
         }
 
         public void runServer() {
