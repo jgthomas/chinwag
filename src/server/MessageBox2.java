@@ -18,6 +18,11 @@ import java.util.EnumMap;
  * mb.add(Data.USER_NAME, "mark")
  * mb.add(Data.PASSWORD, "letmein")
  *
+ * Other end:
+ *
+ * mb.get(Data.USER_NAME)
+ * mb.get(Data.PASSWORD)
+ *
  * */
 public class MessageBox2 implements DataTransfer, Serializable {
     private final Action action;
