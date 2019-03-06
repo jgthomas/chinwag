@@ -7,10 +7,10 @@ import java.net.*;
 /**
  * Deals with receiving data from the client.
  *
- * When data is recieved, in the form of a MessageBox object,
+ * When data is received, in the form of a MessageBox object,
  * it is passed to the messageHandler.
  *
- * Runs until it recieves the command to quit.
+ * Runs until it receives the command to quit.
  *
  * */
 class Receiver implements MessageReceiver {
