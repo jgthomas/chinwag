@@ -43,6 +43,24 @@ public class ClientDraft {
 	public void Close() {
 		//closes the client
 	}
+
+
+	public int getPort() {
+		return port;
+	}
+
+
+	public InetAddress getServerHost() {
+		return serverHost;
+	}
+
+
+	public Socket getSocket() {
+		return socket;
+	}
 	
+	public ObjectInputStream getFromServer() {
+		return fromServer;
+	}
 
 }
