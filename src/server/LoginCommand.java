@@ -1,6 +1,8 @@
 package server;
 
 
+import database.Database;
+
 class LoginCommand extends Command {
 
 	LoginCommand(ConnectionTracker connectionTracker) {
@@ -8,17 +10,19 @@ class LoginCommand extends Command {
 	}
 
 	@Override
-	public void execute(MessageBox messageBox) {
-		setUserName(messageBox.get(Data.USER_NAME));
-		registerSender();
-		MessageBox mb = new MessageBox(Action.CHAT);
-		mb.add(Data.MESSAGE, "hello");
-		getMessageSender().sendMessage(mb);
-		//getMessageSender().sendMessage(new MessageBox(Action.CHAT, "Hello", "Hello!"));
+	public void execute(MessageBox2 messageBox) {
+		String username = messageBox.get(Data.USERNAME);
+		String password = messageBox.get(Data.PASSWORD);
+		if (Database.isValidUser(username, password)){
+			User newUser = new User(null, username)
+		}
+//		setUserName(messageBox.get(Data.USERNAME));
+//		registerSender();
+//		getMessageSender().sendMessage(new MessageBox(Action.CHAT, "Hello", "Hello!"));
 	}
 
 	private void setUserName(String username) {
-		getMessageSender().getUser().setName(username);
+		getMessageSender().getUser().setUsername(username);
 	}
 
 	private void registerSender() {
