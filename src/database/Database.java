@@ -26,13 +26,30 @@ public class Database {
         }
     }
 
-    public static synchronized ResultSet makeLoginQuery(String username){
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")){
+    public static synchronized boolean isValidUser(String username, String password){
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?")){
             statement.setString(1, username);
-            return statement.executeQuery();
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                return true;
+            else {
+                try (PreparedStatement anotherStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")){
+                    anotherStatement.setString(1, username);
+                    rs = anotherStatement.executeQuery();
+                    if (rs.next()) {
+                        int i = rs.getInt(3);
+                        makeAttemptsIncrement(username, i);
+                        // Wrong password
+                        return false;
+                    } else
+                        // User doesn't exit
+                        return false;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return false;
         }
     }
 
