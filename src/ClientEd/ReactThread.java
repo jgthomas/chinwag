@@ -4,10 +4,10 @@ import server.Action;
 import server.MessageBox;
 
 public class ReactThread implements Runnable {
-	private ClientDraft client;
+	private Client client;
 	private MessageBox message;
 	
-	ReactThread(ClientDraft client, MessageBox message) {
+	ReactThread(Client client, MessageBox message) {
 			this.client = client;
 			this.message = message;
 		}
