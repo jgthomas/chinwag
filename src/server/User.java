@@ -6,11 +6,14 @@ import java.net.*;
 class User {
         private String name;
         private String username;
+        private Socket clientSocket;
 
-        User(String username) {
+        User(Socket clientSocket) {
                 this.name = null;
-                this.username = username;
+                this.username = null;
+                this.clientSocket = clientSocket;
         }
+
 
         void setName(String name) {
                 this.name = name;

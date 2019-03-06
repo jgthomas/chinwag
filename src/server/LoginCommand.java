@@ -14,7 +14,9 @@ class LoginCommand extends Command {
 		String username = messageBox.get(Data.USERNAME);
 		String password = messageBox.get(Data.PASSWORD);
 		if (Database.isValidUser(username, password)){
-			User newUser = new User(username);
+			MessageBox mb = new MessageBox(Action.SERVERMESSAGE);
+			mb.add(Data.MESSAGE, "Login successful!");
+			getMessageSender().sendMessage(mb);
 		}
 //		setUserName(messageBox.get(Data.USERNAME));
 //		registerSender();
