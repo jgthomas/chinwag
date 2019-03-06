@@ -3,24 +3,24 @@ package server;
 import java.net.*;
 
 
-public class User {
+class User {
         private String name;
         private String id;
 
-        public User(Socket clientSocket) {
+        User(Socket clientSocket) {
                 this.name = "you";
                 this.id = setID(clientSocket);
         }
 
-        public String id() {
+        String id() {
                 return id;
         }
 
-        public void setName(String name) {
+        void setName(String name) {
                 this.name = name;
         }
 
-        public String getName() {
+        String getName() {
                 return name;
         }
 
