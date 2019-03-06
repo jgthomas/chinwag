@@ -1,7 +1,7 @@
 package server;
 
 
-class CommandFactory {
+public class CommandFactory {
 
         static Command buildCommand
                 (Action action,
