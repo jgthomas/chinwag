@@ -79,7 +79,7 @@ public class Client {
 		
 		
 		
-		//MessageBox loginMessage = new MessageBox(login);
+		MessageBox loginMessage = new MessageBox(login);
 	}
 
 }
