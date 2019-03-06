@@ -7,9 +7,9 @@ import server.MessageBox;
 public class ListenerThread implements Runnable {
 	private Socket socket;
 	private ObjectInputStream fromServer;
-	private ClientDraft client;
+	private Client client;
 	
-	ListenerThread(ClientDraft client) {
+	ListenerThread(Client client) {
 		this.client = client;
 		socket = client.getSocket();
 		fromServer = client.getFromServer();
@@ -21,6 +21,9 @@ public class ListenerThread implements Runnable {
 			//Waits here for an object to appear in input
 			while (true) {
 				MessageBox messageBox = (MessageBox) fromServer.readObject();
+				//if (messageBox.) If the data is a response, print something helpful
+				
+				
 				ReactThread reaction = new ReactThread(client, messageBox);
 				
 			//Create new thread to do the following:

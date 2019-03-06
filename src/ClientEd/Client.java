@@ -10,7 +10,7 @@ import java.util.Scanner;
 /** thread to process received messages */
 /** thread to send messages */
 
-public class ClientDraft {
+public class Client {
 	private final int port;
 	private final InetAddress serverHost;
 	private Socket socket;
@@ -19,7 +19,7 @@ public class ClientDraft {
 	private ObjectOutputStream toServer;
 	
 	/**constructor opens socket to server */
-	ClientDraft(InetAddress serverHost, int port) {
+	Client(InetAddress serverHost, int port) {
 		
 		this.serverHost = serverHost;
 		this.port = port;
