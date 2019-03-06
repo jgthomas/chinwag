@@ -2,7 +2,6 @@ package server;
 
 import java.net.*;
 
-
 /**
  * Acts as a 'mini-server' for a single thread.
  *
