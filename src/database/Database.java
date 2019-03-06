@@ -59,6 +59,17 @@ public class Database {
         }
     }
 
+    public static synchronized boolean userExists(String username){
+        try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")){
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /* Planning to keep attempts counter on server because this is temporary.
      * If later we decide that we want to store the attempts counter on the 
      * database then we can reinstate the following method:
