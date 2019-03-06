@@ -1,9 +1,9 @@
 package server;
 
 
-public class LoginCommand extends Command {
+class LoginCommand extends Command {
 
-        public LoginCommand(ConnectionTracker connectionTracker) {
+        LoginCommand(ConnectionTracker connectionTracker) {
                 super(connectionTracker);
         }
 

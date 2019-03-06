@@ -1,9 +1,9 @@
 package server;
 
 
-public class SwitchCommand extends Command {
+class SwitchCommand extends Command {
 
-        public SwitchCommand(ConnectionTracker connectionTracker) {
+        SwitchCommand(ConnectionTracker connectionTracker) {
                 super(connectionTracker);
         }
 

@@ -3,9 +3,9 @@ package server;
 import java.util.List;
 
 
-public class UsersCommand extends Command {
+class UsersCommand extends Command {
 
-        public UsersCommand(ConnectionTracker connectionTracker) {
+        UsersCommand(ConnectionTracker connectionTracker) {
                 super(connectionTracker);
         }
 

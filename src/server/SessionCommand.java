@@ -1,9 +1,9 @@
 package server;
 
 
-public class SessionCommand extends Command {
+class SessionCommand extends Command {
 
-        public SessionCommand(ConnectionTracker connectionTracker) {
+        SessionCommand(ConnectionTracker connectionTracker) {
                 super(connectionTracker);
         }
 
