@@ -1,7 +1,6 @@
 package server;
 
-
-abstract class Command {
+public abstract class Command {
         private final ConnectionTracker connectionTracker;
 
         Command(ConnectionTracker connectionTracker) {
