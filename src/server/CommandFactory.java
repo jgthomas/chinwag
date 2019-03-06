@@ -1,9 +1,9 @@
 package server;
 
 
-public class CommandFactory {
+class CommandFactory {
 
-        public static Command buildCommand
+        static Command buildCommand
                 (Action action,
                  ConnectionTracker connectionTracker)
         {
