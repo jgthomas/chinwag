@@ -1,8 +1,9 @@
 package server;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 
-public class MessageBox2 implements DataTransfer {
+public class MessageBox2 implements DataTransfer, Serializable {
     private final Action action;
     private final EnumMap<Data, String> messageData;
 
