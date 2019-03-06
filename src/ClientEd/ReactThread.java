@@ -15,7 +15,7 @@ public class ReactThread implements Runnable {
 
 	@Override
 	public void run() {
-		if (Action.isValidCommand(message.getCommand().getToken())) { //change back to value
+		if (message.getAction().getToken()) { //change back to value
 			
 		}
 		else {
