@@ -30,7 +30,7 @@ class Sender implements MessageSender {
          * */
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
-                sendToAllInChat(chatContext, messageBox.getData());
+                sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
         }
 
         /**
@@ -63,7 +63,9 @@ class Sender implements MessageSender {
         private void sendToAllInChat(ChatContext chatContext, String message) {
                 for (MessageSender sender : chatContext) {
                         if (notOriginalSender(sender)) {
-                                sender.sendMessage(new MessageBox(buildMessage(message)));
+                                MessageBox mb = new MessageBox(Action.CHAT);
+                                mb.add(Data.MESSAGE, message);
+                                sender.sendMessage(mb);
                         }
                 }
         }

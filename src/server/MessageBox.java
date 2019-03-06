@@ -1,92 +1,66 @@
 package server;
 
 import java.io.Serializable;
+import java.util.EnumMap;
 
 
-public class MessageBox implements Serializable {
-        private final Action command;
-        private final String target;
-        private final String data;
-        /* we can add anything here as long as it's serializable */
+/**
+ * New MessageBox
+ *
+ * Build the object with an initial Action, then
+ * add fields as required to the map.
+ *
+ * Map has Data enum values as keys and strings as values.
+ *
+ * Samples use:
+ *
+ * MessageBox mb = new MessageBox2(Action.LOGIN)
+ * mb.add(Data.USER_NAME, "mark")
+ * mb.add(Data.PASSWORD, "letmein")
+ *
+ * Other end:
+ *
+ * String userName = mb.get(Data.USER_NAME)
+ * String password = mb.get(Data.PASSWORD)
+ *
+ * */
+public class MessageBox implements DataTransfer, Serializable {
+    private final Action action;
+    private final EnumMap<Data, String> messageData;
 
-        /**
-         * Creates a data transfer object.
-         *
-         * All of this is totally subject to change, obviously, but as this
-         * is what's passed between client and server, I thought it should have
-         * some documentation of its current state.
-         *
-         *
-         * @param command a member of the Action enum, indicating what the
-         *                recipient should do, login, send message, etc.
-         *
-         * @param target  an (optional) parameter regarding the target
-         *                of the command, e.g. direct a message at a particular user
-         *                ignored if blank
-         *
-         * @param data    the content of the communication, also optional. this
-         *                could be the chat message, the name a user is logging
-         *                in with, or whatever
-         *
-         *
-         * Sample uses:
-         *
-         * (1) new MessageBox(Action.CHAT, "", "hello losers!")
-         *     - tells the server to send the message to all users in the chat
-         *
-         * (2) new MessageBox(Action.LOGIN, "", "username")
-         *     - tells the server to log the user in, no password stuff done yet, so
-         *       all this really does is set a username
-         *
-         * (3) new MessageBox(Action.QUIT, "", "")
-         *     - tells server to disconnect the client, the second two arguments
-         *       could be filled in, they'd just be ignored for QUIT
-         *
-         * (4) new MessageBox(Action.CHAT, "@jack", "yo man")
-         *     - this does not yet exist, but the idea is that this would send
-         *       the message to the named user, '@' or however this is indicated
-         *       is unknown
-         *
-         * */
-        public MessageBox(Action command, String target, String data) {
-                this.command = command;
-                this.target = target;
-                this.data = data;
-        }
+    /**
+     * @param action a member of the Action enum,
+     *               indicating the action to perform,
+     *               chat, quit, login etc
+     *
+     * */
+    public MessageBox(Action action) {
+        this.action = action;
+        this.messageData = new EnumMap<>(Data.class);
+    }
 
-        /*
-         * Constructor omitting target
-         *
-         */
-        public MessageBox(Action command, String data) {
-                this(command, "", data);
-        }
+    public Action getAction() {
+        return action;
+    }
 
-        /*
-         * Constructor with no target and a default CHAT action
-         *
-         */
-        public MessageBox(String data) {
-                this(Action.CHAT, "", data);
-        }
+    /**
+     * @param data a member of the Data enum
+     * @param s a string, could be a message,
+     *          username or password, etc.
+     *
+     **/
+    @Override
+    public void add(Data data, String s) {
+        messageData.put(data, s);
+    }
 
-        /*
-         * Constructor taking only a command
-         *
-         */
-        public MessageBox(Action command) {
-                this(command, "", "");
-        }
+    /**
+     * @param data a member of the Data enum
+     * @return the string associated with that member in the map
+     */
+    @Override
+    public String get(Data data) {
+        return messageData.get(data);
+    }
 
-        public Action getCommand() {
-                return command;
-        }
-
-        public String getTarget() {
-                return target;
-        }
-
-        public String getData() {
-                return data;
-        }
 }

@@ -5,15 +5,11 @@ import java.net.*;
 
 class User {
         private String name;
-        private String id;
+        private String username;
 
-        User(Socket clientSocket) {
-                this.name = "you";
-                this.id = setID(clientSocket);
-        }
-
-        String id() {
-                return id;
+        User(String username) {
+                this.name = null;
+                this.username = username;
         }
 
         void setName(String name) {
@@ -24,9 +20,7 @@ class User {
                 return name;
         }
 
-        private String setID(Socket clientSocket) {
-                return clientSocket.getInetAddress().getHostAddress()
-                        + "_"
-                        + clientSocket.getPort();
-        }
+        String getUsername() { return username; }
+
+        void setUsername(String username) { this.username = username; }
 }
