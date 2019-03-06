@@ -13,14 +13,14 @@ import java.net.*;
  * Third object tracks the current chat sessions for this thread.
  *
  * */
-public class ClientHandler implements MessageHandler {
+class ClientHandler implements MessageHandler {
         private static final String THREAD_START = "Connected to client using: ";
         private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
         private final ConnectionTracker connectionTracker;
 
-        public ClientHandler(Socket clientSocket, ChatContext global) {
+        ClientHandler(Socket clientSocket, ChatContext global) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, new User(clientSocket));
                 connectionTracker = new Sessions(messageSender, global);
