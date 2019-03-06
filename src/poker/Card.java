@@ -3,7 +3,7 @@ package poker;
 public class Card {
 	private CardRank rank;
 	private String suit;
-	private int value;
+	private int value; //Handle ace being lower in other way
 	
 	public Card(CardRank rank, String suit) {
 		this.rank = rank;
