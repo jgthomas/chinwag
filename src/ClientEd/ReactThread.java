@@ -12,14 +12,30 @@ public class ReactThread implements Runnable {
 			this.message = message;
 		}
 		
-	}
 
 	@Override
 	public void run() {
-		if (!Action.isValidCommand(message.getCommand().getToken())) { //change back to value
-			//Throw exception?
-			//Do nothing?
-		
+		if (Action.isValidCommand(message.getCommand().getToken())) { //change back to value
+			
+		}
+		else {
+			throw new IllegalArgumentException("Invalid command");
+		}
 	}
 
+	void loginRefusedResponse() {
+		System.out.println("Login credentials refused");
+		
+	}
+	
+	/**
+	 * Can add "logged in as ..."
+	 * Last logged in at ...
+	 * 
+	 */
+	void loginAcceptedResponse() {
+		System.out.println("Login successful");
+		//Allow client to do things
+	}
+	
 }

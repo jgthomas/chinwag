@@ -28,7 +28,7 @@ public class ListenerThread implements Runnable {
 			//check validity of message
 			//check command
 			//interpret command
-			
+			}
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

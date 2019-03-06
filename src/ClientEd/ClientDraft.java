@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Scanner;
 
 /** need thread always listening for server communication */
 /** thread to process received messages */
@@ -62,6 +63,23 @@ public class ClientDraft {
 	
 	public ObjectInputStream getFromServer() {
 		return fromServer;
+	}
+	
+	public void login() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter user name, or \"Quit\" to cancel.");
+		String userName = in.nextLine();
+		if (userName.equals("Quit")) {
+			System.out.println("Login cancelled.");
+			return;
+		}
+		//obscure what they type?
+		System.out.println("Enter password");
+		String passWord = in.nextLine();
+		
+		
+		
+		//MessageBox loginMessage = new MessageBox(login);
 	}
 
 }
