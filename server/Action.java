@@ -32,7 +32,7 @@ public enum Action {
                 token = t;
         }
 
-        String value() {
+        String getToken() {
                 return token;
         }
 
