@@ -3,12 +3,12 @@ package server;
 import java.util.*;
 
 
-public class Sessions implements ConnectionTracker {
+class Sessions implements ConnectionTracker {
         private final Map<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
         private String currentSession;
 
-        public Sessions(MessageSender messageSender, ChatContext global) {
+        Sessions(MessageSender messageSender, ChatContext global) {
                 this.messageSender = messageSender;
                 activeSessions = new HashMap<>();
                 activeSessions.put("global", global);
