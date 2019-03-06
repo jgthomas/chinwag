@@ -6,9 +6,13 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import server.Action;
+import server.Data;
+import server.MessageBox;
+
 /** need thread always listening for server communication */
 /** thread to process received messages */
-/** thread to send messages */
+/** thread(s) to execute commands */
 
 public class Client {
 	private final int port;
@@ -43,7 +47,11 @@ public class Client {
 	
 	
 	public void Close() {
-		//closes the client
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -65,6 +73,14 @@ public class Client {
 		return fromServer;
 	}
 	
+	public ObjectOutputStream getToServer() {
+		return toServer;
+	}
+	
+	public void createAccount(String userName, String passWord) {
+		
+	}
+	
 	public void login() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter user name, or \"Quit\" to cancel.");
@@ -73,13 +89,19 @@ public class Client {
 			System.out.println("Login cancelled.");
 			return;
 		}
+		MessageBox loginMessage = new MessageBox(Action.LOGIN);
 		//obscure what they type?
 		System.out.println("Enter password");
 		String passWord = in.nextLine();
 		
-		
-		
-		MessageBox loginMessage = new MessageBox(login);
+		loginMessage.add(Data.USER_NAME, userName);
+		loginMessage.add(Data.PASSWORD, passWord);
+		try {
+			getToServer().writeObject(loginMessage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -21,7 +21,7 @@ public class ListenerThread implements Runnable {
 			//Waits here for an object to appear in input
 			while (true) {
 				MessageBox messageBox = (MessageBox) fromServer.readObject();
-				System.out.println(messageBox.getCommand());
+				System.out.println(messageBox.getAction());
 				//if (messageBox.getAction()==Decline) If the data is a response, print something helpful
 				
 				

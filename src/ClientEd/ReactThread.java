@@ -15,7 +15,7 @@ public class ReactThread implements Runnable {
 
 	@Override
 	public void run() {
-		if (Action.isValidCommand(message.getCommand().getToken())) { //for new version(s)
+		if (Action.isValidCommand(message.getAction().getToken())) { //for new version(s)
 			
 		}
 		else {
@@ -25,7 +25,6 @@ public class ReactThread implements Runnable {
 
 	void loginRefusedResponse() {
 		System.out.println("Login credentials refused");
-		
 	}
 	
 	/**
