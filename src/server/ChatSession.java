@@ -15,12 +15,12 @@ import java.util.ArrayList;
  * of those threads involved in the chat.
  *
  * */
-public class ChatSession implements ChatContext {
+class ChatSession implements ChatContext {
         private final String name;
         private final ConcurrentMap<String, MessageSender> connectedClients;
         private final ConcurrentMap<String, String> activeUserNames;
 
-        public ChatSession(String name) {
+        ChatSession(String name) {
                 this.name = name;
                 connectedClients = new ConcurrentHashMap<>();
                 activeUserNames = new ConcurrentHashMap<>();
