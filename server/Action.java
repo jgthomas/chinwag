@@ -22,7 +22,7 @@ public enum Action {
 
         static {
                 for (Action action : Action.values()) {
-                        validCommands.add(action.value());
+                        validCommands.add(action.getToken());
                 }
         }
 
