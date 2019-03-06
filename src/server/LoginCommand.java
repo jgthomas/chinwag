@@ -11,6 +11,7 @@ class LoginCommand extends Command {
         public void execute(MessageBox messageBox) {
                 setUserName(messageBox.getData());
                 registerSender();
+                getMessageSender().sendMessage(new MessageBox(Action.CHAT, "", "Hello!"));
         }
 
         private void setUserName(String username) {
