@@ -22,7 +22,7 @@ public enum Action {
 
         static {
                 for (Action action : Action.values()) {
-                        validCommands.add(action.value());
+                        validCommands.add(action.getToken());
                 }
         }
 
@@ -32,11 +32,11 @@ public enum Action {
                 token = t;
         }
 
-        String value() {
+        public String getToken() {
                 return token;
         }
 
-        static boolean isValidCommand(String command) {
+        public static boolean isValidCommand(String command) {
                 return validCommands.contains(command);
         }
 }
