@@ -71,10 +71,10 @@ class Sender implements MessageSender {
         }
 
         private String buildMessage(String message) {
-                return user.getName() + " >> " + message;
+                return user.getScreenName() + " >> " + message;
         }
 
         private boolean notOriginalSender(MessageSender sender) {
-                return !sender.getUser().id().equals(user.id());
+                return !sender.getUser().getScreenName().equals(user.getScreenName());
         }
 }

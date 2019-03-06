@@ -4,20 +4,20 @@ import java.net.*;
 
 
 class User {
-        private String name;
+        private String screenName;
         private String username;
 
         User(String username) {
-                this.name = null;
+                this.screenName = null;
                 this.username = username;
         }
 
         void setName(String name) {
-                this.name = name;
+                this.screenName = name;
         }
 
-        String getName() {
-                return name;
+        String getScreenName() {
+                return screenName;
         }
 
         String getUsername() { return username; }

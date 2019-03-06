@@ -34,7 +34,7 @@ class ChatSession implements ChatContext {
         @Override
         public void addUser(MessageSender messageSender) {
                 String id = messageSender.getUser().id();
-                String name = messageSender.getUser().getName();
+                String name = messageSender.getUser().getScreenName();
                 connectedClients.put(id, messageSender);
                 activeUserNames.put(name, id);
         }
@@ -42,7 +42,7 @@ class ChatSession implements ChatContext {
         @Override
         public void removeUser(MessageSender messageSender) {
                 String id = messageSender.getUser().id();
-                String name = messageSender.getUser().getName();
+                String name = messageSender.getUser().getScreenName();
                 connectedClients.remove(id);
                 activeUserNames.remove(name);
         }
