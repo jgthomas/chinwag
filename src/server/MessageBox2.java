@@ -36,7 +36,7 @@ public class MessageBox2 implements DataTransfer, Serializable {
      * */
     public MessageBox2(Action action) {
         this.action = action;
-        this.messageData = new EnumMap<Data, String>(Data.class);
+        this.messageData = new EnumMap<>(Data.class);
     }
 
     /**
