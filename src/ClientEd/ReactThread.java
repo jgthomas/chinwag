@@ -15,7 +15,7 @@ public class ReactThread implements Runnable {
 
 	@Override
 	public void run() {
-		if (Action.isValidCommand(message.getAction().getToken())) { //for new version
+		if (Action.isValidCommand(message.getAction().getToken())) { //for new version(s)
 			
 		}
 		else {
