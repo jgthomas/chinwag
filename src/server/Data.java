@@ -3,6 +3,6 @@ package server;
 
 public enum Data {
     MESSAGE,
-    USERNAME,
+    USER_NAME,
     PASSWORD;
 }
