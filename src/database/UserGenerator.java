@@ -3,8 +3,12 @@ package database;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
+/**
+ * This class will be used once to create a bunch of random users to populate our
+ * database automatically.
+ * @author Aidan
+ *
+ */
 public class UserGenerator {
 
 	private static final String letters = "abcdefghijklmnopqrstuvwxyz";
@@ -63,7 +67,8 @@ public class UserGenerator {
 	
 	public void printToFile(Set<User> s) {
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter("users"));
+			BufferedWriter out = new BufferedWriter(new FileWriter(
+					"/home/aidan/Documents/Semester2/SoftwareWorkshop/Project/users"));
 			Iterator<User> iter = s.iterator();
 			while(iter.hasNext()) {
 				User u = iter.next();
@@ -71,7 +76,6 @@ public class UserGenerator {
 			}
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
