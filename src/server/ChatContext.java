@@ -1,7 +1,6 @@
 package server;
 
 import java.util.List;
-import java.util.Iterator;
 
 
 public interface ChatContext extends Iterable<MessageSender> {
