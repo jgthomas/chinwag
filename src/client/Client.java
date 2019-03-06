@@ -9,6 +9,10 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import server.Action;
+import server.MessageBox;
 
 public class Client {
 	private String hostname;
@@ -36,10 +40,17 @@ public class Client {
 			io.printStackTrace();
 		}
 		ClientListener cl = new ClientListener(this);
-		ClientSender cs = new ClientSender(this);
 		executor.execute(cl);
-		executor.execute(cs);
 		
+		ClientSender cs = new ClientSender(this);
+		MessageBox login = new MessageBox(Action.LOGIN, "Bill");
+		cs.sendMessage(login);
+		try {
+			executor.awaitTermination(2, TimeUnit.MINUTES);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public ObjectInputStream getInput() {
