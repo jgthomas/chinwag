@@ -17,7 +17,7 @@ public enum Action {
         SESSION("SESSION"),
         SWITCH("SWITCH"),
         QUIT("QUIT"),
-        SERVERMESSAGE("SERVERMESSAGE");
+        SERVER_MESSAGE("SERVER_MESSAGE");
 
         private static final Set<String> validCommands = new HashSet<>();
 
