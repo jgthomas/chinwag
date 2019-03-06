@@ -8,6 +8,7 @@ class User {
         private String username;
 
         User(String username) {
+                this.name = null;
                 this.username = username;
         }
 

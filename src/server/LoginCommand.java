@@ -10,11 +10,11 @@ class LoginCommand extends Command {
 	}
 
 	@Override
-	public void execute(MessageBox2 messageBox) {
+	public void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USERNAME);
 		String password = messageBox.get(Data.PASSWORD);
 		if (Database.isValidUser(username, password)){
-			User newUser = new User(null, username)
+			User newUser = new User(username);
 		}
 //		setUserName(messageBox.get(Data.USERNAME));
 //		registerSender();
