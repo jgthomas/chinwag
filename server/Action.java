@@ -36,7 +36,7 @@ public enum Action {
                 return token;
         }
 
-        static boolean isValidCommand(String command) {
+        public static boolean isValidCommand(String command) {
                 return validCommands.contains(command);
         }
 }
