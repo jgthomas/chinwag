@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import server.Action;
+import server.Data;
 import server.MessageBox;
 
 public class Client {
@@ -43,12 +44,12 @@ public class Client {
 		executor.execute(cl);
 		
 		ClientSender cs = new ClientSender(this);
-		MessageBox login = new MessageBox(Action.LOGIN, "Bill");
+		MessageBox login = new MessageBox(Action.LOGIN);
+		login.add(Data.USER_NAME, "Bill");
 		cs.sendMessage(login);
 		try {
 			executor.awaitTermination(2, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
