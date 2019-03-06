@@ -20,8 +20,8 @@ import java.util.EnumMap;
  *
  * Other end:
  *
- * mb.get(Data.USER_NAME)
- * mb.get(Data.PASSWORD)
+ * String userName = mb.get(Data.USER_NAME)
+ * String password = mb.get(Data.PASSWORD)
  *
  * */
 public class MessageBox2 implements DataTransfer, Serializable {
