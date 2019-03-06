@@ -2,9 +2,7 @@ package server;
 
 
 import database.Database;
-
 import java.util.Date;
-import java.util.Timer;
 
 class LoginCommand extends Command {
 
