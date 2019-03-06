@@ -18,7 +18,6 @@ public class Server {
         private final int port;
         private final ExecutorService threadPool;
         private final ChatContext global;
-        private Socket clientSocket;
 
         public Server(int port) {
                 this.port = port;
@@ -27,6 +26,7 @@ public class Server {
         }
 
         public void runServer() {
+                Socket clientSocket;
                 System.out.println("Server available...");
 
                 try (ServerSocket serverSocket = new ServerSocket(port)) {
