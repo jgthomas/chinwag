@@ -1,7 +1,7 @@
 package server;
 
 
-public abstract class Command {
+abstract class Command {
         private final ConnectionTracker connectionTracker;
 
         Command(ConnectionTracker connectionTracker) {
@@ -16,5 +16,5 @@ public abstract class Command {
                 return connectionTracker;
         }
 
-        public abstract void execute(MessageBox messageBox);
+        abstract void execute(MessageBox messageBox);
 }
