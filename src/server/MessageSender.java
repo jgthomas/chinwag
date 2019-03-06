@@ -1,7 +1,7 @@
 package server;
 
 
-public interface MessageSender {
+interface MessageSender {
 
         void postMessage(ChatContext chatContext, MessageBox messageBox);
 

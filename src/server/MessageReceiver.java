@@ -1,7 +1,7 @@
 package server;
 
 
-public interface MessageReceiver {
+interface MessageReceiver {
 
         void listeningLoop();
 

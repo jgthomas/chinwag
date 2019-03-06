@@ -1,7 +1,7 @@
 package server;
 
 
-public interface ConnectionTracker extends Iterable<ChatContext> {
+interface ConnectionTracker extends Iterable<ChatContext> {
 
         void addSession(String sessionName, ChatContext chatContext);
 
