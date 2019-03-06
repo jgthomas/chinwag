@@ -3,7 +3,7 @@ package server;
 import java.util.List;
 
 
-public interface ChatContext extends Iterable<MessageSender> {
+interface ChatContext extends Iterable<MessageSender> {
 
         String getName();
 
