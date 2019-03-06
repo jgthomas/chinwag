@@ -24,7 +24,7 @@ class Receiver implements MessageReceiver {
 
         @Override
         public void listeningLoop() {
-                MessageBox messageBox = new MessageBox(Action.CHAT, "", "");
+                MessageBox messageBox = new MessageBox(Action.CHAT);
                 try (ObjectInputStream in =
                                 new ObjectInputStream(clientSocket.getInputStream()))
                 {
@@ -32,14 +32,14 @@ class Receiver implements MessageReceiver {
                                 try {
                                         messageBox = (MessageBox) in.readObject();
 
-                                        if (messageBox.getCommand() != Action.QUIT) {
+                                        if (messageBox.getAction() != Action.QUIT) {
                                                 messageHandler.handle(messageBox);
                                         }
 
                                 } catch (ClassNotFoundException e) {
                                         e.printStackTrace();
                                 }
-                        } while (messageBox.getCommand() != Action.QUIT);
+                        } while (messageBox.getAction() != Action.QUIT);
                 } catch (IOException ioException) {
                         ioException.printStackTrace();
                 }

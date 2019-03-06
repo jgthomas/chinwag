@@ -36,7 +36,7 @@ class ClientHandler implements MessageHandler {
 
         @Override
         public void handle(MessageBox messageBox) {
-                Action action = messageBox.getCommand();
+                Action action = messageBox.getAction();
                 Command command =
                         CommandFactory.buildCommand(action, connectionTracker);
                 command.execute(messageBox);

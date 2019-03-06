@@ -9,9 +9,12 @@ class LoginCommand extends Command {
 
 	@Override
 	public void execute(MessageBox messageBox) {
-		setUserName(messageBox.getData());
+		setUserName(messageBox.get(Data.USER_NAME));
 		registerSender();
-		getMessageSender().sendMessage(new MessageBox(Action.CHAT, "Hello", "Hello!"));
+		MessageBox mb = new MessageBox(Action.CHAT);
+		mb.add(Data.MESSAGE, "hello");
+		getMessageSender().sendMessage(mb);
+		//getMessageSender().sendMessage(new MessageBox(Action.CHAT, "Hello", "Hello!"));
 	}
 
 	private void setUserName(String username) {
