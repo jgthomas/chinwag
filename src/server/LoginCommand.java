@@ -17,9 +17,16 @@ class LoginCommand extends Command {
 			MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
 			mb.add(Data.MESSAGE, "Login successful!");
 			getMessageSender().sendMessage(mb);
-			setUserName(messageBox.get(Data.USER_NAME));
+			setUserName(username);
 			registerSender();
-			//getMessageSender().sendMessage(new MessageBox(Action.CHAT, "Hello", "Hello!"));
+		} else {
+			if (Database.userExists(username)){
+
+			} else {
+				MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
+				mb.add(Data.MESSAGE, "User doesn't exist.");
+				getMessageSender().sendMessage(mb);
+			}
 		}
 
 	}
