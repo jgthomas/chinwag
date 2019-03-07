@@ -18,6 +18,9 @@ public class SignUpCommand extends Command{
             getMessageSender().sendMessage(mb);
         } else {
             Database.insertNewUser(username, password);
+            MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
+            mb.add(Data.MESSAGE, "Successfully signed up.");
+            getMessageSender().sendMessage(mb);
         }
     }
 
