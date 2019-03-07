@@ -30,7 +30,7 @@ public class ClientGUI extends Application {
 	public void start(Stage stage) throws Exception {
 		username = new TextField("Enter username...");
 		password = new TextField("Enter password...");
-		input = new TextField("Enter username...");
+		input = new TextField("Enter message...");
 		
 		messageSpace = new TextArea();
 		messageSpace.setEditable(false);
@@ -65,10 +65,11 @@ public class ClientGUI extends Application {
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				messageSpace.appendText(input.getText() + "\n");
 				MessageBox message = new MessageBox(Action.CHAT);
 				message.add(Data.CHAT_NAME, "global");
 				message.add(Data.MESSAGE, username.getText());
-				username.clear();
+				input.clear();
 				client.getSender().sendMessage(message);
 			}
 		});
@@ -77,13 +78,15 @@ public class ClientGUI extends Application {
 		v = new VBox();
 		HBox h = new HBox();
 		HBox h2 = new HBox();
-		v.getChildren().add(messageSpace);
 		v.getChildren().add(username);
 		v.getChildren().add(password);
 		v.getChildren().add(h);
+		v.getChildren().add(messageSpace);
+		v.getChildren().add(h2);
 		h.getChildren().add(exit);
 		h.getChildren().add(login);
-		h.getChildren().add(send);
+		h2.getChildren().add(input);
+		h2.getChildren().add(send);
 		root.getChildren().add(v);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
