@@ -4,6 +4,7 @@ import java.net.*;
 
 
 class User {
+
         // name is username
         private String name;
         private String screenName;
