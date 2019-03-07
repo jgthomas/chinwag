@@ -3,7 +3,7 @@ package server;
 import java.util.*;
 
 
-class Sessions implements ConnectionTracker {
+class Sessions implements SessionTracker {
         private final Map<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
         private String currentSession;
@@ -56,12 +56,8 @@ class Sessions implements ConnectionTracker {
         }
 
         @Override
-        public MessageSender getMessageSender() {
-                return messageSender;
-        }
-
-        @Override
         public Iterator<ChatContext> iterator() {
                 return activeSessions.values().iterator();
         }
 }
+
