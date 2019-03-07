@@ -3,7 +3,7 @@ package server;
 
 interface SessionTracker extends Iterable<ChatContext> {
 
-        void addSession(String sessionName, ChatContext chatContext);
+        void addSession(ChatContext chatContext);
 
         void removeSession(String sessionName);
 
