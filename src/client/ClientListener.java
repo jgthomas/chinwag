@@ -18,7 +18,7 @@ public class ClientListener implements Runnable {
 		while(true) {
 			try {
 				MessageBox mb = (MessageBox)client.getInput().readObject();
-				//handler.handle(mb);
+				System.out.println("Message received.");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

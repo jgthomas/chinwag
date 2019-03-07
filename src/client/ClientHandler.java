@@ -10,5 +10,6 @@ public class ClientHandler {
 	}
 	
 	public void handle(MessageBox mb) {
+		
 	}
 }
