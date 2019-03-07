@@ -39,23 +39,11 @@ public class Client {
 			io.printStackTrace();
 		}
 		executor = Executors.newCachedThreadPool();
-		ClientListener cl = new ClientListener(this, gui);
+		ClientListener cl = new ClientListener(this);
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
 		this.gui = gui;
-	}
-	
-	public void runClient() {
-		MessageBox login = new MessageBox(Action.LOGIN);
-		login.add(Data.USER_NAME, "Bill");
-		sender.sendMessage(login);
-		try {
-			executor.awaitTermination(2, TimeUnit.MINUTES);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	public ObjectInputStream getInput() {
@@ -72,5 +60,17 @@ public class Client {
 	
 	public ClientSender getSender() {
 		return sender;
+	}
+	
+	public String getHostname() {
+		return hostname;
+	}
+	
+	public int getPort() {
+		return port;
+	}
+	
+	public ClientGUI getGUI() {
+		return gui;
 	}
 }
