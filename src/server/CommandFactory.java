@@ -5,21 +5,21 @@ public class CommandFactory {
 
         static Command buildCommand
                 (Action action,
-                 ConnectionTracker connectionTracker)
+                 SessionTracker sessionTracker)
         {
                 switch (action) {
                         case CHAT:
-                                return new ChatCommand(connectionTracker);
+                                return new ChatCommand(sessionTracker);
                         case LOGIN:
-                                return new LoginCommand(connectionTracker);
+                                return new LoginCommand(sessionTracker);
 //                        case USERS:
-//                                return new UsersCommand(connectionTracker);
+//                                return new UsersCommand(sessionTracker);
 //                        case CREATE:
-//                                return new CreateCommand(connectionTracker);
+//                                return new CreateCommand(sessionTracker);
 //                        case SESSION:
-//                                return new SessionCommand(connectionTracker);
+//                                return new SessionCommand(sessionTracker);
 //                        case SWITCH:
-//                                return new SwitchCommand(connectionTracker);
+//                                return new SwitchCommand(sessionTracker);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }

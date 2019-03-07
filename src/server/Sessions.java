@@ -3,7 +3,7 @@ package server;
 import java.util.*;
 
 
-class Sessions implements ConnectionTracker {
+class Sessions implements SessionTracker {
         private final Map<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
         private String currentSession;
