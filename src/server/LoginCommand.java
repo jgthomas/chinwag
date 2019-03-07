@@ -6,8 +6,8 @@ import java.util.Date;
 
 class LoginCommand extends Command {
 
-	LoginCommand(SessionTracker sessionTracker) {
-		super(sessionTracker);
+	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker) {
+		super(messageSender, sessionTracker);
 	}
 
 	@Override

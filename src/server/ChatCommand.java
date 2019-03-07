@@ -3,8 +3,8 @@ package server;
 
 class ChatCommand extends Command {
 
-        ChatCommand(SessionTracker sessionTracker) {
-                super(sessionTracker);
+        ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
+                super(messageSender, sessionTracker);
         }
 
         @Override

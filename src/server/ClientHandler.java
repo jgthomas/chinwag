@@ -38,7 +38,7 @@ class ClientHandler implements MessageHandler {
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
                 Command command =
-                        CommandFactory.buildCommand(action, sessionTracker);
+                        CommandFactory.buildCommand(action, messageSender, sessionTracker);
                 command.execute(messageBox);
         }
 

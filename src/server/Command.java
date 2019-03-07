@@ -1,14 +1,16 @@
 package server;
 
 abstract class Command {
+        private final MessageSender messageSender;
         private final SessionTracker sessionTracker;
 
-        Command(SessionTracker sessionTracker) {
+        Command(MessageSender messageSender, SessionTracker sessionTracker) {
+                this.messageSender = messageSender;
                 this.sessionTracker = sessionTracker;
         }
 
         MessageSender getMessageSender() {
-                return sessionTracker.getMessageSender();
+                return messageSender;
         }
 
         SessionTracker getSessionTracker() {
