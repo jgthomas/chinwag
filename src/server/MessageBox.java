@@ -24,7 +24,7 @@ import java.util.EnumMap;
  * String password = mb.get(Data.PASSWORD)
  *
  * */
-public class MessageBox implements DataTransfer, Serializable {
+public class MessageBox implements Serializable {
     private final Action action;
     private final EnumMap<Data, String> messageData;
 
@@ -49,7 +49,6 @@ public class MessageBox implements DataTransfer, Serializable {
      *          username or password, etc.
      *
      **/
-    @Override
     public void add(Data data, String s) {
         messageData.put(data, s);
     }
@@ -58,7 +57,6 @@ public class MessageBox implements DataTransfer, Serializable {
      * @param data a member of the Data enum
      * @return the string associated with that member in the map
      */
-    @Override
     public String get(Data data) {
         return messageData.get(data);
     }
