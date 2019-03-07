@@ -25,7 +25,6 @@ public class ReactThread implements Runnable {
 
 	void loginRefusedResponse() {
 		System.out.println("Login credentials refused");
-		
 	}
 	
 	/**

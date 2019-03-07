@@ -3,7 +3,7 @@ package server;
 import java.util.*;
 
 
-class Sessions implements ConnectionTracker {
+class Sessions implements SessionTracker {
         private final Map<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
         private String currentSession;
@@ -53,11 +53,6 @@ class Sessions implements ConnectionTracker {
                 for (ChatContext chat : this) {
                         chat.removeUser(messageSender);
                 }
-        }
-
-        @Override
-        public MessageSender getMessageSender() {
-                return messageSender;
         }
 
         @Override

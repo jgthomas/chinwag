@@ -1,18 +1,20 @@
 package server;
 
-public abstract class Command {
-        private final ConnectionTracker connectionTracker;
+abstract class Command {
+        private final MessageSender messageSender;
+        private final SessionTracker sessionTracker;
 
-        Command(ConnectionTracker connectionTracker) {
-                this.connectionTracker = connectionTracker;
+        Command(MessageSender messageSender, SessionTracker sessionTracker) {
+                this.messageSender = messageSender;
+                this.sessionTracker = sessionTracker;
         }
 
         MessageSender getMessageSender() {
-                return connectionTracker.getMessageSender();
+                return messageSender;
         }
 
-        ConnectionTracker getConnectionTracker() {
-                return connectionTracker;
+        SessionTracker getSessionTracker() {
+                return sessionTracker;
         }
 
         abstract void execute(MessageBox messageBox);

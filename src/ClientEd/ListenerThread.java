@@ -21,10 +21,11 @@ public class ListenerThread implements Runnable {
 			//Waits here for an object to appear in input
 			while (true) {
 				MessageBox messageBox = (MessageBox) fromServer.readObject();
-				//if (messageBox.) If the data is a response, print something helpful
+				System.out.println(messageBox.getAction());
+				//if (messageBox.getAction()==Decline) If the data is a response, print something helpful
 				
 				
-				ReactThread reaction = new ReactThread(client, messageBox);
+				//ReactThread reaction = new ReactThread(client, messageBox);
 				
 			//Create new thread to do the following:
 			

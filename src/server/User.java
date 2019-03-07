@@ -5,7 +5,9 @@ import java.net.*;
 
 class User {
 
+        // name is username
         private String name;
+        private String screenName;
         private String id;
 
 
@@ -17,6 +19,7 @@ class User {
         String id() {
                 return id;
         }
+
 
 
         void setName(String name) {
