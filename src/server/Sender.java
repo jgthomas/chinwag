@@ -1,5 +1,9 @@
 package server;
 
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
+
 import java.io.*;
 import java.net.*;
 

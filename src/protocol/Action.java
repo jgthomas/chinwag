@@ -1,4 +1,4 @@
-package server;
+package protocol;
 
 import java.util.Set;
 import java.util.HashSet;

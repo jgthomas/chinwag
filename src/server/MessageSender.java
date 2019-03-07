@@ -1,6 +1,8 @@
 package server;
 
 
+import protocol.MessageBox;
+
 interface MessageSender {
 
         void postMessage(ChatContext chatContext, MessageBox messageBox);

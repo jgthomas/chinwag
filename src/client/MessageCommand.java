@@ -1,7 +1,7 @@
 package client;
 
-import server.Data;
-import server.MessageBox;
+import protocol.Data;
+import protocol.MessageBox;
 
 public class MessageCommand implements Command {
 	public void execute(ClientGUI gui, MessageBox mb) {

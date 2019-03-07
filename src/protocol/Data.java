@@ -1,4 +1,4 @@
-package server;
+package protocol;
 
 
 public enum Data {

@@ -1,7 +1,6 @@
 package client;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -11,9 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import server.Action;
-import server.Data;
-import server.MessageBox;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
 
 public class Client {
 	private String hostname;

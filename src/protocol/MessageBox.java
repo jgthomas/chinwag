@@ -1,4 +1,5 @@
-package server;
+package protocol;
+
 
 import java.io.Serializable;
 import java.util.EnumMap;

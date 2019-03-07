@@ -1,6 +1,6 @@
 package client;
 
-import server.MessageBox;
+import protocol.MessageBox;
 
 public class ClientHandler {
 	private Client client;
