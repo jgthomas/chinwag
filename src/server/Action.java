@@ -13,7 +13,7 @@ public enum Action {
         CHAT("CHAT"),
         LOGIN("LOGIN"),
         USERS("USERS"),
-        CREATE("CREATE"),
+        NEW_CHAT("NEW_CHAT"),
         SESSION("SESSION"),
         SWITCH("SWITCH"),
         QUIT("QUIT"),

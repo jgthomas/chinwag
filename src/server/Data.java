@@ -4,5 +4,6 @@ package server;
 public enum Data {
     MESSAGE,
     USER_NAME,
-    PASSWORD;
+    PASSWORD,
+    CHAT_NAME;
 }
