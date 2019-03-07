@@ -16,5 +16,4 @@ public class CreateChatCommand extends Command {
         newChat.addUser(getMessageSender());
         getSessionTracker().addSession(newChat);
     }
-
 }

@@ -1,6 +1,7 @@
 package client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -25,9 +26,13 @@ public class ClientGUI extends Application {
 	private TextField input;
 	private TextArea messageSpace;
 	private VBox v;
+	private HBox h;
+	private Stage stage;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		this.stage = stage;
+		
 		username = new TextField("Enter username...");
 		password = new TextField("Enter password...");
 		input = new TextField("Enter message...");
@@ -45,7 +50,7 @@ public class ClientGUI extends Application {
 				MessageBox login = new MessageBox(Action.LOGIN);
 				login.add(Data.USER_NAME, username.getText());
 				username.clear();
-				login.add(Data.PASSWORD, password.getText());
+				login.add(Data.PASSWORD, password.getText() + "");
 				password.clear();
 				client.getSender().sendMessage(login);
 			}
@@ -76,17 +81,12 @@ public class ClientGUI extends Application {
 		
 		Group root = new Group();
 		v = new VBox();
-		HBox h = new HBox();
-		HBox h2 = new HBox();
+		h = new HBox();
 		v.getChildren().add(username);
 		v.getChildren().add(password);
 		v.getChildren().add(h);
-		v.getChildren().add(messageSpace);
-		v.getChildren().add(h2);
 		h.getChildren().add(exit);
 		h.getChildren().add(login);
-		h2.getChildren().add(input);
-		h2.getChildren().add(send);
 		root.getChildren().add(v);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
@@ -100,6 +100,18 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		login.setTextFill(Color.GREEN);
+		Group root = new Group();
+		v.getChildren().clear();
+		v.getChildren().add(messageSpace);
+		h.getChildren().clear();
+		h.getChildren().add(input);
+		h.getChildren().add(send);
+		v.getChildren().add(h);
+		v.getChildren().add(exit);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 		messageSpace.appendText("Login successful!" + "\n");
 	}
 	

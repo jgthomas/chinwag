@@ -10,10 +10,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import protocol.Action;
-import protocol.Data;
-import protocol.MessageBox;
-
 public class Client {
 	private String hostname;
 	private int port;

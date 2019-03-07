@@ -1,5 +1,7 @@
 package client;
 
+import javafx.application.Platform;
+
 public class AcceptCommand implements Command {
 	private ClientGUI gui;
 	
@@ -9,6 +11,7 @@ public class AcceptCommand implements Command {
 	
 	@Override
 	public void execute() {
-		gui.login();
+		LoginUpdate lu = new LoginUpdate(gui);
+		Platform.runLater(lu);
 	}
 }
