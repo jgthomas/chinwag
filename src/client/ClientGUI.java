@@ -97,6 +97,12 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		login.setTextFill(Color.GREEN);
+		messageSpace.appendText("Login successful!" + "\n");
+	}
+	
+	public void refuseLogin() {
+		login.setTextFill(Color.RED);
+		messageSpace.appendText("Login refused." + "\n");
 	}
 	
 	public static void main(String[] args) {

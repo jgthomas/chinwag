@@ -37,12 +37,12 @@ public class Client {
 		} catch (IOException io) {
 			io.printStackTrace();
 		}
+		this.gui = gui;
 		executor = Executors.newCachedThreadPool();
 		ClientListener cl = new ClientListener(this);
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
-		this.gui = gui;
 	}
 	
 	public ObjectInputStream getInput() {

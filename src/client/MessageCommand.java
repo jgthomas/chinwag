@@ -4,7 +4,15 @@ import protocol.Data;
 import protocol.MessageBox;
 
 public class MessageCommand implements Command {
-	public void execute(ClientGUI gui, MessageBox mb) {
+	private MessageBox mb;
+	private ClientGUI gui;
+	
+	public MessageCommand(MessageBox mb, ClientGUI gui) {
+		this.mb = mb;
+		this.gui = gui;
+	}
+	
+	public void execute() {
 		if(mb.get(Data.MESSAGE).equals("Success!")) {
 			gui.login();
 			return;
