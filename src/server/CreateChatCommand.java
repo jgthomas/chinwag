@@ -14,7 +14,7 @@ public class CreateChatCommand extends Command {
         String newChatName = messageBox.get(Data.CHAT_NAME);
         ChatContext newChat = new ChatSession(newChatName);
         newChat.addUser(getMessageSender());
-        getSessionTracker().addSession(newChatName, newChat);
+        getSessionTracker().addSession(newChat);
     }
 
 }
