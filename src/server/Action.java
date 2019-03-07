@@ -19,6 +19,7 @@ public enum Action {
         QUIT("QUIT"),
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),
+        DENY("DENY"),
         SERVER_MESSAGE("SERVER_MESSAGE");
 
         private static final Set<String> validCommands = new HashSet<>();
