@@ -3,8 +3,8 @@ package server;
 
 class ChatCommand extends Command {
 
-        ChatCommand(ConnectionTracker connectionTracker) {
-                super(connectionTracker);
+        ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
+                super(messageSender, sessionTracker);
         }
 
         @Override
@@ -13,6 +13,6 @@ class ChatCommand extends Command {
         }
 
         private ChatContext getCurrentChat() {
-                return getConnectionTracker().getCurrentSession();
+                return getSessionTracker().getCurrentSession();
         }
 }

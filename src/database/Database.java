@@ -38,21 +38,19 @@ public class Database {
             if (rs.next())
                 return true;
             else {
-//                try (PreparedStatement anotherStatement = connection.
-//                		prepareStatement("SELECT * FROM users WHERE username = ?")){
-//                    anotherStatement.setString(1, username);
-//                    rs = anotherStatement.executeQuery();
-//                    if (rs.next()) {
-//                        int i = rs.getInt(3);
-//                        makeAttemptsIncrement(username, i);
-//                        // Wrong password
-//                        return false;
-//                    } else
-//                        // User doesn't exit
-//                        return false;
-//                }
             	return false;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static synchronized boolean userExists(String username){
+        try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")){
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

@@ -1,25 +1,18 @@
 package server;
 
 
-public class CommandFactory {
+class CommandFactory {
 
         static Command buildCommand
                 (Action action,
-                 ConnectionTracker connectionTracker)
+                 MessageSender messageSender,
+                 SessionTracker sessionTracker)
         {
                 switch (action) {
                         case CHAT:
-                                return new ChatCommand(connectionTracker);
+                                return new ChatCommand(messageSender, sessionTracker);
                         case LOGIN:
-                                return new LoginCommand(connectionTracker);
-//                        case USERS:
-//                                return new UsersCommand(connectionTracker);
-//                        case CREATE:
-//                                return new CreateCommand(connectionTracker);
-//                        case SESSION:
-//                                return new SessionCommand(connectionTracker);
-//                        case SWITCH:
-//                                return new SwitchCommand(connectionTracker);
+                                return new LoginCommand(messageSender, sessionTracker);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }
