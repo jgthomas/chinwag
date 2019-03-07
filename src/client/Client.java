@@ -23,35 +23,39 @@ public class Client {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Scanner in;
+	private ClientSender sender;
+	private ClientGUI gui;
 	
-	public Client(String hostname, int port) {
+	public Client(String hostname, int port, ClientGUI gui) {
 		this.hostname = hostname;
 		this.port = port;
-		executor = Executors.newCachedThreadPool();
-		in = new Scanner(System.in);
-	}
-	
-	public void runClient() {
 		try {
 			clientSocket = new Socket(hostname, port);
 			input = new ObjectInputStream(clientSocket.getInputStream());
 			output = new ObjectOutputStream(clientSocket.getOutputStream());
-		}
-		catch(IOException io) {
+		} catch (UnknownHostException uh) {
+			uh.printStackTrace();
+		} catch (IOException io) {
 			io.printStackTrace();
 		}
-		ClientListener cl = new ClientListener(this);
+		executor = Executors.newCachedThreadPool();
+		ClientListener cl = new ClientListener(this, gui);
 		executor.execute(cl);
-		
-		ClientSender cs = new ClientSender(this);
+		in = new Scanner(System.in);
+		sender = new ClientSender(this);
+		this.gui = gui;
+	}
+	
+	public void runClient() {
 		MessageBox login = new MessageBox(Action.LOGIN);
 		login.add(Data.USER_NAME, "Bill");
-		cs.sendMessage(login);
+		sender.sendMessage(login);
 		try {
 			executor.awaitTermination(2, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public ObjectInputStream getInput() {
@@ -64,5 +68,9 @@ public class Client {
 	
 	public Socket getSocket() {
 		return clientSocket;
+	}
+	
+	public ClientSender getSender() {
+		return sender;
 	}
 }

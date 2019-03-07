@@ -6,11 +6,13 @@ import server.MessageBox;
 
 public class ClientListener implements Runnable {
 	private Client client;
+	private ClientGUI gui;
 	private ClientHandler handler;
 
-	public ClientListener(Client client) {
+	public ClientListener(Client client, ClientGUI gui) {
 		this.client = client;
 		this.handler = new ClientHandler(client);
+		this.gui = gui;
 	}
 	
 	@Override
@@ -18,7 +20,9 @@ public class ClientListener implements Runnable {
 		while(true) {
 			try {
 				MessageBox mb = (MessageBox)client.getInput().readObject();
-				//handler.handle(mb);
+				MessageCommand mc = new MessageCommand();
+				mc.execute(gui, mb);
+				System.out.println("Message received.");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
