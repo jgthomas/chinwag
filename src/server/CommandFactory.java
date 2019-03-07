@@ -1,6 +1,8 @@
 package server;
 
 
+import protocol.Action;
+
 class CommandFactory {
 
         static Command buildCommand

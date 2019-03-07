@@ -1,6 +1,9 @@
 package server;
 
 import database.Database;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
 
 public class SignUpCommand extends Command{
 

@@ -2,6 +2,10 @@ package server;
 
 
 import database.Database;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
+
 import java.util.Date;
 
 class LoginCommand extends Command {
@@ -27,8 +31,7 @@ class LoginCommand extends Command {
 			} else
 				verifyUser(username, password);
 		} else {
-			MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
-			mb.add(Data.MESSAGE, "The username doesn't exit.");
+			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
 		}
 	}
@@ -41,8 +44,7 @@ class LoginCommand extends Command {
 			setUserName(username);
 			registerSender();
 		} else {
-			MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
-			mb.add(Data.MESSAGE, "Wrong password.");
+			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
 			if (Server.getFailedAttempts().get(username) == 2) {
 				Server.getFailedAttempts().remove(username);

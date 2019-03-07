@@ -1,6 +1,6 @@
 package ClientEd;
 
-import server.Action;
+import protocol.Action;
 
 public class ActionThread implements Runnable {
 	private Client client;

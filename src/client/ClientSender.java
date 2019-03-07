@@ -2,7 +2,7 @@ package client;
 
 import java.io.IOException;
 
-import server.MessageBox;
+import protocol.MessageBox;
 
 public class ClientSender {
 	private Client client;

@@ -1,7 +1,7 @@
 package client;
 
-import server.Action;
-import server.MessageBox;
+import protocol.Action;
+import protocol.MessageBox;
 
 class CommandFactory {
 

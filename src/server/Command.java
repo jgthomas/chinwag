@@ -1,5 +1,7 @@
 package server;
 
+import protocol.MessageBox;
+
 abstract class Command {
         private final MessageSender messageSender;
         private final SessionTracker sessionTracker;

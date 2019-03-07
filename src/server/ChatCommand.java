@@ -1,6 +1,8 @@
 package server;
 
 
+import protocol.MessageBox;
+
 class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {

@@ -6,9 +6,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-import server.Action;
-import server.Data;
-import server.MessageBox;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
 
 /** need thread always listening for server communication */
 /** thread to process received messages */

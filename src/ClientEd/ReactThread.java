@@ -1,7 +1,7 @@
 package ClientEd;
 
-import server.Action;
-import server.MessageBox;
+import protocol.Action;
+import protocol.MessageBox;
 
 public class ReactThread implements Runnable {
 	private Client client;

@@ -1,4 +1,4 @@
-package server;
+package protocol;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -12,13 +12,11 @@ import java.util.HashSet;
 public enum Action {
         CHAT("CHAT"),
         LOGIN("LOGIN"),
-        USERS("USERS"),
         NEW_CHAT("NEW_CHAT"),
-        SESSION("SESSION"),
-        SWITCH("SWITCH"),
         QUIT("QUIT"),
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),
+        DENY("DENY"),
         SERVER_MESSAGE("SERVER_MESSAGE");
 
         private static final Set<String> validCommands = new HashSet<>();

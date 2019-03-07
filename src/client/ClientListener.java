@@ -1,8 +1,8 @@
 package client;
 
 import java.io.IOException;
-import server.Action;
-import server.MessageBox;
+
+import protocol.MessageBox;
 
 public class ClientListener implements Runnable {
 	private Client client;

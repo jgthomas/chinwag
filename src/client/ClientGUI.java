@@ -12,9 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import server.Action;
-import server.Data;
-import server.MessageBox;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
 
 public class ClientGUI extends Application {
 	private Button login;
