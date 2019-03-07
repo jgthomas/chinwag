@@ -13,6 +13,8 @@ class CommandFactory {
                                 return new ChatCommand(messageSender, sessionTracker);
                         case LOGIN:
                                 return new LoginCommand(messageSender, sessionTracker);
+                        case SIGN_UP:
+                                return new SignUpCommand(messageSender, sessionTracker);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }
