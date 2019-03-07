@@ -14,11 +14,6 @@ class LoginCommand extends Command {
 	public void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USER_NAME);
 		String password = messageBox.get(Data.PASSWORD);
-		// temporary test confirmation
-		MessageBox mBox = new MessageBox(Action.CHAT);
-		mBox.add(Data.MESSAGE, "Success!");
-		getMessageSender().sendMessage(mBox);
-		// end temporary test confirmation
 		if (Database.userExists(username)){
 			if (Server.getLockedAccounts().containsKey(username)){
 				if (new Date().getTime() - Server.getLockedAccounts().get(username).getTime() >= 600000){
@@ -41,8 +36,7 @@ class LoginCommand extends Command {
 	public void verifyUser(String username, String password){
 		if (Database.isValidUser(username, password)){
 
-			MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
-			mb.add(Data.MESSAGE, "Login successful!");
+			MessageBox mb = new MessageBox(Action.ACCEPT);
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();

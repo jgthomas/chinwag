@@ -18,6 +18,7 @@ public enum Action {
         SWITCH("SWITCH"),
         QUIT("QUIT"),
         SIGN_UP("SIGN_UP"),
+        ACCEPT("ACCEPT"),
         SERVER_MESSAGE("SERVER_MESSAGE");
 
         private static final Set<String> validCommands = new HashSet<>();
