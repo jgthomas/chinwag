@@ -19,8 +19,10 @@ import server.MessageBox;
 public class ClientGUI extends Application {
 	private Button login;
 	private Button exit;
+	private Button send;
 	private TextField username;
 	private TextField password;
+	private TextField input;
 	private TextArea messageSpace;
 	private VBox v;
 	
@@ -28,6 +30,7 @@ public class ClientGUI extends Application {
 	public void start(Stage stage) throws Exception {
 		username = new TextField("Enter username...");
 		password = new TextField("Enter password...");
+		input = new TextField("Enter username...");
 		
 		messageSpace = new TextArea();
 		messageSpace.setEditable(false);
@@ -41,7 +44,9 @@ public class ClientGUI extends Application {
 			public void handle(ActionEvent event) {
 				MessageBox login = new MessageBox(Action.LOGIN);
 				login.add(Data.USER_NAME, username.getText());
+				username.clear();
 				login.add(Data.PASSWORD, password.getText());
+				password.clear();
 				client.getSender().sendMessage(login);
 			}
 		});
@@ -55,15 +60,30 @@ public class ClientGUI extends Application {
 			}
 		});
 		
+		send = new Button("Send");
+		
+		send.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				MessageBox message = new MessageBox(Action.CHAT);
+				message.add(Data.CHAT_NAME, "global");
+				message.add(Data.MESSAGE, username.getText());
+				username.clear();
+				client.getSender().sendMessage(message);
+			}
+		});
+		
 		Group root = new Group();
 		v = new VBox();
 		HBox h = new HBox();
+		HBox h2 = new HBox();
+		v.getChildren().add(messageSpace);
 		v.getChildren().add(username);
 		v.getChildren().add(password);
 		v.getChildren().add(h);
-		v.getChildren().add(messageSpace);
 		h.getChildren().add(exit);
 		h.getChildren().add(login);
+		h.getChildren().add(send);
 		root.getChildren().add(v);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
