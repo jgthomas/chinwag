@@ -1,6 +1,6 @@
 package server;
 
-public abstract class Command {
+abstract class Command {
         private final SessionTracker sessionTracker;
 
         Command(SessionTracker sessionTracker) {
