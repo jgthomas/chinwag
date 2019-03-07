@@ -14,11 +14,6 @@ class LoginCommand extends Command {
 	public void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USER_NAME);
 		String password = messageBox.get(Data.PASSWORD);
-		// temporary test confirmation
-		MessageBox mBox = new MessageBox(Action.CHAT);
-		mBox.add(Data.MESSAGE, "Success!");
-		getMessageSender().sendMessage(mBox);
-		// end temporary test confirmation
 		if (Database.userExists(username)){
 			if (Server.getLockedAccounts().containsKey(username)){
 				if (new Date().getTime() - Server.getLockedAccounts().get(username).getTime() >= 600000){
