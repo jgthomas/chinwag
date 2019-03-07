@@ -12,10 +12,7 @@ import java.util.HashSet;
 public enum Action {
         CHAT("CHAT"),
         LOGIN("LOGIN"),
-        USERS("USERS"),
         NEW_CHAT("NEW_CHAT"),
-        SESSION("SESSION"),
-        SWITCH("SWITCH"),
         QUIT("QUIT"),
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),
