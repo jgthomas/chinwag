@@ -14,6 +14,7 @@ public class ClientSender {
 	public void sendMessage(MessageBox mb) {
 		try {
 			client.getOutput().writeObject(mb);
+			client.getOutput().flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

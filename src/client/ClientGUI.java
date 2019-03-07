@@ -6,23 +6,35 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import server.Action;
 import server.Data;
 import server.MessageBox;
 
 public class ClientGUI extends Application {
+	private Button login;
+	private Button exit;
+	private TextField username;
+	private TextField password;
+	private TextArea messageSpace;
+	private VBox v;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		Client client = new Client("localhost", 6000);
+		username = new TextField("Enter username...");
+		password = new TextField("Enter password...");
 		
-		TextField username = new TextField("Enter username...");
-		TextField password = new TextField("Enter password...");
-		Button login = new Button("Login");
+		messageSpace = new TextArea();
+		messageSpace.setEditable(false);
+		
+		login = new Button("Login");
+		
+		Client client = new Client("localhost", 6000, this);
 		
 		login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -34,7 +46,7 @@ public class ClientGUI extends Application {
 			}
 		});
 		
-		Button exit = new Button("Exit");
+		exit = new Button("Exit");
 		
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -44,11 +56,12 @@ public class ClientGUI extends Application {
 		});
 		
 		Group root = new Group();
-		VBox v = new VBox();
+		v = new VBox();
 		HBox h = new HBox();
 		v.getChildren().add(username);
 		v.getChildren().add(password);
 		v.getChildren().add(h);
+		v.getChildren().add(messageSpace);
 		h.getChildren().add(exit);
 		h.getChildren().add(login);
 		root.getChildren().add(v);
@@ -56,6 +69,14 @@ public class ClientGUI extends Application {
 		stage.setScene(scene);
 		stage.setTitle("MessengerClient");
 		stage.show();
+	}
+	
+	public void displayMessage(String message) {
+		messageSpace.appendText("\n" + message);
+	}
+	
+	public void login() {
+		login.setTextFill(Color.GREEN);
 	}
 	
 	public static void main(String[] args) {

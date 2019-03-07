@@ -24,8 +24,9 @@ public class Client {
 	private ObjectOutputStream output;
 	private Scanner in;
 	private ClientSender sender;
+	private ClientGUI gui;
 	
-	public Client(String hostname, int port) {
+	public Client(String hostname, int port, ClientGUI gui) {
 		this.hostname = hostname;
 		this.port = port;
 		try {
@@ -38,10 +39,11 @@ public class Client {
 			io.printStackTrace();
 		}
 		executor = Executors.newCachedThreadPool();
-		ClientListener cl = new ClientListener(this);
+		ClientListener cl = new ClientListener(this, gui);
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
+		this.gui = gui;
 	}
 	
 	public void runClient() {
