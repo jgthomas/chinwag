@@ -8,6 +8,10 @@ public class CreateChatCommand extends Command {
 
     @Override
     void execute(MessageBox messageBox) {
+        String newChatName = messageBox.get(Data.CHAT_NAME);
+        ChatContext newChat = new ChatSession(newChatName);
+        newChat.addUser(getMessageSender());
+        getSessionTracker().addSession(newChatName, newChat);
     }
 
 }
