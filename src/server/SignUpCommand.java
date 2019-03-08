@@ -10,7 +10,9 @@ import protocol.MessageBox;
  *
  * Action: Action.SIGN_UP
  *
- * Data: Data.USER_NAME, Data.PASSWORD
+ * Data Required:
+ * Data.USER_NAME
+ * Data.PASSWORD
  *
  **/
 public class SignUpCommand extends Command{
