@@ -70,6 +70,10 @@ public class Server {
 		}
 	}
 
+	private String buildID(Socket clientSocket) {
+		return clientSocket.getInetAddress().getHostAddress() + "_" + clientSocket.getPort();
+	}
+
 	public static void main(String[] args) {
 		Server server = new Server(6000);
 		server.runServer();
