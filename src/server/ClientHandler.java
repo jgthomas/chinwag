@@ -50,6 +50,11 @@ class ClientHandler implements MessageHandler {
                 return sessionTracker;
         }
 
+        @Override
+        public MessageSender getMessageSender() {
+                return messageSender;
+        }
+
         private void log(String msg) {
                 System.out.println(msg + Thread.currentThread());
         }
