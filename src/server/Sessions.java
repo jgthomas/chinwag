@@ -5,6 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 
+/**
+ * Keeps track of all the chat sessions this client is
+ * currently engaged involved with.
+ *
+ * */
 class Sessions implements SessionTracker {
         private final ConcurrentMap<String, ChatContext> activeSessions;
         private String currentSession;
