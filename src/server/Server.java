@@ -40,7 +40,7 @@ public class Server {
 	public void runServer() {
 		Socket clientSocket;
 		System.out.println("Server available...");
-
+		Database.makeConnection();
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			while (true) {
 				System.out.println("Waiting for connection...");
