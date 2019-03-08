@@ -20,7 +20,7 @@ public class ChatSession implements ChatContext {
         private final ConcurrentMap<String, MessageSender> connectedClients;
         private final ConcurrentMap<String, String> activeUserNames;
 
-        public ChatSession(String name) {
+        ChatSession(String name) {
                 this.name = name;
                 connectedClients = new ConcurrentHashMap<>();
                 activeUserNames = new ConcurrentHashMap<>();
