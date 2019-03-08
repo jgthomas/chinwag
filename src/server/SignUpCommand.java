@@ -15,7 +15,7 @@ import protocol.MessageBox;
  * Data.PASSWORD
  *
  **/
-public class SignUpCommand extends Command{
+public class SignUpCommand extends Command {
 
     SignUpCommand(MessageSender messageSender,
                   SessionTracker sessionTracker,
