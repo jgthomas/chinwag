@@ -28,10 +28,6 @@ class Sender implements MessageSender {
                 }
         }
 
-        /**
-         * Sends a message to every other user in the passed-in chat.
-         *
-         * */
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
                 sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
@@ -64,6 +60,10 @@ class Sender implements MessageSender {
                 return user;
         }
 
+        /**
+         * Sends a message to every other user in the passed-in chat.
+         *
+         * */
         private void sendToAllInChat(ChatContext chatContext, String message) {
                 for (MessageSender sender : chatContext) {
                         if (notOriginalSender(sender)) {
