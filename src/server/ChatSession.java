@@ -47,6 +47,11 @@ public class ChatSession implements ChatContext {
         }
 
         @Override
+        public MessageSender getUser(String userName) {
+                return connectedClients.get(userName);
+        }
+
+        @Override
         public Iterator<MessageSender> iterator() {
                 return connectedClients.values().iterator();
         }
