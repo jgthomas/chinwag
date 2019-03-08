@@ -49,6 +49,12 @@ class Sessions implements SessionTracker {
         }
 
         @Override
+        public void addUserToChat(String chatName, String userName) {
+                MessageSender sender = getSession("global").getUser(userName);
+                getSession(chatName).addUser(sender);
+        }
+
+        @Override
         public void exitAll() {
                 for (ChatContext chat : this) {
                         chat.removeUser(messageSender);

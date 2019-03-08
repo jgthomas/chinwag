@@ -16,4 +16,6 @@ interface SessionTracker extends Iterable<ChatContext> {
         void setCurrentSessionName(String sessionName);
 
         void exitAll();
+
+        void addUserToChat(String chatName, String userName);
 }
