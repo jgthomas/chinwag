@@ -63,6 +63,11 @@ class Sender implements MessageSender {
                 return user;
         }
 
+        @Override
+        public String id() {
+                return id;
+        }
+
         /**
          * Sends a message to every other user in the passed-in chat.
          *

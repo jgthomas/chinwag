@@ -12,4 +12,6 @@ interface MessageSender {
         void closeSender();
 
         User getUser();
+
+        String id();
 }
