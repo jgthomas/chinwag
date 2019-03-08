@@ -32,7 +32,13 @@ class Sender implements MessageSender {
 
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
-                sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
+                String message = messageBox.get(Data.MESSAGE);
+                if (isDirectMessage(messageBox)) {
+                        MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
+                        dmTarget.sendMessage(messageBox);
+                } else {
+                        sendToAllInChat(chatContext, message);
+                }
         }
 
         /**
@@ -89,5 +95,9 @@ class Sender implements MessageSender {
 
         private boolean notOriginalSender(MessageSender sender) {
                 return !sender.getUserName().equals(getUserName());
+        }
+
+        private boolean isDirectMessage(MessageBox messageBox) {
+                return messageBox.get(Data.USER_NAME) != null;
         }
 }
