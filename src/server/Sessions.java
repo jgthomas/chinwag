@@ -20,31 +20,55 @@ class Sessions implements SessionTracker {
                 currentSession = "global";
         }
 
+        /**
+         * @param chat a chat session to add to the client's
+         *             current sessions
+         */
         @Override
         public void addSession(ChatContext chat) {
                 activeSessions.put(chat.getName(), chat);
         }
 
+        /**
+         * @param sessionName the name of the chat session to remove
+         *                    from the client's current sessions
+         */
         @Override
         public void removeSession(String sessionName) {
                 activeSessions.remove(sessionName);
         }
 
+        /**
+         * @param sessionName the name of the chat session
+         * @return a chat session object
+         */
         @Override
         public ChatContext getSession(String sessionName) {
                 return activeSessions.get(sessionName);
         }
-        
+
+        /**
+         * @return the current chat session object
+         */
         @Override
         public ChatContext getCurrentSession() {
                 return activeSessions.get(getCurrentSessionName());
         }
 
+        /**
+         * @return the name of the current chat session
+         */
         @Override
         public String getCurrentSessionName() {
                 return currentSession;
         }
 
+        /**
+         * Removes the message sender object from all chat sessions
+         * it is currently registered with.
+         *
+         * @param messageSender the message sender object to remove
+         */
         @Override
         public void exitAll(MessageSender messageSender) {
                 for (ChatContext chat : this) {
@@ -52,6 +76,19 @@ class Sessions implements SessionTracker {
                 }
         }
 
+        /**
+         * Allows the chat sessions to be interated over in a for-each loop
+         * directly from the session tracker object.
+         *
+         * Example:
+         *
+         * for (ChatContext chat : sessionTracker) {
+         *     do stuff...
+         * }
+         *
+         * @return an iterator over all the chat sessions stored in the
+         *         activeSessions map
+         */
         @Override
         public Iterator<ChatContext> iterator() {
                 return activeSessions.values().iterator();
