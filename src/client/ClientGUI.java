@@ -1,7 +1,5 @@
 package client;
 
-import com.sun.xml.internal.ws.api.message.Message;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -78,11 +76,11 @@ public class ClientGUI extends Application {
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				messageSpace.appendText(input.getText() + "\n");
+				messageSpace.appendText("\n" + "You>>> " + input.getText());
 				MessageBox message = new MessageBox(Action.CHAT);
 				message.add(Data.CHAT_NAME, "global");
 				message.add(Data.USER_NAME, loggedInName);
-				message.add(Data.MESSAGE, username.getText());
+				message.add(Data.MESSAGE, input.getText());
 				input.clear();
 				client.getSender().sendMessage(message);
 			}
@@ -179,8 +177,8 @@ public class ClientGUI extends Application {
 		stage.show();
 	}
 	
-	public void displayMessage(String message) {
-		messageSpace.appendText("\n" + message);
+	public void displayMessage(String user, String message) {
+		messageSpace.appendText("\n" + user + ">>> " + message);
 	}
 	
 	public void login() {

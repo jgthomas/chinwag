@@ -13,6 +13,6 @@ public class MessageCommand implements Command {
 	}
 	
 	public void execute() {
-		gui.displayMessage(mb.get(Data.MESSAGE));
+		gui.displayMessage(mb.get(Data.USER_NAME), mb.get(Data.MESSAGE));
 	}
 }
