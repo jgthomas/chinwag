@@ -7,7 +7,7 @@ import protocol.MessageBox;
 /**
  * CONTRACT
  *
- * Action: Action.NEW_CHAT
+ * Action: Action.START_NEW_CHAT
  *
  * Data Required:
  * Data.CHAT_NAME - the name of the new session
