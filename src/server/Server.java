@@ -20,6 +20,8 @@ public class Server {
 	private final int port;
 	private final ExecutorService threadPool;
 	private final ChatContext global;
+
+
 	private static Map<String, Integer> failedAttempts = new HashMap<>();
 	private static Map<String, Date> lockedAccounts = new HashMap<>();
 
