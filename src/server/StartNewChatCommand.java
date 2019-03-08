@@ -26,6 +26,9 @@ class StartNewChatCommand extends Command {
 
     @Override
     void execute(MessageBox messageBox) {
+    	// first check if chat session name already exists
+    	
+    	
         String newChatName = messageBox.get(Data.CHAT_NAME);
         ChatContext newChat = new ChatSession(newChatName);
         newChat.addUser(getMessageSender());

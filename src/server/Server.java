@@ -28,7 +28,7 @@ public class Server {
 		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
 		global = new ChatSession("global");
 	}
-
+	
 	public static synchronized Map<String, Integer> getFailedAttempts() {
 		return failedAttempts;
 	}
