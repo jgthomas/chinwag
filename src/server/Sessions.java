@@ -6,19 +6,16 @@ import java.util.*;
 class Sessions implements SessionTracker {
         private final Map<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
-        private String currentSession;
 
         Sessions(MessageSender messageSender, ChatContext global) {
                 this.messageSender = messageSender;
                 activeSessions = new HashMap<>();
                 activeSessions.put("global", global);
-                currentSession = "global";
         }
 
         @Override
         public void addSession(ChatContext chat) {
                 activeSessions.put(chat.getName(), chat);
-                setCurrentSessionName(chat.getName());
         }
 
         @Override
@@ -27,25 +24,8 @@ class Sessions implements SessionTracker {
         }
 
         @Override
-        public ChatContext getCurrentSession() {
-                return activeSessions.get(getCurrentSessionName());
-        }
-
-        @Override
         public ChatContext getSession(String sessionName) {
                 return activeSessions.get(sessionName);
-        }
-
-        @Override
-        public String getCurrentSessionName() {
-                return currentSession;
-        }
-
-        @Override
-        public void setCurrentSessionName(String sessionName) {
-                if (activeSessions.keySet().contains(sessionName)) {
-                        currentSession = sessionName;
-                }
         }
 
         @Override
