@@ -9,7 +9,8 @@ import protocol.MessageBox;
  *
  * Action: Action.CHAT
  *
- * Data: Data.MESSAGE
+ * Data Required:
+ * Data.MESSAGE - the content to send to the chat
  *
  * TODO: specify the chat session to which the message should be posted
  *
