@@ -5,6 +5,14 @@ import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 
+/**
+ * CONTRACT
+ *
+ * Action: Action.SIGN_UP
+ *
+ * Data: Data.USER_NAME, Data.PASSWORD
+ *
+ **/
 public class SignUpCommand extends Command{
 
     public SignUpCommand(MessageSender messageSender, SessionTracker sessionTracker){
