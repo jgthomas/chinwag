@@ -3,7 +3,7 @@ package server;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class ConnectedClients {
+class ConnectedClients {
     private final ConcurrentMap<String, MessageHandler> clientsByID;
     private final ConcurrentMap<String, MessageHandler> clientsByUserName;
 

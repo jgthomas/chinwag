@@ -20,14 +20,14 @@ public class Server {
 	private final int port;
 	private final ExecutorService threadPool;
 	private final ChatContext global;
-	private final ConcurrentMap<String, MessageHandler> allClients;
+	private final ConnectedClients connectedClients;
 
 	private static Map<String, Integer> failedAttempts = new HashMap<>();
 	private static Map<String, Date> lockedAccounts = new HashMap<>();
 
 	public Server(int port) {
 		this.port = port;
-		this.allClients = new ConcurrentHashMap<>();
+		connectedClients = new ConnectedClients();
 		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
 		global = new ChatSession("global");
 	}
@@ -49,7 +49,7 @@ public class Server {
 				System.out.println("Waiting for connection...");
 				clientSocket = serverSocket.accept();
 				MessageHandler messageHandler = new ClientHandler(clientSocket, global);
-				allClients.put(buildID(clientSocket), messageHandler);
+				connectedClients.addClientByID(buildID(clientSocket), messageHandler);
 				threadPool.execute(messageHandler);
 			}
 		} catch (IOException ioException) {
