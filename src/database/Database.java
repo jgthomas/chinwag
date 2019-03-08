@@ -101,4 +101,14 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public static void removeUserFromChat(String chatname, String username){
+	    try (PreparedStatement statement = connection.prepareStatement("DELETE FROM chatsession WHERE chatname = ? AND username = ?")){
+	        statement.setString(1, chatname);
+	        statement.setString(2, username);
+	        statement.executeQuery();
+        } catch (SQLException e) {
+	        e.printStackTrace();
+        }
+    }
 }
