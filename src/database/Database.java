@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
+import server.Message;
+
 public class Database {
 
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
@@ -107,8 +109,10 @@ public class Database {
 		}
 	}
 
-	public static void addUserToChat(String chatname, String username){
-	    try (PreparedStatement statement = connection.prepareStatement("INSERT INTO chatsession (chatname, username) VALUES (?, ?)")){
+	public static synchronized void addUserToChat(String chatname, String username){
+	    try (PreparedStatement statement = connection.prepareStatement(
+	    		"INSERT INTO chatsession (chatname, username) VALUES (?, ?)"))
+	    {
 	        statement.setString(1, chatname);
 	        statement.setString(2, username);
 	        statement.executeQuery();
@@ -117,8 +121,10 @@ public class Database {
         }
     }
 
-    public static void removeUserFromChat(String chatname, String username){
-	    try (PreparedStatement statement = connection.prepareStatement("DELETE FROM chatsession WHERE chatname = ? AND username = ?")){
+    public static synchronized void removeUserFromChat(String chatname, String username){
+	    try (PreparedStatement statement = connection.prepareStatement(
+	    		"DELETE FROM chatsession WHERE chatname = ? AND username = ?"))
+	    {
 	        statement.setString(1, chatname);
 	        statement.setString(2, username);
 	        statement.executeQuery();
@@ -126,4 +132,26 @@ public class Database {
 	        e.printStackTrace();
         }
     }
+    
+    public static synchronized void insertMessage (Message message) {
+    	try (PreparedStatement statement = connection.prepareStatement(
+    			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?"))
+    	{
+    		statement.setString(1, message.getChatname());
+    		statement.setString(2, message.getSender());
+    		statement.setString(3, message.getContent());
+    		statement.setTimestamp(4, message.getTimestamp());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
 }
+
+
+
+
+
+
+
+
+
