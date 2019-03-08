@@ -8,13 +8,11 @@ import java.util.concurrent.ConcurrentMap;
 class Sessions implements SessionTracker {
         private final ConcurrentMap<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
-        private final ConnectedClients connectedClients;
         private String currentSession;
 
         
-        Sessions(MessageSender messageSender, ChatContext global, ConnectedClients connectedClients) {
+        Sessions(MessageSender messageSender, ChatContext global) {
                 this.messageSender = messageSender;
-                this.connectedClients = connectedClients;
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
                 currentSession = "global";
@@ -50,11 +48,6 @@ class Sessions implements SessionTracker {
                 for (ChatContext chat : this) {
                         chat.removeUser(messageSender);
                 }
-        }
-
-        @Override
-        public ConnectedClients getConnectedClients() {
-                return connectedClients;
         }
 
         @Override

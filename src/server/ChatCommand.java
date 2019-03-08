@@ -23,8 +23,8 @@ import protocol.MessageBox;
  **/
 class ChatCommand extends Command {
 
-        ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-                super(messageSender, sessionTracker);
+        ChatCommand(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients) {
+                super(messageSender, sessionTracker, connectedClients);
         }
 
         @Override

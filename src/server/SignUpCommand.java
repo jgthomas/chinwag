@@ -17,8 +17,8 @@ import protocol.MessageBox;
  **/
 public class SignUpCommand extends Command{
 
-    public SignUpCommand(MessageSender messageSender, SessionTracker sessionTracker){
-        super(messageSender, sessionTracker);
+    public SignUpCommand(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients){
+        super(messageSender, sessionTracker, connectedClients);
     }
 
     @Override

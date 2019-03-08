@@ -20,8 +20,8 @@ import protocol.MessageBox;
  **/
 class StartNewChatCommand extends Command {
 
-    StartNewChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-        super(messageSender, sessionTracker);
+    StartNewChatCommand(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients) {
+        super(messageSender, sessionTracker, connectedClients);
     }
 
     @Override
@@ -44,6 +44,6 @@ class StartNewChatCommand extends Command {
     }
 
     private MessageHandler getChatBuddy(String userName) {
-        return getSessionTracker().getConnectedClients().getClientByUserName(userName);
+        return getConnectedClients().getClientByUserName(userName);
     }
 }

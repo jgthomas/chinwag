@@ -21,11 +21,13 @@ class ClientHandler implements MessageHandler {
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
         private final SessionTracker sessionTracker;
+        private final ConnectedClients connectedClients;
 
         ClientHandler(Socket clientSocket, ChatContext global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessionTracker = new Sessions(messageSender, global, connectedClients);
+                sessionTracker = new Sessions(messageSender, global);
+                this.connectedClients = connectedClients;
         }
 
         @Override
@@ -41,7 +43,7 @@ class ClientHandler implements MessageHandler {
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
                 Command command =
-                        CommandFactory.buildCommand(action, messageSender, sessionTracker);
+                        CommandFactory.buildCommand(action, messageSender, sessionTracker, connectedClients);
                 command.execute(messageBox);
         }
 

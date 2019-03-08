@@ -20,8 +20,8 @@ import java.util.Date;
  **/
 class LoginCommand extends Command {
 
-	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-		super(messageSender, sessionTracker);
+	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients) {
+		super(messageSender, sessionTracker, connectedClients);
 	}
 
 	@Override
@@ -76,6 +76,6 @@ class LoginCommand extends Command {
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {
-		getSessionTracker().getConnectedClients().addClientByUserName(id, userName);
+		getConnectedClients().addClientByUserName(id, userName);
 	}
 }
