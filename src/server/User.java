@@ -5,14 +5,14 @@ import java.net.*;
 
 class User {
 
-        // name is username
-        private String name;
+        // userName is username
+        private String userName;
         private String screenName;
         private String id;
 
 
         User(Socket clientSocket) {
-                this.name = "you";
+                this.userName = "you";
                 this.id = setID(clientSocket);
         }
 
@@ -20,12 +20,12 @@ class User {
                 return id;
         }
 
-        void setName(String name) {
-                this.name = name;
+        void setUserName(String userName) {
+                this.userName = userName;
         }
 
-        String getName() {
-                return name;
+        String getUserName() {
+                return userName;
         }
 
         private String setID(Socket clientSocket){

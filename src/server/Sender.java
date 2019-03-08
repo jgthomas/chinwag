@@ -69,13 +69,13 @@ class Sender implements MessageSender {
                         if (notOriginalSender(sender)) {
                                 MessageBox mb = new MessageBox(Action.CHAT);
                                 mb.add(Data.MESSAGE, message);
-                                mb.add(Data.USER_NAME, getUser().getName());
+                                mb.add(Data.USER_NAME, getUser().getUserName());
                                 sender.sendMessage(mb);
                         }
                 }
         }
 
         private boolean notOriginalSender(MessageSender sender) {
-                return !sender.getUser().getName().equals(user.getName());
+                return !sender.getUser().getUserName().equals(user.getUserName());
         }
 }

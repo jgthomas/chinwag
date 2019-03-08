@@ -65,7 +65,7 @@ class LoginCommand extends Command {
 	}
 
 	private void setUserName(String name) {
-		getMessageSender().getUser().setName(name);
+		getMessageSender().getUser().setUserName(name);
 	}
 
 	private void registerSender() {
