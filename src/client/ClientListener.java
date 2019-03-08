@@ -1,5 +1,6 @@
 package client;
 
+import java.io.EOFException;
 import java.io.IOException;
 
 import protocol.MessageBox;
@@ -19,6 +20,9 @@ public class ClientListener implements Runnable {
 			try {
 				MessageBox mb = (MessageBox)client.getInput().readObject();
 				cf.buildCommand(mb).execute();
+			} catch(EOFException eof) {
+				System.out.println("Connection to server dropped.");
+				break;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
