@@ -59,7 +59,7 @@ public class MessageBox implements Serializable {
      * @return the string associated with that member in the map
      */
     public String get(Data data) {
-        return messageData.get(data);
+        return messageData.getOrDefault(data, null);
     }
 
 }
