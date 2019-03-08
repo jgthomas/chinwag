@@ -17,7 +17,7 @@ class CommandFactory {
                                 return new LoginCommand(messageSender, sessionTracker);
                         case SIGN_UP:
                                 return new SignUpCommand(messageSender, sessionTracker);
-                        case NEW_CHAT:
+                        case START_NEW_CHAT:
                                 return new StartNewChatCommand(messageSender, sessionTracker);
                         case DIRECT_MESSAGE:
                                 return new DirectMessageCommand(messageSender, sessionTracker);
