@@ -69,6 +69,7 @@ class Sender implements MessageSender {
                         if (notOriginalSender(sender)) {
                                 MessageBox mb = new MessageBox(Action.CHAT);
                                 mb.add(Data.MESSAGE, message);
+                                mb.add(Data.USER_NAME, getUser().getName());
                                 sender.sendMessage(mb);
                         }
                 }
