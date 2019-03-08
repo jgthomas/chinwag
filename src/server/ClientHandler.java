@@ -39,6 +39,15 @@ class ClientHandler implements MessageHandler {
                 log(THREAD_END);
         }
 
+        /**
+         * Creates a command object of the right kind to run the
+         * instructions sent by the client.
+         *
+         * The command object co-ordinates the sender, session tracker and
+         * connected clients objects to carry out the client's instructions.
+         *
+         * @param messageBox the instruction from the client to perfonm
+         */
         @Override
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
