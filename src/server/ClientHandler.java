@@ -26,7 +26,7 @@ class ClientHandler implements MessageHandler {
         ClientHandler(Socket clientSocket, ChatContext global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessionTracker = new Sessions(messageSender, global);
+                sessionTracker = new Sessions(global);
                 this.connectedClients = connectedClients;
         }
 
@@ -34,7 +34,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                sessionTracker.exitAll();
+                sessionTracker.exitAll(messageSender);
                 messageSender.closeSender();
                 log(THREAD_END);
         }

@@ -9,7 +9,7 @@ interface SessionTracker extends Iterable<ChatContext> {
 
         ChatContext getSession(String sessionName);
 
-        void exitAll();
+        void exitAll(MessageSender messageSender);
 
         ChatContext getCurrentSession();
 

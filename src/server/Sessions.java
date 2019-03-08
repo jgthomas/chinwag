@@ -7,12 +7,10 @@ import java.util.concurrent.ConcurrentMap;
 
 class Sessions implements SessionTracker {
         private final ConcurrentMap<String, ChatContext> activeSessions;
-        private final MessageSender messageSender;
         private String currentSession;
 
         
-        Sessions(MessageSender messageSender, ChatContext global) {
-                this.messageSender = messageSender;
+        Sessions(ChatContext global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
                 currentSession = "global";
@@ -44,7 +42,7 @@ class Sessions implements SessionTracker {
         }
 
         @Override
-        public void exitAll() {
+        public void exitAll(MessageSender messageSender) {
                 for (ChatContext chat : this) {
                         chat.removeUser(messageSender);
                 }
