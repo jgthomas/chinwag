@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Represents a chat session.
  *
- * Keeps a record of the MessageSender instances and the usernames
+ * Keeps a record of the MessageSender instances and the user names
  * of those threads involved in the chat.
  *
  * */
