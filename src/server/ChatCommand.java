@@ -29,6 +29,10 @@ class ChatCommand extends Command {
 
         @Override
         public void execute(MessageBox messageBox) {
+                getMessageSender().postMessage(getCurrentChat(), messageBox);
+        }
 
+        private ChatContext getCurrentChat() {
+                return getSessionTracker().getCurrentSession();
         }
 }
