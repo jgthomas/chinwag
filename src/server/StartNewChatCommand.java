@@ -9,7 +9,9 @@ import protocol.MessageBox;
  *
  * Action: Action.NEW_CHAT
  *
- * Data: Data.CHAT_NAME
+ * Data: 
+ *
+ * Data.CHAT_NAME - the name of the new session
  *
  **/
 class StartNewChatCommand extends Command {
