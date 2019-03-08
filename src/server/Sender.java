@@ -32,12 +32,11 @@ class Sender implements MessageSender {
 
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
-                String message = messageBox.get(Data.MESSAGE);
                 if (isDirectMessage(messageBox)) {
                         MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
                         dmTarget.sendMessage(messageBox);
                 } else {
-                        sendToAllInChat(chatContext, message);
+                        sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
                 }
         }
 
