@@ -18,12 +18,10 @@ import java.util.ArrayList;
 public class ChatSession implements ChatContext {
         private final String name;
         private final ConcurrentMap<String, MessageSender> connectedClients;
-        private final ConcurrentMap<String, String> activeUserNames;
 
         ChatSession(String name) {
                 this.name = name;
                 connectedClients = new ConcurrentHashMap<>();
-                activeUserNames = new ConcurrentHashMap<>();
         }
 
         @Override
@@ -33,23 +31,17 @@ public class ChatSession implements ChatContext {
 
         @Override
         public void addUser(MessageSender messageSender) {
-                String id = messageSender.id();
-                String name = messageSender.getUserName();
-                connectedClients.put(id, messageSender);
-                activeUserNames.put(name, id);
+                connectedClients.put(messageSender.getUserName(), messageSender);
         }
 
         @Override
         public void removeUser(MessageSender messageSender) {
-                String id = messageSender.id();
-                String name = messageSender.getUserName();
-                connectedClients.remove(id);
-                activeUserNames.remove(name);
+                connectedClients.remove(messageSender.getUserName());
         }
 
         @Override
         public List<String> allUserNames() {
-                List<String> names = new ArrayList<>(activeUserNames.keySet());
+                List<String> names = new ArrayList<>(connectedClients.keySet());
                 Collections.sort(names);
                 return names;
         }
