@@ -20,8 +20,6 @@ class User {
                 return id;
         }
 
-
-
         void setName(String name) {
                 this.name = name;
         }
