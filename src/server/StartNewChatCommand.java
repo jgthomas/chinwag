@@ -37,7 +37,9 @@ class StartNewChatCommand extends Command {
         String userToChatWith = messageBox.get(Data.USER_NAME);
 
         if (userToChatWith != null) {
-            getSessionTracker().addUserToChat(newChatName, userToChatWith);
+            MessageHandler mh = getSessionTracker().getConnectedClients().getClientByUserName(userToChatWith);
+            newChat.addUser(mh.getMessageSender());
+            mh.getSessionTracker().addSession(newChat);
         }
     }
 }
