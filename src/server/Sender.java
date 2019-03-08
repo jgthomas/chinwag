@@ -83,17 +83,22 @@ class Sender implements MessageSender {
         private void sendToAllInChat(ChatContext chatContext, String message) {
                 for (MessageSender sender : chatContext) {
                         if (notOriginalSender(sender)) {
-                                MessageBox mb = new MessageBox(Action.CHAT);
-                                mb.add(Data.MESSAGE, message);
-                                mb.add(Data.USER_NAME, getUserName());
-                                sender.sendMessage(mb);
+                                sender.sendMessage(buildMessage(message));
                         }
                 }
         }
 
         private void sendDirectMessage(ChatContext chatContext, MessageBox messageBox) {
                 MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
-                dmTarget.sendMessage(messageBox);
+                MessageBox dmMessage = buildMessage(messageBox.get(Data.MESSAGE));
+                dmTarget.sendMessage(dmMessage);
+        }
+
+        private MessageBox buildMessage(String message) {
+                MessageBox mb = new MessageBox(Action.CHAT);
+                mb.add(Data.MESSAGE, message);
+                mb.add(Data.USER_NAME, getUserName());
+                return mb;
         }
 
         private boolean notOriginalSender(MessageSender sender) {
