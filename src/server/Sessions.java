@@ -37,7 +37,7 @@ class Sessions implements SessionTracker {
         
         @Override
         public ChatContext getCurrentSession() {
-                return activeSessions.get(getCurrentSession());
+                return activeSessions.get(getCurrentSessionName());
         }
 
         @Override
