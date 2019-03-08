@@ -22,6 +22,7 @@ public class ClientListener implements Runnable {
 				cf.buildCommand(mb).execute();
 			} catch(EOFException eof) {
 				System.out.println("Connection to server dropped.");
+				System.exit(1);
 				break;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
