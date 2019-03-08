@@ -8,6 +8,14 @@ import protocol.MessageBox;
 
 import java.util.Date;
 
+/**
+ * CONTRACT
+ *
+ * Action: Action.LOGIN
+ *
+ * Data: Data.USER_NAME, Data.PASSWORD
+ *
+ **/
 class LoginCommand extends Command {
 
 	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker) {
