@@ -20,7 +20,10 @@ import java.util.Date;
  **/
 class LoginCommand extends Command {
 
-	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients) {
+	LoginCommand(MessageSender messageSender,
+				 SessionTracker sessionTracker,
+				 ConnectedClients connectedClients)
+	{
 		super(messageSender, sessionTracker, connectedClients);
 	}
 
