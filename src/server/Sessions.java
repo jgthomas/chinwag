@@ -8,10 +8,12 @@ import java.util.concurrent.ConcurrentMap;
 class Sessions implements SessionTracker {
         private final ConcurrentMap<String, ChatContext> activeSessions;
         private final MessageSender messageSender;
+        private final ConnectedClients connectedClients;
         private String currentSession;
 
-        Sessions(MessageSender messageSender, ChatContext global) {
+        Sessions(MessageSender messageSender, ChatContext global, ConnectedClients connectedClients) {
                 this.messageSender = messageSender;
+                this.connectedClients = connectedClients;
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
                 currentSession = "global";

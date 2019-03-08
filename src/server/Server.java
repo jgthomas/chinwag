@@ -48,7 +48,7 @@ public class Server {
 			while (true) {
 				System.out.println("Waiting for connection...");
 				clientSocket = serverSocket.accept();
-				MessageHandler messageHandler = new ClientHandler(clientSocket, global);
+				MessageHandler messageHandler = new ClientHandler(clientSocket, global, connectedClients);
 				connectedClients.addClientByID(buildID(clientSocket), messageHandler);
 				threadPool.execute(messageHandler);
 			}

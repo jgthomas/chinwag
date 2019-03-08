@@ -22,10 +22,10 @@ class ClientHandler implements MessageHandler {
         private final MessageSender messageSender;
         private final SessionTracker sessionTracker;
 
-        ClientHandler(Socket clientSocket, ChatContext global) {
+        ClientHandler(Socket clientSocket, ChatContext global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessionTracker = new Sessions(messageSender, global);
+                sessionTracker = new Sessions(messageSender, global, connectedClients);
         }
 
         @Override
