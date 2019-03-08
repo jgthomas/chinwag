@@ -15,10 +15,13 @@ import java.net.*;
  * */
 class Sender implements MessageSender {
         private final User user;
+        private final String id;
         private ObjectOutputStream out = null;
 
         Sender(Socket clientSocket, User user) {
                 this.user = user;
+
+                id = clientSocket.getInetAddress().getHostAddress() + "_" + clientSocket.getPort();
 
                 try {
                         out = new ObjectOutputStream(
