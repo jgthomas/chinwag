@@ -66,6 +66,11 @@ class Sessions implements SessionTracker {
         }
 
         @Override
+        public ConnectedClients getConnectedClients() {
+                return connectedClients;
+        }
+
+        @Override
         public Iterator<ChatContext> iterator() {
                 return activeSessions.values().iterator();
         }
