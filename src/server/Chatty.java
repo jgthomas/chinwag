@@ -2,7 +2,7 @@ package server;
 
 import java.util.List;
 
-public interface Chat {
+public interface Chatty {
 
     String getName();
 
