@@ -2,7 +2,7 @@ package server;
 
 import java.util.List;
 
-public interface Chatty {
+public interface Chatty extends Iterable<MessageHandler> {
 
     String getName();
 
@@ -12,5 +12,5 @@ public interface Chatty {
 
     List<String> allUserNames();
 
-    MessageSender getUser(String userName);
+    MessageHandler getUser(String userName);
 }
