@@ -3,6 +3,23 @@ package server;
 
 import protocol.MessageBox;
 
+
+/**
+ * CONTRACT
+ *
+ * Action: Action.CHAT
+ *
+ * Data: Data.MESSAGE
+ *
+ * TODO: specify the chat session to which the message should be posted
+ *
+ * Currently it is sent to the 'activeSession' as tracked on the server, we can
+ * either have the client update this when active session changes, i.e. when GUI window
+ * focus alters, and keep the current system. Or, we can have the client specify the
+ * current chat session in the MessageBox directly, which would add a Data.CHAT_NAME
+ * to the contract.
+ *
+ **/
 class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
