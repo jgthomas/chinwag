@@ -13,7 +13,9 @@ import java.util.Date;
  *
  * Action: Action.LOGIN
  *
- * Data: Data.USER_NAME, Data.PASSWORD
+ * Data Required:
+ * Data.USER_NAME
+ * Data.PASSWORD
  *
  **/
 class LoginCommand extends Command {
