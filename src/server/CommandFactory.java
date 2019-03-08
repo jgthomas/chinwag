@@ -19,8 +19,6 @@ class CommandFactory {
                                 return new SignUpCommand(messageSender, sessionTracker);
                         case NEW_CHAT:
                                 return new StartNewChatCommand(messageSender, sessionTracker);
-                        case DIRECT_MESSAGE:
-                                return new DirectMessageCommand(messageSender, sessionTracker);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }
