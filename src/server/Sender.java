@@ -14,12 +14,11 @@ import java.net.*;
  *
  * */
 class Sender implements MessageSender {
-        private final User user;
         private final String id;
+        private String userName;
         private ObjectOutputStream out = null;
 
-        Sender(Socket clientSocket, User user) {
-                this.user = user;
+        Sender(Socket clientSocket) {
 
                 id = clientSocket.getInetAddress().getHostAddress() + "_" + clientSocket.getPort();
 
@@ -59,13 +58,18 @@ class Sender implements MessageSender {
         }
 
         @Override
-        public User getUser() {
-                return user;
+        public String id() {
+                return id;
         }
 
         @Override
-        public String id() {
-                return id;
+        public void setUserName(String userName) {
+                this.userName = userName;
+        }
+
+        @Override
+        public String getUserName() {
+                return userName;
         }
 
         /**
@@ -77,13 +81,13 @@ class Sender implements MessageSender {
                         if (notOriginalSender(sender)) {
                                 MessageBox mb = new MessageBox(Action.CHAT);
                                 mb.add(Data.MESSAGE, message);
-                                mb.add(Data.USER_NAME, getUser().getUserName());
+                                mb.add(Data.USER_NAME, getUserName());
                                 sender.sendMessage(mb);
                         }
                 }
         }
 
         private boolean notOriginalSender(MessageSender sender) {
-                return !sender.getUser().getUserName().equals(user.getUserName());
+                return !sender.getUserName().equals(getUserName());
         }
 }

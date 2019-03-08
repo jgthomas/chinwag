@@ -24,7 +24,7 @@ class ClientHandler implements MessageHandler {
 
         ClientHandler(Socket clientSocket, ChatContext global) {
                 messageReceiver = new Receiver(clientSocket, this);
-                messageSender = new Sender(clientSocket, new User(clientSocket));
+                messageSender = new Sender(clientSocket);
                 sessionTracker = new Sessions(messageSender, global);
         }
 
