@@ -17,6 +17,7 @@ class Sessions implements SessionTracker {
                 this.connectedClients = connectedClients;
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
+                currentSession = "global";
         }
 
         @Override
@@ -38,6 +39,16 @@ class Sessions implements SessionTracker {
         public void addUserToChat(String chatName, String userName) {
                 MessageSender sender = getSession("global").getUser(userName);
                 getSession(chatName).addUser(sender);
+        }
+
+        @Override
+        public ChatContext getCurrentSession() {
+                return activeSessions.get(getCurrentSession());
+        }
+
+        @Override
+        public String getCurrentSessionName() {
+                return currentSession;
         }
 
         @Override
