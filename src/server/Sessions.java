@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentMap;
 class Sessions implements SessionTracker {
         private final ConcurrentMap<String, ChatContext> activeSessions;
         private String currentSession;
-
         
         Sessions(ChatContext global) {
                 activeSessions = new ConcurrentHashMap<>();
