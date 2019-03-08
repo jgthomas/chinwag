@@ -33,8 +33,7 @@ class Sender implements MessageSender {
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
                 if (isDirectMessage(messageBox)) {
-                        MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
-                        dmTarget.sendMessage(messageBox);
+                        sendDirectMessage(chatContext, messageBox);
                 } else {
                         sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
                 }
@@ -90,6 +89,11 @@ class Sender implements MessageSender {
                                 sender.sendMessage(mb);
                         }
                 }
+        }
+
+        private void sendDirectMessage(ChatContext chatContext, MessageBox messageBox) {
+                MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
+                dmTarget.sendMessage(messageBox);
         }
 
         private boolean notOriginalSender(MessageSender sender) {
