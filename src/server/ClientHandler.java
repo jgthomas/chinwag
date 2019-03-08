@@ -32,7 +32,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                Server.getGlobal().removeUser(messageSender);
+                sessionTracker.exitAll();
                 messageSender.closeSender();
                 log(THREAD_END);
         }
