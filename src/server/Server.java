@@ -19,7 +19,7 @@ public class Server {
 	private static final int MAX_THREADS = 3;
 	private final int port;
 	private final ExecutorService threadPool;
-	private final ChatContext global;
+	private static ChatContext global;
 	private static Map<String, Integer> failedAttempts = new HashMap<>();
 	private static Map<String, Date> lockedAccounts = new HashMap<>();
 
@@ -29,6 +29,10 @@ public class Server {
 		global = new ChatSession("global");
 	}
 
+	public static synchronized ChatContext getGlobal() {
+		return global;
+	}
+	
 	public static synchronized Map<String, Integer> getFailedAttempts() {
 		return failedAttempts;
 	}
