@@ -30,12 +30,17 @@ class Sender implements MessageSender {
                 }
         }
 
+        /*
+         * Sends a message to every other user in the passed-in chat.
+         *
+         */
         @Override
         public void postMessage(ChatContext chatContext, MessageBox messageBox) {
-                if (isDirectMessage(messageBox)) {
-                        sendDirectMessage(chatContext, messageBox);
-                } else {
-                        sendToAllInChat(chatContext, messageBox);
+                MessageBox groupMessage = buildMessage(messageBox.get(Data.MESSAGE));
+                for (MessageSender sender : chatContext) {
+                        if (notOriginalSender(sender)) {
+                                sender.sendMessage(groupMessage);
+                        }
                 }
         }
 
@@ -76,29 +81,6 @@ class Sender implements MessageSender {
                 return userName;
         }
 
-        /*
-         * Sends a message to every other user in the passed-in chat.
-         *
-         */
-        private void sendToAllInChat(ChatContext chatContext, MessageBox messageBox) {
-                MessageBox groupMessage = buildMessage(messageBox.get(Data.MESSAGE));
-                for (MessageSender sender : chatContext) {
-                        if (notOriginalSender(sender)) {
-                                sender.sendMessage(groupMessage);
-                        }
-                }
-        }
-
-        /*
-         * Sends a message to a specific person
-         *
-         */
-        private void sendDirectMessage(ChatContext chatContext, MessageBox messageBox) {
-                MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
-                MessageBox dmMessage = buildMessage(messageBox.get(Data.MESSAGE));
-                dmTarget.sendMessage(dmMessage);
-        }
-
         private MessageBox buildMessage(String message) {
                 MessageBox mb = new MessageBox(Action.CHAT);
                 mb.add(Data.MESSAGE, message);
@@ -108,9 +90,5 @@ class Sender implements MessageSender {
 
         private boolean notOriginalSender(MessageSender sender) {
                 return !sender.getUserName().equals(getUserName());
-        }
-
-        private boolean isDirectMessage(MessageBox messageBox) {
-                return messageBox.get(Data.USER_NAME) != null;
         }
 }
