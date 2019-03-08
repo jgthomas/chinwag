@@ -13,10 +13,6 @@ public class MessageCommand implements Command {
 	}
 	
 	public void execute() {
-		if(mb.get(Data.MESSAGE).equals("Success!")) {
-			gui.login();
-			return;
-		}
 		gui.displayMessage(mb.get(Data.MESSAGE));
 	}
 }

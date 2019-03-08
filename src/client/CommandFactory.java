@@ -18,7 +18,7 @@ class CommandFactory {
 		case DENY:
 			return new DenyCommand(gui);
 		case ACCEPT:
-			return new AcceptCommand(gui);
+			return new AcceptCommand(mb, gui);
 		default:
 			throw new IllegalStateException("Unrecognised command: " + action);
 		}

@@ -1,5 +1,7 @@
 package client;
 
+import javafx.application.Platform;
+
 public class DenyCommand implements Command {
 	private ClientGUI gui;
 	
@@ -9,6 +11,7 @@ public class DenyCommand implements Command {
 	
 	@Override
 	public void execute() {
-		gui.refuseLogin();
+		DenyUpdate du = new DenyUpdate(gui);
+		Platform.runLater(du);
 	}
 }
