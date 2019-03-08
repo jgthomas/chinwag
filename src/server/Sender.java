@@ -35,7 +35,7 @@ class Sender implements MessageSender {
                 if (isDirectMessage(messageBox)) {
                         sendDirectMessage(chatContext, messageBox);
                 } else {
-                        sendToAllInChat(chatContext, messageBox.get(Data.MESSAGE));
+                        sendToAllInChat(chatContext, messageBox);
                 }
         }
 
@@ -76,18 +76,23 @@ class Sender implements MessageSender {
                 return userName;
         }
 
-        /**
+        /*
          * Sends a message to every other user in the passed-in chat.
          *
-         * */
-        private void sendToAllInChat(ChatContext chatContext, String message) {
+         */
+        private void sendToAllInChat(ChatContext chatContext, MessageBox messageBox) {
+                MessageBox groupMessage = buildMessage(messageBox.get(Data.MESSAGE));
                 for (MessageSender sender : chatContext) {
                         if (notOriginalSender(sender)) {
-                                sender.sendMessage(buildMessage(message));
+                                sender.sendMessage(groupMessage);
                         }
                 }
         }
 
+        /*
+         * Sends a message to a specific person
+         *
+         */
         private void sendDirectMessage(ChatContext chatContext, MessageBox messageBox) {
                 MessageSender dmTarget = chatContext.getUser(messageBox.get(Data.USER_NAME));
                 MessageBox dmMessage = buildMessage(messageBox.get(Data.MESSAGE));
