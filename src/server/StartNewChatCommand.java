@@ -3,9 +3,9 @@ package server;
 import protocol.Data;
 import protocol.MessageBox;
 
-public class CreateChatCommand extends Command {
+public class StartNewChatCommand extends Command {
 
-    CreateChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
+    StartNewChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
         super(messageSender, sessionTracker);
     }
 
