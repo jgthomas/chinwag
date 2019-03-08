@@ -53,7 +53,7 @@ class LoginCommand extends Command {
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
-			getSessionTracker().getConnectedClients().addClientByUserName(getMessageSender().id(), username);
+			addAsLoggedInClient(getMessageSender().id(), username);
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
@@ -73,5 +73,9 @@ class LoginCommand extends Command {
 
 	private void registerSender() {
 		getSessionTracker().getSession("global").addUser(getMessageSender());
+	}
+
+	private void addAsLoggedInClient(String id, String userName) {
+		getSessionTracker().getConnectedClients().addClientByUserName(id, userName);
 	}
 }
