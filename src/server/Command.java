@@ -7,7 +7,10 @@ abstract class Command {
         private final SessionTracker sessionTracker;
         private final ConnectedClients connectedClients;
 
-        Command(MessageSender messageSender, SessionTracker sessionTracker, ConnectedClients connectedClients) {
+        Command(MessageSender messageSender,
+                SessionTracker sessionTracker,
+                ConnectedClients connectedClients)
+        {
                 this.messageSender = messageSender;
                 this.sessionTracker = sessionTracker;
                 this.connectedClients = connectedClients;
