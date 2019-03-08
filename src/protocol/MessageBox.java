@@ -57,6 +57,7 @@ public class MessageBox implements Serializable {
     /**
      * @param data a member of the Data enum
      * @return the string associated with that member in the map
+     *         if member is not included, method returns null
      */
     public String get(Data data) {
         return messageData.getOrDefault(data, null);
