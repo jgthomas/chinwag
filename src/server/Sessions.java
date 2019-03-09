@@ -24,7 +24,7 @@ class Sessions implements Iterable<ChatSession> {
          * @param chat a chat session to add to the client's
          *             current sessions
          */
-        public void addSession(ChatSession chat) {
+        void addSession(ChatSession chat) {
                 activeSessions.put(chat.getChatName(), chat);
         }
 
@@ -32,7 +32,7 @@ class Sessions implements Iterable<ChatSession> {
          * @param sessionName the name of the chat session to remove
          *                    from the client's current sessions
          */
-        public void removeSession(String sessionName) {
+        void removeSession(String sessionName) {
                 activeSessions.remove(sessionName);
         }
 
@@ -40,21 +40,21 @@ class Sessions implements Iterable<ChatSession> {
          * @param sessionName the name of the chat session
          * @return a chat session object
          */
-        public ChatSession getSession(String sessionName) {
+        ChatSession getSession(String sessionName) {
                 return activeSessions.get(sessionName);
         }
 
         /**
          * @return the current chat session object
          */
-        public ChatSession getCurrentSession() {
+        ChatSession getCurrentSession() {
                 return activeSessions.get(getCurrentSessionName());
         }
 
         /**
          * @return the name of the current chat session
          */
-        public String getCurrentSessionName() {
+        String getCurrentSessionName() {
                 return currentSession;
         }
 
@@ -64,7 +64,7 @@ class Sessions implements Iterable<ChatSession> {
          *
          * @param messageSender the message sender object to remove
          */
-        public void exitAll(MessageSender messageSender) {
+        void exitAll(MessageSender messageSender) {
                 for (ChatSession chat : this) {
                         chat.removeUser(messageSender);
                 }
