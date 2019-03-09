@@ -23,9 +23,9 @@ class ClientHandler implements MessageHandler {
         private final CurrentChatSessions currentChatSessions;
         private final ConnectedClients connectedClients;
 
-        ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients) {
+        ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients, String socketID) {
                 messageReceiver = new Receiver(clientSocket, this);
-                messageSender = new Sender(clientSocket);
+                messageSender = new Sender(clientSocket, socketID);
                 currentChatSessions = new CurrentChatSessions(global);
                 this.connectedClients = connectedClients;
         }

@@ -18,9 +18,8 @@ class Sender implements MessageSender {
         private String userName;
         private ObjectOutputStream out = null;
 
-        Sender(Socket clientSocket) {
-
-                id = clientSocket.getInetAddress().getHostAddress() + "_" + clientSocket.getPort();
+        Sender(Socket clientSocket, String socketID) {
+                id = socketID;
 
                 try {
                         out = new ObjectOutputStream(
