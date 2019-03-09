@@ -5,7 +5,7 @@ import java.util.List;
 
 interface ChatContext extends Iterable<MessageSender> {
 
-        String getName();
+        String getChatName();
 
         void addUser(MessageSender messageSender);
 

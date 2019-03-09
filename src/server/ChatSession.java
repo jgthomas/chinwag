@@ -16,12 +16,12 @@ import java.util.ArrayList;
  *
  * */
 public class ChatSession implements ChatContext {
-        private final String name;
-        private final ConcurrentMap<String, MessageSender> connectedClients;
+        private final String chatName;
+        private final ConcurrentMap<String, MessageSender> usersInChat;
 
-        ChatSession(String name) {
-                this.name = name;
-                connectedClients = new ConcurrentHashMap<>();
+        ChatSession(String chatName) {
+                this.chatName = chatName;
+                usersInChat = new ConcurrentHashMap<>();
         }
 
         /**
@@ -30,8 +30,8 @@ public class ChatSession implements ChatContext {
          * @return the name of the chat session
          **/
         @Override
-        public String getName() {
-                return name;
+        public String getChatName() {
+                return chatName;
         }
 
         /**
@@ -39,9 +39,10 @@ public class ChatSession implements ChatContext {
          *
          * @param messageSender the messageSender object to add
          * */
+
         @Override
         public void addUser(MessageSender messageSender) {
-                connectedClients.put(messageSender.getUserName(), messageSender);
+                usersInChat.put(messageSender.getUserName(), messageSender);
         }
 
         /**
@@ -51,7 +52,7 @@ public class ChatSession implements ChatContext {
          * */
         @Override
         public void removeUser(MessageSender messageSender) {
-                connectedClients.remove(messageSender.getUserName());
+                usersInChat.remove(messageSender.getUserName());
         }
 
         /**
@@ -61,7 +62,7 @@ public class ChatSession implements ChatContext {
          * */
         @Override
         public List<String> allUserNames() {
-                List<String> names = new ArrayList<>(connectedClients.keySet());
+                List<String> names = new ArrayList<>(usersInChat.keySet());
                 Collections.sort(names);
                 return names;
         }
@@ -81,6 +82,6 @@ public class ChatSession implements ChatContext {
          */
         @Override
         public Iterator<MessageSender> iterator() {
-                return connectedClients.values().iterator();
+                return usersInChat.values().iterator();
         }
 }

@@ -26,7 +26,7 @@ class Sessions implements SessionTracker {
          */
         @Override
         public void addSession(ChatContext chat) {
-                activeSessions.put(chat.getName(), chat);
+                activeSessions.put(chat.getChatName(), chat);
         }
 
         /**
