@@ -12,6 +12,4 @@ interface ChatContext extends Iterable<MessageSender> {
         void removeUser(MessageSender messageSender);
 
         List<String> allUserNames();
-
-        MessageSender getUser(String userName);
 }

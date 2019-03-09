@@ -66,11 +66,6 @@ public class ChatSession implements ChatContext {
                 return names;
         }
 
-        @Override
-        public MessageSender getUser(String userName) {
-                return connectedClients.get(userName);
-        }
-
         /**
          * Allows the chat session to be iterated over in a for-each loop
          * directly from the chat context object, such that
