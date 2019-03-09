@@ -73,9 +73,10 @@ public class Database {
 
     public static synchronized void insertNewUser(String username, String password){
         try (PreparedStatement statement = connection.prepareStatement(
-        		"INSERT INTO users (username, password, attempts, locked_time) VALUES (?, ?, 0, null)")){
+        		"INSERT INTO users (username, password) VALUES (?, ?)")){
             statement.setString(1, username);
             statement.setString(2, password);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -188,7 +189,6 @@ public class Database {
     	}
     }
 }
-
 
 
 
