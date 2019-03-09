@@ -43,7 +43,7 @@ class ClientHandler implements MessageHandler {
          * Creates a command object of the right kind to run the
          * instructions sent by the client.
          *
-         * The command object co-ordinates the sender, session tracker and
+         * The command object co-ordinates the sender, current chat sessions and
          * connected clients objects to carry out the client's instructions.
          *
          * @param messageBox the instruction from the client to perform
