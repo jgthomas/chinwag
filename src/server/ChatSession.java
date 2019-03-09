@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * of those threads involved in the chat.
  *
  * */
-public class ChatSession implements ChatContext {
+public class ChatSession implements Iterable<MessageSender> {
         private final String chatName;
         private final ConcurrentMap<String, MessageSender> usersInChat;
 
@@ -29,7 +29,6 @@ public class ChatSession implements ChatContext {
          *
          * @return the name of the chat session
          **/
-        @Override
         public String getChatName() {
                 return chatName;
         }
@@ -40,7 +39,6 @@ public class ChatSession implements ChatContext {
          * @param messageSender the messageSender object to add
          * */
 
-        @Override
         public void addUser(MessageSender messageSender) {
                 usersInChat.put(messageSender.getUserName(), messageSender);
         }
@@ -50,7 +48,6 @@ public class ChatSession implements ChatContext {
          *
          * @param messageSender the messageSender to remove
          * */
-        @Override
         public void removeUser(MessageSender messageSender) {
                 usersInChat.remove(messageSender.getUserName());
         }
@@ -60,7 +57,6 @@ public class ChatSession implements ChatContext {
          *
          * @return a list of user names
          * */
-        @Override
         public List<String> allUserNames() {
                 List<String> names = new ArrayList<>(usersInChat.keySet());
                 Collections.sort(names);

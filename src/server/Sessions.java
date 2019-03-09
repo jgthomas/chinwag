@@ -11,10 +11,10 @@ import java.util.concurrent.ConcurrentMap;
  *
  * */
 class Sessions implements SessionTracker {
-        private final ConcurrentMap<String, ChatContext> activeSessions;
+        private final ConcurrentMap<String, ChatSession> activeSessions;
         private String currentSession;
         
-        Sessions(ChatContext global) {
+        Sessions(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
                 currentSession = "global";
@@ -25,7 +25,7 @@ class Sessions implements SessionTracker {
          *             current sessions
          */
         @Override
-        public void addSession(ChatContext chat) {
+        public void addSession(ChatSession chat) {
                 activeSessions.put(chat.getChatName(), chat);
         }
 
@@ -43,7 +43,7 @@ class Sessions implements SessionTracker {
          * @return a chat session object
          */
         @Override
-        public ChatContext getSession(String sessionName) {
+        public ChatSession getSession(String sessionName) {
                 return activeSessions.get(sessionName);
         }
 
@@ -51,7 +51,7 @@ class Sessions implements SessionTracker {
          * @return the current chat session object
          */
         @Override
-        public ChatContext getCurrentSession() {
+        public ChatSession getCurrentSession() {
                 return activeSessions.get(getCurrentSessionName());
         }
 
@@ -71,7 +71,7 @@ class Sessions implements SessionTracker {
          */
         @Override
         public void exitAll(MessageSender messageSender) {
-                for (ChatContext chat : this) {
+                for (ChatSession chat : this) {
                         chat.removeUser(messageSender);
                 }
         }
@@ -91,7 +91,7 @@ class Sessions implements SessionTracker {
          *         activeSessions map
          */
         @Override
-        public Iterator<ChatContext> iterator() {
+        public Iterator<ChatSession> iterator() {
                 return activeSessions.values().iterator();
         }
 }

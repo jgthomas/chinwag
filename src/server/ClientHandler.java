@@ -23,7 +23,7 @@ class ClientHandler implements MessageHandler {
         private final SessionTracker sessionTracker;
         private final ConnectedClients connectedClients;
 
-        ClientHandler(Socket clientSocket, ChatContext global, ConnectedClients connectedClients) {
+        ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
                 sessionTracker = new Sessions(global);

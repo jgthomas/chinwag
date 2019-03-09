@@ -53,7 +53,7 @@ abstract class Command {
          * @param chatContext the chat the user is joining
          * @param messageHandler the user to join the chat
          */
-        void addUserToChat(ChatContext chatContext, MessageHandler messageHandler) {
+        void addUserToChat(ChatSession chatContext, MessageHandler messageHandler) {
                 chatContext.addUser(messageHandler.getMessageSender());
                 messageHandler.getSessionTracker().addSession(chatContext);
         }

@@ -35,7 +35,7 @@ class ChatCommand extends Command {
                 getMessageSender().postMessage(getCurrentChat(), messageBox);
         }
 
-        private ChatContext getCurrentChat() {
+        private ChatSession getCurrentChat() {
                 return getSessionTracker().getCurrentSession();
         }
 }

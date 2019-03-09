@@ -1,17 +1,17 @@
 package server;
 
 
-interface SessionTracker extends Iterable<ChatContext> {
+interface SessionTracker extends Iterable<ChatSession> {
 
-        void addSession(ChatContext chatContext);
+        void addSession(ChatSession chatContext);
 
         void removeSession(String sessionName);
 
-        ChatContext getSession(String sessionName);
+        ChatSession getSession(String sessionName);
 
         void exitAll(MessageSender messageSender);
 
-        ChatContext getCurrentSession();
+        ChatSession getCurrentSession();
 
         String getCurrentSessionName();
 }

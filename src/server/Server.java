@@ -19,7 +19,7 @@ public class Server {
 	private static final int MAX_THREADS = 3;
 	private final int port;
 	private final ExecutorService threadPool;
-	private final ChatContext global;
+	private final ChatSession global;
 	private final ConnectedClients connectedClients;
 
 	private static Map<String, Integer> failedAttempts = new HashMap<>();

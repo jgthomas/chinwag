@@ -5,7 +5,7 @@ import protocol.MessageBox;
 
 interface MessageSender {
 
-        void postMessage(ChatContext chatContext, MessageBox messageBox);
+        void postMessage(ChatSession chatContext, MessageBox messageBox);
 
         void sendMessage(MessageBox messageBox);
 
