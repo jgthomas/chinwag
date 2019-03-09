@@ -72,7 +72,7 @@ public class ChatSession implements ChatContext {
         }
 
         /**
-         * Allows the chat sessions to be iterated over in a for-each loop
+         * Allows the chat session to be iterated over in a for-each loop
          * directly from the chat context object, such that
          *
          * Example:

@@ -77,8 +77,9 @@ class Sessions implements SessionTracker {
         }
 
         /**
-         * Allows the chat sessions to be iterated over in a for-each loop
-         * directly from the session tracker object.
+         * Allows all the chat sessions to be iterated over
+         * in a for-each loop directly from the session tracker object.
+         *
          *
          * Example:
          *
