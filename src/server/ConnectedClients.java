@@ -50,6 +50,9 @@ class ConnectedClients {
      * @return the client thread object associated with that username
      */
      MessageHandler getClientByUserName(String userName) {
-        return clientsByUserName.get(userName);
+        if (this.clientsByUserName.containsKey(userName)){
+            return clientsByUserName.get(userName);
+        } else
+            return null;
      }
 }
