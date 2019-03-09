@@ -62,12 +62,12 @@ class LoginCommand extends Command {
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
-			if (Server.getFailedAttempts().get(username) == 2) {
+			if (Server.getFailedAttempts().get(username) == null)
+				Server.getFailedAttempts().put(username, 1);
+			else if (Server.getFailedAttempts().get(username) == 2) {
 				Server.getFailedAttempts().remove(username);
 				Server.getLockedAccounts().put(username, new Date());
-			} else if (Server.getFailedAttempts().get(username) == null)
-				Server.getFailedAttempts().put(username, 1);
-			else
+			} else
 				Server.getFailedAttempts().put(username, Server.getFailedAttempts().get(username) + 1);
 		}
 	}
