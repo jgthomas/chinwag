@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
-import server.Message;
-
 public class Database {
 
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
@@ -49,7 +47,8 @@ public class Database {
     }
 
     public static synchronized boolean userExists(String username){
-        try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")){
+        try(PreparedStatement statement = connection.prepareStatement(
+        		"SELECT * FROM users WHERE username = ?")){
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             return rs.next();
@@ -143,6 +142,20 @@ public class Database {
     		statement.setTimestamp(4, message.getTimestamp());
     	} catch (SQLException e) {
     		e.printStackTrace();
+    	}
+    }
+    
+    public static synchronized ResultSet retrieveMessages (String chatname) {
+    	try (PreparedStatement statement = connection.prepareStatement(
+    			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT 200"))
+    	{
+    		statement.setString(1, chatname);
+
+			return statement.executeQuery();
+
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		return null;
     	}
     }
 }
