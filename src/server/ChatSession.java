@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * of those threads involved in the chat.
  *
  * */
-public class ChatSession implements Iterable<MessageSender> {
+class ChatSession implements Iterable<MessageSender> {
         private final String chatName;
         private final ConcurrentMap<String, MessageSender> usersInChat;
 
@@ -29,7 +29,7 @@ public class ChatSession implements Iterable<MessageSender> {
          *
          * @return the name of the chat session
          **/
-        public String getChatName() {
+        String getChatName() {
                 return chatName;
         }
 
@@ -39,7 +39,7 @@ public class ChatSession implements Iterable<MessageSender> {
          * @param messageSender the messageSender object to add
          * */
 
-        public void addUser(MessageSender messageSender) {
+        void addUser(MessageSender messageSender) {
                 usersInChat.put(messageSender.getUserName(), messageSender);
         }
 
@@ -48,7 +48,7 @@ public class ChatSession implements Iterable<MessageSender> {
          *
          * @param messageSender the messageSender to remove
          * */
-        public void removeUser(MessageSender messageSender) {
+        void removeUser(MessageSender messageSender) {
                 usersInChat.remove(messageSender.getUserName());
         }
 
@@ -57,7 +57,7 @@ public class ChatSession implements Iterable<MessageSender> {
          *
          * @return a list of user names
          * */
-        public List<String> allUserNames() {
+        List<String> allUserNames() {
                 List<String> names = new ArrayList<>(usersInChat.keySet());
                 Collections.sort(names);
                 return names;
@@ -69,7 +69,7 @@ public class ChatSession implements Iterable<MessageSender> {
          *
          * Example:
          *
-         * for (MessageSender sender : chatContext) {
+         * for (MessageSender sender : chatSession) {
          *     do stuff...
          * }
          *
