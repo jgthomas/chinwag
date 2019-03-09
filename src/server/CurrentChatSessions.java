@@ -29,19 +29,19 @@ class CurrentChatSessions implements Iterable<ChatSession> {
         }
 
         /**
-         * @param sessionName the name of the chat session to remove
+         * @param chatName the name of the chat session to remove
          *                    from the client's current sessions
          */
-        void removeSession(String sessionName) {
-                activeSessions.remove(sessionName);
+        void removeSession(String chatName) {
+                activeSessions.remove(chatName);
         }
 
         /**
-         * @param sessionName the name of the chat session
+         * @param chatName the name of the chat session
          * @return a chat session object
          */
-        ChatSession getSession(String sessionName) {
-                return activeSessions.get(sessionName);
+        ChatSession getSession(String chatName) {
+                return activeSessions.get(chatName);
         }
 
         /**
@@ -71,13 +71,13 @@ class CurrentChatSessions implements Iterable<ChatSession> {
         }
 
         /**
-         * Allows all the chat sessions to be iterated over
-         * in a for-each loop directly from the session tracker object.
+         * Allows all the chat sessions to be iterated over in a
+         * for-each loop directly from the current sessions object.
          *
          *
          * Example:
          *
-         * for (ChatContext chat : sessionTracker) {
+         * for (ChatContext chat : currentChatSessions) {
          *     do stuff...
          * }
          *
