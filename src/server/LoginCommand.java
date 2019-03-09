@@ -7,7 +7,6 @@ import protocol.Data;
 import protocol.MessageBox;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * CONTRACT
@@ -58,29 +57,17 @@ class LoginCommand extends Command {
 			setUserName(username);
 			registerSender();
 			addAsLoggedInClient(getMessageSender().id(), username);
-			loadUserSessions(username);
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
-			if (Server.getFailedAttempts().get(username) == null)
-				Server.getFailedAttempts().put(username, 1);
-			else if (Server.getFailedAttempts().get(username) == 2) {
+			if (Server.getFailedAttempts().get(username) == null) {
+					Server.getFailedAttempts().put(username, 1);
+			}
+			else if (Server.getFailedAttempts().get(username).equals(2)) {
 				Server.getFailedAttempts().remove(username);
 				Server.getLockedAccounts().put(username, new Date());
 			} else
 				Server.getFailedAttempts().put(username, Server.getFailedAttempts().get(username) + 1);
-		}
-	}
-
-	public void loadUserSessions(String username){
-		List<String> chats = Database.retrieveChatSessions(username);
-		for (String chatname: chats){
-			ChatSession chatSession = new ChatSession(chatname);
-			List<String> users = Database.retrieveUsersFromSessions(chatname);
-			for (String user: users){
-				chatSession.addUser(getConnectedClients().getClientByUserName(user).getMessageSender());
-			}
-			getCurrentChatSessions().addSession(chatSession);
 		}
 	}
 
