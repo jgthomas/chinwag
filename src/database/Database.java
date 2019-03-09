@@ -1,9 +1,8 @@
 package database;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
+import java.util.*;
 
 public class Database {
 
@@ -145,14 +144,44 @@ public class Database {
     	}
     }
     
-    public static synchronized ResultSet retrieveMessages (String chatname) {
+    
+    public static synchronized List<String> retrieveChatSessions(String username) {
     	try (PreparedStatement statement = connection.prepareStatement(
-    			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT 200"))
+    			"SELECT chatname FROM chatsession WHERE username = ? ORDER BY chatname ASC"))
+    	{
+    		statement.setString(1, username);
+    		
+    		ResultSet rs = statement.executeQuery();
+    		List<String> sessions = new ArrayList<>();
+    		
+    		while(rs.next()) {
+    			String chatname = rs.getString("chatname");
+    			sessions.add(chatname);
+    		}
+    		return sessions;
+    	} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
+    
+    public static synchronized List<Message> retrieveMessages (String chatname, int limit) {
+    	try (PreparedStatement statement = connection.prepareStatement(
+    			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT ?"))
     	{
     		statement.setString(1, chatname);
-
-			return statement.executeQuery();
-
+    		statement.setInt(2, limit);
+    		ResultSet rs = statement.executeQuery();
+    		List<Message> messages = new ArrayList<>();
+    		
+    		while(rs.next()) {
+    			String chat = rs.getString("chatname");
+    			String sender = rs.getString("sender");
+    			String content = rs.getString("content");
+    			Timestamp timestamp = rs.getTimestamp("timestamp");
+    			messages.add(new Message(chat, sender, content, timestamp));
+    		}
+    		return messages;
     	} catch (SQLException e) {
     		e.printStackTrace();
     		return null;
