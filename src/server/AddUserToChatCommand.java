@@ -1,5 +1,6 @@
 package server;
 
+import protocol.Data;
 import protocol.MessageBox;
 
 
@@ -24,6 +25,10 @@ class AddUserToChatCommand extends Command {
 
     @Override
     public void execute(MessageBox messageBox) {
-
+        String chatName = messageBox.get(Data.CHAT_NAME);
+        String user = messageBox.get(Data.USER_NAME);
+        MessageHandler mh = getUser(user);
+        ChatSession chat = getCurrentChatSessions().getSession(chatName);
+        addUserToChat(chat, mh);
     }
 }
