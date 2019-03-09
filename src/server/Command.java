@@ -50,12 +50,12 @@ abstract class Command {
         /**
          * Adds a user to a chat session
          *
-         * @param chatContext the chat the user is joining
+         * @param chatSession the chat the user is joining
          * @param messageHandler the user to join the chat
          */
-        void addUserToChat(ChatSession chatContext, MessageHandler messageHandler) {
-                chatContext.addUser(messageHandler.getMessageSender());
-                messageHandler.getCurrentChatSessions().addSession(chatContext);
+        void addUserToChat(ChatSession chatSession, MessageHandler messageHandler) {
+                chatSession.addUser(messageHandler.getMessageSender());
+                messageHandler.getCurrentChatSessions().addSession(chatSession);
         }
 
         /**
