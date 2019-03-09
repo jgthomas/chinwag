@@ -41,7 +41,6 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @param messageSender the messageSender object to add
          * */
-
         void addUser(MessageSender messageSender) {
                 usersInChat.put(messageSender.getUserName(), messageSender);
         }
