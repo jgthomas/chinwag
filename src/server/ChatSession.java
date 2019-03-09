@@ -67,8 +67,8 @@ public class ChatSession implements ChatContext {
         }
 
         /**
-         * Allows the chat session to be iterated over in a for-each loop
-         * directly from the chat context object, such that
+         * Allows all the message senders registered with this chat session
+         * to be iterated over in a for-each loop directly from the chat object
          *
          * Example:
          *
@@ -76,7 +76,7 @@ public class ChatSession implements ChatContext {
          *     do stuff...
          * }
          *
-         * @return an iterator over all the messaageSenders stored in the
+         * @return an iterator over all the message senders stored in the
          *         connectedClients map
          */
         @Override
