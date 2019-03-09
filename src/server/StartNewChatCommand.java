@@ -21,7 +21,7 @@ import protocol.MessageBox;
 class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
-                        SessionTracker sessionTracker,
+                        Sessions sessionTracker,
                         ConnectedClients connectedClients)
     {
         super(messageSender, sessionTracker, connectedClients);

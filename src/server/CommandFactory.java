@@ -8,7 +8,7 @@ class CommandFactory {
         static Command buildCommand
                 (Action action,
                  MessageSender messageSender,
-                 SessionTracker sessionTracker,
+                 Sessions sessionTracker,
                  ConnectedClients connectedClients)
         {
                 switch (action) {

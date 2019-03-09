@@ -21,7 +21,7 @@ import java.util.Date;
 class LoginCommand extends Command {
 
 	LoginCommand(MessageSender messageSender,
-				 SessionTracker sessionTracker,
+				 Sessions sessionTracker,
 				 ConnectedClients connectedClients)
 	{
 		super(messageSender, sessionTracker, connectedClients);

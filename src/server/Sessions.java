@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
  * currently engaged involved with.
  *
  * */
-class Sessions implements SessionTracker {
+class Sessions implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
         private String currentSession;
         
@@ -24,7 +24,6 @@ class Sessions implements SessionTracker {
          * @param chat a chat session to add to the client's
          *             current sessions
          */
-        @Override
         public void addSession(ChatSession chat) {
                 activeSessions.put(chat.getChatName(), chat);
         }
@@ -33,7 +32,6 @@ class Sessions implements SessionTracker {
          * @param sessionName the name of the chat session to remove
          *                    from the client's current sessions
          */
-        @Override
         public void removeSession(String sessionName) {
                 activeSessions.remove(sessionName);
         }
@@ -42,7 +40,6 @@ class Sessions implements SessionTracker {
          * @param sessionName the name of the chat session
          * @return a chat session object
          */
-        @Override
         public ChatSession getSession(String sessionName) {
                 return activeSessions.get(sessionName);
         }
@@ -50,7 +47,6 @@ class Sessions implements SessionTracker {
         /**
          * @return the current chat session object
          */
-        @Override
         public ChatSession getCurrentSession() {
                 return activeSessions.get(getCurrentSessionName());
         }
@@ -58,7 +54,6 @@ class Sessions implements SessionTracker {
         /**
          * @return the name of the current chat session
          */
-        @Override
         public String getCurrentSessionName() {
                 return currentSession;
         }
@@ -69,7 +64,6 @@ class Sessions implements SessionTracker {
          *
          * @param messageSender the message sender object to remove
          */
-        @Override
         public void exitAll(MessageSender messageSender) {
                 for (ChatSession chat : this) {
                         chat.removeUser(messageSender);

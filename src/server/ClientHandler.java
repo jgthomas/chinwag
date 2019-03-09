@@ -20,13 +20,13 @@ class ClientHandler implements MessageHandler {
         private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
-        private final SessionTracker sessionTracker;
+        private final Sessions sessions;
         private final ConnectedClients connectedClients;
 
         ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessionTracker = new Sessions(global);
+                sessions = new Sessions(global);
                 this.connectedClients = connectedClients;
         }
 
@@ -34,7 +34,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                sessionTracker.exitAll(messageSender);
+                sessions.exitAll(messageSender);
                 messageSender.closeSender();
                 log(THREAD_END);
         }
@@ -52,13 +52,13 @@ class ClientHandler implements MessageHandler {
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
                 Command command =
-                        CommandFactory.buildCommand(action, messageSender, sessionTracker, connectedClients);
+                        CommandFactory.buildCommand(action, messageSender, sessions, connectedClients);
                 command.execute(messageBox);
         }
 
         @Override
-        public SessionTracker getSessionTracker() {
-                return sessionTracker;
+        public Sessions getSessions() {
+                return sessions;
         }
 
         @Override
