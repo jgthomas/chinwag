@@ -7,7 +7,7 @@ import protocol.MessageBox;
 /**
  * CONTRACT
  *
- * Action: Action.NEW_CHAT
+ * Action: Action.START_NEW_CHAT
  *
  * Data Required:
  * Data.CHAT_NAME - the name of the new session
@@ -20,8 +20,11 @@ import protocol.MessageBox;
  **/
 class StartNewChatCommand extends Command {
 
-    StartNewChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-        super(messageSender, sessionTracker);
+    StartNewChatCommand(MessageSender messageSender,
+                        SessionTracker sessionTracker,
+                        ConnectedClients connectedClients)
+    {
+        super(messageSender, sessionTracker, connectedClients);
     }
 
     @Override
@@ -30,20 +33,15 @@ class StartNewChatCommand extends Command {
     	
     	
         String newChatName = messageBox.get(Data.CHAT_NAME);
-        ChatContext newChat = new ChatSession(newChatName);
+        ChatSession newChat = new ChatSession(newChatName);
         newChat.addUser(getMessageSender());
         getSessionTracker().addSession(newChat);
 
         String userToChatWith = messageBox.get(Data.USER_NAME);
 
         if (userToChatWith != null) {
-            MessageHandler mh = getChatBuddy(userToChatWith);
-            newChat.addUser(mh.getMessageSender());
-            mh.getSessionTracker().addSession(newChat);
+            MessageHandler user = getUser(userToChatWith);
+            addUserToChat(newChat, user);
         }
-    }
-
-    private MessageHandler getChatBuddy(String userName) {
-        return getSessionTracker().getConnectedClients().getClientByUserName(userName);
     }
 }

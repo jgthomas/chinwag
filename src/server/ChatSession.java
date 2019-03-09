@@ -15,44 +15,69 @@ import java.util.ArrayList;
  * of those threads involved in the chat.
  *
  * */
-public class ChatSession implements ChatContext {
-        private final String name;
-        private final ConcurrentMap<String, MessageSender> connectedClients;
+class ChatSession implements Iterable<MessageSender> {
+        private final String chatName;
+        private final ConcurrentMap<String, MessageSender> usersInChat;
 
-        ChatSession(String name) {
-                this.name = name;
-                connectedClients = new ConcurrentHashMap<>();
+        ChatSession(String chatName) {
+                this.chatName = chatName;
+                usersInChat = new ConcurrentHashMap<>();
         }
 
-        @Override
-        public String getName() {
-                return name;
+        /**
+         * Gets the chat session's name
+         *
+         * @return the name of the chat session
+         **/
+        String getChatName() {
+                return chatName;
         }
 
-        @Override
-        public void addUser(MessageSender messageSender) {
-                connectedClients.put(messageSender.getUserName(), messageSender);
+        /**
+         * Adds a user to the chat session by registering their message sender object
+         *
+         * @param messageSender the messageSender object to add
+         * */
+
+        void addUser(MessageSender messageSender) {
+                usersInChat.put(messageSender.getUserName(), messageSender);
         }
 
-        @Override
-        public void removeUser(MessageSender messageSender) {
-                connectedClients.remove(messageSender.getUserName());
+        /**
+         * Removes a user from a chat session by removing their message sender object
+         *
+         * @param messageSender the messageSender to remove
+         * */
+        void removeUser(MessageSender messageSender) {
+                usersInChat.remove(messageSender.getUserName());
         }
 
-        @Override
-        public List<String> allUserNames() {
-                List<String> names = new ArrayList<>(connectedClients.keySet());
+        /**
+         * Gets a list of all the users currently in the chat
+         *
+         * @return a list of user names
+         * */
+        List<String> allUserNames() {
+                List<String> names = new ArrayList<>(usersInChat.keySet());
                 Collections.sort(names);
                 return names;
         }
 
-        @Override
-        public MessageSender getUser(String userName) {
-                return connectedClients.get(userName);
-        }
-
+        /**
+         * Allows all the message senders registered with this chat session
+         * to be iterated over in a for-each loop directly from the chat object
+         *
+         * Example:
+         *
+         * for (MessageSender sender : chatSession) {
+         *     do stuff...
+         * }
+         *
+         * @return an iterator over all the message senders stored in the
+         *         connectedClients map
+         */
         @Override
         public Iterator<MessageSender> iterator() {
-                return connectedClients.values().iterator();
+                return usersInChat.values().iterator();
         }
 }

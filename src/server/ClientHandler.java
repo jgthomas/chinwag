@@ -21,27 +21,38 @@ class ClientHandler implements MessageHandler {
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
         private final SessionTracker sessionTracker;
+        private final ConnectedClients connectedClients;
 
-        ClientHandler(Socket clientSocket, ChatContext global, ConnectedClients connectedClients) {
+        ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessionTracker = new Sessions(messageSender, global, connectedClients);
+                sessionTracker = new Sessions(global);
+                this.connectedClients = connectedClients;
         }
 
         @Override
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                sessionTracker.exitAll();
+                sessionTracker.exitAll(messageSender);
                 messageSender.closeSender();
                 log(THREAD_END);
         }
 
+        /**
+         * Creates a command object of the right kind to run the
+         * instructions sent by the client.
+         *
+         * The command object co-ordinates the sender, session tracker and
+         * connected clients objects to carry out the client's instructions.
+         *
+         * @param messageBox the instruction from the client to perform
+         */
         @Override
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
                 Command command =
-                        CommandFactory.buildCommand(action, messageSender, sessionTracker);
+                        CommandFactory.buildCommand(action, messageSender, sessionTracker, connectedClients);
                 command.execute(messageBox);
         }
 

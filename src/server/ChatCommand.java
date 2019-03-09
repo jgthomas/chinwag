@@ -23,8 +23,11 @@ import protocol.MessageBox;
  **/
 class ChatCommand extends Command {
 
-        ChatCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-                super(messageSender, sessionTracker);
+        ChatCommand(MessageSender messageSender,
+                    SessionTracker sessionTracker,
+                    ConnectedClients connectedClients)
+        {
+                super(messageSender, sessionTracker, connectedClients);
         }
 
         @Override
@@ -32,7 +35,7 @@ class ChatCommand extends Command {
                 getMessageSender().postMessage(getCurrentChat(), messageBox);
         }
 
-        private ChatContext getCurrentChat() {
+        private ChatSession getCurrentChat() {
                 return getSessionTracker().getCurrentSession();
         }
 }

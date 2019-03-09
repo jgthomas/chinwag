@@ -20,8 +20,11 @@ import java.util.Date;
  **/
 class LoginCommand extends Command {
 
-	LoginCommand(MessageSender messageSender, SessionTracker sessionTracker) {
-		super(messageSender, sessionTracker);
+	LoginCommand(MessageSender messageSender,
+				 SessionTracker sessionTracker,
+				 ConnectedClients connectedClients)
+	{
+		super(messageSender, sessionTracker, connectedClients);
 	}
 
 	@Override
@@ -53,7 +56,7 @@ class LoginCommand extends Command {
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
-			getSessionTracker().getConnectedClients().addClientByUserName(getMessageSender().id(), username);
+			addAsLoggedInClient(getMessageSender().id(), username);
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
@@ -68,11 +71,14 @@ class LoginCommand extends Command {
 	}
 
 	private void setUserName(String name) {
-		//getMessageSender().getUser().setUserName(name);
 		getMessageSender().setUserName(name);
 	}
 
 	private void registerSender() {
 		getSessionTracker().getSession("global").addUser(getMessageSender());
+	}
+
+	private void addAsLoggedInClient(String id, String userName) {
+		getConnectedClients().addClientByUserName(id, userName);
 	}
 }

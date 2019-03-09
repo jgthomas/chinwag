@@ -15,10 +15,13 @@ import protocol.MessageBox;
  * Data.PASSWORD
  *
  **/
-public class SignUpCommand extends Command{
+public class SignUpCommand extends Command {
 
-    public SignUpCommand(MessageSender messageSender, SessionTracker sessionTracker){
-        super(messageSender, sessionTracker);
+    SignUpCommand(MessageSender messageSender,
+                  SessionTracker sessionTracker,
+                  ConnectedClients connectedClients)
+    {
+        super(messageSender, sessionTracker, connectedClients);
     }
 
     @Override
