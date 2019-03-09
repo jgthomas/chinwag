@@ -34,10 +34,7 @@ class Receiver implements MessageReceiver {
                         do {
                                 try {
                                         messageBox = (MessageBox) in.readObject();
-
-                                        if (messageBox.getAction() != Action.QUIT) {
-                                                messageHandler.handle(messageBox);
-                                        }
+                                        messageHandler.handle(messageBox);
 
                                 } catch (ClassNotFoundException e) {
                                         e.printStackTrace();

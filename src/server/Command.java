@@ -26,7 +26,7 @@ abstract class Command {
         /**
          * @return the session tracker object for use with this command
          * */
-        CurrentChatSessions getSessionTracker() {
+        CurrentChatSessions getCurrentChatSessions() {
                 return currentChatSessions;
         }
 

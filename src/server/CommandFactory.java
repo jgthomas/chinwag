@@ -20,6 +20,8 @@ class CommandFactory {
                                 return new SignUpCommand(messageSender, currentChatSessions, connectedClients);
                         case START_NEW_CHAT:
                                 return new StartNewChatCommand(messageSender, currentChatSessions, connectedClients);
+                        case QUIT:
+                                return new QuitCommand(messageSender, currentChatSessions, connectedClients);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }

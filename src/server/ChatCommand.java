@@ -36,6 +36,6 @@ class ChatCommand extends Command {
         }
 
         private ChatSession getCurrentChat() {
-                return getSessionTracker().getCurrentSession();
+                return getCurrentChatSessions().getCurrentSession();
         }
 }
