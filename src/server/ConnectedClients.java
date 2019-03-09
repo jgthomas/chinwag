@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * A record of all the clients currently connected to the chat server.
+ * A record of all the clients (threads) currently connected to the chat server.
  *
  * When a client initially connects, but *before* a user has logged-in
  * the client is stored in the clientsByID map.
