@@ -165,6 +165,21 @@ public class Database {
 			return null;
 		}
     }
+
+    public static synchronized List<String> retrieveUsersFromSessions(String chatname){
+	    try (PreparedStatement statement = connection.prepareStatement("SELECT username FROM chatsession WHERE chatname = ?")){
+	        statement.setString(1, chatname);
+	        ResultSet rs = statement.executeQuery();
+	        List<String> users = new ArrayList<>();
+	        while (rs.next()){
+	            users.add(rs.getString(1));
+            }
+            return users;
+        } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+        }
+    }
     
     public static synchronized List<Message> retrieveMessages (String chatname, int limit) {
     	try (PreparedStatement statement = connection.prepareStatement(
