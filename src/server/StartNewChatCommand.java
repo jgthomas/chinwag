@@ -40,13 +40,8 @@ class StartNewChatCommand extends Command {
         String userToChatWith = messageBox.get(Data.USER_NAME);
 
         if (userToChatWith != null) {
-            MessageHandler mh = getChatBuddy(userToChatWith);
-            newChat.addUser(mh.getMessageSender());
-            mh.getSessionTracker().addSession(newChat);
+            MessageHandler user = getUser(userToChatWith);
+            addUserToChat(newChat, user);
         }
-    }
-
-    private MessageHandler getChatBuddy(String userName) {
-        return getConnectedClients().getClientByUserName(userName);
     }
 }

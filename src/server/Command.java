@@ -48,6 +48,17 @@ abstract class Command {
         }
 
         /**
+         * Adds a user to a chat session
+         *
+         * @param chatContext the chat the user is joining
+         * @param messageHandler the user to join the chat
+         */
+        void addUserToChat(ChatContext chatContext, MessageHandler messageHandler) {
+                chatContext.addUser(messageHandler.getMessageSender());
+                messageHandler.getSessionTracker().addSession(chatContext);
+        }
+
+        /**
          * Executes the command received from the client.
          * Overridden in subclasses.
          *
