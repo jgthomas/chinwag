@@ -31,10 +31,10 @@ class Sender implements MessageSender {
                 }
         }
 
-        /*
+        /**
          * Sends a message to every other user in the passed-in chat.
          *
-         */
+         * */
         @Override
         public void postMessage(ChatSession chatContext, MessageBox messageBox) {
                 MessageBox outMessage = buildMessage(messageBox.get(Data.MESSAGE));
