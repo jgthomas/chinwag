@@ -147,7 +147,7 @@ public class Database {
     
     public static synchronized ResultSet retrieveMessages (String chatname) {
     	try (PreparedStatement statement = connection.prepareStatement(
-    			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC"))
+    			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT 200"))
     	{
     		statement.setString(1, chatname);
 
