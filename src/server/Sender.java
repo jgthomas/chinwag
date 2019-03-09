@@ -15,11 +15,13 @@ import java.net.*;
  * */
 class Sender implements MessageSender {
         private final String id;
+        private final Socket clientSocket;
         private String userName;
         private ObjectOutputStream out = null;
 
         Sender(Socket clientSocket, String socketID) {
                 id = socketID;
+                this.clientSocket = clientSocket;
 
                 try {
                         out = new ObjectOutputStream(
