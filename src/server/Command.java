@@ -4,15 +4,15 @@ import protocol.MessageBox;
 
 abstract class Command {
         private final MessageSender messageSender;
-        private final Sessions sessionTracker;
+        private final CurrentChatSessions currentChatSessions;
         private final ConnectedClients connectedClients;
 
         Command(MessageSender messageSender,
-                Sessions sessionTracker,
+                CurrentChatSessions currentChatSessions,
                 ConnectedClients connectedClients)
         {
                 this.messageSender = messageSender;
-                this.sessionTracker = sessionTracker;
+                this.currentChatSessions = currentChatSessions;
                 this.connectedClients = connectedClients;
         }
 
@@ -26,8 +26,8 @@ abstract class Command {
         /**
          * @return the session tracker object for use with this command
          * */
-        Sessions getSessionTracker() {
-                return sessionTracker;
+        CurrentChatSessions getSessionTracker() {
+                return currentChatSessions;
         }
 
         /**
@@ -55,7 +55,7 @@ abstract class Command {
          */
         void addUserToChat(ChatSession chatContext, MessageHandler messageHandler) {
                 chatContext.addUser(messageHandler.getMessageSender());
-                messageHandler.getSessions().addSession(chatContext);
+                messageHandler.getCurrentChatSessions().addSession(chatContext);
         }
 
         /**

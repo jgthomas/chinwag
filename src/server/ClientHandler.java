@@ -12,7 +12,7 @@ import java.net.*;
  * handle sending data out. These objects implement the MessageReceiver and
  * MessageSender interfaces, respectively.
  *
- * Third object tracks the current chat sessions for this thread.
+ * Third object tracks the current chat currentChatSessions for this thread.
  *
  * */
 class ClientHandler implements MessageHandler {
@@ -20,13 +20,13 @@ class ClientHandler implements MessageHandler {
         private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
-        private final Sessions sessions;
+        private final CurrentChatSessions currentChatSessions;
         private final ConnectedClients connectedClients;
 
         ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients) {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket);
-                sessions = new Sessions(global);
+                currentChatSessions = new CurrentChatSessions(global);
                 this.connectedClients = connectedClients;
         }
 
@@ -34,7 +34,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                sessions.exitAll(messageSender);
+                currentChatSessions.exitAll(messageSender);
                 messageSender.closeSender();
                 log(THREAD_END);
         }
@@ -52,13 +52,13 @@ class ClientHandler implements MessageHandler {
         public void handle(MessageBox messageBox) {
                 Action action = messageBox.getAction();
                 Command command =
-                        CommandFactory.buildCommand(action, messageSender, sessions, connectedClients);
+                        CommandFactory.buildCommand(action, messageSender, currentChatSessions, connectedClients);
                 command.execute(messageBox);
         }
 
         @Override
-        public Sessions getSessions() {
-                return sessions;
+        public CurrentChatSessions getCurrentChatSessions() {
+                return currentChatSessions;
         }
 
         @Override

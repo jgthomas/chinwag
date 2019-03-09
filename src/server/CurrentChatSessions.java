@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentMap;
  * currently engaged involved with.
  *
  * */
-class Sessions implements Iterable<ChatSession> {
+class CurrentChatSessions implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
         private String currentSession;
         
-        Sessions(ChatSession global) {
+        CurrentChatSessions(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
                 currentSession = "global";

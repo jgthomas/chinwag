@@ -24,10 +24,10 @@ import protocol.MessageBox;
 class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender,
-                    Sessions sessionTracker,
+                    CurrentChatSessions currentChatSessions,
                     ConnectedClients connectedClients)
         {
-                super(messageSender, sessionTracker, connectedClients);
+                super(messageSender, currentChatSessions, connectedClients);
         }
 
         @Override

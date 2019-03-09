@@ -21,10 +21,10 @@ import java.util.Date;
 class LoginCommand extends Command {
 
 	LoginCommand(MessageSender messageSender,
-				 Sessions sessionTracker,
+				 CurrentChatSessions currentChatSessions,
 				 ConnectedClients connectedClients)
 	{
-		super(messageSender, sessionTracker, connectedClients);
+		super(messageSender, currentChatSessions, connectedClients);
 	}
 
 	@Override

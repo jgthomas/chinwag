@@ -21,10 +21,10 @@ import protocol.MessageBox;
 class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
-                        Sessions sessionTracker,
+                        CurrentChatSessions currentChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, sessionTracker, connectedClients);
+        super(messageSender, currentChatSessions, connectedClients);
     }
 
     @Override

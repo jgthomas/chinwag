@@ -7,7 +7,7 @@ interface MessageHandler extends Runnable {
 
         void handle(MessageBox messageBox);
 
-        Sessions getSessions();
+        CurrentChatSessions getCurrentChatSessions();
 
         MessageSender getMessageSender();
 }
