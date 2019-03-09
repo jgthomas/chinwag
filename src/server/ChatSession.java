@@ -14,6 +14,9 @@ import java.util.ArrayList;
  * Keeps a record of the MessageSender instances and the user names
  * of those threads involved in the chat.
  *
+ * A connected client joins a chat by registering its message sender object
+ * and leaves a chat by removing its message sender object.
+ *
  * */
 class ChatSession implements Iterable<MessageSender> {
         private final String chatName;
