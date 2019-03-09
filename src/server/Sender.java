@@ -62,6 +62,7 @@ class Sender implements MessageSender {
         public void closeSender() {
                 try {
                         out.close();
+                        clientSocket.close();
                 } catch (IOException ioException) {
                         ioException.printStackTrace();
                 }
