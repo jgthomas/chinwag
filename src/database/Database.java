@@ -95,7 +95,8 @@ public class Database {
 	}
 
 	public static synchronized boolean chatExists(String chatname){
-		try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM chatsession WHERE chatname = ?")) {
+		try (PreparedStatement statement = connection.prepareStatement(
+				"SELECT * FROM chatsession WHERE chatname = ?")) {
 			statement.setString(1, chatname);
 			return statement.executeQuery().next();
 		} catch (SQLException e) {
