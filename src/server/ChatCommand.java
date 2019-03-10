@@ -40,7 +40,7 @@ class ChatCommand extends Command {
          * */
         @Override
         public void execute(MessageBox messageBox) {
-                //MessageQueue.addToQueue(messageBox);
+                MessageQueue.addToQueue(messageBox);
 
                 String chatSessionName = messageBox.get(Data.CHAT_NAME);
                 ChatSession chatSession = getChatSession(chatSessionName);
