@@ -104,6 +104,8 @@ abstract class Command {
         }
 
         /**
+         * Convenience method to get the user name, as this is done very often
+         *
          * @return the user name associated with the current thread
          * */
         String getCurrentThreadUserName() {
@@ -111,6 +113,8 @@ abstract class Command {
         }
 
         /**
+         * Convenience method to get the id, as this is done very often
+         *
          * @return the id associated with the current thread
          */
         String getCurrentThreadID() {
