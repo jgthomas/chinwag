@@ -1,5 +1,6 @@
 package server;
 
+import protocol.Action;
 import protocol.Data;
 import protocol.DataFormatter;
 import protocol.MessageBox;
@@ -20,35 +21,44 @@ public class InfoCommand extends Command {
 
     @Override
     public void execute(MessageBox messageBox) {
+        MessageBox mb = null;
+
         switch (messageBox.getAction()) {
             case LIST_CHAT_SESSIONS:
-                String sessions = DataFormatter.listToString(currentSessions());
+                mb = currentSessionsMessage();
                 break;
             case LIST_MEMBERS:
                 String chatName = messageBox.get(Data.CHAT_NAME);
-                String sessionMembers = DataFormatter.listToString(sessionMembers(chatName));
+                mb = sessionMembersMessage(chatName);
                 break;
             case LIST_LOGGED_IN:
-                String loggedInUsers = DataFormatter.listToString(loggedInUsers());
                 break;
         }
     }
 
-    private List<String> currentSessions() {
+    private MessageBox currentSessionsMessage() {
         List<String> sessions = getUserChatSessions().allUserChatSessions();
         Collections.sort(sessions);
-        return sessions;
+        String sessionsString = DataFormatter.listToString(sessions);
+        MessageBox messageBox = new MessageBox(Action.GIVE_CHAT_SESSIONS);
+        messageBox.add(Data.CHAT_SESSIONS, sessionsString);
+        return messageBox;
     }
 
-    private List<String> loggedInUsers() {
+    private String loggedInUsers() {
         List<String> loggedIn = getConnectedClients().allLoggedInUsers();
         Collections.sort(loggedIn);
-        return loggedIn;
+        String loggedInString = DataFormatter.listToString(loggedIn);
+
     }
 
-    private List<String> sessionMembers(String chatName) {
+    private MessageBox sessionMembersMessage(String chatName) {
         List<String> members = getUserChatSessions().getSession(chatName).allUserNames();
         Collections.sort(members);
-        return new ArrayList<>();
+        String sessionMemebrsString = DataFormatter.listToString(members);
+        MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
+        messageBox.add(Data.CHAT_NAME, chatName);
+        messageBox.add(Data.CHAT_MEMBERS, sessionMemebrsString);
+        return messageBox;
     }
 }
