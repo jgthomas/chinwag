@@ -29,7 +29,7 @@ public class LeaveChatCommand extends Command{
         MessageSender senderToBeRemoved = getMessageSender();
         Database.removeUserFromChat(chatname, senderToBeRemoved.getUserName());
         for (MessageSender messageSender: getCurrentChatSessions().getSession(chatname)) {
-            getConnectedClients().getClientByUserName(messageSender.getUserName()).getCurrentChatSessions().
+            getUser(messageSender.getUserName()).getCurrentChatSessions().
                     getSession(chatname).removeUser(senderToBeRemoved);
         }
         getCurrentChatSessions().removeSession(chatname);
