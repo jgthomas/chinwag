@@ -1,5 +1,6 @@
 package server;
 
+import protocol.Data;
 import protocol.DataFormatter;
 import protocol.MessageBox;
 
@@ -24,8 +25,11 @@ public class InfoCommand extends Command {
                 String sessions = DataFormatter.listToString(currentSessions());
                 break;
             case LIST_MEMBERS:
+                String chatName = messageBox.get(Data.CHAT_NAME);
+                String sessionMembers = DataFormatter.listToString(sessionMembers(chatName));
                 break;
             case LIST_LOGGED_IN:
+                String loggedInUsers = DataFormatter.listToString(loggedInUsers());
                 break;
         }
     }
@@ -40,7 +44,7 @@ public class InfoCommand extends Command {
         return new ArrayList<>();
     }
 
-    private List<String> sessionMembers() {
+    private List<String> sessionMembers(String chatName) {
         return new ArrayList<>();
     }
 }
