@@ -32,8 +32,7 @@ class LeaveChatCommand extends Command {
     @Override
     void execute(MessageBox messageBox){
         String chatName = messageBox.get(CHAT_NAME);
-        MessageSender senderToBeRemoved = getMessageSender();
-        Database.removeUserFromChat(chatName, senderToBeRemoved.getUserName());
+        Database.removeUserFromChat(chatName, getCurrentThreadUserName());
         leaveChat(chatName);
     }
 
