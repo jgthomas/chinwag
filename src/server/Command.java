@@ -54,7 +54,7 @@ abstract class Command {
          * @return the chat session object
          * */
         ChatSession getChatSession(String chatName) {
-                return getUserChatSessions().getSession(chatName);
+                return getAllChatSessions().getSession(chatName);
         }
 
         /**
@@ -82,7 +82,7 @@ abstract class Command {
          */
         void addOtherUserToChat(String chatName, String userName) {
                 MessageHandler user = getUser(userName);
-                ChatSession chatSession = getChatSession(chatName);
+                ChatSession chatSession = getAllChatSessions().getSession(chatName);
 
                 if (user != null && chatSession != null) {
                         chatSession.addUser(user.getMessageSender());
