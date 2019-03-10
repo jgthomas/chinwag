@@ -27,13 +27,13 @@ class AddUserToChatCommand extends Command {
 
     @Override
     public void execute(MessageBox messageBox) {
-        String chatname = messageBox.get(Data.CHAT_NAME);
+        String chatName = messageBox.get(Data.CHAT_NAME);
         String username = messageBox.get(Data.USER_NAME);
-        Database.addUserToChat(chatname, username);
-        getUserChatSessions().getSession(chatname).addUser(getMessageSender());
-        for (MessageSender messageSender: getUserChatSessions().getSession(chatname)) {
+        Database.addUserToChat(chatName, username);
+        getUserChatSessions().getSession(chatName).addUser(getMessageSender());
+        for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
             getUser(messageSender.getUserName()).getUserChatSessions().
-                    getSession(chatname).addUser(getUser(username).getMessageSender());
+                    getSession(chatName).addUser(getUser(username).getMessageSender());
         }
     }
 }
