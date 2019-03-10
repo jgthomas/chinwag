@@ -64,6 +64,7 @@ public class ClientGUI extends Application {
 		
 		chatListView = new ListView<String>();
 		chatListView.setItems(observableChatList);
+		chatListView.getSelectionModel().selectFirst();
 		
 		messageSpace = new TextArea();
 		messageSpace.setEditable(false);
