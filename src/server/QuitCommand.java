@@ -12,6 +12,13 @@ class QuitCommand extends Command {
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Placeholder.
+     *
+     * Quit is done by exiting the listening loop
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     public void execute(MessageBox messageBox) {
 
