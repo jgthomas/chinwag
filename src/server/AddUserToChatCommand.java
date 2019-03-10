@@ -25,6 +25,11 @@ class AddUserToChatCommand extends Command {
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Adds another user to an existing chat session
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     public void execute(MessageBox messageBox) {
         String chatName = messageBox.get(Data.CHAT_NAME);
