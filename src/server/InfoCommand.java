@@ -40,18 +40,16 @@ class InfoCommand extends Command {
     }
 
     private MessageBox currentSessionsMessage() {
-        List<String> sessions = getUserChatSessions().allUserChatSessions();
-        Collections.sort(sessions);
-        String sessionsString = DataFormatter.listToString(sessions);
+        String sessionsString =
+                buildStringMessage(getUserChatSessions().allUserChatSessions());
         MessageBox messageBox = new MessageBox(Action.GIVE_CHAT_SESSIONS);
         messageBox.add(Data.CHAT_SESSIONS, sessionsString);
         return messageBox;
     }
 
     private MessageBox sessionMembersMessage(String chatName) {
-        List<String> members = getUserChatSessions().getSession(chatName).allUserNames();
-        Collections.sort(members);
-        String sessionMembersString = DataFormatter.listToString(members);
+        String sessionMembersString =
+                buildStringMessage(getUserChatSessions().getSession(chatName).allUserNames());
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
         messageBox.add(Data.CHAT_NAME, chatName);
         messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
@@ -59,11 +57,15 @@ class InfoCommand extends Command {
     }
 
     private MessageBox loggedInUsersMessage() {
-        List<String> loggedIn = getConnectedClients().allLoggedInUsers();
-        Collections.sort(loggedIn);
-        String loggedInString = DataFormatter.listToString(loggedIn);
+        String loggedInString =
+                buildStringMessage(getConnectedClients().allLoggedInUsers());
         MessageBox messageBox = new MessageBox(Action.GIVE_LOGGED_IN);
         messageBox.add(Data.LOGGED_IN_MEMBERS, loggedInString);
         return messageBox;
+    }
+
+    private String buildStringMessage(List<String> s) {
+        Collections.sort(s);
+        return DataFormatter.listToString(s);
     }
 }
