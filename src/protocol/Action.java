@@ -13,6 +13,7 @@ public enum Action {
         CHAT("CHAT"),
         LOGIN("LOGIN"),
         START_NEW_CHAT("START_NEW_CHAT"),
+        LEAVE_CHAT("LEAVE_CHAT"),
         QUIT("QUIT"),
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),

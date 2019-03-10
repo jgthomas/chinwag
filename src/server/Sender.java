@@ -36,9 +36,9 @@ class Sender implements MessageSender {
          *
          * */
         @Override
-        public void postMessage(ChatSession chatContext, MessageBox messageBox) {
+        public void postMessage(ChatSession chatSession, MessageBox messageBox) {
                 MessageBox outMessage = buildMessage(messageBox.get(Data.MESSAGE));
-                for (MessageSender sender : chatContext) {
+                for (MessageSender sender : chatSession) {
                         if (notOriginalSender(sender)) {
                                 sender.sendMessage(outMessage);
                         }
