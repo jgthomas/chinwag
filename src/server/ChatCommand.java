@@ -43,8 +43,4 @@ class ChatCommand extends Command {
                 ChatSession chatSession = getUserChatSessions().getSession(chatSessionName);
                 getMessageSender().postMessage(chatSession, messageBox);
         }
-
-        //private ChatSession getCurrentChat() {
-        //        return getUserChatSessions().getCurrentSession();
-        //}
 }
