@@ -29,11 +29,12 @@ class LeaveChatCommand extends Command{
         String chatName = messageBox.get(CHAT_NAME);
         MessageSender senderToBeRemoved = getMessageSender();
         Database.removeUserFromChat(chatName, senderToBeRemoved.getUserName());
-        for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
-            getUser(messageSender.getUserName()).getUserChatSessions().
-                    getSession(chatName).removeUser(senderToBeRemoved);
-        }
-        getUserChatSessions().removeSession(chatName);
+        //for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
+        //    getUser(messageSender.getUserName()).getUserChatSessions().
+        //            getSession(chatName).removeUser(senderToBeRemoved);
+        //}
+        //getUserChatSessions().removeSession(chatName);
+        leaveChat(chatName);
     }
 
 }

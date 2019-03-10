@@ -69,7 +69,7 @@ abstract class Command {
         }
 
         /**
-         * Adds a user to an *existing* chat session
+         * Adds a DIFFERENT user to a chat session
          *
          * @param chatName the chat the user is joining
          * @param messageHandler the user to join the chat
@@ -81,15 +81,12 @@ abstract class Command {
         }
 
         /**
-         * Remove a user from an *existing* chat session
+         * Remove the user from the chat session
          *
          * @param chatName the chat from which the user is to be removed
-         * @param messageHandler the user to remove
          * */
-        void removeUserFromChat(String chatName, MessageHandler messageHandler) {
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
-                chatSession.removeUser(messageHandler.getMessageSender());
-                messageHandler.getUserChatSessions().removeSession(chatName);
+        void leaveChat(String chatName) {
+                getUserChatSessions().removeSession(chatName);
         }
 
         /**
