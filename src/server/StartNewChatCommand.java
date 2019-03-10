@@ -23,12 +23,20 @@ import protocol.MessageBox;
 class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
-                        CurrentChatSessions currentChatSessions,
+                        UserChatSessions userChatSessions,
+                        AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Creates a new chat session.
+     *
+     * Can optionally add a user to the chat session at the same time.
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     void execute(MessageBox messageBox) {
     	// first check if chat session name already exists
@@ -41,13 +49,23 @@ class StartNewChatCommand extends Command {
             ChatSession newChat = new ChatSession(newChatName);
             Database.addUserToChat(newChatName, getMessageSender().getUserName());
             newChat.addUser(getMessageSender());
-            getCurrentChatSessions().addSession(newChat);
+            registerNewChat(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
-                MessageHandler user = getUser(userToChatWith);
-                addUserToChat(newChat, user);
+                addOtherUserToChat(newChatName, userToChatWith);
             }
         }
+    }
+
+    /**
+     * Adds a newly created chat to the master record, AND to the
+     * chats of the current user
+     *
+     * @param chatSession the session to add to the master record
+     * */
+    private void registerNewChat(ChatSession chatSession) {
+        getAllChatSessions().addSession(chatSession);
+        getUserChatSessions().addSession(chatSession);
     }
 }

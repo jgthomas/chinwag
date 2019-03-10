@@ -4,17 +4,94 @@ import protocol.MessageBox;
 
 abstract class Command {
         private final MessageSender messageSender;
-        private final CurrentChatSessions currentChatSessions;
+        private final UserChatSessions userChatSessions;
         private final ConnectedClients connectedClients;
+        private final AllChatSessions allChatSessions;
 
         Command(MessageSender messageSender,
-                CurrentChatSessions currentChatSessions,
+                UserChatSessions userChatSessions,
+                AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
         {
                 this.messageSender = messageSender;
-                this.currentChatSessions = currentChatSessions;
+                this.userChatSessions = userChatSessions;
+                this.allChatSessions = allChatSessions;
                 this.connectedClients = connectedClients;
         }
+
+        /*
+         These methods work on ConnectedClients and AllChatSessions
+        * */
+
+        /**
+         * @return an object tracking all the connected clients
+         * */
+        ConnectedClients getConnectedClients() {
+                return connectedClients;
+        }
+
+        /**
+         * @return an object tracking all the chats on the server
+         * */
+        AllChatSessions getAllChatSessions() {
+                return allChatSessions;
+        }
+
+        /**
+         * Gets an single user from those currently connected
+         *
+         * @param userName the name of the user to get
+         * @return a user's message handler object
+         * */
+        MessageHandler getUser(String userName) {
+                return getConnectedClients().getClientByUserName(userName);
+        }
+
+        /**
+         * Get a chat from the master record
+         *
+         * @param chatName the name of the chat
+         * @return the chat session object
+         * */
+        ChatSession getChatSession(String chatName) {
+                return getAllChatSessions().getSession(chatName);
+        }
+
+        /**
+         * Delete a chat session entirely.
+         *
+         * Removes the chat session from every user and from the master record
+         *
+         * @param chatName the chat session to delete
+         * */
+        void deleteChatSession(String chatName) {
+                ChatSession chatSession = getChatSession(chatName);
+
+                for (String userName : chatSession.allUserNames()) {
+                        MessageHandler user = getUser(userName);
+                        user.getUserChatSessions().removeSession(chatName);
+                }
+
+                chatSession.removeAllUsers();
+                getAllChatSessions().removeSession(chatName);
+        }
+
+        /**
+         * Adds a DIFFERENT user to a chat session, pulling them in
+         *
+         * @param chatName the chat the user is joining
+         * @param userName the name of the user
+         */
+        void addOtherUserToChat(String chatName, String userName) {
+                MessageHandler user = getUser(userName);
+                ChatSession chatSession = getChatSession(chatName);
+                chatSession.addUser(user.getMessageSender());
+                user.getUserChatSessions().addSession(chatSession);
+        }
+
+        /*
+         These methods work on the state of the current thread
+        * */
 
         /**
          * @return the message sender object for use with this command
@@ -26,36 +103,26 @@ abstract class Command {
         /**
          * @return the session tracker object for use with this command
          * */
-        CurrentChatSessions getCurrentChatSessions() {
-                return currentChatSessions;
+        UserChatSessions getUserChatSessions() {
+                return userChatSessions;
         }
 
         /**
-         * @return an object tracking all the connected clients
-         * */
-        ConnectedClients getConnectedClients() {
-                return connectedClients;
-        }
-
-        /**
-         * Gets an single user from those currently connected
+         * Convenience method to get the user name, as this is done very often
          *
-         * @param userName the name of the user to get
-         * @return a user's message handler object
+         * @return the user name associated with the current thread
          * */
-        MessageHandler getUser(String userName) {
-                return connectedClients.getClientByUserName(userName);
+        String getCurrentThreadUserName() {
+                return getMessageSender().getUserName();
         }
 
         /**
-         * Adds a user to a chat session
+         * Convenience method to get the id, as this is done very often
          *
-         * @param chatSession the chat the user is joining
-         * @param messageHandler the user to join the chat
+         * @return the id associated with the current thread
          */
-        void addUserToChat(ChatSession chatSession, MessageHandler messageHandler) {
-                chatSession.addUser(messageHandler.getMessageSender());
-                messageHandler.getCurrentChatSessions().addSession(chatSession);
+        String getCurrentThreadID() {
+                return getMessageSender().id();
         }
 
         /**

@@ -18,21 +18,28 @@ import protocol.MessageBox;
 class AddUserToChatCommand extends Command {
 
     AddUserToChatCommand(MessageSender messageSender,
-                         CurrentChatSessions currentChatSessions,
+                         UserChatSessions userChatSessions,
+                         AllChatSessions allChatSessions,
                          ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Adds another user to an existing chat session
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     public void execute(MessageBox messageBox) {
-        String chatname = messageBox.get(Data.CHAT_NAME);
+        String chatName = messageBox.get(Data.CHAT_NAME);
         String username = messageBox.get(Data.USER_NAME);
-        Database.addUserToChat(chatname, username);
-        getCurrentChatSessions().getSession(chatname).addUser(getMessageSender());
-        for (MessageSender messageSender: getCurrentChatSessions().getSession(chatname)) {
-            getUser(messageSender.getUserName()).getCurrentChatSessions().
-                    getSession(chatname).addUser(getUser(username).getMessageSender());
-        }
+        Database.addUserToChat(chatName, username);
+        //getUserChatSessions().getSession(chatName).addUser(getMessageSender());
+        //for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
+        //    getUser(messageSender.getUserName()).getUserChatSessions().
+        //            getSession(chatName).addUser(getUser(username).getMessageSender());
+        //}
+        addOtherUserToChat(chatName, username);
     }
 }

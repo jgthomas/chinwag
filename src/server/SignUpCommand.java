@@ -15,15 +15,21 @@ import protocol.MessageBox;
  * Data.PASSWORD
  *
  **/
-public class SignUpCommand extends Command {
+class SignUpCommand extends Command {
 
     SignUpCommand(MessageSender messageSender,
-                  CurrentChatSessions currentChatSessions,
+                  UserChatSessions userChatSessions,
+                  AllChatSessions allChatSessions,
                   ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Creates a new account
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     public void execute(MessageBox messageBox){
         String username = messageBox.get(Data.USER_NAME);
@@ -39,7 +45,4 @@ public class SignUpCommand extends Command {
             getMessageSender().sendMessage(mb);
         }
     }
-
-
-
 }

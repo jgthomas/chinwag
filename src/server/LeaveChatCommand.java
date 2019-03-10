@@ -14,25 +14,48 @@ import static protocol.Data.CHAT_NAME;
  * Data.CHAT_NAME - the name of the session to leave
  *
  **/
-public class LeaveChatCommand extends Command{
+class LeaveChatCommand extends Command {
 
     LeaveChatCommand(MessageSender messageSender,
-                        CurrentChatSessions currentChatSessions,
-                        ConnectedClients connectedClients)
+                     UserChatSessions userChatSessions,
+                     AllChatSessions allChatSessions,
+                     ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Remove the user from a chat session
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     void execute(MessageBox messageBox){
-        String chatname = messageBox.get(CHAT_NAME);
+        String chatName = messageBox.get(CHAT_NAME);
         MessageSender senderToBeRemoved = getMessageSender();
-        Database.removeUserFromChat(chatname, senderToBeRemoved.getUserName());
-        for (MessageSender messageSender: getCurrentChatSessions().getSession(chatname)) {
-            getUser(messageSender.getUserName()).getCurrentChatSessions().
-                    getSession(chatname).removeUser(senderToBeRemoved);
-        }
-        getCurrentChatSessions().removeSession(chatname);
+        Database.removeUserFromChat(chatName, senderToBeRemoved.getUserName());
+        //for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
+        //    getUser(messageSender.getUserName()).getUserChatSessions().
+        //            getSession(chatName).removeUser(senderToBeRemoved);
+        //}
+        //getUserChatSessions().removeSession(chatName);
+        leaveChat(chatName);
+    }
+
+    /**
+     * Remove the user from the chat session
+     *
+     * First it removes the user's sender object from the chat
+     * (this only needs to be done once, as all users have a reference
+     *  to the *same* chat object)
+     *
+     * Second it removes the chat from the user's current sessions
+     *
+     * @param chatName the chat from which the user is to be removed
+     * */
+    private void leaveChat(String chatName) {
+        getChatSession(chatName).removeUser(getMessageSender());
+        getUserChatSessions().removeSession(chatName);
     }
 
 }

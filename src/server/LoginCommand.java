@@ -22,12 +22,20 @@ import java.util.List;
 class LoginCommand extends Command {
 
 	LoginCommand(MessageSender messageSender,
-				 CurrentChatSessions currentChatSessions,
+				 UserChatSessions userChatSessions,
+				 AllChatSessions allChatSessions,
 				 ConnectedClients connectedClients)
 	{
-		super(messageSender, currentChatSessions, connectedClients);
+		super(messageSender, userChatSessions, allChatSessions, connectedClients);
 	}
 
+	/**
+	 * Logs a user in.
+	 *
+	 * Checks for previously unsuccessful attempts and loads user's chat sessions
+	 *
+	 * @param messageBox the command from the client to perform
+	 * */
 	@Override
 	public void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USER_NAME);
@@ -56,7 +64,7 @@ class LoginCommand extends Command {
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
-			addAsLoggedInClient(getMessageSender().id(), username);
+			addAsLoggedInClient(getCurrentThreadID(), username);
 			loadSessions();
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
@@ -73,17 +81,17 @@ class LoginCommand extends Command {
 	}
 
 	private void loadSessions(){
-		List<String> chatSessions = Database.retrieveChatSessions(getMessageSender().getUserName());
-		for (String chatname: chatSessions) {
-			ChatSession chatSession = new ChatSession(chatname);
-			List<String> users = Database.retrieveUsersFromSessions(chatname);
+		List<String> chatSessions = Database.retrieveChatSessions(getCurrentThreadUserName());
+		for (String chatName : chatSessions) {
+			ChatSession chatSession = new ChatSession(chatName);
+			List<String> users = Database.retrieveUsersFromSessions(chatName);
 			for (String username : users) {
-				MessageHandler messageHandler = getConnectedClients().getClientByUserName(username);
+				MessageHandler messageHandler = getUser(username);
 				if (messageHandler != null)
 					messageHandler.getCurrentChatSessions().getSession(chatname).addUser(getMessageSender());
 					chatSession.addUser(messageHandler.getMessageSender());
 			}
-			getCurrentChatSessions().addSession(chatSession);
+			getUserChatSessions().addSession(chatSession);
 		}
 	}
 
@@ -92,7 +100,7 @@ class LoginCommand extends Command {
 	}
 
 	private void registerSender() {
-		getCurrentChatSessions().getSession("global").addUser(getMessageSender());
+		getUserChatSessions().getSession("global").addUser(getMessageSender());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {

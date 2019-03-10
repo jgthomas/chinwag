@@ -3,7 +3,6 @@ package server;
 
 import java.util.concurrent.*;
 import java.util.Iterator;
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -55,14 +54,22 @@ class ChatSession implements Iterable<MessageSender> {
         }
 
         /**
+         * Removes all users from the chat session
+         *
+         * */
+        void removeAllUsers() {
+                for (MessageSender sender : this) {
+                        removeUser(sender);
+                }
+        }
+
+        /**
          * Gets a list of all the users currently in the chat
          *
          * @return a list of user names
          * */
         List<String> allUserNames() {
-                List<String> names = new ArrayList<>(usersInChat.keySet());
-                Collections.sort(names);
-                return names;
+                return new ArrayList<>(usersInChat.keySet());
         }
 
         /**

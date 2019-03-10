@@ -24,18 +24,24 @@ import protocol.MessageBox;
 class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender,
-                    CurrentChatSessions currentChatSessions,
+                    UserChatSessions userChatSessions,
+                    AllChatSessions allChatSessions,
                     ConnectedClients connectedClients)
         {
-                super(messageSender, currentChatSessions, connectedClients);
+                super(messageSender, userChatSessions, allChatSessions, connectedClients);
         }
 
+        /**
+         * Sends a message to all users in a chat session.
+         *
+         * @param messageBox the command from the client to perform
+         * */
         @Override
         public void execute(MessageBox messageBox) {
                 getMessageSender().postMessage(getCurrentChat(), messageBox);
         }
 
         private ChatSession getCurrentChat() {
-                return getCurrentChatSessions().getCurrentSession();
+                return getUserChatSessions().getCurrentSession();
         }
 }
