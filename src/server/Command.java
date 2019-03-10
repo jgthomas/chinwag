@@ -64,17 +64,17 @@ abstract class Command {
          *
          * @param chatName the chat session to delete
          * */
-        void deleteChatSession(String chatName) {
-                ChatSession chatSession = getChatSession(chatName);
-
-                for (String userName : chatSession.allUserNames()) {
-                        MessageHandler user = getUser(userName);
-                        user.getUserChatSessions().removeSession(chatName);
-                }
-
-                chatSession.removeAllUsers();
-                getAllChatSessions().removeSession(chatName);
-        }
+        //void deleteChatSession(String chatName) {
+        //        ChatSession chatSession = getChatSession(chatName);
+        //
+        //        for (String userName : chatSession.allUserNames()) {
+        //                MessageHandler user = getUser(userName);
+        //                user.getUserChatSessions().removeSession(chatName);
+        //        }
+        //
+        //        chatSession.removeAllUsers();
+        //        getAllChatSessions().removeSession(chatName);
+        //}
 
         /**
          * Adds a DIFFERENT user to a chat session, pulling them in
