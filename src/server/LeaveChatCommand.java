@@ -24,6 +24,11 @@ class LeaveChatCommand extends Command{
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Remove the user from a chat session
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     void execute(MessageBox messageBox){
         String chatName = messageBox.get(CHAT_NAME);
