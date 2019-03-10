@@ -43,6 +43,7 @@ public class ClientGUI extends Application {
 	private TextField username;
 	private TextField password;
 	private TextField input;
+	private Text loggedInAs;
 	private TextArea messageSpace;
 	private HashMap<String, TextArea> messageSpaces;
 	private ListView<String> chatListView;
@@ -98,6 +99,7 @@ public class ClientGUI extends Application {
 			public void handle(ActionEvent e) {
 				MessageBox login = new MessageBox(Action.LOGIN);
 				login.add(Data.USER_NAME, username.getText());
+				setLoggedInName(username.getText());
 				username.clear();
 				login.add(Data.PASSWORD, password.getText() + "");
 				password.clear();
@@ -301,7 +303,10 @@ public class ClientGUI extends Application {
 		hMain.getChildren().add(ta);
 		v.getChildren().add(hMain);
 		v.getChildren().add(h);
-		v.getChildren().add(exit);
+		HBox h3 = new HBox();
+		h3.getChildren().add(exit);
+		h3.getChildren().add(loggedInAs);
+		v.getChildren().add(h3);
 		root.getChildren().add(v);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
@@ -337,6 +342,7 @@ public class ClientGUI extends Application {
 	}
 	
 	public void login() {
+		loggedInAs = new Text("Logged in as " + loggedInName);
 		drawMainScreen(messageSpace);
 		messageSpace.appendText("Login successful!" + "\n");
 	}
