@@ -94,6 +94,7 @@ class LoginCommand extends Command {
 
 	private void registerSender() {
 		getUserChatSessions().getSession("global").addUser(getMessageSender());
+		Database.addUserToChat("global", getMessageSender().getUserName());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {
