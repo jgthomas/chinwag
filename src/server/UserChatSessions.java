@@ -57,16 +57,16 @@ class UserChatSessions implements Iterable<ChatSession> {
         /**
          * @return the current chat session object
          */
-        ChatSession getCurrentSession() {
-                return activeSessions.get(getCurrentSessionName());
-        }
+        //ChatSession getCurrentSession() {
+        //        return activeSessions.get(getCurrentSessionName());
+        //}
 
         /**
          * @return the name of the current chat session
          */
-        String getCurrentSessionName() {
-                return currentSession;
-        }
+        //String getCurrentSessionName() {
+        //        return currentSession;
+        //}
 
         /**
          * Removes the message sender object from all chat sessions
