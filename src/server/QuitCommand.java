@@ -2,7 +2,7 @@ package server;
 
 import protocol.MessageBox;
 
-public class QuitCommand extends Command {
+class QuitCommand extends Command {
 
     QuitCommand(MessageSender messageSender,
                 UserChatSessions userChatSessions,

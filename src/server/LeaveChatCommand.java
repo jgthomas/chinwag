@@ -14,7 +14,7 @@ import static protocol.Data.CHAT_NAME;
  * Data.CHAT_NAME - the name of the session to leave
  *
  **/
-public class LeaveChatCommand extends Command{
+class LeaveChatCommand extends Command{
 
     LeaveChatCommand(MessageSender messageSender,
                         UserChatSessions userChatSessions,
