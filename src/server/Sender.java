@@ -15,13 +15,13 @@ import java.net.*;
  * */
 class Sender implements MessageSender {
         private final String id;
-        private final Socket clientSocket;
+        //private final Socket clientSocket;
         private String userName;
         private ObjectOutputStream out = null;
 
         Sender(Socket clientSocket, String socketID) {
                 id = socketID;
-                this.clientSocket = clientSocket;
+                //this.clientSocket = clientSocket;
 
                 try {
                         out = new ObjectOutputStream(
@@ -62,7 +62,7 @@ class Sender implements MessageSender {
         public void closeSender() {
                 try {
                         out.close();
-                        clientSocket.close();
+                        //clientSocket.close();
                 } catch (IOException ioException) {
                         ioException.printStackTrace();
                 }
