@@ -7,7 +7,8 @@ import protocol.Data;
 import protocol.MessageBox;
 
 public class MessageQueue implements Runnable {
-	private static ConcurrentLinkedQueue<Message> insertionQueue;
+	private static ConcurrentLinkedQueue<Message> insertionQueue = 
+			new ConcurrentLinkedQueue<>();
 	
 	public static void addToQueue(MessageBox messageBox) {
 		String chatname = messageBox.get(Data.CHAT_NAME);
