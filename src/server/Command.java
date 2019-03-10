@@ -83,6 +83,7 @@ abstract class Command {
                         user.getUserChatSessions().removeSession(chatName);
                 }
 
+                chatSession.removeAllUsers();
                 getAllChatSessions().removeSession(chatName);
         }
 
