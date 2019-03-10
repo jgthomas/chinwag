@@ -14,12 +14,10 @@ import java.util.concurrent.ConcurrentMap;
  * */
 class UserChatSessions implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
-        //private String currentSession;
         
         UserChatSessions(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
-                //currentSession = "global";
         }
 
         /**
@@ -64,20 +62,6 @@ class UserChatSessions implements Iterable<ChatSession> {
         List<String> allUserChatSessions() {
                 return new ArrayList<>(activeSessions.keySet());
         }
-
-        /**
-         * @return the current chat session object
-         */
-        //ChatSession getCurrentSession() {
-        //        return activeSessions.get(getCurrentSessionName());
-        //}
-
-        /**
-         * @return the name of the current chat session
-         */
-        //String getCurrentSessionName() {
-        //        return currentSession;
-        //}
 
         /**
          * Removes the message sender object from all chat sessions
