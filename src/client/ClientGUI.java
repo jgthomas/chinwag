@@ -112,6 +112,9 @@ public class ClientGUI extends Application {
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
+				MessageBox logout = new MessageBox(Action.QUIT);
+				logout.add(Data.USER_NAME, loggedInName);
+				client.getSender().sendMessage(logout);
 				System.exit(1);
 			}
 		});
