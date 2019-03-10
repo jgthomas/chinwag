@@ -34,12 +34,10 @@ class AddUserToChatCommand extends Command {
     public void execute(MessageBox messageBox) {
         String chatName = messageBox.get(Data.CHAT_NAME);
         String username = messageBox.get(Data.USER_NAME);
-        Database.addUserToChat(chatName, username);
-        //getUserChatSessions().getSession(chatName).addUser(getMessageSender());
-        //for (MessageSender messageSender: getUserChatSessions().getSession(chatName)) {
-        //    getUser(messageSender.getUserName()).getUserChatSessions().
-        //            getSession(chatName).addUser(getUser(username).getMessageSender());
-        //}
-        addOtherUserToChat(chatName, username);
+
+        if (getUserChatSessions().isInChat(chatName)) {
+            Database.addUserToChat(chatName, username);
+            addOtherUserToChat(chatName, username);
+        }
     }
 }
