@@ -21,7 +21,7 @@ public class Server {
 	private final ExecutorService threadPool;
 	private final ChatSession global;
 	private final ConnectedClients connectedClients;
-	private final ActiveChatSessions activeChatSessions;
+	private final AllChatSessions allChatSessions;
 
 	private static Map<String, Integer> failedAttempts = new HashMap<>();
 	private static Map<String, Date> lockedAccounts = new HashMap<>();
@@ -31,7 +31,7 @@ public class Server {
 		connectedClients = new ConnectedClients();
 		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
 		global = new ChatSession("global");
-		activeChatSessions = new ActiveChatSessions(global);
+		allChatSessions = new AllChatSessions(global);
 	}
 	
 	public static synchronized Map<String, Integer> getFailedAttempts() {
@@ -55,7 +55,7 @@ public class Server {
 						clientSocket,
 						global,
 						connectedClients,
-						activeChatSessions,
+						allChatSessions,
 						socketID);
 				connectedClients.addClientByID(socketID, messageHandler);
 				threadPool.execute(messageHandler);

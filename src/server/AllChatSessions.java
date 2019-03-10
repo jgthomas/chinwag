@@ -10,10 +10,10 @@ import java.util.concurrent.ConcurrentMap;
  * When a chat session is created, it is added here.
  *
 1 * */
-class ActiveChatSessions {
+class AllChatSessions {
     private final ConcurrentMap<String, ChatSession> activeSessions;
 
-    ActiveChatSessions() {
+    AllChatSessions() {
         activeSessions = new ConcurrentHashMap<>();
     }
 
@@ -24,7 +24,7 @@ class ActiveChatSessions {
      *
      * @param global the global chat session
      * */
-    ActiveChatSessions(ChatSession global) {
+    AllChatSessions(ChatSession global) {
         activeSessions = new ConcurrentHashMap<>();
         activeSessions.put(global.getChatName(), global);
     }
