@@ -22,12 +22,19 @@ class ClientHandler implements MessageHandler {
         private final MessageSender messageSender;
         private final CurrentChatSessions currentChatSessions;
         private final ConnectedClients connectedClients;
+        private final ActiveChatSessions activeChatSessions;
 
-        ClientHandler(Socket clientSocket, ChatSession global, ConnectedClients connectedClients, String socketID) {
+        ClientHandler(Socket clientSocket,
+                      ChatSession global,
+                      ConnectedClients connectedClients,
+                      ActiveChatSessions activeChatSessions,
+                      String socketID)
+        {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, socketID);
                 currentChatSessions = new CurrentChatSessions(global);
                 this.connectedClients = connectedClients;
+                this.activeChatSessions = activeChatSessions;
         }
 
         @Override

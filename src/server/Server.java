@@ -51,7 +51,12 @@ public class Server {
 				System.out.println("Waiting for connection...");
 				clientSocket = serverSocket.accept();
 				String socketID = buildID(clientSocket);
-				MessageHandler messageHandler = new ClientHandler(clientSocket, global, connectedClients, socketID);
+				MessageHandler messageHandler = new ClientHandler(
+						clientSocket,
+						global,
+						connectedClients,
+						activeChatSessions,
+						socketID);
 				connectedClients.addClientByID(socketID, messageHandler);
 				threadPool.execute(messageHandler);
 			}
