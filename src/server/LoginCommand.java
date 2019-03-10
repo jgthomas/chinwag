@@ -51,7 +51,6 @@ class LoginCommand extends Command {
 
 	public void verifyUser(String username, String password){
 		if (Database.isValidUser(username, password)){
-
 			MessageBox mb = new MessageBox(Action.ACCEPT);
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
