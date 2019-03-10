@@ -24,13 +24,13 @@ class InfoCommand extends Command {
         MessageBox mb = null;
 
         switch (messageBox.getAction()) {
-            case LIST_CHAT_SESSIONS:
+            case GET_CHAT_SESSIONS:
                 mb = currentSessionsMessage();
                 break;
-            case LIST_MEMBERS:
+            case GET_MEMBERS:
                 mb = sessionMembersMessage(chatName);
                 break;
-            case LIST_LOGGED_IN:
+            case GET_LOGGED_IN:
                 mb = loggedInUsersMessage();
                 break;
         }
