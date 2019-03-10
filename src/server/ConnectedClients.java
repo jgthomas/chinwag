@@ -1,5 +1,7 @@
 package server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -51,5 +53,14 @@ class ConnectedClients {
      */
      MessageHandler getClientByUserName(String userName) {
         return clientsByUserName.getOrDefault(userName, null);
+     }
+
+    /**
+     * Builds a list of all currently logged-in users
+     *
+     * @return a list of user names
+     * */
+    List<String> allLoggedInUsers() {
+         return new ArrayList<>(clientsByUserName.keySet());
      }
 }
