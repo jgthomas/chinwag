@@ -37,6 +37,16 @@ class UserChatSessions implements Iterable<ChatSession> {
         }
 
         /**
+         * Checks if a user is in a chat
+         *
+         * @param chatName the name of the chat
+         * @return true if user is in the chat, else false
+         * */
+        boolean isInChat(String chatName) {
+                return activeSessions.containsKey(chatName);
+        }
+
+        /**
          * @param chatName the name of the chat session
          * @return a chat session object
          */

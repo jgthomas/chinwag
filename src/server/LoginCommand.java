@@ -82,15 +82,9 @@ class LoginCommand extends Command {
 
 	private void loadSessions(){
 		List<String> chatSessions = Database.retrieveChatSessions(getCurrentThreadUserName());
-		for (String chatName : chatSessions) {
-			ChatSession chatSession = new ChatSession(chatName);
-			List<String> users = Database.retrieveUsersFromSessions(chatName);
-			for (String username : users) {
-				MessageHandler messageHandler = getUser(username);
-				if (messageHandler != null)
-					chatSession.addUser(messageHandler.getMessageSender());
-			}
-			getUserChatSessions().addSession(chatSession);
+		for (String chatname : chatSessions) {
+			getChatSession(chatname).addUser(getMessageSender());
+			getUserChatSessions().addSession(getChatSession(chatname));
 		}
 	}
 
@@ -100,6 +94,7 @@ class LoginCommand extends Command {
 
 	private void registerSender() {
 		getUserChatSessions().getSession("global").addUser(getMessageSender());
+		Database.addUserToChat("global", getMessageSender().getUserName());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {
