@@ -54,6 +54,15 @@ class ChatSession implements Iterable<MessageSender> {
         }
 
         /**
+         * Checks if the chat is now empty
+         *
+         * @return true if empty, else false
+         * */
+        boolean isEmpty() {
+                return usersInChat.size() == 0;
+        }
+
+        /**
          * Removes all users from the chat session
          *
          * */

@@ -54,15 +54,13 @@ abstract class Command {
          * @return the chat session object
          * */
         ChatSession getChatSession(String chatName) {
-                return getAllChatSessions().getSession(chatName);
+                return getUserChatSessions().getSession(chatName);
         }
 
         /**
-         * Delete a chat session entirely.
+         * Completely deletes a chat session
          *
-         * Removes the chat session from every user and from the master record
-         *
-         * @param chatName the chat session to delete
+         * @param chatName the name of the session to delete
          * */
         void deleteChatSession(String chatName) {
                 ChatSession chatSession = getChatSession(chatName);
@@ -85,8 +83,11 @@ abstract class Command {
         void addOtherUserToChat(String chatName, String userName) {
                 MessageHandler user = getUser(userName);
                 ChatSession chatSession = getChatSession(chatName);
-                chatSession.addUser(user.getMessageSender());
-                user.getUserChatSessions().addSession(chatSession);
+
+                if (user != null && chatSession != null) {
+                        chatSession.addUser(user.getMessageSender());
+                        user.getUserChatSessions().addSession(chatSession);
+                }
         }
 
         /*

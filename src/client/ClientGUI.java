@@ -52,12 +52,14 @@ public class ClientGUI extends Application {
 	private HBox hMain;
 	private Stage stage;
 	private Stage createStage;
+	private Stage addStage;
 	private String loggedInName;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
 		createStage = new Stage();
+		addStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
 		observableChatList.add("global");
@@ -118,7 +120,7 @@ public class ClientGUI extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				messageSpaces.get(chatListView.getSelectionModel().getSelectedItem())
-							 .appendText("\n" + "You>>> " + input.getText());
+							 .appendText("You>>> " + input.getText() + "\n");
 				MessageBox message = new MessageBox(Action.CHAT);
 				message.add(Data.CHAT_NAME, chatListView
 											.getSelectionModel()
@@ -195,11 +197,35 @@ public class ClientGUI extends Application {
 			}
 		});
 		
+		add = new Button("Add users");
+		
+		add.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				drawAddUserScreen();
+			}
+		});
+		
+		invite = new Button("Invite");
+		
+		invite.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				MessageBox invite = new MessageBox(Action.ADD_USER);
+				invite.add(Data.USER_NAME, username.getText());
+				username.clear();
+				invite.add(Data.CHAT_NAME, chatListView
+										   .getSelectionModel()
+										   .getSelectedItem());
+				client.getSender().sendMessage(invite);
+			}
+		});
+		
 		createChat = new Button("Create");
 		
 		createChat.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent eevent) {
 				MessageBox create = new MessageBox(Action.START_NEW_CHAT);
 				create.add(Data.CHAT_NAME, chatName.getText());
 				create.add(Data.USER_NAME, loggedInName);
@@ -219,6 +245,7 @@ public class ClientGUI extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				createStage.close();
+				addStage.close();
 			}
 		});
 		
@@ -269,6 +296,7 @@ public class ClientGUI extends Application {
 		h.getChildren().add(send);
 		h.getChildren().add(logout);
 		h.getChildren().add(requestCreateChat);
+		h.getChildren().add(add);
 		hMain.getChildren().add(chatListView);
 		hMain.getChildren().add(ta);
 		v.getChildren().add(hMain);
@@ -280,10 +308,32 @@ public class ClientGUI extends Application {
 		stage.show();
 	}
 	
+	public void drawAddUserScreen() {
+		Group root = new Group();
+		VBox v = new VBox();
+		v.getChildren().add(username);
+		HBox h = new HBox();
+		h.getChildren().add(cancel);
+		h.getChildren().add(invite);
+		v.getChildren().add(h);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		addStage.setScene(scene);
+		addStage.show();
+	}
+	
 	public void displayMessage(MessageBox mb) {
+		if(mb.getAction() == Action.SERVER_MESSAGE) {
+			messageSpaces.get("global")
+			 .appendText(mb.get(Data.USER_NAME) + 
+					 ">>> " + mb.get(Data.MESSAGE) + "\n");
+		}
+		if(mb.get(Data.CHAT_NAME) == null) {
+			return;
+		}
 		messageSpaces.get(mb.get(Data.CHAT_NAME))
-					 .appendText("\n" + mb.get(Data.USER_NAME) + 
-							 ">>> " + mb.get(Data.MESSAGE));
+					 .appendText(mb.get(Data.USER_NAME) + 
+							 ">>> " + mb.get(Data.MESSAGE) + "\n");
 	}
 	
 	public void login() {

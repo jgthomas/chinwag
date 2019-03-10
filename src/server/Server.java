@@ -1,6 +1,7 @@
 package server;
 
 import database.Database;
+import database.MessageQueue;
 
 import java.io.*;
 import java.net.*;
@@ -46,6 +47,8 @@ public class Server {
 		Socket clientSocket;
 		System.out.println("Server available...");
 		Database.makeConnection();
+		MessageQueue messageQueue = new MessageQueue();
+		threadPool.execute(messageQueue);
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			while (true) {
 				System.out.println("Waiting for connection...");

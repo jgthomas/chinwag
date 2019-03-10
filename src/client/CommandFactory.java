@@ -16,6 +16,8 @@ class CommandFactory {
 		switch (action) {
 		case CHAT:
 			return new MessageCommand(mb, gui);
+		case SERVER_MESSAGE:
+			return new MessageCommand(mb, gui);
 		case DENY:
 			return new DenyCommand(gui);
 		case ACCEPT:
