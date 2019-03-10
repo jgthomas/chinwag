@@ -74,7 +74,7 @@ abstract class Command {
          * @param chatName the chat the user is joining
          * @param messageHandler the user to join the chat
          */
-        void addUserToChat(String chatName, MessageHandler messageHandler) {
+        void addOtherUserToChat(String chatName, MessageHandler messageHandler) {
                 ChatSession chatSession = getAllChatSessions().getSession(chatName);
                 chatSession.addUser(messageHandler.getMessageSender());
                 messageHandler.getUserChatSessions().addSession(chatSession);

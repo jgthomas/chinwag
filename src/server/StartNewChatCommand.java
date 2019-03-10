@@ -47,7 +47,7 @@ class StartNewChatCommand extends Command {
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
                 MessageHandler user = getUser(userToChatWith);
-                addUserToChat(newChatName, user);
+                addOtherUserToChat(newChatName, user);
             }
         }
     }
