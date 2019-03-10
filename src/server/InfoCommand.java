@@ -5,7 +5,6 @@ import protocol.Data;
 import protocol.DataFormatter;
 import protocol.MessageBox;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +31,7 @@ public class InfoCommand extends Command {
                 mb = sessionMembersMessage(chatName);
                 break;
             case LIST_LOGGED_IN:
+                mb = loggedInUsersMessage();
                 break;
         }
     }
@@ -45,13 +45,6 @@ public class InfoCommand extends Command {
         return messageBox;
     }
 
-    private String loggedInUsers() {
-        List<String> loggedIn = getConnectedClients().allLoggedInUsers();
-        Collections.sort(loggedIn);
-        String loggedInString = DataFormatter.listToString(loggedIn);
-
-    }
-
     private MessageBox sessionMembersMessage(String chatName) {
         List<String> members = getUserChatSessions().getSession(chatName).allUserNames();
         Collections.sort(members);
@@ -59,6 +52,15 @@ public class InfoCommand extends Command {
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
         messageBox.add(Data.CHAT_NAME, chatName);
         messageBox.add(Data.CHAT_MEMBERS, sessionMemebrsString);
+        return messageBox;
+    }
+
+    private MessageBox loggedInUsersMessage() {
+        List<String> loggedIn = getConnectedClients().allLoggedInUsers();
+        Collections.sort(loggedIn);
+        String loggedInString = DataFormatter.listToString(loggedIn);
+        MessageBox messageBox = new MessageBox(Action.GIVE_LOGGED_IN);
+        messageBox.add(Data.LOGGED_IN_MEMBERS, loggedInString);
         return messageBox;
     }
 }
