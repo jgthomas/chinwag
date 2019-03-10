@@ -63,6 +63,7 @@ class ClientHandler implements MessageHandler {
                                 (action,
                                 messageSender,
                                 currentChatSessions,
+                                allChatSessions,
                                 connectedClients);
                 command.execute(messageBox);
         }

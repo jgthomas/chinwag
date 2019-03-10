@@ -18,9 +18,10 @@ public class LeaveChatCommand extends Command{
 
     LeaveChatCommand(MessageSender messageSender,
                         CurrentChatSessions currentChatSessions,
+                        AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
     }
 
     @Override

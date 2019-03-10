@@ -19,9 +19,10 @@ public class SignUpCommand extends Command {
 
     SignUpCommand(MessageSender messageSender,
                   CurrentChatSessions currentChatSessions,
+                  AllChatSessions allChatSessions,
                   ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
     }
 
     @Override

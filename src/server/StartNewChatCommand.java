@@ -24,9 +24,10 @@ class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
                         CurrentChatSessions currentChatSessions,
+                        AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, connectedClients);
+        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
     }
 
     @Override

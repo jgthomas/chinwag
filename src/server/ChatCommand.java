@@ -25,9 +25,10 @@ class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender,
                     CurrentChatSessions currentChatSessions,
+                    AllChatSessions allChatSessions,
                     ConnectedClients connectedClients)
         {
-                super(messageSender, currentChatSessions, connectedClients);
+                super(messageSender, currentChatSessions, allChatSessions, connectedClients);
         }
 
         @Override

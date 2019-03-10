@@ -6,13 +6,16 @@ abstract class Command {
         private final MessageSender messageSender;
         private final CurrentChatSessions currentChatSessions;
         private final ConnectedClients connectedClients;
+        private final AllChatSessions allChatSessions;
 
         Command(MessageSender messageSender,
                 CurrentChatSessions currentChatSessions,
+                AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
         {
                 this.messageSender = messageSender;
                 this.currentChatSessions = currentChatSessions;
+                this.allChatSessions = allChatSessions;
                 this.connectedClients = connectedClients;
         }
 
