@@ -9,14 +9,13 @@ public class Database {
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
     private static String username = "group22";
     private static String password = "group22";
-    private static Connection connection = makeConnection();
+    private static Connection connection;
 
-    public static Connection makeConnection(){
+    public static void makeConnection(){
         try {
-            return DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e){
             e.printStackTrace();
-            return null;
         }
     }
 
