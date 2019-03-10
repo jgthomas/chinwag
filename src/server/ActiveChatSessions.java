@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
  * When a chat session is created, it is added here.
  *
 1 * */
-public class ActiveChatSessions {
+class ActiveChatSessions {
     private final ConcurrentMap<String, ChatSession> activeSessions;
 
     ActiveChatSessions() {
