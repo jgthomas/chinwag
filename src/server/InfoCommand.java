@@ -41,10 +41,14 @@ public class InfoCommand extends Command {
     }
 
     private List<String> loggedInUsers() {
-        return new ArrayList<>();
+        List<String> loggedIn = getConnectedClients().allLoggedInUsers();
+        Collections.sort(loggedIn);
+        return loggedIn;
     }
 
     private List<String> sessionMembers(String chatName) {
+        List<String> members = getUserChatSessions().getSession(chatName).allUserNames();
+        Collections.sort(members);
         return new ArrayList<>();
     }
 }
