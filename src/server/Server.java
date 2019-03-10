@@ -17,7 +17,7 @@ import java.util.concurrent.*;
  *
  */
 public class Server {
-	private static final int MAX_THREADS = 3;
+	private static final int MAX_THREADS = 4;
 	private final int port;
 	private final ExecutorService threadPool;
 	private final ChatSession global;
