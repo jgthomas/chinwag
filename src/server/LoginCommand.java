@@ -88,8 +88,8 @@ class LoginCommand extends Command {
 				getUserChatSessions().addSession(getChatSession(chatname));
 			} else {
 				ChatSession chatSession = new ChatSession(chatname);
-				getAllChatSessions().addSession(chatSession);
 				chatSession.addUser(getMessageSender());
+				getAllChatSessions().addSession(chatSession);
 				getUserChatSessions().addSession(chatSession);
 			}
 		}
