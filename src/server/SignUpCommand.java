@@ -45,7 +45,4 @@ class SignUpCommand extends Command {
             getMessageSender().sendMessage(mb);
         }
     }
-
-
-
 }
