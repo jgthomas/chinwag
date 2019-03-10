@@ -58,25 +58,38 @@ abstract class Command {
         }
 
         /**
-         * Adds a user to a chat session
+         * Adds a newly created chat to the master record, AND to the
+         * chats of the current user
          *
-         * @param chatSession the chat the user is joining
+         * @param chatSession the session to add to the master record
+         * */
+        void registerNewChat(ChatSession chatSession) {
+                getAllChatSessions().addSession(chatSession);
+                getUserChatSessions().addSession(chatSession);
+        }
+
+        /**
+         * Adds a user to an *existing* chat session
+         *
+         * @param chatName the chat the user is joining
          * @param messageHandler the user to join the chat
          */
-        void addUserToChat(ChatSession chatSession, MessageHandler messageHandler) {
+        void addUserToChat(String chatName, MessageHandler messageHandler) {
+                ChatSession chatSession = getAllChatSessions().getSession(chatName);
                 chatSession.addUser(messageHandler.getMessageSender());
                 messageHandler.getUserChatSessions().addSession(chatSession);
         }
 
         /**
-         * Remove a user from a chat session
+         * Remove a user from an *existing* chat session
          *
-         * @param chatSession the chat from which the user is to be removed
+         * @param chatName the chat from which the user is to be removed
          * @param messageHandler the user to remove
          * */
-        void removeUserFromChat(ChatSession chatSession, MessageHandler messageHandler) {
+        void removeUserFromChat(String chatName, MessageHandler messageHandler) {
+                ChatSession chatSession = getAllChatSessions().getSession(chatName);
                 chatSession.removeUser(messageHandler.getMessageSender());
-                messageHandler.getUserChatSessions().removeSession(chatSession.getChatName());
+                messageHandler.getUserChatSessions().removeSession(chatName);
         }
 
         /**

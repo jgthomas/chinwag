@@ -42,13 +42,12 @@ class StartNewChatCommand extends Command {
             ChatSession newChat = new ChatSession(newChatName);
             Database.addUserToChat(newChatName, getMessageSender().getUserName());
             newChat.addUser(getMessageSender());
-            getUserChatSessions().addSession(newChat);
-            getAllChatSessions().addSession(newChat);
+            registerNewChat(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
                 MessageHandler user = getUser(userToChatWith);
-                addUserToChat(newChat, user);
+                addUserToChat(newChatName, user);
             }
         }
     }
