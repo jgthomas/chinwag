@@ -89,7 +89,7 @@ abstract class Command {
          * @param chatName the chat session to delete
          * */
         void deleteChatSession(String chatName) {
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
+                ChatSession chatSession = getChatSession(chatName);
 
                 for (String userName : chatSession.allUserNames()) {
                         MessageHandler user = getUser(userName);
