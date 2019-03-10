@@ -80,6 +80,7 @@ class LoginCommand extends Command {
 			for (String username : users) {
 				MessageHandler messageHandler = getConnectedClients().getClientByUserName(username);
 				if (messageHandler != null)
+					messageHandler.getCurrentChatSessions().getSession(chatname).addUser(getMessageSender());
 					chatSession.addUser(messageHandler.getMessageSender());
 			}
 			getCurrentChatSessions().addSession(chatSession);
