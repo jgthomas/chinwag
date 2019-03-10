@@ -1,6 +1,8 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -52,6 +54,15 @@ class UserChatSessions implements Iterable<ChatSession> {
          */
         ChatSession getSession(String chatName) {
                 return activeSessions.get(chatName);
+        }
+
+        /**
+         * Gets a list of sessions the user is in
+         *
+         * @return list of all sessions the user is currently in
+         * */
+        List<String> allUserChatSessions() {
+                return new ArrayList<>(activeSessions.keySet());
         }
 
         /**
