@@ -55,6 +55,16 @@ class ChatSession implements Iterable<MessageSender> {
         }
 
         /**
+         * Removes all users from the chat session
+         *
+         * */
+        void removeAllUsers() {
+                for (MessageSender sender : this) {
+                        removeUser(sender);
+                }
+        }
+
+        /**
          * Gets a list of all the users currently in the chat
          *
          * @return a list of user names
