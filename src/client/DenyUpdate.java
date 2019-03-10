@@ -15,14 +15,14 @@ public class DenyUpdate implements Runnable {
 	@Override
 	public void run() {
 		gui.refuseLogin();
-		Text fuckoff = new Text("Fuck off.");
-		Group root = new Group();
-		VBox v = new VBox();
-		v.getChildren().clear();
-		v.getChildren().add(fuckoff);
-		root.getChildren().add(v);
-		Scene scene = new Scene(root);
-		gui.getStage().setScene(scene);
-		gui.getStage().show();
+//		Text fuckoff = new Text("Fuck off.");
+//		Group root = new Group();
+//		VBox v = new VBox();
+//		v.getChildren().clear();
+//		v.getChildren().add(fuckoff);
+//		root.getChildren().add(v);
+//		Scene scene = new Scene(root);
+//		gui.getStage().setScene(scene);
+//		gui.getStage().show();
 	}
 }
