@@ -100,19 +100,6 @@ abstract class Command {
         }
 
         /**
-         * Remove the user from the chat session
-         *
-         * First it removes the user's sender object from the chat
-         * Second it removes the chat from the user's current sessions
-         *
-         * @param chatName the chat from which the user is to be removed
-         * */
-        void leaveChat(String chatName) {
-                getAllChatSessions().getSession(chatName).removeUser(getMessageSender());
-                getUserChatSessions().removeSession(chatName);
-        }
-
-        /**
          * Executes the command received from the client.
          * Overridden in subclasses.
          *
