@@ -53,7 +53,7 @@ class UserChatSessions implements Iterable<ChatSession> {
          * @return a chat session object
          */
         ChatSession getSession(String chatName) {
-                return activeSessions.get(chatName);
+                return activeSessions.getOrDefault(chatName, null);
         }
 
         /**
