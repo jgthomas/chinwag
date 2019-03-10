@@ -110,7 +110,7 @@ public class Database {
 	    {
 	        statement.setString(1, chatname);
 	        statement.setString(2, username);
-	        statement.executeQuery();
+	        statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,13 +130,13 @@ public class Database {
     
     public static synchronized void insertMessage (Message message) {
     	try (PreparedStatement statement = connection.prepareStatement(
-    			"INSERT INTO message (chatname, sender, content, time) VALUES (?, ?, ?, ?)"))
+    			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?)"))
     	{
     		statement.setString(1, message.getChatname());
     		statement.setString(2, message.getSender());
     		statement.setString(3, message.getContent());
     		statement.setTimestamp(4, message.getTimestamp());
-    		statement.executeQuery();
+    		statement.executeUpdate();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}

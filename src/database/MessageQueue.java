@@ -3,13 +3,14 @@ package database;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import protocol.Data;
 import protocol.MessageBox;
 
 public class MessageQueue implements Runnable {
-	private static Queue<Message> insertionQueue =
-			new LinkedList<>();
+	private static ConcurrentLinkedQueue<Message> insertionQueue =
+			new ConcurrentLinkedQueue<>();
 
 	public static void addToQueue(MessageBox messageBox) {
 		String chatname = messageBox.get(Data.CHAT_NAME);
