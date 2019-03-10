@@ -51,7 +51,7 @@ class LeaveChatCommand extends Command{
      * @param chatName the chat from which the user is to be removed
      * */
     private void leaveChat(String chatName) {
-        getAllChatSessions().getSession(chatName).removeUser(getMessageSender());
+        getChatSession(chatName).removeUser(getMessageSender());
         getUserChatSessions().removeSession(chatName);
     }
 
