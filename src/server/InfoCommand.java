@@ -8,7 +8,7 @@ import protocol.MessageBox;
 import java.util.Collections;
 import java.util.List;
 
-public class InfoCommand extends Command {
+class InfoCommand extends Command {
 
     InfoCommand(MessageSender messageSender,
                 UserChatSessions userChatSessions,
@@ -19,7 +19,7 @@ public class InfoCommand extends Command {
     }
 
     @Override
-    public void execute(MessageBox messageBox) {
+    void execute(MessageBox messageBox) {
         String chatName = messageBox.get(Data.CHAT_NAME);
         MessageBox mb = null;
 
