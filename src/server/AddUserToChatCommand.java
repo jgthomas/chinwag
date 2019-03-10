@@ -40,7 +40,6 @@ class AddUserToChatCommand extends Command {
         //    getUser(messageSender.getUserName()).getUserChatSessions().
         //            getSession(chatName).addUser(getUser(username).getMessageSender());
         //}
-        MessageHandler userToAdd = getUser(username);
-        addOtherUserToChat(chatName, userToAdd);
+        addOtherUserToChat(chatName, username);
     }
 }
