@@ -60,16 +60,13 @@ class LoginCommand extends Command {
 
 	private void verifyUser(String username, String password){
 		if (Database.isValidUser(username, password)){
-			MessageBox mb = new MessageBox(Action.ACCEPT);
-			mb.add(Data.USER_NAME, username);
-			getMessageSender().sendMessage(mb);
+			sendAcceptMessage(username);
 			setUserName(username);
 			registerSender();
 			addAsLoggedInClient(getCurrentThreadID(), username);
 			loadSessions();
 		} else {
-			MessageBox mb = new MessageBox(Action.DENY);
-			getMessageSender().sendMessage(mb);
+			sendDenyMessage();
 			if (Server.getFailedAttempts().get(username) == null) {
 					Server.getFailedAttempts().put(username, 1);
 			}
@@ -107,5 +104,16 @@ class LoginCommand extends Command {
 
 	private void addAsLoggedInClient(String id, String userName) {
 		getConnectedClients().addClientByUserName(id, userName);
+	}
+
+	private void sendAcceptMessage(String userName) {
+		MessageBox mb = new MessageBox(Action.ACCEPT);
+		mb.add(Data.USER_NAME, userName);
+		getMessageSender().sendMessage(mb);
+	}
+
+	private void sendDenyMessage() {
+		MessageBox mb = new MessageBox(Action.DENY);
+		getMessageSender().sendMessage(mb);
 	}
 }
