@@ -130,7 +130,7 @@ public class Database {
     
     public static synchronized void insertMessage (Message message) {
     	try (PreparedStatement statement = connection.prepareStatement(
-    			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?"))
+    			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?)"))
     	{
     		statement.setString(1, message.getChatname());
     		statement.setString(2, message.getSender());
