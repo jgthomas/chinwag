@@ -40,11 +40,10 @@ class ChatCommand extends Command {
          * */
         @Override
         public void execute(MessageBox messageBox) {
-                getMessageSender().postMessage(getCurrentChat(), messageBox);
                 MessageQueue.addToQueue(messageBox);
-        }
 
-        private ChatSession getCurrentChat() {
-                return getUserChatSessions().getCurrentSession();
+                String chatSessionName = messageBox.get(Data.CHAT_NAME);
+                ChatSession chatSession = getChatSession(chatSessionName);
+                getMessageSender().postMessage(chatSession, messageBox);
         }
 }

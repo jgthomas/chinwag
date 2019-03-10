@@ -19,7 +19,8 @@ public enum Action {
         ACCEPT("ACCEPT"),
         DENY("DENY"),
         SERVER_MESSAGE("SERVER_MESSAGE"),
-        ADD_USER("ADD_USER");
+        ADD_USER("ADD_USER"),
+		INVITE("INVITE");
 
         private static final Set<String> validCommands = new HashSet<>();
 
