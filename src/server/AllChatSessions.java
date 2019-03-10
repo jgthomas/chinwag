@@ -56,4 +56,8 @@ class AllChatSessions {
     ChatSession getSession(String sessionID) {
         return activeSessions.getOrDefault(sessionID, null);
     }
+
+    boolean sessionExists(String chatname) {
+        return activeSessions.containsKey(chatname);
+    }
 }
