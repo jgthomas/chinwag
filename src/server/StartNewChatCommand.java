@@ -30,6 +30,13 @@ class StartNewChatCommand extends Command {
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Creates a new chat session.
+     *
+     * Can optionally add a user to the chat session at the same time.
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     void execute(MessageBox messageBox) {
     	// first check if chat session name already exists
