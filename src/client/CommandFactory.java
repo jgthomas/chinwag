@@ -5,7 +5,7 @@ import protocol.MessageBox;
 
 class CommandFactory {
 	private ClientGUI gui;
-	private Client client;
+	private User user;
 
 	public CommandFactory(ClientGUI gui) {
 		this.gui = gui;
@@ -23,7 +23,7 @@ class CommandFactory {
 		case ACCEPT:
 			return new AcceptCommand(mb, gui);
 		case UPDATE_LOGGED_IN:
-			return new UpdateLoggedInCommand(mb, gui, client);
+			return new UpdateLoggedInCommand(mb, gui, user);
 		default:
 			throw new IllegalStateException("Unrecognised command: " + action);
 		}

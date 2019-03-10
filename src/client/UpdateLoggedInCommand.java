@@ -15,17 +15,17 @@ import protocol.MessageBox;
  */
 
 public class UpdateLoggedInCommand implements Command {
-	private Client client;
+	private User user;
 	private ClientGUI gui;
 	private ClientChatSession chatSession;
 	private TreeSet<String> onlineUsers;
 	
-	public UpdateLoggedInCommand(MessageBox mb, ClientGUI gui, Client client) {
+	public UpdateLoggedInCommand(MessageBox mb, ClientGUI gui, User user) {
 		this.gui = gui;
 		//Finds the chat session corresponding to the CHAT_NAME in the MessageBox
-		this.chatSession = client.getChatSessions().get(mb.get(Data.CHAT_NAME));
+		this.chatSession = user.getChatSessions().get(mb.get(Data.CHAT_NAME));
 		this.onlineUsers = onlineUsers;
-		this.client = client;
+		this.user = user;
 	}
 	
 	
