@@ -7,6 +7,7 @@ import protocol.Data;
 import protocol.MessageBox;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * CONTRACT
@@ -49,13 +50,14 @@ class LoginCommand extends Command {
 		}
 	}
 
-	public void verifyUser(String username, String password){
+	private void verifyUser(String username, String password){
 		if (Database.isValidUser(username, password)){
 			MessageBox mb = new MessageBox(Action.ACCEPT);
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
 			addAsLoggedInClient(getMessageSender().id(), username);
+			loadSessions();
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
 			getMessageSender().sendMessage(mb);
@@ -67,6 +69,20 @@ class LoginCommand extends Command {
 				Server.getLockedAccounts().put(username, new Date());
 			} else
 				Server.getFailedAttempts().put(username, Server.getFailedAttempts().get(username) + 1);
+		}
+	}
+
+	private void loadSessions(){
+		List<String> chatSessions = Database.retrieveChatSessions(getMessageSender().getUserName());
+		for (String chatname: chatSessions) {
+			ChatSession chatSession = new ChatSession(chatname);
+			List<String> users = Database.retrieveUsersFromSessions(chatname);
+			for (String username : users) {
+				MessageHandler messageHandler = getConnectedClients().getClientByUserName(username);
+				if (messageHandler != null)
+					chatSession.addUser(messageHandler.getMessageSender());
+			}
+			getCurrentChatSessions().addSession(chatSession);
 		}
 	}
 
