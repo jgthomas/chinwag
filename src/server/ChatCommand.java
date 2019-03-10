@@ -44,6 +44,8 @@ class ChatCommand extends Command {
 
                 String chatSessionName = messageBox.get(Data.CHAT_NAME);
                 ChatSession chatSession = getChatSession(chatSessionName);
+                System.out.println(chatSession.getChatName());
+                System.out.println(chatSession.allUserNames());
                 getMessageSender().postMessage(chatSession, messageBox);
         }
 }
