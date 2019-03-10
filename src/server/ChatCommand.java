@@ -1,6 +1,7 @@
 package server;
 
 
+import database.MessageQueue;
 import protocol.Data;
 import protocol.MessageBox;
 
@@ -39,8 +40,10 @@ class ChatCommand extends Command {
          * */
         @Override
         public void execute(MessageBox messageBox) {
+                MessageQueue.addToQueue(messageBox);
+
                 String chatSessionName = messageBox.get(Data.CHAT_NAME);
-                ChatSession chatSession = getUserChatSessions().getSession(chatSessionName);
+                ChatSession chatSession = getChatSession(chatSessionName);
                 getMessageSender().postMessage(chatSession, messageBox);
         }
 }

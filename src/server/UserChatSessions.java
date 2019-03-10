@@ -1,6 +1,8 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -12,12 +14,10 @@ import java.util.concurrent.ConcurrentMap;
  * */
 class UserChatSessions implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
-        private String currentSession;
         
         UserChatSessions(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
-                currentSession = "global";
         }
 
         /**
@@ -51,21 +51,16 @@ class UserChatSessions implements Iterable<ChatSession> {
          * @return a chat session object
          */
         ChatSession getSession(String chatName) {
-                return activeSessions.get(chatName);
+                return activeSessions.getOrDefault(chatName, null);
         }
 
         /**
-         * @return the current chat session object
-         */
-        ChatSession getCurrentSession() {
-                return activeSessions.get(getCurrentSessionName());
-        }
-
-        /**
-         * @return the name of the current chat session
-         */
-        String getCurrentSessionName() {
-                return currentSession;
+         * Gets a list of sessions the user is in
+         *
+         * @return list of all sessions the user is currently in
+         * */
+        List<String> allUserChatSessions() {
+                return new ArrayList<>(activeSessions.keySet());
         }
 
         /**

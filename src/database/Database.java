@@ -136,6 +136,7 @@ public class Database {
     		statement.setString(2, message.getSender());
     		statement.setString(3, message.getContent());
     		statement.setTimestamp(4, message.getTimestamp());
+    		statement.executeUpdate();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -163,7 +164,8 @@ public class Database {
     }
 
     public static synchronized List<String> retrieveUsersFromSessions(String chatname){
-	    try (PreparedStatement statement = connection.prepareStatement("SELECT username FROM chatsession WHERE chatname = ?")){
+	    try (PreparedStatement statement = connection.prepareStatement(
+	    		"SELECT username FROM chatsession WHERE chatname = ?")){
 	        statement.setString(1, chatname);
 	        ResultSet rs = statement.executeQuery();
 	        List<String> users = new ArrayList<>();
