@@ -15,7 +15,7 @@ public class AcceptCommand implements Command {
 	
 	@Override
 	public void execute() {
-		gui.setLoggedInName(mb.get(Data.USER_NAME));
+		//gui.setLoggedInName(mb.get(Data.USER_NAME));
 		LoginUpdate lu = new LoginUpdate(gui);
 		Platform.runLater(lu);
 	}
