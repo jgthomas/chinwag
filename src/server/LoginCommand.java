@@ -64,7 +64,7 @@ class LoginCommand extends Command {
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
-			addAsLoggedInClient(getMessageSender().id(), username);
+			addAsLoggedInClient(getCurrentUserID(), username);
 			loadSessions();
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
