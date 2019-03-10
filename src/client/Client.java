@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +22,7 @@ public class Client {
 	private Scanner in;
 	private ClientSender sender;
 	private ClientGUI gui;
+	private TreeMap<String, ClientChatSession> chatSessions; //Tracks the chats of which user is a member.
 	
 	public Client(String hostname, int port, ClientGUI gui) {
 		this.hostname = hostname;
@@ -39,6 +42,7 @@ public class Client {
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
+		this.chatSessions = new TreeMap<>();
 	}
 	
 	public ObjectInputStream getInput() {
@@ -68,4 +72,13 @@ public class Client {
 	public ClientGUI getGUI() {
 		return gui;
 	}
+
+	public TreeMap<String, ClientChatSession> getChatSessions() {
+		return chatSessions;
+	}
+
+	public void setChatSessions(TreeMap<String, ClientChatSession> chatSessions) {
+		this.chatSessions = chatSessions;
+	}
+	
 }
