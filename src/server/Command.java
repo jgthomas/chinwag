@@ -67,7 +67,7 @@ abstract class Command {
         /**
          * @return the id associated with the current thread
          */
-        String getCurrentTreadID() {
+        String getCurrentThreadID() {
                 return getMessageSender().id();
         }
 
