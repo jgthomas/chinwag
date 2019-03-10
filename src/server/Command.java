@@ -54,7 +54,17 @@ abstract class Command {
          * @return a user's message handler object
          * */
         MessageHandler getUser(String userName) {
-                return connectedClients.getClientByUserName(userName);
+                return getConnectedClients().getClientByUserName(userName);
+        }
+
+        /**
+         * Get a chat from the master record
+         *
+         * @param chatName the name of the chat
+         * @return the chat session object
+         * */
+        ChatSession getChatSession(String chatName) {
+                return getAllChatSessions().getSession(chatName);
         }
 
         /**
