@@ -1,6 +1,7 @@
 package server;
 
 
+import protocol.Data;
 import protocol.MessageBox;
 
 
@@ -38,10 +39,12 @@ class ChatCommand extends Command {
          * */
         @Override
         public void execute(MessageBox messageBox) {
-                getMessageSender().postMessage(getCurrentChat(), messageBox);
+                String chatSessionName = messageBox.get(Data.CHAT_NAME);
+                ChatSession chatSession = getUserChatSessions().getSession(chatSessionName);
+                getMessageSender().postMessage(chatSession, messageBox);
         }
 
-        private ChatSession getCurrentChat() {
-                return getUserChatSessions().getCurrentSession();
-        }
+        //private ChatSession getCurrentChat() {
+        //        return getUserChatSessions().getCurrentSession();
+        //}
 }
