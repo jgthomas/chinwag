@@ -46,6 +46,9 @@ class LeaveChatCommand extends Command{
      * Remove the user from the chat session
      *
      * First it removes the user's sender object from the chat
+     * (this only needs to be done once, as all users have a reference
+     *  to the same chat object)
+     *
      * Second it removes the chat from the user's current sessions
      *
      * @param chatName the chat from which the user is to be removed
