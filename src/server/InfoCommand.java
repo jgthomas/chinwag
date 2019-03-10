@@ -20,6 +20,7 @@ public class InfoCommand extends Command {
 
     @Override
     public void execute(MessageBox messageBox) {
+        String chatName = messageBox.get(Data.CHAT_NAME);
         MessageBox mb = null;
 
         switch (messageBox.getAction()) {
@@ -27,13 +28,15 @@ public class InfoCommand extends Command {
                 mb = currentSessionsMessage();
                 break;
             case LIST_MEMBERS:
-                String chatName = messageBox.get(Data.CHAT_NAME);
                 mb = sessionMembersMessage(chatName);
                 break;
             case LIST_LOGGED_IN:
                 mb = loggedInUsersMessage();
                 break;
         }
+
+        ChatSession chatSession = getUserChatSessions().getSession(chatName);
+        getMessageSender().postMessage(chatSession, mb);
     }
 
     private MessageBox currentSessionsMessage() {
