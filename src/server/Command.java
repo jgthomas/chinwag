@@ -19,19 +19,7 @@ abstract class Command {
                 this.connectedClients = connectedClients;
         }
 
-        /**
-         * @return the message sender object for use with this command
-         * */
-        MessageSender getMessageSender() {
-                return messageSender;
-        }
-
-        /**
-         * @return the session tracker object for use with this command
-         * */
-        UserChatSessions getUserChatSessions() {
-                return userChatSessions;
-        }
+        /* These methods work on ConnectedClients and AllChatSessions */
 
         /**
          * @return an object tracking all the connected clients
@@ -55,20 +43,6 @@ abstract class Command {
          * */
         MessageHandler getUser(String userName) {
                 return getConnectedClients().getClientByUserName(userName);
-        }
-
-        /**
-         * @return the user name associated with the current thread
-         * */
-        String getCurrentThreadUserName() {
-                return getMessageSender().getUserName();
-        }
-
-        /**
-         * @return the id associated with the current thread
-         */
-        String getCurrentThreadID() {
-                return getMessageSender().id();
         }
 
         /**
@@ -111,6 +85,36 @@ abstract class Command {
                 ChatSession chatSession = getChatSession(chatName);
                 chatSession.addUser(user.getMessageSender());
                 user.getUserChatSessions().addSession(chatSession);
+        }
+
+        /* These methods work on the state of the current thread */
+
+        /**
+         * @return the message sender object for use with this command
+         * */
+        MessageSender getMessageSender() {
+                return messageSender;
+        }
+
+        /**
+         * @return the session tracker object for use with this command
+         * */
+        UserChatSessions getUserChatSessions() {
+                return userChatSessions;
+        }
+
+        /**
+         * @return the user name associated with the current thread
+         * */
+        String getCurrentThreadUserName() {
+                return getMessageSender().getUserName();
+        }
+
+        /**
+         * @return the id associated with the current thread
+         */
+        String getCurrentThreadID() {
+                return getMessageSender().id();
         }
 
         /**
