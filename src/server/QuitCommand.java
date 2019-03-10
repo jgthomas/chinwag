@@ -13,6 +13,6 @@ public class QuitCommand extends Command {
 
     @Override
     public void execute(MessageBox messageBox) {
-        getCurrentChatSessions().exitAll(getMessageSender());
+
     }
 }
