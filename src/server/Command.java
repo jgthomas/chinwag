@@ -69,6 +69,17 @@ abstract class Command {
         }
 
         /**
+         * Remove a user from a chat session
+         *
+         * @param chatSession the chat from which the user is to be removed
+         * @param messageHandler the user to remove
+         * */
+        void removeUserFromChat(ChatSession chatSession, MessageHandler messageHandler) {
+                chatSession.removeUser(messageHandler.getMessageSender());
+                messageHandler.getUserChatSessions().removeSession(chatSession.getChatName());
+        }
+
+        /**
          * Executes the command received from the client.
          * Overridden in subclasses.
          *
