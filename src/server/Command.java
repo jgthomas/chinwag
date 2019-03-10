@@ -58,17 +58,6 @@ abstract class Command {
         }
 
         /**
-         * Adds a newly created chat to the master record, AND to the
-         * chats of the current user
-         *
-         * @param chatSession the session to add to the master record
-         * */
-        void registerNewChat(ChatSession chatSession) {
-                getAllChatSessions().addSession(chatSession);
-                getUserChatSessions().addSession(chatSession);
-        }
-
-        /**
          * Delete a chat session entirely.
          *
          * Removes the chat session from every user and from the master record
