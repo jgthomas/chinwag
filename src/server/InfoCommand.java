@@ -2,6 +2,9 @@ package server;
 
 import protocol.MessageBox;
 
+import java.util.Collections;
+import java.util.List;
+
 public class InfoCommand extends Command {
 
     InfoCommand(MessageSender messageSender,
@@ -22,5 +25,11 @@ public class InfoCommand extends Command {
             case LIST_LOGGED_IN:
                 break;
         }
+    }
+
+    private List<String> currentSessions() {
+        List<String> sessions = getUserChatSessions().allUserChatSessions();
+        Collections.sort(sessions);
+        return sessions;
     }
 }
