@@ -58,6 +58,20 @@ abstract class Command {
         }
 
         /**
+         * @return the user name associated with the current thread
+         * */
+        String getCurrentUserName() {
+                return getMessageSender().getUserName();
+        }
+
+        /**
+         * @return the id associated with the current thread
+         */
+        String getCurrentUserID() {
+                return getMessageSender().id();
+        }
+
+        /**
          * Get a chat from the master record
          *
          * @param chatName the name of the chat
