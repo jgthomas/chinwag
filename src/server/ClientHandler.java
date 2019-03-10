@@ -62,7 +62,7 @@ class ClientHandler implements MessageHandler {
                         CommandFactory.buildCommand
                                 (action,
                                 messageSender,
-                                        userChatSessions,
+                                userChatSessions,
                                 allChatSessions,
                                 connectedClients);
                 command.execute(messageBox);
