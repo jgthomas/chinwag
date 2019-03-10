@@ -69,7 +69,7 @@ abstract class Command {
         }
 
         /**
-         * Adds a DIFFERENT user to a chat session
+         * Adds a DIFFERENT user to a chat session, pulling them in
          *
          * @param chatName the chat the user is joining
          * @param messageHandler the user to join the chat
