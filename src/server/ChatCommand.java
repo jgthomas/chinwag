@@ -31,6 +31,11 @@ class ChatCommand extends Command {
                 super(messageSender, userChatSessions, allChatSessions, connectedClients);
         }
 
+        /**
+         * Sends a message to all users in a chat session.
+         *
+         * @param messageBox the command from the client to perform
+         * */
         @Override
         public void execute(MessageBox messageBox) {
                 getMessageSender().postMessage(getCurrentChat(), messageBox);
