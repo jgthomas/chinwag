@@ -21,8 +21,11 @@ public enum Action {
         SERVER_MESSAGE("SERVER_MESSAGE"),
         ADD_USER("ADD_USER"),
         LIST_CHAT_SESSIONS("LIST_CHAT_SESSIONS"),
+        GIVE_CHAT_SESSIONS("GIVE_CHAT_SESSIONS"),
         LIST_MEMBERS("LIST_MEMBERS"),
+        GIVE_MEMBERS("GIVE_MEMBERS"),
         LIST_LOGGED_IN("LIST_LOGGED_IN"),
+        GIVE_LOGGED_IN("GIVE_LOGGED_IN"),
 		INVITE("INVITE");
 
         private static final Set<String> validCommands = new HashSet<>();
