@@ -37,7 +37,7 @@ class Sender implements MessageSender {
          * */
         @Override
         public void postMessage(ChatSession chatSession, MessageBox messageBox) {
-                MessageBox outMessage = buildMessage(messageBox.get(Data.MESSAGE));
+                MessageBox outMessage = buildMessage(messageBox);
                 for (MessageSender sender : chatSession) {
                         if (notOriginalSender(sender)) {
                                 sender.sendMessage(outMessage);
@@ -83,10 +83,11 @@ class Sender implements MessageSender {
                 return userName;
         }
 
-        private MessageBox buildMessage(String message) {
+        private MessageBox buildMessage(MessageBox messageBox) {
                 MessageBox mb = new MessageBox(Action.CHAT);
-                mb.add(Data.MESSAGE, message);
+                mb.add(Data.MESSAGE, messageBox.get(Data.MESSAGE));
                 mb.add(Data.USER_NAME, getUserName());
+                mb.add(Data.CHAT_NAME, messageBox.get(Data.CHAT_NAME));
                 return mb;
         }
 
