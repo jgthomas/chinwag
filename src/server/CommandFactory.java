@@ -27,6 +27,10 @@ class CommandFactory {
                                 return new AddUserToChatCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
                         case QUIT:
                                 return new QuitCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
+                        case LIST_CHAT_SESSIONS:
+                        case LIST_MEMBERS:
+                        case LIST_LOGGED_IN:
+                                return new InfoCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
                 }
