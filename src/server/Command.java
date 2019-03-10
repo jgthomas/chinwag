@@ -41,6 +41,13 @@ abstract class Command {
         }
 
         /**
+         * @return an object tracking all the chats on the server
+         * */
+        AllChatSessions getAllChatSessions() {
+                return allChatSessions;
+        }
+
+        /**
          * Gets an single user from those currently connected
          *
          * @param userName the name of the user to get
