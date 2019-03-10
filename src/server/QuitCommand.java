@@ -5,11 +5,11 @@ import protocol.MessageBox;
 public class QuitCommand extends Command {
 
     QuitCommand(MessageSender messageSender,
-                CurrentChatSessions currentChatSessions,
+                UserChatSessions userChatSessions,
                 AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
     @Override

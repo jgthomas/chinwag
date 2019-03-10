@@ -12,7 +12,7 @@ import java.net.*;
  * handle sending data out. These objects implement the MessageReceiver and
  * MessageSender interfaces, respectively.
  *
- * Third object tracks the current chat currentChatSessions for this thread.
+ * Third object tracks the current chat userChatSessions for this thread.
  *
  * */
 class ClientHandler implements MessageHandler {
@@ -20,7 +20,7 @@ class ClientHandler implements MessageHandler {
         private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
-        private final CurrentChatSessions currentChatSessions;
+        private final UserChatSessions userChatSessions;
         private final ConnectedClients connectedClients;
         private final AllChatSessions allChatSessions;
 
@@ -32,7 +32,7 @@ class ClientHandler implements MessageHandler {
         {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, socketID);
-                currentChatSessions = new CurrentChatSessions(global);
+                userChatSessions = new UserChatSessions(global);
                 this.connectedClients = connectedClients;
                 this.allChatSessions = allChatSessions;
         }
@@ -41,7 +41,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                getCurrentChatSessions().exitAll(getMessageSender());
+                getUserChatSessions().exitAll(getMessageSender());
                 messageSender.closeSender();
                 log(THREAD_END);
         }
@@ -62,15 +62,15 @@ class ClientHandler implements MessageHandler {
                         CommandFactory.buildCommand
                                 (action,
                                 messageSender,
-                                currentChatSessions,
+                                        userChatSessions,
                                 allChatSessions,
                                 connectedClients);
                 command.execute(messageBox);
         }
 
         @Override
-        public CurrentChatSessions getCurrentChatSessions() {
-                return currentChatSessions;
+        public UserChatSessions getUserChatSessions() {
+                return userChatSessions;
         }
 
         @Override

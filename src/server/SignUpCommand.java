@@ -18,11 +18,11 @@ import protocol.MessageBox;
 public class SignUpCommand extends Command {
 
     SignUpCommand(MessageSender messageSender,
-                  CurrentChatSessions currentChatSessions,
+                  UserChatSessions userChatSessions,
                   AllChatSessions allChatSessions,
                   ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
     @Override

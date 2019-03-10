@@ -23,11 +23,11 @@ import protocol.MessageBox;
 class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
-                        CurrentChatSessions currentChatSessions,
+                        UserChatSessions userChatSessions,
                         AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
     @Override
@@ -42,7 +42,7 @@ class StartNewChatCommand extends Command {
             ChatSession newChat = new ChatSession(newChatName);
             Database.addUserToChat(newChatName, getMessageSender().getUserName());
             newChat.addUser(getMessageSender());
-            getCurrentChatSessions().addSession(newChat);
+            getUserChatSessions().addSession(newChat);
             getAllChatSessions().addSession(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);

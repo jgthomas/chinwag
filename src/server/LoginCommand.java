@@ -22,11 +22,11 @@ import java.util.List;
 class LoginCommand extends Command {
 
 	LoginCommand(MessageSender messageSender,
-				 CurrentChatSessions currentChatSessions,
+				 UserChatSessions userChatSessions,
 				 AllChatSessions allChatSessions,
 				 ConnectedClients connectedClients)
 	{
-		super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+		super(messageSender, userChatSessions, allChatSessions, connectedClients);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ class LoginCommand extends Command {
 				if (messageHandler != null)
 					chatSession.addUser(messageHandler.getMessageSender());
 			}
-			getCurrentChatSessions().addSession(chatSession);
+			getUserChatSessions().addSession(chatSession);
 		}
 	}
 
@@ -92,7 +92,7 @@ class LoginCommand extends Command {
 	}
 
 	private void registerSender() {
-		getCurrentChatSessions().getSession("global").addUser(getMessageSender());
+		getUserChatSessions().getSession("global").addUser(getMessageSender());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {

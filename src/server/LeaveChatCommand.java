@@ -17,11 +17,11 @@ import static protocol.Data.CHAT_NAME;
 public class LeaveChatCommand extends Command{
 
     LeaveChatCommand(MessageSender messageSender,
-                        CurrentChatSessions currentChatSessions,
+                        UserChatSessions userChatSessions,
                         AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
     @Override
@@ -29,11 +29,11 @@ public class LeaveChatCommand extends Command{
         String chatname = messageBox.get(CHAT_NAME);
         MessageSender senderToBeRemoved = getMessageSender();
         Database.removeUserFromChat(chatname, senderToBeRemoved.getUserName());
-        for (MessageSender messageSender: getCurrentChatSessions().getSession(chatname)) {
-            getUser(messageSender.getUserName()).getCurrentChatSessions().
+        for (MessageSender messageSender: getUserChatSessions().getSession(chatname)) {
+            getUser(messageSender.getUserName()).getUserChatSessions().
                     getSession(chatname).removeUser(senderToBeRemoved);
         }
-        getCurrentChatSessions().removeSession(chatname);
+        getUserChatSessions().removeSession(chatname);
     }
 
 }

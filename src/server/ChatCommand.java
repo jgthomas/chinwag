@@ -24,11 +24,11 @@ import protocol.MessageBox;
 class ChatCommand extends Command {
 
         ChatCommand(MessageSender messageSender,
-                    CurrentChatSessions currentChatSessions,
+                    UserChatSessions userChatSessions,
                     AllChatSessions allChatSessions,
                     ConnectedClients connectedClients)
         {
-                super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+                super(messageSender, userChatSessions, allChatSessions, connectedClients);
         }
 
         @Override
@@ -37,6 +37,6 @@ class ChatCommand extends Command {
         }
 
         private ChatSession getCurrentChat() {
-                return getCurrentChatSessions().getCurrentSession();
+                return getUserChatSessions().getCurrentSession();
         }
 }

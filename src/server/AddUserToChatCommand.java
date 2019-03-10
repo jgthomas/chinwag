@@ -18,11 +18,11 @@ import protocol.MessageBox;
 class AddUserToChatCommand extends Command {
 
     AddUserToChatCommand(MessageSender messageSender,
-                         CurrentChatSessions currentChatSessions,
+                         UserChatSessions userChatSessions,
                          AllChatSessions allChatSessions,
                          ConnectedClients connectedClients)
     {
-        super(messageSender, currentChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
     @Override
@@ -30,9 +30,9 @@ class AddUserToChatCommand extends Command {
         String chatname = messageBox.get(Data.CHAT_NAME);
         String username = messageBox.get(Data.USER_NAME);
         Database.addUserToChat(chatname, username);
-        getCurrentChatSessions().getSession(chatname).addUser(getMessageSender());
-        for (MessageSender messageSender: getCurrentChatSessions().getSession(chatname)) {
-            getUser(messageSender.getUserName()).getCurrentChatSessions().
+        getUserChatSessions().getSession(chatname).addUser(getMessageSender());
+        for (MessageSender messageSender: getUserChatSessions().getSession(chatname)) {
+            getUser(messageSender.getUserName()).getUserChatSessions().
                     getSession(chatname).addUser(getUser(username).getMessageSender());
         }
     }
