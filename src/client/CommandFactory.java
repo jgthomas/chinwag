@@ -11,6 +11,8 @@ class CommandFactory {
 		this.gui = gui;
 	}
 
+	
+	//Add break after each switch case for speed?
 	public Command buildCommand(MessageBox mb) {
 		Action action = mb.getAction();
 		switch (action) {
@@ -22,7 +24,9 @@ class CommandFactory {
 			return new DenyCommand(gui);
 		case ACCEPT:
 			return new AcceptCommand(mb, gui);
-		case UPDATE_LOGGED_IN:
+		case GIVE_MEMBERS:
+			return new UpdateMembersCommand(mb, gui, user);
+		case GIVE_LOGGED_IN:
 			return new UpdateLoggedInCommand(mb, gui, user);
 		default:
 			throw new IllegalStateException("Unrecognised command: " + action);
