@@ -29,6 +29,13 @@ class LoginCommand extends Command {
 		super(messageSender, userChatSessions, allChatSessions, connectedClients);
 	}
 
+	/**
+	 * Logs a user in.
+	 *
+	 * Checks for previously unsuccessful attempts and loads user's chat sessions
+	 *
+	 * @param messageBox the command from the client to perform
+	 * */
 	@Override
 	public void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USER_NAME);
