@@ -17,9 +17,9 @@ import static protocol.Data.CHAT_NAME;
 class LeaveChatCommand extends Command {
 
     LeaveChatCommand(MessageSender messageSender,
-                        UserChatSessions userChatSessions,
-                        AllChatSessions allChatSessions,
-                        ConnectedClients connectedClients)
+                     UserChatSessions userChatSessions,
+                     AllChatSessions allChatSessions,
+                     ConnectedClients connectedClients)
     {
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
