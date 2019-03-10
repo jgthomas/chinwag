@@ -9,10 +9,6 @@ import protocol.MessageBox;
 public class MessageQueue implements Runnable {
 	private static ConcurrentLinkedQueue<Message> insertionQueue;
 	
-	public MessageQueue() {
-		insertionQueue = new ConcurrentLinkedQueue<Message>();
-	}
-	
 	public static void addToQueue(MessageBox messageBox) {
 		String chatname = messageBox.get(Data.CHAT_NAME);
 		String sender = messageBox.get(Data.USER_NAME);
