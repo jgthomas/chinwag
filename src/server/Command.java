@@ -54,7 +54,7 @@ abstract class Command {
          * @return the chat session object
          * */
         ChatSession getChatSession(String chatName) {
-                return getAllChatSessions().getSession(chatName);
+                return getUserChatSessions().getSession(chatName);
         }
 
         /**
