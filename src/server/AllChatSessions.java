@@ -32,11 +32,10 @@ class AllChatSessions {
     /**
      * Adds a new chat session to the server master record.
      *
-     * @param sessionID the unique identifier of the chat session
      * @param chatSession the chat session object
      * */
-    void addSession(String sessionID, ChatSession chatSession) {
-        activeSessions.put(sessionID, chatSession);
+    void addSession(ChatSession chatSession) {
+        activeSessions.put(chatSession.getChatName(), chatSession);
     }
 
     /**

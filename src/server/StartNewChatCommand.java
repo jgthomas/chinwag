@@ -43,6 +43,7 @@ class StartNewChatCommand extends Command {
             Database.addUserToChat(newChatName, getMessageSender().getUserName());
             newChat.addUser(getMessageSender());
             getCurrentChatSessions().addSession(newChat);
+            getAllChatSessions().addSession(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
