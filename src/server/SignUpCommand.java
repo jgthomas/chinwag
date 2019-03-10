@@ -25,6 +25,11 @@ class SignUpCommand extends Command {
         super(messageSender, userChatSessions, allChatSessions, connectedClients);
     }
 
+    /**
+     * Creates a new account
+     *
+     * @param messageBox the command from the client to perform
+     * */
     @Override
     public void execute(MessageBox messageBox){
         String username = messageBox.get(Data.USER_NAME);
