@@ -51,10 +51,10 @@ public class InfoCommand extends Command {
     private MessageBox sessionMembersMessage(String chatName) {
         List<String> members = getUserChatSessions().getSession(chatName).allUserNames();
         Collections.sort(members);
-        String sessionMemebrsString = DataFormatter.listToString(members);
+        String sessionMembersString = DataFormatter.listToString(members);
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
         messageBox.add(Data.CHAT_NAME, chatName);
-        messageBox.add(Data.CHAT_MEMBERS, sessionMemebrsString);
+        messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
         return messageBox;
     }
 
