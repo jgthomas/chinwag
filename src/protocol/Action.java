@@ -20,6 +20,9 @@ public enum Action {
         DENY("DENY"),
         SERVER_MESSAGE("SERVER_MESSAGE"),
         ADD_USER("ADD_USER"),
+        LIST_CHAT_SESSIONS("LIST_CHAT_SESSIONS"),
+        LIST_MEMBERS("LIST_MEMBERS"),
+        LIST_LOGGED_IN("LIST_LOGGED_IN"),
 		INVITE("INVITE");
 
         private static final Set<String> validCommands = new HashSet<>();
