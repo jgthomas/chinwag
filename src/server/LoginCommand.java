@@ -86,7 +86,7 @@ class LoginCommand extends Command {
 			ChatSession chatSession = new ChatSession(chatname);
 			List<String> users = Database.retrieveUsersFromSessions(chatname);
 			for (String username : users) {
-				MessageHandler messageHandler = getConnectedClients().getClientByUserName(username);
+				MessageHandler messageHandler = getUser(username);
 				if (messageHandler != null)
 					chatSession.addUser(messageHandler.getMessageSender());
 			}
