@@ -64,7 +64,7 @@ class LoginCommand extends Command {
 			getMessageSender().sendMessage(mb);
 			setUserName(username);
 			registerSender();
-			addAsLoggedInClient(getCurrentUserID(), username);
+			addAsLoggedInClient(getCurrentTreadID(), username);
 			loadSessions();
 		} else {
 			MessageBox mb = new MessageBox(Action.DENY);
@@ -81,7 +81,7 @@ class LoginCommand extends Command {
 	}
 
 	private void loadSessions(){
-		List<String> chatSessions = Database.retrieveChatSessions(getCurrentUserName());
+		List<String> chatSessions = Database.retrieveChatSessions(getCurrentThreadUserName());
 		for (String chatName : chatSessions) {
 			ChatSession chatSession = new ChatSession(chatName);
 			List<String> users = Database.retrieveUsersFromSessions(chatName);

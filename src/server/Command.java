@@ -60,14 +60,14 @@ abstract class Command {
         /**
          * @return the user name associated with the current thread
          * */
-        String getCurrentUserName() {
+        String getCurrentThreadUserName() {
                 return getMessageSender().getUserName();
         }
 
         /**
          * @return the id associated with the current thread
          */
-        String getCurrentUserID() {
+        String getCurrentTreadID() {
                 return getMessageSender().id();
         }
 
