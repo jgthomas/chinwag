@@ -48,22 +48,12 @@ abstract class Command {
         }
 
         /**
-         * Get a chat from the master record
-         *
-         * @param chatName the name of the chat
-         * @return the chat session object
-         * */
-        ChatSession getChatSession(String chatName) {
-                return getAllChatSessions().getSession(chatName);
-        }
-
-        /**
          * Completely deletes a chat session
          *
          * @param chatName the name of the session to delete
          * */
         void deleteChatSession(String chatName) {
-                ChatSession chatSession = getChatSession(chatName);
+                ChatSession chatSession = getAllChatSessions().getSession(chatName);
 
                 for (String userName : chatSession.allUserNames()) {
                         MessageHandler user = getUser(userName);
