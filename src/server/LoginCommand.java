@@ -101,8 +101,10 @@ class LoginCommand extends Command {
 	 * Will be removed once we get rid of global chat - needed until then!
 	 * */
 	private void registerUserWithGlobal() {
-		getUserChatSessions().getSession("global").addUser(getMessageSender());
-		getAllChatSessions().getSession("global").addUser(getMessageSender());
+		ChatSession chatSession = getAllChatSessions().getSession("global");
+		registerUserWithChat(chatSession);
+		//getUserChatSessions().getSession("global").addUser(getMessageSender());
+		//getAllChatSessions().getSession("global").addUser(getMessageSender());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {

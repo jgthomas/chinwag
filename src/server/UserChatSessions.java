@@ -50,9 +50,9 @@ class UserChatSessions implements Iterable<ChatSession> {
          * @param chatName the name of the chat session
          * @return a chat session object
          */
-        ChatSession getSession(String chatName) {
-                return activeSessions.getOrDefault(chatName, null);
-        }
+        //ChatSession getSession(String chatName) {
+        //        return activeSessions.getOrDefault(chatName, null);
+        //}
 
         /**
          * Gets a list of sessions the user is in
