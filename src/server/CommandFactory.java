@@ -27,6 +27,8 @@ class CommandFactory {
                                 return new AddUserToChatCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
                         case QUIT:
                                 return new QuitCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
+                        case INVITE:
+                        	return new InviteUserToChatCommand(messageSender, userChatSessions, allChatSessions, connectedClients);
                         case GET_CHAT_SESSIONS:
                         case GET_MEMBERS:
                         case GET_LOGGED_IN:
