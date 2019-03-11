@@ -39,7 +39,6 @@ class StartNewChatCommand extends Command {
      * */
     @Override
     void execute(MessageBox messageBox) {
-    	// first check if chat session name already exists
         String newChatName = messageBox.get(Data.CHAT_NAME);
         if (Database.chatExists(newChatName)){
             MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
@@ -50,8 +49,6 @@ class StartNewChatCommand extends Command {
             Database.addUserToChat(newChatName, getCurrentThreadUserName());
             registerUserWithChat(newChat);
             registerChatOnSystem(newChat);
-            //newChat.addUser(getMessageSender());
-            //registerNewChat(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
