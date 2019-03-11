@@ -14,7 +14,11 @@ import java.util.concurrent.ConcurrentMap;
  * */
 class UserChatSessions implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
-        
+
+        UserChatSessions() {
+                activeSessions = new ConcurrentHashMap<>();
+        }
+
         UserChatSessions(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
                 activeSessions.put("global", global);
