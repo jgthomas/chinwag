@@ -94,6 +94,18 @@ abstract class Command {
         }
 
         /**
+         * Removes the current user from a chat
+         *
+         * @param chatSession the chat to leave
+         * */
+        void removeUserFromChat(ChatSession chatSession) {
+                if (getUserChatSessions().isInChat(chatSession.getChatName())) {
+                     chatSession.removeUser(getMessageSender());
+                     getUserChatSessions().removeSession(chatSession.getChatName());
+                }
+        }
+
+        /**
          * Adds a DIFFERENT user to a chat session, pulling them in
          *
          * @param chatName the chat the user is joining
