@@ -59,15 +59,4 @@ class StartNewChatCommand extends Command {
             }
         }
     }
-
-    /**
-     * Adds a newly created chat to the master record, AND to the
-     * chats of the current user
-     *
-     * @param chatSession the session to add to the master record
-     * */
-    //private void registerNewChat(ChatSession chatSession) {
-    //    getAllChatSessions().addSession(chatSession);
-    //   getUserChatSessions().addSession(chatSession);
-    //}
 }
