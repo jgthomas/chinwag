@@ -35,7 +35,7 @@ class InfoCommand extends Command {
                 break;
         }
 
-        ChatSession chatSession = getUserChatSessions().getSession(chatName);
+        ChatSession chatSession = getAllChatSessions().getSession(chatName);
         getMessageSender().postMessage(chatSession, mb);
     }
 
@@ -49,7 +49,7 @@ class InfoCommand extends Command {
 
     private MessageBox sessionMembersMessage(String chatName) {
         String sessionMembersString =
-                buildStringMessage(getUserChatSessions().getSession(chatName).allUserNames());
+                buildStringMessage(getAllChatSessions().getSession(chatName).allUserNames());
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
         messageBox.add(Data.CHAT_NAME, chatName);
         messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
