@@ -80,18 +80,20 @@ class LoginCommand extends Command {
 
 	private void loadSessions(){
 		List<String> chatSessions = Database.retrieveChatSessions(getCurrentThreadUserName());
-		for (String chatname : chatSessions) {
-			if (getAllChatSessions().sessionExists(chatname)) {
-				//getChatSession(chatname).addUser(getMessageSender());
-				//getUserChatSessions().addSession(getChatSession(chatname));
-				registerUserWithChat(getAllChatSessions().getSession(chatname));
-			} else {
-				ChatSession chatSession = new ChatSession(chatname);
-				registerUserWithChat(chatSession);
-				registerChatOnSystem(chatSession);
-				//chatSession.addUser(getMessageSender());
-				//getAllChatSessions().addSession(chatSession);
-				//getUserChatSessions().addSession(chatSession);
+		if (chatSessions != null) {
+			for (String chatName : chatSessions) {
+				if (getAllChatSessions().sessionExists(chatName)) {
+					registerUserWithChat(getAllChatSessions().getSession(chatName));
+					//getChatSession(chatname).addUser(getMessageSender());
+					//getUserChatSessions().addSession(getChatSession(chatname));
+				} else {
+					ChatSession chatSession = new ChatSession(chatName);
+					registerUserWithChat(chatSession);
+					registerChatOnSystem(chatSession);
+					//chatSession.addUser(getMessageSender());
+					//getAllChatSessions().addSession(chatSession);
+					//getUserChatSessions().addSession(chatSession);
+				}
 			}
 		}
 	}
