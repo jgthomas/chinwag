@@ -75,6 +75,25 @@ abstract class Command {
         }
 
         /**
+         * Adds a newly created chat to the system
+         *
+         * @param chatSession the chat object to add
+         * */
+        void registerChatOnSystem(ChatSession chatSession) {
+                getAllChatSessions().addSession(chatSession);
+        }
+
+        /**
+         * Registers a user with a chat session
+         *
+         * @param chatSession the chat session to join
+         * */
+        void registerUserWithChat(ChatSession chatSession) {
+                chatSession.addUser(getMessageSender());
+                getUserChatSessions().addSession(chatSession);
+        }
+
+        /**
          * Adds a DIFFERENT user to a chat session, pulling them in
          *
          * @param chatName the chat the user is joining
