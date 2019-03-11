@@ -42,11 +42,9 @@ class ChatCommand extends Command {
         public void execute(MessageBox messageBox) {
                 MessageQueue.addToQueue(messageBox);
 
-                String chatSessionName = messageBox.get(Data.CHAT_NAME);
+                String chatName = messageBox.get(Data.CHAT_NAME);
+                ChatSession chatSession = getAllChatSessions().getSession(chatName);
+                getMessageSender().postMessage(chatSession, messageBox);
 
-                if (getUserChatSessions().isInChat(chatSessionName)) {
-                        ChatSession chatSession = getAllChatSessions().getSession(chatSessionName);
-                        getMessageSender().postMessage(chatSession, messageBox);
-                }
         }
 }
