@@ -47,9 +47,11 @@ class StartNewChatCommand extends Command {
             getMessageSender().sendMessage(mb);
         } else {
             ChatSession newChat = new ChatSession(newChatName);
-            Database.addUserToChat(newChatName, getMessageSender().getUserName());
-            newChat.addUser(getMessageSender());
-            registerNewChat(newChat);
+            Database.addUserToChat(newChatName, getCurrentThreadUserName());
+            registerUserWithChat(newChat);
+            registerChatOnSystem(newChat);
+            //newChat.addUser(getMessageSender());
+            //registerNewChat(newChat);
 
             String userToChatWith = messageBox.get(Data.USER_NAME);
             if (userToChatWith != null) {
@@ -64,8 +66,8 @@ class StartNewChatCommand extends Command {
      *
      * @param chatSession the session to add to the master record
      * */
-    private void registerNewChat(ChatSession chatSession) {
-        getAllChatSessions().addSession(chatSession);
-        getUserChatSessions().addSession(chatSession);
-    }
+    //private void registerNewChat(ChatSession chatSession) {
+    //    getAllChatSessions().addSession(chatSession);
+    //   getUserChatSessions().addSession(chatSession);
+    //}
 }
