@@ -62,8 +62,8 @@ class LoginCommand extends Command {
 		if (Database.isValidUser(username, password)){
 			sendAcceptMessage(username);
 			setUserName(username);
-			registerSender();
 			addAsLoggedInClient(getCurrentThreadID(), username);
+			registerUserWithGlobal();
 			loadSessions();
 		} else {
 			sendDenyMessage();
@@ -102,7 +102,7 @@ class LoginCommand extends Command {
 		getMessageSender().setUserName(name);
 	}
 
-	private void registerSender() {
+	private void registerUserWithGlobal() {
 		getUserChatSessions().getSession("global").addUser(getMessageSender());
 		getAllChatSessions().getSession("global").addUser(getMessageSender());
 	}
