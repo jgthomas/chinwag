@@ -19,10 +19,6 @@ abstract class Command {
                 this.connectedClients = connectedClients;
         }
 
-        /*
-         These methods work on ConnectedClients and AllChatSessions
-        * */
-
         /**
          * @return an object tracking all the connected clients
          * */
@@ -110,10 +106,6 @@ abstract class Command {
                         user.getUserChatSessions().addSession(chatSession);
                 }
         }
-
-        /*
-         These methods work on the state of the current thread
-        * */
 
         /**
          * @return the message sender object for use with this command
