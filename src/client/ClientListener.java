@@ -3,15 +3,16 @@ package client;
 import java.io.EOFException;
 import java.io.IOException;
 
+//import client_archive.CommandFactory;
 import protocol.MessageBox;
 
 public class ClientListener implements Runnable {
 	private Client client;
-	private CommandFactory cf;
+//	private CommandFactory cf;
 
 	public ClientListener(Client client) {
 		this.client = client;
-		this.cf = new CommandFactory(client.getGUI());
+//		this.cf = new CommandFactory(client.getGUI());
 	}
 	
 	@Override
@@ -19,7 +20,7 @@ public class ClientListener implements Runnable {
 		while(true) {
 			try {
 				MessageBox mb = (MessageBox)client.getInput().readObject();
-				cf.buildCommand(mb).execute();
+				client.getHandler().handle(mb);
 			} catch(EOFException eof) {
 				System.out.println("Connection to server dropped.");
 				System.exit(1);

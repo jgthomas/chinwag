@@ -21,7 +21,9 @@ public class Client {
 	private ObjectOutputStream output;
 	private Scanner in;
 	private ClientSender sender;
+	private ClientHandler handler;
 	private ClientGUI gui;
+	private User user;
 	
 	public Client(String hostname, int port, ClientGUI gui) {
 		this.hostname = hostname;
@@ -41,6 +43,7 @@ public class Client {
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
+		handler = new ClientHandler(this, gui, user);
 	}
 	
 	public ObjectInputStream getInput() {
@@ -69,6 +72,10 @@ public class Client {
 	
 	public ClientGUI getGUI() {
 		return gui;
+	}
+	
+	public ClientHandler getHandler() {
+		return handler;
 	}
 	
 }

@@ -39,6 +39,8 @@ public class ClientGUI extends Application {
 	private Button requestCreateChat;
 	private Button createChat;
 	private Button cancel;
+	private Button accept;
+	private Button decline;
 	private TextField chatName;
 	private TextField username;
 	private TextField password;
@@ -54,13 +56,16 @@ public class ClientGUI extends Application {
 	private Stage stage;
 	private Stage createStage;
 	private Stage addStage;
+	private Stage inviteStage;
 	private String loggedInName;
+	private String inviteName;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
 		createStage = new Stage();
 		addStage = new Stage();
+		inviteStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
 		observableChatList.add("global");
@@ -216,7 +221,7 @@ public class ClientGUI extends Application {
 		invite.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				MessageBox invite = new MessageBox(Action.ADD_USER);
+				MessageBox invite = new MessageBox(Action.INVITE);
 				invite.add(Data.USER_NAME, username.getText());
 				username.clear();
 				invite.add(Data.CHAT_NAME, chatListView
@@ -251,6 +256,32 @@ public class ClientGUI extends Application {
 			public void handle(ActionEvent event) {
 				createStage.close();
 				addStage.close();
+			}
+		});
+		
+		accept = new Button("Accept");
+		
+		accept.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				MessageBox accept = new MessageBox(Action.ADD_USER);
+				accept.add(Data.USER_NAME, username.getText());
+				username.clear();
+				accept.add(Data.CHAT_NAME, chatListView
+										   .getSelectionModel()
+										   .getSelectedItem());
+				client.getSender().sendMessage(accept);
+				observableChatList.add(inviteName);
+				inviteStage.close();
+			}
+		});
+		
+		decline = new Button("Decline");
+		
+		decline.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				inviteStage.close();
 			}
 		});
 		
@@ -330,12 +361,27 @@ public class ClientGUI extends Application {
 		addStage.show();
 	}
 	
+	public void drawInviteScreen(MessageBox mb) {
+		Group root = new Group();
+		VBox v = new VBox();
+		Text from = new Text(mb.get(Data.USER_NAME) + " invited you to chat.");
+		v.getChildren().add(from);
+		HBox h = new HBox();
+		h.getChildren().add(accept);
+		h.getChildren().add(decline);
+		v.getChildren().add(h);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		inviteStage.setScene(scene);
+		inviteStage.show();
+	}
+	
 	public void displayMessage(MessageBox mb) {
-		if(mb.getAction() == Action.SERVER_MESSAGE) {
-			messageSpaces.get("global")
-			 .appendText(mb.get(Data.USER_NAME) + 
-					 ">>> " + mb.get(Data.MESSAGE) + "\n");
-		}
+//		if(mb.getAction() == Action.SERVER_MESSAGE) {
+//			messageSpaces.get("global")
+//			 .appendText(mb.get(Data.USER_NAME) + 
+//					 ">>> " + mb.get(Data.MESSAGE) + "\n");
+//		}
 		if(mb.get(Data.CHAT_NAME) == null) {
 			return;
 		}
@@ -365,5 +411,9 @@ public class ClientGUI extends Application {
 	
 	public Stage getStage() {
 		return stage;
+	}
+	
+	public void setInviteName(String inviteName) {
+		this.inviteName = inviteName;
 	}
 }
