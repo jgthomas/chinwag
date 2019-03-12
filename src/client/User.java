@@ -20,7 +20,7 @@ public class User {
 	private Client client;
 	private String userName;
 	
-	public User(Client client, String userName) {
+	public User(Client client) {
 		this.chatSessions = new TreeMap<>();
 		this.client = client;
 	}
@@ -54,6 +54,14 @@ public class User {
 		MessageBox mb = new MessageBox(Action.GET_LOGGED_IN);
 		mb.add(Data.CHAT_NAME, chatSession.getName());
 		cs.sendMessage(mb);
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getUserName() {
+		return userName;
 	}
 
 }
