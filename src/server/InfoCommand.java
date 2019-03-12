@@ -29,14 +29,14 @@ class InfoCommand extends Command {
                 break;
             case GET_MEMBERS:
                 mb = sessionMembersMessage(chatName);
+                mb.add(Data.CHAT_NAME, chatName);
                 break;
             case GET_LOGGED_IN:
                 mb = loggedInUsersMessage();
                 break;
         }
 
-        ChatSession chatSession = getAllChatSessions().getSession(chatName);
-        getMessageSender().postMessage(chatSession, mb);
+        getMessageSender().sendMessage(mb);
     }
 
     private MessageBox currentSessionsMessage() {
