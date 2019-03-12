@@ -43,6 +43,7 @@ public class Client {
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		sender = new ClientSender(this);
+		this.user = new User(this);
 		handler = new ClientHandler(this, gui, user);
 	}
 	
@@ -78,4 +79,7 @@ public class Client {
 		return handler;
 	}
 	
+	public User getUser() {
+		return user;
+	}
 }
