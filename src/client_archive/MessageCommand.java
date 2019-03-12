@@ -1,5 +1,6 @@
-package client;
+package client_archive;
 
+import client.ClientGUI;
 import protocol.Data;
 import protocol.MessageBox;
 

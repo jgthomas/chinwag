@@ -1,5 +1,7 @@
-package client;
+package client_archive;
 
+import client.ClientGUI;
+import client.DenyUpdate;
 import javafx.application.Platform;
 
 public class DenyCommand implements Command {

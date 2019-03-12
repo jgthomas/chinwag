@@ -1,7 +1,10 @@
-package client;
+package client_archive;
 
 import java.util.TreeMap;
 
+import client.ClientChatSession;
+import client.ClientGUI;
+import client.User;
 import protocol.Data;
 import protocol.MessageBox;
 import protocol.Token;
