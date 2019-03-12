@@ -32,14 +32,15 @@ public class InviteUserToChatCommand extends Command {
 		String chatName = messageBox.get(Data.CHAT_NAME);
 		String invitee = messageBox.get(Data.USER_NAME);
 		
-		// build messagebox for invitee with invite command and username of sender
+		// build messagebox for invitee with invite command, username of sender, 
+		//   and chatname of chatsession they're being invited to
 		MessageBox inviteBox = new MessageBox(Action.INVITE);
 		inviteBox.add(Data.USER_NAME, getMessageSender().getUserName());
 		inviteBox.add(Data.CHAT_NAME, chatName);
 		
 		// if invitee is online then send invite to them
-		if(getConnectedClients().getClientByUserName(invitee) != null) {
-			getConnectedClients().getClientByUserName(invitee).getMessageSender().sendMessage(inviteBox);			
+		if(getUser(invitee) != null) {
+			getUser(invitee).getMessageSender().sendMessage(inviteBox);			
 		}
 	}
 
