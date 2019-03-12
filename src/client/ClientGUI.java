@@ -266,12 +266,11 @@ public class ClientGUI extends Application {
 				MessageBox accept = new MessageBox(Action.ADD_USER);
 				accept.add(Data.USER_NAME, username.getText());
 				username.clear();
-				accept.add(Data.CHAT_NAME, chatListView
-										   .getSelectionModel()
-										   .getSelectedItem());
+				accept.add(Data.CHAT_NAME, inviteName);
 				client.getSender().sendMessage(accept);
 				observableChatList.add(inviteName);
 				inviteStage.close();
+				messageSpaces.put(inviteName, new TextArea());
 			}
 		});
 		
