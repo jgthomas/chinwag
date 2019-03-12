@@ -101,4 +101,6 @@ public class ClientHandler {
 	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
 		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
 	}
+	
+	
 }
