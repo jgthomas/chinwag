@@ -1,7 +1,7 @@
 package protocol;
 
 public enum Token {
-    SEPARATOR("$|$");
+    SEPARATOR("£££");
 
     String value;
 
