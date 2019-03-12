@@ -1,9 +1,12 @@
 package client;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javafx.application.Platform;
+import javafx.scene.control.TextArea;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
@@ -40,6 +43,8 @@ public class ClientHandler {
 			case INVITE:
 				handleInvite(mb, gui);
 				return;
+			case GIVE_CHAT_SESSIONS:
+				handleGiveSessions(mb);
 			case GIVE_MEMBERS:
 				handleGiveMembers(mb, gui, user);
 				return;
@@ -65,8 +70,10 @@ public class ClientHandler {
 	}
 	
 	public void handleAccept(MessageBox mb, ClientGUI gui) {
-		LoginUpdate lu = new LoginUpdate(gui);
-		Platform.runLater(lu);
+		client.getUser().setUserName(mb.get(Data.USER_NAME));
+		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
+		requestChatSessions.add(Data.USER_NAME, client.getUser().getUserName());
+		client.getSender().sendMessage(requestChatSessions);
 	}
 	
 	public void handleInvite(MessageBox mb, ClientGUI gui) {
@@ -75,11 +82,23 @@ public class ClientHandler {
 		gui.setInviteName(mb.get(Data.CHAT_NAME));
 	}
 	
+	public void handleGiveSessions(MessageBox mb) {
+		List<String> chatSessions;
+		chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
+				.split(protocol.Token.SEPARATOR.getValue()));
+		for(String session : chatSessions) {
+			gui.getObservableChatList().add(session);
+			gui.getMessageSpaces().put(session, new TextArea());
+		}
+		LoginUpdate lu = new LoginUpdate(gui);
+		Platform.runLater(lu);
+	}
+	
 	public void handleGiveMembers(MessageBox mb, ClientGUI gui, User user) {
-//		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setOnlineUsers(onlineUsers);
+		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setOnlineUsers(onlineUsers);
 	}
 	
 	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
-//		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
+		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
 	}
 }
