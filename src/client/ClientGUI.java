@@ -78,7 +78,6 @@ public class ClientGUI extends Application {
 		messageSpace.setEditable(false);
 		
 		messageSpaces = new HashMap<String, TextArea>();
-		messageSpaces.put("global", messageSpace);
 		
 		chatListView.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -392,8 +391,8 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		loggedInAs = new Text("Logged in as " + loggedInName);
-		drawMainScreen(messageSpace);
-		messageSpace.appendText("Login successful!" + "\n");
+		drawMainScreen(messageSpaces.get("global"));
+		messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
 	public void refuseLogin() {
@@ -415,5 +414,13 @@ public class ClientGUI extends Application {
 	
 	public void setInviteName(String inviteName) {
 		this.inviteName = inviteName;
+	}
+	
+	public ObservableList<String> getObservableChatList() {
+		return observableChatList;
+	}
+	
+	public HashMap<String, TextArea> getMessageSpaces() {
+		return messageSpaces;
 	}
 }
