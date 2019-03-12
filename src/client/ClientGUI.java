@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +44,7 @@ public class ClientGUI extends Application {
 	private Button decline;
 	private TextField chatName;
 	private TextField username;
-	private TextField password;
+	private PasswordField password;
 	private TextField input;
 	private Text loggedInAs;
 	private TextArea messageSpace;
@@ -88,8 +89,13 @@ public class ClientGUI extends Application {
 		});
 		
 		username = new TextField("Enter username...");
-		password = new TextField("Enter password...");
-		input = new TextField("Enter message...");
+		
+		password = new PasswordField(); //Text entered shows up as asterisks in GUI
+		password.setPromptText("Enter password");
+		
+		input = new TextField();
+		input.setPromptText("Enter message..."); //Text disappears after user begins typing
+		
 		input.setPrefWidth(500);
 		input.setMinWidth(500);
 		input.setMaxWidth(500);
