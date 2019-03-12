@@ -89,9 +89,13 @@ public class ClientGUI extends Application {
 		});
 		
 		username = new TextField("Enter username...");
-		password = new PasswordField();
+		
+		password = new PasswordField(); //Text entered shows up as asterisks in GUI
 		password.setPromptText("Enter password");
-		input = new TextField("Enter message...");
+		
+		input = new TextField();
+		input.setPromptText("Enter message..."); //Text disappears after user begins typing
+		
 		input.setPrefWidth(500);
 		input.setMinWidth(500);
 		input.setMaxWidth(500);
