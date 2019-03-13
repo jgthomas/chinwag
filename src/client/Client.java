@@ -22,7 +22,6 @@ public class Client {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Scanner in;
-	private ClientSender sender;
 	private ClientHandler handler;
 	private ClientGUI gui;
 	private User user;
@@ -44,7 +43,6 @@ public class Client {
 		ClientListener cl = new ClientListener(this);
 		executor.execute(cl);
 		in = new Scanner(System.in);
-		sender = new ClientSender(this);
 		this.user = new User(this);
 		handler = new ClientHandler(this, gui, user);
 	}
@@ -68,10 +66,6 @@ public class Client {
 	
 	public Socket getSocket() {
 		return clientSocket;
-	}
-	
-	public ClientSender getSender() {
-		return sender;
 	}
 	
 	public String getHostname() {
