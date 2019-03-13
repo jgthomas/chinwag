@@ -66,6 +66,12 @@ import java.util.Base64;
  *
  * */
 public final class Hasher {
+        /*
+         * Nice answers here regarding the parts of the algorithm
+         *
+         * https://crypto.stackexchange.com/questions/35275/whats-the-difference-between-pbkdf-and-sha-and-why-use-them-together
+         *
+         */
         private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
         /*
