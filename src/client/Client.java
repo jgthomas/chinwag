@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import protocol.MessageBox;
+
 public class Client {
 	private String hostname;
 	private int port;
@@ -45,6 +47,15 @@ public class Client {
 		sender = new ClientSender(this);
 		this.user = new User(this);
 		handler = new ClientHandler(this, gui, user);
+	}
+	
+	public void sendMessage(MessageBox mb) {
+		try {
+			getOutput().writeObject(mb);
+			getOutput().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public ObjectInputStream getInput() {
