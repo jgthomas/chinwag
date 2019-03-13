@@ -114,7 +114,7 @@ public class ClientGUI extends Application {
 				username.clear();
 				login.add(Data.PASSWORD, password.getText() + "");
 				password.clear();
-				client.getSender().sendMessage(login);
+				client.sendMessage(login);
 			}
 		});
 		
@@ -125,7 +125,7 @@ public class ClientGUI extends Application {
 			public void handle(ActionEvent e) {
 				MessageBox logout = new MessageBox(Action.QUIT);
 				logout.add(Data.USER_NAME, loggedInName);
-				client.getSender().sendMessage(logout);
+				client.sendMessage(logout);
 				System.exit(1);
 			}
 		});
@@ -145,7 +145,7 @@ public class ClientGUI extends Application {
 				message.add(Data.USER_NAME, loggedInName);
 				message.add(Data.MESSAGE, input.getText());
 				input.clear();
-				client.getSender().sendMessage(message);
+				client.sendMessage(message);
 			}
 		});
 		
@@ -189,7 +189,7 @@ public class ClientGUI extends Application {
 				username.clear();
 				create.add(Data.PASSWORD, password.getText());
 				password.clear();
-				client.getSender().sendMessage(create);
+				client.sendMessage(create);
 				drawLogonScreen();
 			}
 		});
@@ -234,7 +234,7 @@ public class ClientGUI extends Application {
 				invite.add(Data.CHAT_NAME, chatListView
 										   .getSelectionModel()
 										   .getSelectedItem());
-				client.getSender().sendMessage(invite);
+				client.sendMessage(invite);
 			}
 		});
 		
@@ -251,7 +251,7 @@ public class ClientGUI extends Application {
 				newMessageSpace.setEditable(false);
 				messageSpaces.put(chatName.getText(), newMessageSpace);
 				chatName.clear();
-				client.getSender().sendMessage(create);
+				client.sendMessage(create);
 				createStage.close();
 			}
 		});
@@ -275,7 +275,7 @@ public class ClientGUI extends Application {
 				accept.add(Data.USER_NAME, username.getText());
 				username.clear();
 				accept.add(Data.CHAT_NAME, inviteName);
-				client.getSender().sendMessage(accept);
+				client.sendMessage(accept);
 				observableChatList.add(inviteName);
 				inviteStage.close();
 				messageSpaces.put(inviteName, new TextArea());

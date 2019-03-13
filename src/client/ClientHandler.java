@@ -72,7 +72,7 @@ public class ClientHandler {
 		client.getUser().setUserName(mb.get(Data.USER_NAME));
 		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
 		requestChatSessions.add(Data.USER_NAME, client.getUser().getUserName());
-		client.getSender().sendMessage(requestChatSessions);
+		client.sendMessage(requestChatSessions);
 	}
 	
 	public void handleInvite(MessageBox mb, ClientGUI gui) {
