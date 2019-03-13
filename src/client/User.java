@@ -38,22 +38,19 @@ public class User {
 	}
 	
 	public void requestChatSessions() {
-		ClientSender cs = new ClientSender(client);
-		cs.sendMessage(new MessageBox(Action.GET_CHAT_SESSIONS));
+		client.sendMessage(new MessageBox(Action.GET_CHAT_SESSIONS));
 	}
 
 	public void requestSessionMembers(ClientChatSession chatSession) {
-		ClientSender cs = new ClientSender(client);
 		MessageBox mb = new MessageBox(Action.GET_MEMBERS);
 		mb.add(Data.CHAT_NAME, chatSession.getName());
-		cs.sendMessage(mb);
+		client.sendMessage(mb);
 	}
 	
 	public void requestLoggedInMembers(ClientChatSession chatSession) {
-		ClientSender cs = new ClientSender(client);
 		MessageBox mb = new MessageBox(Action.GET_LOGGED_IN);
 		mb.add(Data.CHAT_NAME, chatSession.getName());
-		cs.sendMessage(mb);
+		client.sendMessage(mb);
 	}
 	
 	public void setUserName(String userName) {
