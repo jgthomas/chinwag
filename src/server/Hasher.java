@@ -82,6 +82,10 @@ public final class Hasher {
          * database. However, it is also slower for us to
          * do the original hashing with more iterations.
          *
+         * I do not think 1000 iterations is considered secure
+         * these days, so we should find a level that balances
+         * performance and security.
+         *
          * We should maybe store this too, as this has
          * to be the same on storage and retrieval for
          * any given hash.
