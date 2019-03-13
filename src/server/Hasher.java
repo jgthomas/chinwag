@@ -143,6 +143,10 @@ public final class Hasher {
         /**
          * Generates a random byte array to use as a salt.
          *
+         * See here for why salts are good
+         *
+         * https://en.wikipedia.org/wiki/Salt_(cryptography)
+         *
          * */
         static byte[] genSalt() {
                 SecureRandom random = new SecureRandom();
