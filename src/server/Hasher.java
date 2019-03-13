@@ -39,7 +39,7 @@ import java.util.Base64;
  *
  * - Save BOTH the salt and the hash in the user's database record
  * # String saltString = Hasher.bytesToString(salt) // easier to save as string
- * # do database INSERT stuff
+ * # INSERT INTO table (username,hash,salt) etc
  *
  * - DO NOT store the password itself
  *
