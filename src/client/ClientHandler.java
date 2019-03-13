@@ -65,8 +65,7 @@ public class ClientHandler {
 	}
 	
 	public void handleDeny(ClientGUI gui) {
-		DenyUpdate du = new DenyUpdate(gui);
-		Platform.runLater(du);
+		Platform.runLater(() -> gui.refuseLogin());
 	}
 	
 	public void handleAccept(MessageBox mb, ClientGUI gui) {
@@ -77,8 +76,7 @@ public class ClientHandler {
 	}
 	
 	public void handleInvite(MessageBox mb, ClientGUI gui) {
-		InviteUpdate iu = new InviteUpdate(gui, mb);
-		Platform.runLater(iu);
+		Platform.runLater(() -> gui.drawInviteScreen(mb));
 		gui.setInviteName(mb.get(Data.CHAT_NAME));
 	}
 	
@@ -90,8 +88,7 @@ public class ClientHandler {
 			gui.getObservableChatList().add(session);
 			gui.getMessageSpaces().put(session, new TextArea());
 		}
-		LoginUpdate lu = new LoginUpdate(gui);
-		Platform.runLater(lu);
+		Platform.runLater(() -> gui.login());
 	}
 	
 	public void handleGiveMembers(MessageBox mb, ClientGUI gui, User user) {
