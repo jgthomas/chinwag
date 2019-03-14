@@ -39,7 +39,17 @@ class SignUpCommand extends Command {
             mb.add(Data.MESSAGE, "The username already exists.");
             getMessageSender().sendMessage(mb);
         } else {
-            Database.insertNewUser(username, password);
+        	// generate salt
+        	byte[] salt = Hasher.genSalt();
+        	String saltString = Hasher.bytesToString(salt);
+        	
+        	// generate hash based on password and salt
+        	String pwHash = Hasher.hashPassword(password, salt);
+        	
+        	// insert new user into database
+            Database.insertNewUser(username, password, saltString, pwHash);
+            
+            // inform user of successful signup
             MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
             mb.add(Data.MESSAGE, "Successfully signed up.");
             getMessageSender().sendMessage(mb);

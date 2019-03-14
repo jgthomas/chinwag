@@ -56,11 +56,13 @@ public class Database {
         }
     }
 
-    public static synchronized void insertNewUser(String username, String password){
+    public static synchronized void insertNewUser(String username, String password, String salt, String pwHash){
         try (PreparedStatement statement = connection.prepareStatement(
-        		"INSERT INTO users (username, password) VALUES (?, ?)")){
+        		"INSERT INTO users (username, password, salt, pw_hash) VALUES (?, ?, ?, ?)")){
             statement.setString(1, username);
             statement.setString(2, password);
+            statement.setString(3, salt);
+            statement.setString(4, pwHash);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
