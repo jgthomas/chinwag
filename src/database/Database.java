@@ -70,6 +70,19 @@ public class Database {
             return false;
         }
     }
+    
+    public static synchronized boolean isFriend(String username, String friend) {
+    	try(PreparedStatement statement = connection.prepareStatement(
+        		"SELECT * FROM friend WHERE username = ? AND friend = ?")){
+            statement.setString(1, username);
+            statement.setString(2, friend);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static synchronized void insertNewUser(String username, String salt, String pwHash){
         try (PreparedStatement statement = connection.prepareStatement(
