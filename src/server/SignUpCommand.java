@@ -47,7 +47,7 @@ class SignUpCommand extends Command {
         	String pwHash = Hasher.hashPassword(password, salt);
         	
         	// insert new user into database
-            Database.insertNewUser(username, password, saltString, pwHash);
+            Database.insertNewUser(username, saltString, pwHash);
             
             // inform user of successful signup
             MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);

@@ -4,6 +4,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
+import server.Hasher;
+
 public class Database {
 
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
@@ -26,12 +28,25 @@ public class Database {
             e.printStackTrace();
         }
     }
-
-    public static synchronized boolean isValidUser(String username, String password){
-        try (PreparedStatement statement = connection.prepareStatement(
-        		"SELECT * FROM users WHERE username = ? AND password = ?")){
+    
+    public static synchronized String getSalt(String username) {
+    	try (PreparedStatement statement = connection.prepareStatement(
+        		"SELECT salt FROM users WHERE username = ?")){
             statement.setString(1, username);
-            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getString("salt");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static synchronized boolean isValidUser(String username, String hash){
+        try (PreparedStatement statement = connection.prepareStatement(
+        		"SELECT * FROM users WHERE username = ? AND pw_hash = ?")){
+            statement.setString(1, username);
+            statement.setString(2, hash);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
                 return true;
@@ -56,13 +71,12 @@ public class Database {
         }
     }
 
-    public static synchronized void insertNewUser(String username, String password, String salt, String pwHash){
+    public static synchronized void insertNewUser(String username, String salt, String pwHash){
         try (PreparedStatement statement = connection.prepareStatement(
-        		"INSERT INTO users (username, password, salt, pw_hash) VALUES (?, ?, ?, ?)")){
+        		"INSERT INTO users (username, salt, pw_hash) VALUES (?, ?, ?)")){
             statement.setString(1, username);
-            statement.setString(2, password);
-            statement.setString(3, salt);
-            statement.setString(4, pwHash);
+            statement.setString(2, salt);
+            statement.setString(3, pwHash);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
