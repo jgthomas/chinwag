@@ -11,6 +11,7 @@ import java.util.HashSet;
  * */
 public enum Action {
         CHAT("CHAT"),
+        IMAGE("IMAGE"),
         LOGIN("LOGIN"),
         START_NEW_CHAT("START_NEW_CHAT"),
         LEAVE_CHAT("LEAVE_CHAT"),
@@ -29,7 +30,7 @@ public enum Action {
 		INVITE("INVITE"),
 		UPDATE_LOGGED_IN("UPDATE_LOGGED_IN"),
 		UPDATE_MEMBERS("UPDATE_MEMBERS"),
-		GET_CHAT_HISTORY("GET_CHAT_HISTORY");
+		GET_CHAT_HISTORY("GET_CHAT_HISTORY"),;
 
         private static final Set<String> validCommands = new HashSet<>();
 
