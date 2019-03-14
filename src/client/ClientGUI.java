@@ -101,7 +101,6 @@ public class ClientGUI extends Application {
 		input.setMaxWidth(500);
 		
 		login = new Button("Login");
-		login.setDefaultButton(true);
 		
 		Client client = new Client("localhost", 6000, this);
 		
@@ -131,7 +130,6 @@ public class ClientGUI extends Application {
 		});
 		
 		send = new Button("Send");
-		send.setDefaultButton(true);
 		
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -311,6 +309,7 @@ public class ClientGUI extends Application {
 		root.getChildren().add(v);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		login.setDefaultButton(true);
 		stage.show();
 	}
 	
@@ -351,6 +350,8 @@ public class ClientGUI extends Application {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		send.setDefaultButton(true);
+		input.requestFocus(); //moves focus to chat text field
 	}
 	
 	public void drawAddUserScreen() {
@@ -400,7 +401,6 @@ public class ClientGUI extends Application {
 		loggedInAs = new Text("Logged in as " + loggedInName);
 		drawMainScreen(messageSpaces.get("global"));
 		messageSpaces.get("global").appendText("Login successful!" + "\n");
-		input.requestFocus(); //moves focus to chat text field
 	}
 	
 	public void refuseLogin() {
