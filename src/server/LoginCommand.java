@@ -65,7 +65,11 @@ class LoginCommand extends Command {
 		// hash the combined password + salt
     	String hash = Hasher.hashPassword(password, salt);
     	
-    	// query database for matching username + hash
+    	/*
+    	 * Query database for matching username + hash.
+    	 * Login user if match is found, else send deny message and update
+    	 * failed attempts counter and/or locked accounts.
+    	 */
 		if (Database.isValidUser(username, hash)){
 			sendAcceptMessage(username);
 			setUserName(username);
