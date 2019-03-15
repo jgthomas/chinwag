@@ -106,6 +106,10 @@ public final class Hasher {
         /**
          * Generates a hash for the combined password and salt
          *
+         * @param password the user's password
+         * @param salt a random array of byte to combine with the password to hash
+         * @return an array of bytes representing the hashed password and salt
+         *
          * */
         static byte[] hashPasswordBytes(String password, byte[] salt) {
                 char[] passwordBytes = password.toCharArray();
@@ -134,6 +138,10 @@ public final class Hasher {
          * This method is for convenience, as its easier to store
          * the hashes as strings in the database than as byte arrays
          *
+         * @param password the user's password
+         * @param salt a random array of byte to combine with the password to hash
+         * @return a string representation of the hashed password and salt
+         *
          * */
         static String hashPassword(String password, byte[] salt) {
                 return Base64.getEncoder()
@@ -160,6 +168,9 @@ public final class Hasher {
          *
          * For easier storage in the database.
          *
+         * @param salt a byte array representing a random salt
+         * @return a string representation of the salt
+         *
          * */
         static String bytesToString(byte[] salt) {
                 return Base64.getEncoder().encodeToString(salt);
@@ -169,6 +180,9 @@ public final class Hasher {
          * Converts a string to a byte array.
          *
          * For when it needs to be in byte array format
+         *
+         * @param saltString a string representation of a salt
+         * @return a byte array of the salt
          *
          * */
         static byte[] stringToBytes(String saltString) {
