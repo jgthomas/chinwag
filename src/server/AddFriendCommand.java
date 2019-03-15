@@ -23,6 +23,12 @@ public class AddFriendCommand extends Command {
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
 
+	/**
+	 * Adds the specified friend username to the database and to the UserState
+	 * object for this client. 
+	 * 
+	 * If already a friend then just send a message back to inform client of this.
+	 */
 	@Override
 	void execute(MessageBox messageBox) {
 		String friend = messageBox.get(Data.USER_NAME);
