@@ -230,6 +230,22 @@ public class Database {
         }
     }
     
+    public static synchronized List<String> retrieveFriends(String username){
+	    try (PreparedStatement statement = connection.prepareStatement(
+	    		"SELECT friend FROM friend WHERE username = ?")){
+	        statement.setString(1, username);
+	        ResultSet rs = statement.executeQuery();
+	        List<String> friends = new ArrayList<>();
+	        while (rs.next()){
+	            friends.add(rs.getString(1));
+            }
+            return friends;
+        } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+        }
+    }
+    
     public static synchronized List<Message> retrieveMessages (String chatname, int limit) {
     	try (PreparedStatement statement = connection.prepareStatement(
     			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT ?"))
