@@ -34,6 +34,9 @@ class InfoCommand extends Command {
             case GET_LOGGED_IN:
                 mb = loggedInUsersMessage();
                 break;
+            case GET_FRIENDS:
+                mb = userFriendsMessage();
+                break;
         }
 
         getMessageSender().sendMessage(mb);
@@ -61,6 +64,14 @@ class InfoCommand extends Command {
                 buildStringMessage(getConnectedClients().allLoggedInUsers());
         MessageBox messageBox = new MessageBox(Action.GIVE_LOGGED_IN);
         messageBox.add(Data.LOGGED_IN_MEMBERS, loggedInString);
+        return messageBox;
+    }
+
+    private MessageBox userFriendsMessage() {
+        String userFriendString =
+                buildStringMessage(getUserState().getAllFriends());
+        MessageBox messageBox = new MessageBox(Action.GIVE_FRIENDS);
+        messageBox.add(Data.USER_FRIENDS, userFriendString);
         return messageBox;
     }
 

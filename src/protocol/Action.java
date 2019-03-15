@@ -31,7 +31,9 @@ public enum Action {
 		INVITE("INVITE"),
 		UPDATE_LOGGED_IN("UPDATE_LOGGED_IN"),
 		UPDATE_MEMBERS("UPDATE_MEMBERS"),
-		GET_CHAT_HISTORY("GET_CHAT_HISTORY"),;
+		GET_CHAT_HISTORY("GET_CHAT_HISTORY"),
+        GET_FRIENDS("GET_FRIENDS"),
+        GIVE_FRIENDS("GIVE_FRIENDS");
 
         private static final Set<String> validCommands = new HashSet<>();
 

@@ -36,6 +36,7 @@ class CommandFactory {
                         case GET_CHAT_SESSIONS:
                         case GET_MEMBERS:
                         case GET_LOGGED_IN:
+                        case GET_FRIENDS:
                                 return new InfoCommand(messageSender, userState, allChatSessions, connectedClients);
                         default:
                                 throw new IllegalStateException("Unrecognised command: " + action);
