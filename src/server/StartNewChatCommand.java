@@ -14,11 +14,6 @@ import protocol.MessageBox;
  * Data Required:
  * Data.CHAT_NAME - the name of the new session
  *
- * Data Optional
- * Data.USER_NAME - the user to chat with, they will be pulled into chat
- *                  if not provided, a chat session with only its creator
- *                  will be made
- *
  **/
 class StartNewChatCommand extends Command {
 
