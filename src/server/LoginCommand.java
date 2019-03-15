@@ -59,7 +59,18 @@ class LoginCommand extends Command {
 	}
 
 	private void verifyUser(String username, String password){
-		if (Database.isValidUser(username, password)){
+		// get the salt for the specified user
+		byte[] salt = Hasher.stringToBytes(Database.getSalt(username));
+		
+		// hash the combined password + salt
+    	String hash = Hasher.hashPassword(password, salt);
+    	
+    	/*
+    	 * Query database for matching username + hash.
+    	 * Login user if match is found, else send deny message and update
+    	 * failed attempts counter and/or locked accounts.
+    	 */
+		if (Database.isValidUser(username, hash)){
 			sendAcceptMessage(username);
 			setUserName(username);
 			addAsLoggedInClient(getCurrentThreadID(), username);

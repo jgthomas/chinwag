@@ -8,5 +8,6 @@ public enum Data {
     CHAT_SESSIONS,
     CHAT_MEMBERS,
     LOGGED_IN_MEMBERS,
-    CHAT_NAME;
+    CHAT_NAME,
+    IMAGE;
 }
