@@ -23,11 +23,11 @@ import protocol.MessageBox;
 class StartNewChatCommand extends Command {
 
     StartNewChatCommand(MessageSender messageSender,
-                        UserChatSessions userChatSessions,
+                        UserState userState,
                         AllChatSessions allChatSessions,
                         ConnectedClients connectedClients)
     {
-        super(messageSender, userChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userState, allChatSessions, connectedClients);
     }
 
     /**

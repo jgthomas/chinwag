@@ -17,10 +17,10 @@ import protocol.MessageBox;
  * */
 public class AddFriendCommand extends Command {
 
-	AddFriendCommand(MessageSender messageSender, UserChatSessions userChatSessions, AllChatSessions allChatSessions,
+	AddFriendCommand(MessageSender messageSender, UserState userState, AllChatSessions allChatSessions,
 			ConnectedClients connectedClients) 
 	{
-		super(messageSender, userChatSessions, allChatSessions, connectedClients);
+		super(messageSender, userState, allChatSessions, connectedClients);
 	}
 
 	@Override

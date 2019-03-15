@@ -18,11 +18,11 @@ import protocol.MessageBox;
 class AddUserToChatCommand extends Command {
 
     AddUserToChatCommand(MessageSender messageSender,
-                         UserChatSessions userChatSessions,
+                         UserState userState,
                          AllChatSessions allChatSessions,
                          ConnectedClients connectedClients)
     {
-        super(messageSender, userChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userState, allChatSessions, connectedClients);
     }
 
     /**

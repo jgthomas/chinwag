@@ -26,11 +26,11 @@ import java.sql.Timestamp;
 public class ImageCommand extends Command {
 
     ImageCommand(MessageSender messageSender,
-                UserChatSessions userChatSessions,
+                UserState userState,
                 AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
     {
-        super(messageSender, userChatSessions, allChatSessions, connectedClients);
+        super(messageSender, userState, allChatSessions, connectedClients);
     }
 
     /**

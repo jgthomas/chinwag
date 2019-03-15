@@ -20,7 +20,7 @@ class ClientHandler implements MessageHandler {
         private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
-        private final UserChatSessions userChatSessions;
+        private final UserState userState;
         private final ConnectedClients connectedClients;
         private final AllChatSessions allChatSessions;
 
@@ -32,7 +32,7 @@ class ClientHandler implements MessageHandler {
         {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, socketID);
-                userChatSessions = new UserChatSessions(global);
+                userState = new UserState(global);
                 this.connectedClients = connectedClients;
                 this.allChatSessions = allChatSessions;
         }
@@ -63,15 +63,15 @@ class ClientHandler implements MessageHandler {
                         CommandFactory.buildCommand
                                 (action,
                                 messageSender,
-                                userChatSessions,
+                                userState,
                                 allChatSessions,
                                 connectedClients);
                 command.execute(messageBox);
         }
 
         @Override
-        public UserChatSessions getUserChatSessions() {
-                return userChatSessions;
+        public UserState getUserChatSessions() {
+                return userState;
         }
 
         @Override

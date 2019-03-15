@@ -4,17 +4,17 @@ import protocol.MessageBox;
 
 abstract class Command {
         private final MessageSender messageSender;
-        private final UserChatSessions userChatSessions;
+        private final UserState userState;
         private final ConnectedClients connectedClients;
         private final AllChatSessions allChatSessions;
 
         Command(MessageSender messageSender,
-                UserChatSessions userChatSessions,
+                UserState userState,
                 AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
         {
                 this.messageSender = messageSender;
-                this.userChatSessions = userChatSessions;
+                this.userState = userState;
                 this.allChatSessions = allChatSessions;
                 this.connectedClients = connectedClients;
         }
@@ -117,8 +117,8 @@ abstract class Command {
         /**
          * @return the session tracker object for use with this command
          * */
-        UserChatSessions getUserChatSessions() {
-                return userChatSessions;
+        UserState getUserChatSessions() {
+                return userState;
         }
 
         /**

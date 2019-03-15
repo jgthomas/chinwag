@@ -1,8 +1,6 @@
 package server;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -12,15 +10,18 @@ import java.util.concurrent.ConcurrentMap;
  * currently engaged involved with.
  *
  * */
-class UserChatSessions implements Iterable<ChatSession> {
+class UserState implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
+        private final Set<String> allFriends;
 
-        UserChatSessions() {
+        UserState() {
                 activeSessions = new ConcurrentHashMap<>();
+                allFriends = new HashSet<String>();
         }
 
-        UserChatSessions(ChatSession global) {
+        UserState(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
+                allFriends = new HashSet<String>();
                 activeSessions.put("global", global);
         }
 
@@ -39,8 +40,23 @@ class UserChatSessions implements Iterable<ChatSession> {
         void removeSession(String chatName) {
                 activeSessions.remove(chatName);
         }
+        
+        
+        
+        void addFriend(String friend) {
+        	allFriends.add(friend);
+        }
+        
+        void removeFriend(String friend) {
+        	allFriends.remove(friend);
+        }
+        
 
-        /**
+        public List<String> getAllFriends() {
+			return new ArrayList<>(allFriends);
+		}
+
+		/**
          * Checks if a user is in a chat
          *
          * @param chatName the name of the chat
