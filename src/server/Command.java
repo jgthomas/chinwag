@@ -44,23 +44,6 @@ abstract class Command {
         }
 
         /**
-         * Completely deletes a chat session
-         *
-         * @param chatName the name of the session to delete
-         * */
-        void deleteChatSession(String chatName) {
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
-
-                for (String userName : chatSession.allUserNames()) {
-                        MessageHandler user = getUser(userName);
-                        user.getUserChatSessions().removeSession(chatName);
-                }
-
-                chatSession.removeAllUsers();
-                getAllChatSessions().removeSession(chatName);
-        }
-
-        /**
          * Adds a newly created chat to the system
          *
          * @param chatSession the chat object to add
