@@ -9,6 +9,18 @@ import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 
+/**
+ * CONTRACT
+ *
+ * Action: Action.GET_CHAT_HISTORY
+ *
+ * Data Required
+ * Data.USER_NAME - username of user
+ * Data.CHAT_NAME - specified if only single message history is required. If not
+ * provided then all message histories for all chats are returned in separate
+ * message boxes.
+ *
+ * */
 public class GetChatHistoryCommand extends Command {
 
 	GetChatHistoryCommand(MessageSender messageSender, UserState userState, AllChatSessions allChatSessions,
@@ -17,6 +29,10 @@ public class GetChatHistoryCommand extends Command {
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
 
+	/**
+	 * Returns message history for a chat. If no chat is specified then the 
+	 * message history for all chats that the user is in is returned.
+	 */
 	@Override
 	void execute(MessageBox messageBox) {
 		String username = messageBox.get(Data.USER_NAME);
@@ -32,6 +48,12 @@ public class GetChatHistoryCommand extends Command {
 		}
 	}
 	
+	/**
+	 * Queries the database for messages from a particular chat and returns
+	 * a corresponding ArrayList of Message objects. 
+	 * Sends the Messages back to client in a MessageBox.
+	 * @param chatName Chat for which to return its message history.
+	 */
 	void sendMessageHistory(String chatName) {
 		int messageLimit = 200;
 		ArrayList<Message> messageList = Database.retrieveMessages(chatName, messageLimit);
