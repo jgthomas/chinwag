@@ -1,8 +1,9 @@
 package database;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Message {
+public class Message implements Serializable {
 	private String chatname, sender, content;
 	private Timestamp timestamp;
 	
