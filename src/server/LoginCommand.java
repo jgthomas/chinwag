@@ -106,6 +106,8 @@ class LoginCommand extends Command {
 	
 	
 	//  placeholder: load friends
+	
+	// placeholder: send message history to client
 
 	private void setUserName(String name) {
 		getMessageSender().setUserName(name);
