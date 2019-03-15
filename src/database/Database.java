@@ -107,6 +107,17 @@ public class Database {
         }
     }
     
+    public static synchronized void removeFriend(String username, String friend) {
+    	try (PreparedStatement statement = connection.prepareStatement(
+        		"DELETE FROM friend WHERE username = ? AND friend = ?")){
+    		statement.setString(1, username);
+    		statement.setString(2, friend);
+    		statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 	/**
 	 * Inserts users from a file, allowing for bulk adding of many users.
 	 * Do not need to synchronise as this will happen just once to populate

@@ -5,11 +5,9 @@ import java.util.concurrent.ConcurrentMap;
 
 public class UserFriends {
 	private final ConcurrentMap<String, MessageHandler> allFriends;
-	private final ConcurrentMap<String, MessageHandler> activeFriends;
 	
 	public UserFriends() {
 		allFriends = new ConcurrentHashMap<>();
-		activeFriends = new ConcurrentHashMap<>();
 	}
 	
 	public void addFriend(String friend) {
@@ -24,9 +22,4 @@ public class UserFriends {
 		return allFriends;
 	}
 
-	public ConcurrentMap<String, MessageHandler> getActiveFriends() {
-		return activeFriends;
-	}
-	
-	
 }
