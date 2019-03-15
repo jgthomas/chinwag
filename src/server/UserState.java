@@ -16,12 +16,12 @@ class UserState implements Iterable<ChatSession> {
 
         UserState() {
                 activeSessions = new ConcurrentHashMap<>();
-                allFriends = new HashSet<String>();
+                allFriends = new HashSet<>();
         }
 
         UserState(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
-                allFriends = new HashSet<String>();
+                allFriends = new HashSet<>();
                 activeSessions.put("global", global);
         }
 
@@ -40,19 +40,31 @@ class UserState implements Iterable<ChatSession> {
         void removeSession(String chatName) {
                 activeSessions.remove(chatName);
         }
-        
-        
-        
-        void addFriend(String friend) {
-        	allFriends.add(friend);
-        }
-        
-        void removeFriend(String friend) {
-        	allFriends.remove(friend);
-        }
-        
 
-        List<String> getAllFriends() {
+        /**
+         * Adds a user to friends
+         *
+         * @param friendName the name of the friend to add
+         * */
+        void addFriend(String friendName) {
+                allFriends.add(friendName);
+        }
+
+        /**
+         * Removes a user from friends
+         *
+         * @param friendName the name of the friend to remove
+         * */
+        void removeFriend(String friendName) {
+                allFriends.remove(friendName);
+        }
+
+        /**
+         * Gets all the friends of the current user
+         *
+         * @return a list of all the user's friends
+         * */
+        public List<String> getAllFriends() {
 			return new ArrayList<>(allFriends);
 		}
 
@@ -65,14 +77,6 @@ class UserState implements Iterable<ChatSession> {
         boolean isInChat(String chatName) {
                 return activeSessions.containsKey(chatName);
         }
-
-        /**
-         * @param chatName the name of the chat session
-         * @return a chat session object
-         */
-        //ChatSession getSession(String chatName) {
-        //        return activeSessions.getOrDefault(chatName, null);
-        //}
 
         /**
          * Gets a list of sessions the user is in

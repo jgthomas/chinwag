@@ -52,7 +52,7 @@ class LeaveChatCommand extends Command {
         removeUserFromChat(chatSession);
 
         if (chatSession.isEmpty()) {
-            deleteChatSession(chatName);
+            getAllChatSessions().removeSession(chatName);
         }
     }
 

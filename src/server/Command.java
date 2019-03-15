@@ -44,23 +44,6 @@ abstract class Command {
         }
 
         /**
-         * Completely deletes a chat session
-         *
-         * @param chatName the name of the session to delete
-         * */
-        void deleteChatSession(String chatName) {
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
-
-                for (String userName : chatSession.allUserNames()) {
-                        MessageHandler user = getUser(userName);
-                        user.getUserChatSessions().removeSession(chatName);
-                }
-
-                chatSession.removeAllUsers();
-                getAllChatSessions().removeSession(chatName);
-        }
-
-        /**
          * Adds a newly created chat to the system
          *
          * @param chatSession the chat object to add
@@ -88,22 +71,6 @@ abstract class Command {
                 if (getUserState().isInChat(chatSession.getChatName())) {
                      chatSession.removeUser(getMessageSender());
                      getUserState().removeSession(chatSession.getChatName());
-                }
-        }
-
-        /**
-         * Adds a DIFFERENT user to a chat session, pulling them in
-         *
-         * @param chatName the chat the user is joining
-         * @param userName the name of the user
-         */
-        void addOtherUserToChat(String chatName, String userName) {
-                MessageHandler user = getUser(userName);
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
-
-                if (user != null && chatSession != null) {
-                        chatSession.addUser(user.getMessageSender());
-                        user.getUserChatSessions().addSession(chatSession);
                 }
         }
 
