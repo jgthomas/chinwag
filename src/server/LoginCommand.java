@@ -2,10 +2,12 @@ package server;
 
 
 import database.Database;
+import database.Message;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +79,7 @@ class LoginCommand extends Command {
 			registerUserWithGlobal();
 			loadSessions();
 			loadFriends();
+			sendMessageHistory();
 		} else {
 			sendDenyMessage();
 			if (Server.getFailedAttempts().get(username) == null) {
@@ -117,6 +120,24 @@ class LoginCommand extends Command {
 		if (friends != null) {
 			for (String friend : friends) {
 				getUserState().addFriend(friend);
+			}
+		}
+	}
+	
+	/**
+	 * Sends the message history as an ArrayList for each chat that the current
+	 * user is a member of.
+	 */
+	private void sendMessageHistory() {
+		List<String> chatNames = Database.retrieveChatSessions(getCurrentThreadUserName());
+		int messageLimit = 200;
+		for (String chat : chatNames) {
+			ArrayList<Message> messageList = Database.retrieveMessages(chat, messageLimit);
+			if (messageList != null) {
+				MessageBox mb = new MessageBox(Action.GIVE_CHAT_HISTORY);
+				mb.add(Data.CHAT_NAME, chat);
+				mb.addMessageHistory(messageList);
+				getMessageSender().sendMessage(mb);
 			}
 		}
 	}
