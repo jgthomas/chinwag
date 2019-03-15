@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.FocusModel;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -351,6 +352,7 @@ public class ClientGUI extends Application {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		send.setDefaultButton(false);
 		send.setDefaultButton(true);
 		input.requestFocus(); //moves focus to chat text field
 	}
@@ -434,4 +436,5 @@ public class ClientGUI extends Application {
 	public HashMap<String, TextArea> getMessageSpaces() {
 		return messageSpaces;
 	}
+	
 }
