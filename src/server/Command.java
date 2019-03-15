@@ -76,7 +76,7 @@ abstract class Command {
          * */
         void registerUserWithChat(ChatSession chatSession) {
                 chatSession.addUser(getMessageSender());
-                getUserChatSessions().addSession(chatSession);
+                getUserState().addSession(chatSession);
         }
 
         /**
@@ -85,9 +85,9 @@ abstract class Command {
          * @param chatSession the chat to leave
          * */
         void removeUserFromChat(ChatSession chatSession) {
-                if (getUserChatSessions().isInChat(chatSession.getChatName())) {
+                if (getUserState().isInChat(chatSession.getChatName())) {
                      chatSession.removeUser(getMessageSender());
-                     getUserChatSessions().removeSession(chatSession.getChatName());
+                     getUserState().removeSession(chatSession.getChatName());
                 }
         }
 
@@ -117,7 +117,7 @@ abstract class Command {
         /**
          * @return the session tracker object for use with this command
          * */
-        UserState getUserChatSessions() {
+        UserState getUserState() {
                 return userState;
         }
 
