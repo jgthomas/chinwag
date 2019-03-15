@@ -326,6 +326,7 @@ public class ClientGUI extends Application {
 		createStage.setScene(scene);
 		createStage.setTitle("Create Chat");
 		createStage.show();
+		createChat.setDefaultButton(true);
 	}
 	
 	public void drawMainScreen(TextArea ta) {
@@ -366,6 +367,7 @@ public class ClientGUI extends Application {
 		Scene scene = new Scene(root);
 		addStage.setScene(scene);
 		addStage.show();
+		invite.setDefaultButton(true);
 	}
 	
 	public void drawInviteScreen(MessageBox mb) {
@@ -381,6 +383,7 @@ public class ClientGUI extends Application {
 		Scene scene = new Scene(root);
 		inviteStage.setScene(scene);
 		inviteStage.show();
+		accept.setDefaultButton(true);
 	}
 	
 	public void displayMessage(MessageBox mb) {
