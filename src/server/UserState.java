@@ -52,7 +52,7 @@ class UserState implements Iterable<ChatSession> {
         }
         
 
-        public List<String> getAllFriends() {
+        List<String> getAllFriends() {
 			return new ArrayList<>(allFriends);
 		}
 

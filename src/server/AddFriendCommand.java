@@ -28,7 +28,7 @@ public class AddFriendCommand extends Command {
 		String friend = messageBox.get(Data.USER_NAME);
 		if(!Database.isFriend(getCurrentThreadUserName(), friend)) {
 			Database.insertFriend(getCurrentThreadUserName(), friend);
-			// add some stuff here to add friend to server friend list
+			getUserState().addFriend(friend);
 		} else {
 			MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
 			mb.add(Data.MESSAGE, "This user is already in your friend list");

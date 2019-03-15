@@ -41,7 +41,7 @@ class InfoCommand extends Command {
 
     private MessageBox currentSessionsMessage() {
         String sessionsString =
-                buildStringMessage(getUserChatSessions().allUserChatSessions());
+                buildStringMessage(getUserState().allUserChatSessions());
         MessageBox messageBox = new MessageBox(Action.GIVE_CHAT_SESSIONS);
         messageBox.add(Data.CHAT_SESSIONS, sessionsString);
         return messageBox;
