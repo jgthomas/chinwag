@@ -16,12 +16,12 @@ class UserState implements Iterable<ChatSession> {
 
         UserState() {
                 activeSessions = new ConcurrentHashMap<>();
-                allFriends = new HashSet<String>();
+                allFriends = new HashSet<>();
         }
 
         UserState(ChatSession global) {
                 activeSessions = new ConcurrentHashMap<>();
-                allFriends = new HashSet<String>();
+                allFriends = new HashSet<>();
                 activeSessions.put("global", global);
         }
 
