@@ -76,6 +76,7 @@ class LoginCommand extends Command {
 			addAsLoggedInClient(getCurrentThreadID(), username);
 			registerUserWithGlobal();
 			loadSessions();
+			loadFriends();
 		} else {
 			sendDenyMessage();
 			if (Server.getFailedAttempts().get(username) == null) {
@@ -89,6 +90,10 @@ class LoginCommand extends Command {
 		}
 	}
 
+	/**
+	 * Loads from database the ChatSession names. Creates new ChatSession if it
+	 * doesn't exist, registers the chat with system, and the user with that chat.
+	 */
 	private void loadSessions(){
 		List<String> chatSessions = Database.retrieveChatSessions(getCurrentThreadUserName());
 		if (chatSessions != null) {
@@ -104,8 +109,17 @@ class LoginCommand extends Command {
 		}
 	}
 	
-	
-	//  placeholder: load friends
+	/**
+	 * Loads from database the usernames of friends into UserState object 
+	 */
+	private void loadFriends() {
+		List<String> friends = Database.retrieveFriends(getCurrentThreadUserName());
+		if (friends != null) {
+			for (String friend : friends) {
+				getUserState().addFriend(friend);
+			}
+		}
+	}
 	
 	// placeholder: send message history to client
 
