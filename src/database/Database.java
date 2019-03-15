@@ -246,14 +246,14 @@ public class Database {
         }
     }
     
-    public static synchronized List<Message> retrieveMessages (String chatname, int limit) {
+    public static synchronized ArrayList<Message> retrieveMessages (String chatname, int limit) {
     	try (PreparedStatement statement = connection.prepareStatement(
     			"SELECT * FROM message WHERE chatname = ? ORDER BY timestamp ASC LIMIT ?"))
     	{
     		statement.setString(1, chatname);
     		statement.setInt(2, limit);
     		ResultSet rs = statement.executeQuery();
-    		List<Message> messages = new ArrayList<>();
+    		ArrayList<Message> messages = new ArrayList<>();
     		
     		while(rs.next()) {
     			String chat = rs.getString("chatname");
