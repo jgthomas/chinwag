@@ -1,7 +1,10 @@
 package protocol;
 
 
+import database.Message;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 
@@ -28,6 +31,7 @@ import java.util.EnumMap;
 public class MessageBox implements Serializable {
     private final Action action;
     private final EnumMap<Data, String> messageData;
+    private ArrayList<Message> messageHistory;
 
     /**
      * @param action a member of the Action enum,
@@ -38,10 +42,30 @@ public class MessageBox implements Serializable {
     public MessageBox(Action action) {
         this.action = action;
         this.messageData = new EnumMap<>(Data.class);
+        messageHistory = new ArrayList<>();
     }
 
     public Action getAction() {
         return action;
+    }
+
+    /**
+     * Adds a list of message objects for transmitting message
+     * history of a chat
+     *
+     * @param messageHistory a list of message history objects
+     * */
+    public void addMessageHistory(ArrayList<Message> messageHistory) {
+        this.messageHistory = messageHistory;
+    }
+
+    /**
+     * Gets the message history list
+     *
+     * @return a list of message history objects
+     * */
+    public ArrayList<Message> getMessageHistory() {
+        return messageHistory;
     }
 
     /**
