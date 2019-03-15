@@ -40,18 +40,30 @@ class UserState implements Iterable<ChatSession> {
         void removeSession(String chatName) {
                 activeSessions.remove(chatName);
         }
-        
-        
-        
-        void addFriend(String friend) {
-        	allFriends.add(friend);
-        }
-        
-        void removeFriend(String friend) {
-        	allFriends.remove(friend);
-        }
-        
 
+        /**
+         * Adds a user to friends
+         *
+         * @param friendName the name of the friend to add
+         * */
+        void addFriend(String friendName) {
+                allFriends.add(friendName);
+        }
+
+        /**
+         * Removes a user from friends
+         *
+         * @param friendName the name of the friend to remove
+         * */
+        void removeFriend(String friendName) {
+                allFriends.remove(friendName);
+        }
+
+        /**
+         * Gets all the friends of the current user
+         *
+         * @return a list of all the user's friends
+         * */
         public List<String> getAllFriends() {
 			return new ArrayList<>(allFriends);
 		}
