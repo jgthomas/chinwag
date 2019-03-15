@@ -49,11 +49,6 @@ class StartNewChatCommand extends Command {
             registerUserWithChat(newChat);
             registerChatOnSystem(newChat);
             Database.addUserToChat(newChatName, getCurrentThreadUserName());
-
-            String userToChatWith = messageBox.get(Data.USER_NAME);
-            if (userToChatWith != null) {
-                addOtherUserToChat(newChatName, userToChatWith);
-            }
         }
     }
 }

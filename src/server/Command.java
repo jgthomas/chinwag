@@ -92,22 +92,6 @@ abstract class Command {
         }
 
         /**
-         * Adds a DIFFERENT user to a chat session, pulling them in
-         *
-         * @param chatName the chat the user is joining
-         * @param userName the name of the user
-         */
-        void addOtherUserToChat(String chatName, String userName) {
-                MessageHandler user = getUser(userName);
-                ChatSession chatSession = getAllChatSessions().getSession(chatName);
-
-                if (user != null && chatSession != null) {
-                        chatSession.addUser(user.getMessageSender());
-                        user.getUserChatSessions().addSession(chatSession);
-                }
-        }
-
-        /**
          * @return the message sender object for use with this command
          * */
         MessageSender getMessageSender() {
