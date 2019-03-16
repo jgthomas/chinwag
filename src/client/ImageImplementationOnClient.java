@@ -31,6 +31,10 @@ public class ImageImplementationOnClient {
      * provided, the return value would be the string of the
      * image converted.
      *
+     * Note that the image file can be jpg, png, bmp or gif.
+     * But later I've decided that we output it as jpg, so
+     * that it's easier to be managed.
+     *
      * @param path  The path of the image file
      * @return      The string value of the image converted into
      */
