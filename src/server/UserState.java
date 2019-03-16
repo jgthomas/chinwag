@@ -93,7 +93,7 @@ public class UserState implements Iterable<ChatSession> {
          *
          * @param messageSender the message sender object to remove
          */
-        public void exitAll(MessageSender messageSender) {
+        public void exitAllChats(MessageSender messageSender) {
                 for (ChatSession chat : this) {
                         chat.removeUser(messageSender);
                 }

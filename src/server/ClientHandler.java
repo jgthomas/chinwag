@@ -43,7 +43,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                getUserState().exitAll(getMessageSender());
+                getUserState().exitAllChats(getMessageSender());
                 messageSender.closeSender();
                 log(THREAD_END);
         }
