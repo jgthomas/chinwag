@@ -10,5 +10,6 @@ public enum Data {
     LOGGED_IN_MEMBERS,
     CHAT_NAME,
     IMAGE,
+    IMAGE_FORMAT,
     USER_FRIENDS;
 }
