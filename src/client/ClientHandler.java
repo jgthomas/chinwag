@@ -106,11 +106,6 @@ public class ClientHandler {
 	}
 	
 	public void handleGiveChatHistory(MessageBox mb, ClientGUI gui) {
-//		TextArea newSpace = new TextArea();
-//		newSpace.setEditable(false);
-//		gui.getObservableChatList().add(mb.get(Data.CHAT_NAME));
-//		gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(mb.get(Data.CHAT_NAME)));
-//		gui.getMessageSpaces().put(mb.get(Data.CHAT_NAME), newSpace);
 		Collections.reverse(mb.getMessageHistory());
 		for(Message message : mb.getMessageHistory()) {
 			gui.getMessageSpaces().get(mb.get(Data.CHAT_NAME))
