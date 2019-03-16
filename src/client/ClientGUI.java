@@ -70,14 +70,9 @@ public class ClientGUI extends Application {
 		inviteStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
-		observableChatList.add("global");
 		
 		chatListView = new ListView<String>();
 		chatListView.setItems(observableChatList);
-		chatListView.getSelectionModel().selectFirst();
-		
-		messageSpace = new TextArea();
-		messageSpace.setEditable(false);
 		
 		messageSpaces = new HashMap<String, TextArea>();
 		
@@ -431,6 +426,10 @@ public class ClientGUI extends Application {
 	
 	public ObservableList<String> getObservableChatList() {
 		return observableChatList;
+	}
+	
+	public ListView<String> getChatListView() {
+		return chatListView;
 	}
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
