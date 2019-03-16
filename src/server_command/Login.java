@@ -22,12 +22,12 @@ import java.util.List;
  * Data.PASSWORD
  *
  **/
-class LoginCommand extends Command {
+class Login extends Command {
 
-	LoginCommand(MessageSender messageSender,
-				 UserState userState,
-				 AllChatSessions allChatSessions,
-				 ConnectedClients connectedClients)
+	Login(MessageSender messageSender,
+		  UserState userState,
+		  AllChatSessions allChatSessions,
+		  ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
