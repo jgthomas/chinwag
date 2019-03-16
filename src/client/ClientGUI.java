@@ -80,7 +80,7 @@ public class ClientGUI extends Application {
 		chatListView = new ListView<String>();
 		chatListView.setItems(observableChatList);
 		
-		treeViewRoot = new TreeItem<>();
+		treeViewRoot = new TreeItem<String>();
 		chatTreeView = new TreeView<String>(treeViewRoot);
 		chatTreeView.setShowRoot(false);
 		
@@ -105,6 +105,9 @@ public class ClientGUI extends Application {
 					}
 					chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
 				}
+				else
+					chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
+					input.requestFocus();
 			}
 		});
 		
