@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.FocusModel;
@@ -18,6 +19,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -43,6 +46,7 @@ public class ClientGUI extends Application {
 	private Button cancel;
 	private Button accept;
 	private Button decline;
+	private Button viewFriends;
 	private TextField chatName;
 	private TextField username;
 	private PasswordField password;
@@ -51,6 +55,8 @@ public class ClientGUI extends Application {
 	private TextArea messageSpace;
 	private HashMap<String, TextArea> messageSpaces;
 	private ListView<String> chatListView;
+	private TreeView<String> chatTreeView;
+	private TreeItem<String> treeViewRoot;
 	private ObservableList<String> observableChatList;
 	private VBox v;
 	private HBox h;
@@ -74,6 +80,10 @@ public class ClientGUI extends Application {
 		chatListView = new ListView<String>();
 		chatListView.setItems(observableChatList);
 		
+		treeViewRoot = new TreeItem<>();
+		chatTreeView = new TreeView<String>(treeViewRoot);
+		chatTreeView.setShowRoot(false);
+		
 		messageSpaces = new HashMap<String, TextArea>();
 		
 		chatListView.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -81,6 +91,20 @@ public class ClientGUI extends Application {
 			public void handle(MouseEvent event) {
 				String space = chatListView.getSelectionModel().getSelectedItem();
 				drawMainScreen(messageSpaces.get(space));
+			}
+		});
+		
+		chatTreeView.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if(!chatTreeView.getSelectionModel().getSelectedItem().getChildren().isEmpty()) {
+					String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+					drawMainScreen(messageSpaces.get(space));
+					for(TreeItem<String> item : treeViewRoot.getChildren()) {
+						item.setExpanded(false);
+					}
+					chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+				}
 			}
 		});
 		
@@ -225,9 +249,10 @@ public class ClientGUI extends Application {
 				MessageBox invite = new MessageBox(Action.INVITE);
 				invite.add(Data.USER_NAME, username.getText());
 				username.clear();
-				invite.add(Data.CHAT_NAME, chatListView
+				invite.add(Data.CHAT_NAME, chatTreeView
 										   .getSelectionModel()
-										   .getSelectedItem());
+										   .getSelectedItem()
+										   .getValue());
 				client.sendMessage(invite);
 			}
 		});
@@ -271,6 +296,7 @@ public class ClientGUI extends Application {
 				accept.add(Data.CHAT_NAME, inviteName);
 				client.sendMessage(accept);
 				observableChatList.add(inviteName);
+				treeViewRoot.getChildren().add(new TreeItem<String>(inviteName));
 				inviteStage.close();
 				messageSpaces.put(inviteName, new TextArea());
 			}
@@ -335,8 +361,34 @@ public class ClientGUI extends Application {
 		h.getChildren().add(logout);
 		h.getChildren().add(requestCreateChat);
 		h.getChildren().add(add);
-		hMain.getChildren().add(chatListView);
+		hMain.getChildren().add(chatTreeView);
 		hMain.getChildren().add(ta);
+		v.getChildren().add(hMain);
+		v.getChildren().add(h);
+		HBox h3 = new HBox();
+		h3.getChildren().add(exit);
+		h3.getChildren().add(loggedInAs);
+		v.getChildren().add(h3);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		send.setDefaultButton(false);
+		send.setDefaultButton(true);
+		input.requestFocus(); //moves focus to chat text field
+	}
+	
+	public void drawMainScreen() {
+		Group root = new Group();
+		v.getChildren().clear();
+		h.getChildren().clear();
+		hMain.getChildren().clear();
+		h.getChildren().add(input);
+		h.getChildren().add(send);
+		h.getChildren().add(logout);
+		h.getChildren().add(requestCreateChat);
+		h.getChildren().add(add);
+		hMain.getChildren().add(chatTreeView);
 		v.getChildren().add(hMain);
 		v.getChildren().add(h);
 		HBox h3 = new HBox();
@@ -399,8 +451,9 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		loggedInAs = new Text("Logged in as " + loggedInName);
-		drawMainScreen(messageSpaces.get("global"));
-		messageSpaces.get("global").appendText("Login successful!" + "\n");
+		//drawMainScreen(messageSpaces.get("global"));
+		drawMainScreen();
+		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
 	public void refuseLogin() {
@@ -430,6 +483,14 @@ public class ClientGUI extends Application {
 	
 	public ListView<String> getChatListView() {
 		return chatListView;
+	}
+	
+	public TreeView<String> getChatTreeView() {
+		return chatTreeView;
+	}
+	
+	public TreeItem<String> getTreeViewRoot() {
+		return treeViewRoot;
 	}
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
