@@ -43,7 +43,7 @@ class ClientHandler implements MessageHandler {
         public void run() {
                 log(THREAD_START);
                 messageReceiver.listeningLoop();
-                getUserChatSessions().exitAll(getMessageSender());
+                getUserState().exitAll(getMessageSender());
                 messageSender.closeSender();
                 log(THREAD_END);
         }
@@ -72,7 +72,7 @@ class ClientHandler implements MessageHandler {
         }
 
         @Override
-        public UserState getUserChatSessions() {
+        public UserState getUserState() {
                 return userState;
         }
 
