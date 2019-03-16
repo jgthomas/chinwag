@@ -2,10 +2,7 @@ package server_command;
 
 
 import protocol.Action;
-import server.AllChatSessions;
-import server.ConnectedClients;
-import server.MessageSender;
-import server.UserState;
+import server.*;
 
 public class CommandFactory {
 
