@@ -47,12 +47,16 @@ public class ClientGUI extends Application {
 	private Button accept;
 	private Button decline;
 	private Button viewFriends;
+	private Button addFriend;
+	private Button leaveChat;
 	private TextField chatName;
 	private TextField username;
 	private PasswordField password;
 	private TextField input;
 	private Text loggedInAs;
 	private TextArea messageSpace;
+	private ObservableList<String> friendsList;
+	private ListView<String> friendsListView;
 	private HashMap<String, TextArea> messageSpaces;
 	private TreeView<String> chatTreeView;
 	private TreeItem<String> treeViewRoot;
@@ -79,6 +83,9 @@ public class ClientGUI extends Application {
 		treeViewRoot = new TreeItem<String>();
 		chatTreeView = new TreeView<String>(treeViewRoot);
 		chatTreeView.setShowRoot(false);
+		
+		friendsList = FXCollections.observableArrayList();
+		friendsListView = new ListView<String>(friendsList);
 		
 		messageSpaces = new HashMap<String, TextArea>();
 		
@@ -313,6 +320,16 @@ public class ClientGUI extends Application {
 			}
 		});
 		
+		addFriend = new Button("Add Friend");
+		
+		addFriend.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				
+			}
+		});
+		
 		v = new VBox();
 		h = new HBox();
 		hMain = new HBox();
@@ -365,32 +382,7 @@ public class ClientGUI extends Application {
 		h.getChildren().add(add);
 		hMain.getChildren().add(chatTreeView);
 		hMain.getChildren().add(ta);
-		v.getChildren().add(hMain);
-		v.getChildren().add(h);
-		HBox h3 = new HBox();
-		h3.getChildren().add(exit);
-		h3.getChildren().add(loggedInAs);
-		v.getChildren().add(h3);
-		root.getChildren().add(v);
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-		send.setDefaultButton(false);
-		send.setDefaultButton(true);
-		input.requestFocus(); //moves focus to chat text field
-	}
-	
-	public void drawMainScreen() {
-		Group root = new Group();
-		v.getChildren().clear();
-		h.getChildren().clear();
-		hMain.getChildren().clear();
-		h.getChildren().add(input);
-		h.getChildren().add(send);
-		h.getChildren().add(logout);
-		h.getChildren().add(requestCreateChat);
-		h.getChildren().add(add);
-		hMain.getChildren().add(chatTreeView);
+		hMain.getChildren().add(friendsListView);
 		v.getChildren().add(hMain);
 		v.getChildren().add(h);
 		HBox h3 = new HBox();
@@ -453,8 +445,7 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		loggedInAs = new Text("Logged in as " + loggedInName);
-		//drawMainScreen(messageSpaces.get("global"));
-		drawMainScreen();
+		drawMainScreen(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()));
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
@@ -493,6 +484,10 @@ public class ClientGUI extends Application {
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
 		return messageSpaces;
+	}
+	
+	public ObservableList<String> getFriendsList(){
+		return friendsList;
 	}
 	
 }
