@@ -2,7 +2,8 @@ package server;
 
 import protocol.Action;
 import protocol.MessageBox;
-import server_command.*;
+import server_command.Command;
+import server_command.CommandFactory;
 
 import java.net.*;
 
