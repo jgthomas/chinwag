@@ -29,8 +29,6 @@ class StartNewChat extends Command {
     /**
      * Creates a new chat session.
      *
-     * Can optionally add a user to the chat session at the same time.
-     *
      * @param messageBox the command from the client to perform
      * */
     @Override
