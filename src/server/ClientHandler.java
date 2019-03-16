@@ -5,7 +5,7 @@ import protocol.MessageBox;
 import server_command.Command;
 import server_command.CommandFactory;
 
-import java.net.*;
+import java.net.Socket;
 
 /**
  * Acts as a 'mini-server' for a single thread.
