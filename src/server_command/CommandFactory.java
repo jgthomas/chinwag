@@ -31,7 +31,7 @@ public class CommandFactory {
                         case QUIT:
                                 return new Quit(messageSender, userState, allChatSessions, connectedClients);
                         case INVITE:
-                        	    return new InviteUserToChat(messageSender, userState, allChatSessions, connectedClients);
+                                return new InviteUserToChat(messageSender, userState, allChatSessions, connectedClients);
                         case IMAGE:
                                 return new ImageSend(messageSender, userState, allChatSessions, connectedClients);
                         case GET_CHAT_HISTORY:
