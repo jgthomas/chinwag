@@ -83,7 +83,8 @@ public class ImageCommand extends Command {
         String image = messageBox.get(Data.IMAGE);
         String imageFormat = messageBox.get(Data.IMAGE_FORMAT);
         String chatname = messageBox.get(Data.CHAT_NAME);
-        stringToImage(image, imageFormat, "image/" + fileName);
+        String path = "src/server/image/" + fileName;
+        stringToImage(image, imageFormat, path);
         // The following two lines are to send the image to all other users in the same group chat
         ChatSession chatSession = getAllChatSessions().getSession(chatname);
         getMessageSender().postMessage(chatSession, messageBox);

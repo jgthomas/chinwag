@@ -256,7 +256,20 @@ public class Database {
     		e.printStackTrace();
     	}
     }
-    
+
+    public static synchronized void insertImage(String chatname, String sender, String path, Timestamp timestamp){
+        try (PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO image (chatname, sender, path, timestamp) VALUES (?, ?, ?, ?)"))
+        {
+            statement.setString(1, chatname);
+            statement.setString(2, sender);
+            statement.setString(3, path);
+            statement.setTimestamp(4, timestamp);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     /**
      * Gets a List of chats that a user is a member of.
