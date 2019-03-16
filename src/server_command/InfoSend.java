@@ -12,12 +12,12 @@ import server.UserState;
 import java.util.Collections;
 import java.util.List;
 
-class InfoCommand extends Command {
+class InfoSend extends Command {
 
-    InfoCommand(MessageSender messageSender,
-                UserState userState,
-                AllChatSessions allChatSessions,
-                ConnectedClients connectedClients)
+    InfoSend(MessageSender messageSender,
+             UserState userState,
+             AllChatSessions allChatSessions,
+             ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }
