@@ -28,7 +28,7 @@ public class CommandFactory {
                         case LEAVE_CHAT:
                                 return new LeaveChatCommand(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_USER:
-                                return new AddUserToChatCommand(messageSender, userState, allChatSessions, connectedClients);
+                                return new AddUserToChat(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_FRIEND:
                                 return new AddFriend(messageSender, userState, allChatSessions, connectedClients);
                         case QUIT:

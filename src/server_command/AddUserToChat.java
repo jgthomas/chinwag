@@ -16,12 +16,12 @@ import server.*;
  * Data.USER_NAME - the user to add to the chat
  *
  * */
-class AddUserToChatCommand extends Command {
+class AddUserToChat extends Command {
 
-    AddUserToChatCommand(MessageSender messageSender,
-                         UserState userState,
-                         AllChatSessions allChatSessions,
-                         ConnectedClients connectedClients)
+    AddUserToChat(MessageSender messageSender,
+                  UserState userState,
+                  AllChatSessions allChatSessions,
+                  ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }
