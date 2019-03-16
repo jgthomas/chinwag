@@ -38,16 +38,8 @@ public class ImageSend extends Command {
      *
      * @return  A file name of string type
      */
-    private String generateFileName(String imageFormat){
-        switch (imageFormat){
-            case "jpg":
-                return new Timestamp(System.currentTimeMillis()) + ".jpg";
-            case "png":
-                return new Timestamp(System.currentTimeMillis()) + ".png";
-            case "gif":
-                return new Timestamp(System.currentTimeMillis()) + ".gif";
-        }
-        throw new IllegalArgumentException("Unsupported image format:" + imageFormat);
+    private String generateFileName(){
+        return new Timestamp(System.currentTimeMillis()) + ".jpg";
     }
 
     /**
@@ -60,7 +52,6 @@ public class ImageSend extends Command {
     public void execute(MessageBox messageBox){
 
         String imageString = messageBox.get(Data.IMAGE);
-        String imageFormat = messageBox.get(Data.IMAGE_FORMAT);
         String chatname = messageBox.get(Data.CHAT_NAME);
         String sender = getMessageSender().getUserName();
 
@@ -68,17 +59,17 @@ public class ImageSend extends Command {
         ChatSession chatSession = getAllChatSessions().getSession(chatname);
         getMessageSender().postMessage(chatSession, messageBox);
 
-        String fileName = generateFileName(imageFormat);
+        String fileName = generateFileName();
         String path = "src/server/image/" + fileName;
 
         File file;
         file = new File(path);
         while(file.exists()){
-            fileName = generateFileName(imageFormat);
+            fileName = generateFileName();
             path = "src/server/image/" + fileName;
             file = new File(path);
         }
-        Image image = new Image(imageString, imageFormat, chatname, sender, path, new Timestamp(System.currentTimeMillis()));
+        Image image = new Image(imageString, chatname, sender, path, new Timestamp(System.currentTimeMillis()));
         ImageQueue.addToQueue(image);
     }
 }

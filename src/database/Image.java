@@ -5,15 +5,13 @@ import java.sql.Timestamp;
 public class Image {
 
     private String image;
-    private String imageFormat;
     private String chatname;
     private String sender;
     private String path;
     private Timestamp timestamp;
 
-    public Image (String image, String imageFormat, String chatname, String sender, String path, Timestamp timestamp){
+    public Image (String image, String chatname, String sender, String path, Timestamp timestamp){
         this.image = image;
-        this.imageFormat = imageFormat;
         this.chatname = chatname;
         this.sender = sender;
         this.path = path;
@@ -38,9 +36,5 @@ public class Image {
 
     public String getImage() {
         return image;
-    }
-
-    public String getImageFormat() {
-        return imageFormat;
     }
 }

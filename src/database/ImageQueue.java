@@ -26,7 +26,6 @@ public class ImageQueue implements Runnable {
      */
     public void stringToImage(Image image){
         String imageString = image.getImage();
-        String imageFormat = image.getImageFormat();
         String path = image.getPath();
         try {
             BASE64Decoder decoder = new BASE64Decoder();
@@ -34,16 +33,7 @@ public class ImageQueue implements Runnable {
             ByteArrayInputStream by = new ByteArrayInputStream(bytes);
             BufferedImage bi = ImageIO.read(by);
             File file = new File(path);
-            switch (imageFormat) {
-                case "jpg":
-                    ImageIO.write(bi, "jpg", file);
-                case "png":
-                    ImageIO.write(bi, "png", file);
-                case "gif":
-                    ImageIO.write(bi, "gif", file);
-                default:
-                    throw new IllegalArgumentException("Unsupported image format:" + imageFormat);
-            }
+            ImageIO.write(bi, "jpg", file);
         } catch (IOException e) {
             e.printStackTrace();
         }
