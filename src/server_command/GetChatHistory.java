@@ -1,6 +1,7 @@
 package server_command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import database.Database;
 import database.Message;
@@ -35,7 +36,21 @@ class GetChatHistory extends Command {
 	 */
 	@Override
 	public void execute(MessageBox messageBox) {
-		String chatName = messageBox.get(Data.CHAT_NAME);
+		String username = messageBox.get(Data.USER_NAME);
+		String singleChatName = messageBox.get(Data.CHAT_NAME);
+		List<String> chatNames = Database.retrieveChatSessions(username);
+		
+		if (singleChatName == null) {
+			for (String chat : chatNames) {
+				sendMessageHistory(chat);
+			}
+		} else {
+			sendMessageHistory(singleChatName);
+		}
+
+	}
+	
+	void sendMessageHistory(String chatName) {
 		int messageLimit = 200;
 		ArrayList<Message> messageList = Database.retrieveMessages(chatName, messageLimit);
 		if (messageList != null) {
@@ -45,4 +60,5 @@ class GetChatHistory extends Command {
 			getMessageSender().sendMessage(mb);
 		}
 	}
+
 }

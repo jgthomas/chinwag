@@ -77,10 +77,10 @@ class Login extends Command {
 			sendAcceptMessage(username);
 			setUserName(username);
 			addAsLoggedInClient(getCurrentThreadID(), username);
-			registerUserWithGlobal();
+			//registerUserWithGlobal();
 			loadSessions();
 			loadFriends();
-			sendMessageHistory();
+			//sendMessageHistory();
 		} else {
 			sendDenyMessage();
 			if (Server.getFailedAttempts().get(username) == null) {
@@ -125,25 +125,25 @@ class Login extends Command {
 		}
 	}
 	
-	/**
-	 * Sends the message history as an ArrayList for each chat that the current
-	 * user is a member of.
-	 */
-	private void sendMessageHistory() {
-		List<String> chatNames = Database.retrieveChatSessions(getCurrentThreadUserName());
-		int messageLimit = 200;
-		if (chatNames != null) {
-			for (String chat : chatNames) {
-				ArrayList<Message> messageList = Database.retrieveMessages(chat, messageLimit);
-				if (messageList != null) {
-					MessageBox mb = new MessageBox(Action.GIVE_CHAT_HISTORY);
-					mb.add(Data.CHAT_NAME, chat);
-					mb.addMessageHistory(messageList);
-					getMessageSender().sendMessage(mb);
-				}
-			}
-		}
-	}
+//	/**
+//	 * Sends the message history as an ArrayList for each chat that the current
+//	 * user is a member of.
+//	 */
+//	private void sendMessageHistory() {
+//		List<String> chatNames = Database.retrieveChatSessions(getCurrentThreadUserName());
+//		int messageLimit = 200;
+//		if (chatNames != null) {
+//			for (String chat : chatNames) {
+//				ArrayList<Message> messageList = Database.retrieveMessages(chat, messageLimit);
+//				if (messageList != null) {
+//					MessageBox mb = new MessageBox(Action.GIVE_CHAT_HISTORY);
+//					mb.add(Data.CHAT_NAME, chat);
+//					mb.addMessageHistory(messageList);
+//					getMessageSender().sendMessage(mb);
+//				}
+//			}
+//		}
+//	}
 	
 	private void setUserName(String name) {
 		getMessageSender().setUserName(name);
@@ -152,10 +152,10 @@ class Login extends Command {
 	/**
 	 * Will be removed once we get rid of global chat - needed until then!
 	 * */
-	private void registerUserWithGlobal() {
-		ChatSession chatSession = getAllChatSessions().getSession("global");
-		registerUserWithChat(chatSession);
-	}
+	//private void registerUserWithGlobal() {
+	//	ChatSession chatSession = getAllChatSessions().getSession("global");
+	//	registerUserWithChat(chatSession);
+	//}
 
 	private void addAsLoggedInClient(String id, String userName) {
 		getConnectedClients().addClientByUserName(id, userName);

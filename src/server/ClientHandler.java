@@ -27,14 +27,15 @@ class ClientHandler implements MessageHandler {
         private final AllChatSessions allChatSessions;
 
         ClientHandler(Socket clientSocket,
-                      ChatSession global,
+                      //ChatSession global,
                       ConnectedClients connectedClients,
                       AllChatSessions allChatSessions,
                       String socketID)
         {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, socketID);
-                userState = new UserState(global);
+                //userState = new UserState(global);
+                userState = new UserState();
                 this.connectedClients = connectedClients;
                 this.allChatSessions = allChatSessions;
         }
@@ -42,7 +43,7 @@ class ClientHandler implements MessageHandler {
         @Override
         public void run() {
                 messageReceiver.listeningLoop();
-                getUserChatSessions().exitAll(getMessageSender());
+                getUserState().exitAllChats(getMessageSender());
                 messageSender.closeSender();
         }
 
@@ -70,7 +71,7 @@ class ClientHandler implements MessageHandler {
         }
 
         @Override
-        public UserState getUserChatSessions() {
+        public UserState getUserState() {
                 return userState;
         }
 

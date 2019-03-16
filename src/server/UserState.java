@@ -19,11 +19,11 @@ public class UserState implements Iterable<ChatSession> {
                 allFriends = new HashSet<>();
         }
 
-        UserState(ChatSession global) {
-                activeSessions = new ConcurrentHashMap<>();
-                allFriends = new HashSet<>();
-                activeSessions.put("global", global);
-        }
+        //UserState(ChatSession global) {
+        //        activeSessions = new ConcurrentHashMap<>();
+        //        allFriends = new HashSet<>();
+        //        activeSessions.put("global", global);
+        //}
 
         /**
          * @param chat a chat session to add to the client's
@@ -93,7 +93,7 @@ public class UserState implements Iterable<ChatSession> {
          *
          * @param messageSender the message sender object to remove
          */
-        public void exitAll(MessageSender messageSender) {
+        public void exitAllChats(MessageSender messageSender) {
                 for (ChatSession chat : this) {
                         chat.removeUser(messageSender);
                 }

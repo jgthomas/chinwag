@@ -21,7 +21,7 @@ public class Server {
 	private static final int MAX_THREADS = 10;
 	private final int port;
 	private final ExecutorService threadPool;
-	private final ChatSession global;
+	//private final ChatSession global;
 	private final ConnectedClients connectedClients;
 	private final AllChatSessions allChatSessions;
 
@@ -32,8 +32,9 @@ public class Server {
 		this.port = port;
 		connectedClients = new ConnectedClients();
 		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
-		global = new ChatSession("global");
-		allChatSessions = new AllChatSessions(global);
+		//global = new ChatSession("global");
+		//allChatSessions = new AllChatSessions(global);
+		allChatSessions = new AllChatSessions();
 	}
 	
 	public static synchronized Map<String, Integer> getFailedAttempts() {
@@ -57,7 +58,7 @@ public class Server {
 				String socketID = buildID(clientSocket);
 				MessageHandler messageHandler = new ClientHandler(
 						clientSocket,
-						global,
+						//global,
 						connectedClients,
 						allChatSessions,
 						socketID);
