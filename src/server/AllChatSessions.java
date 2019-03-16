@@ -24,10 +24,10 @@ public class AllChatSessions {
      *
      * @param global the global chat session
      * */
-    AllChatSessions(ChatSession global) {
-        activeSessions = new ConcurrentHashMap<>();
-        activeSessions.put(global.getChatName(), global);
-    }
+    //AllChatSessions(ChatSession global) {
+    //    activeSessions = new ConcurrentHashMap<>();
+    //    activeSessions.put(global.getChatName(), global);
+    //}
 
     /**
      * Adds a new chat session to the server master record.

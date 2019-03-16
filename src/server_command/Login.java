@@ -77,7 +77,7 @@ class Login extends Command {
 			sendAcceptMessage(username);
 			setUserName(username);
 			addAsLoggedInClient(getCurrentThreadID(), username);
-			registerUserWithGlobal();
+			//registerUserWithGlobal();
 			loadSessions();
 			loadFriends();
 			sendMessageHistory();
@@ -152,10 +152,10 @@ class Login extends Command {
 	/**
 	 * Will be removed once we get rid of global chat - needed until then!
 	 * */
-	private void registerUserWithGlobal() {
-		ChatSession chatSession = getAllChatSessions().getSession("global");
-		registerUserWithChat(chatSession);
-	}
+	//private void registerUserWithGlobal() {
+	//	ChatSession chatSession = getAllChatSessions().getSession("global");
+	//	registerUserWithChat(chatSession);
+	//}
 
 	private void addAsLoggedInClient(String id, String userName) {
 		getConnectedClients().addClientByUserName(id, userName);

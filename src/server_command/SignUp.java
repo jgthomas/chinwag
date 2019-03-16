@@ -51,7 +51,7 @@ class SignUp extends Command {
             Database.insertNewUser(username, saltString, pwHash);
 
             // store a new user's membership to global chat
-            Database.addUserToChat("global", username);
+            //Database.addUserToChat("global", username);
             
             // inform user of successful signup
             MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
