@@ -30,7 +30,7 @@ public class CommandFactory {
                         case ADD_USER:
                                 return new AddUserToChatCommand(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_FRIEND:
-                        		return new AddFriendCommand(messageSender, userState, allChatSessions, connectedClients);
+                                return new AddFriend(messageSender, userState, allChatSessions, connectedClients);
                         case QUIT:
                                 return new QuitCommand(messageSender, userState, allChatSessions, connectedClients);
                         case INVITE:

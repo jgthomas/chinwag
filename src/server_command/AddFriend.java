@@ -4,10 +4,7 @@ import database.Database;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
-import server.AllChatSessions;
-import server.ConnectedClients;
-import server.MessageSender;
-import server.UserState;
+import server.*;
 
 
 /**
@@ -19,10 +16,12 @@ import server.UserState;
  * Data.USER_NAME - username of friend
  *
  * */
-class AddFriendCommand extends Command {
+class AddFriend extends Command {
 
-	AddFriendCommand(MessageSender messageSender, UserState userState, AllChatSessions allChatSessions,
-					 ConnectedClients connectedClients)
+	AddFriend(MessageSender messageSender,
+			  UserState userState,
+			  AllChatSessions allChatSessions,
+              ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
