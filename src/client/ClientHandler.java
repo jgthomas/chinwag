@@ -91,7 +91,6 @@ public class ClientHandler {
 		chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
 				.split(protocol.Token.SEPARATOR.getValue()));
 		for(String session : chatSessions) {
-			gui.getObservableChatList().add(session);
 			gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
 			TextArea newSpace = new TextArea();
 			newSpace.setEditable(false);
