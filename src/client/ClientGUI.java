@@ -398,33 +398,6 @@ public class ClientGUI extends Application {
 		input.requestFocus(); //moves focus to chat text field
 	}
 	
-	public void drawMainScreen() {
-		Group root = new Group();
-		v.getChildren().clear();
-		h.getChildren().clear();
-		hMain.getChildren().clear();
-		h.getChildren().add(input);
-		h.getChildren().add(send);
-		h.getChildren().add(logout);
-		h.getChildren().add(requestCreateChat);
-		h.getChildren().add(add);
-		hMain.getChildren().add(chatTreeView);
-		hMain.getChildren().add(friendsListView);
-		v.getChildren().add(hMain);
-		v.getChildren().add(h);
-		HBox h3 = new HBox();
-		h3.getChildren().add(exit);
-		h3.getChildren().add(loggedInAs);
-		v.getChildren().add(h3);
-		root.getChildren().add(v);
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-		send.setDefaultButton(false);
-		send.setDefaultButton(true);
-		input.requestFocus(); //moves focus to chat text field
-	}
-	
 	public void drawAddUserScreen() {
 		Group root = new Group();
 		VBox v = new VBox();
