@@ -46,7 +46,6 @@ public class Server {
 
 	public void runServer() {
 		Socket clientSocket;
-		System.out.println("Server available...");
 		Database.makeConnection();
 		MessageQueue messageQueue = new MessageQueue();
 		ImageQueue imageQueue = new ImageQueue();
@@ -54,7 +53,6 @@ public class Server {
 		threadPool.execute(imageQueue);
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			while (true) {
-				System.out.println("Waiting for connection...");
 				clientSocket = serverSocket.accept();
 				String socketID = buildID(clientSocket);
 				MessageHandler messageHandler = new ClientHandler(
@@ -73,7 +71,6 @@ public class Server {
 
 		closeThreadPool();
 		Database.closeConnection();
-		System.out.println("Server terminating...");
 	}
 
 	private void closeThreadPool() {

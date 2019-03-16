@@ -41,11 +41,9 @@ class ClientHandler implements MessageHandler {
 
         @Override
         public void run() {
-                log(THREAD_START);
                 messageReceiver.listeningLoop();
                 getUserChatSessions().exitAll(getMessageSender());
                 messageSender.closeSender();
-                log(THREAD_END);
         }
 
         /**
@@ -79,9 +77,5 @@ class ClientHandler implements MessageHandler {
         @Override
         public MessageSender getMessageSender() {
                 return messageSender;
-        }
-
-        private void log(String msg) {
-                System.out.println(msg + Thread.currentThread());
         }
 }
