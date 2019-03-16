@@ -472,7 +472,7 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		loggedInAs = new Text("Logged in as " + loggedInName);
-		drawMainScreen(messageSpaces.get("global"));
+		drawMainScreen(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()));
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
