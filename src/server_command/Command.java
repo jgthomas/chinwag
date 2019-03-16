@@ -10,9 +10,9 @@ public abstract class Command {
         private final AllChatSessions allChatSessions;
 
         public Command(MessageSender messageSender,
-                UserState userState,
-                AllChatSessions allChatSessions,
-                ConnectedClients connectedClients)
+                       UserState userState,
+                       AllChatSessions allChatSessions,
+                       ConnectedClients connectedClients)
         {
                 this.messageSender = messageSender;
                 this.userState = userState;
