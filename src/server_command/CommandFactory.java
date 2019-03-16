@@ -18,7 +18,7 @@ public class CommandFactory {
         {
                 switch (action) {
                         case CHAT:
-                                return new ChatCommand(messageSender, userState, allChatSessions, connectedClients);
+                                return new ChatSend(messageSender, userState, allChatSessions, connectedClients);
                         case LOGIN:
                                 return new Login(messageSender, userState, allChatSessions, connectedClients);
                         case SIGN_UP:

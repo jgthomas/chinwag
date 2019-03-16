@@ -17,12 +17,12 @@ import server.*;
  * Data.CHAT_NAME - the chat to which the message should be sent
  *
  **/
-class ChatCommand extends Command {
+class ChatSend extends Command {
 
-        ChatCommand(MessageSender messageSender,
-                    UserState userState,
-                    AllChatSessions allChatSessions,
-                    ConnectedClients connectedClients)
+        ChatSend(MessageSender messageSender,
+                 UserState userState,
+                 AllChatSessions allChatSessions,
+                 ConnectedClients connectedClients)
         {
                 super(messageSender, userState, allChatSessions, connectedClients);
         }
