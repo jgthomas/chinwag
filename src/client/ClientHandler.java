@@ -91,7 +91,6 @@ public class ClientHandler {
 		chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
 				.split(protocol.Token.SEPARATOR.getValue()));
 		for(String session : chatSessions) {
-			gui.getObservableChatList().add(session);
 			gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
 			TextArea newSpace = new TextArea();
 			newSpace.setEditable(false);
@@ -100,7 +99,6 @@ public class ClientHandler {
 			requestMembers.add(Data.CHAT_NAME, session);
 			client.sendMessage(requestMembers);
 		}
-		gui.getChatListView().getSelectionModel().selectFirst();
 		Platform.runLater(() -> gui.login());
 		MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
 		requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
@@ -108,11 +106,6 @@ public class ClientHandler {
 	}
 	
 	public void handleGiveChatHistory(MessageBox mb, ClientGUI gui) {
-//		TextArea newSpace = new TextArea();
-//		newSpace.setEditable(false);
-//		gui.getObservableChatList().add(mb.get(Data.CHAT_NAME));
-//		gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(mb.get(Data.CHAT_NAME)));
-//		gui.getMessageSpaces().put(mb.get(Data.CHAT_NAME), newSpace);
 		Collections.reverse(mb.getMessageHistory());
 		for(Message message : mb.getMessageHistory()) {
 			gui.getMessageSpaces().get(mb.get(Data.CHAT_NAME))

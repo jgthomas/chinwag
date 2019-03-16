@@ -54,7 +54,6 @@ public class ClientGUI extends Application {
 	private Text loggedInAs;
 	private TextArea messageSpace;
 	private HashMap<String, TextArea> messageSpaces;
-	private ListView<String> chatListView;
 	private TreeView<String> chatTreeView;
 	private TreeItem<String> treeViewRoot;
 	private ObservableList<String> observableChatList;
@@ -77,34 +76,34 @@ public class ClientGUI extends Application {
 		
 		observableChatList = FXCollections.observableArrayList();
 		
-		chatListView = new ListView<String>();
-		chatListView.setItems(observableChatList);
-		
-		treeViewRoot = new TreeItem<>();
+		treeViewRoot = new TreeItem<String>();
 		chatTreeView = new TreeView<String>(treeViewRoot);
 		chatTreeView.setShowRoot(false);
 		
 		messageSpaces = new HashMap<String, TextArea>();
 		
-		chatListView.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				String space = chatListView.getSelectionModel().getSelectedItem();
-				drawMainScreen(messageSpaces.get(space));
-			}
-		});
-		
 		chatTreeView.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				if(!chatTreeView.getSelectionModel().getSelectedItem().getChildren().isEmpty()) {
-					String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+				if(!chatTreeView.getSelectionModel().getSelectedItem()
+													.getChildren()
+													.isEmpty()) {
+					String space = chatTreeView.getSelectionModel()
+											   .getSelectedItem()
+											   .getValue();
 					drawMainScreen(messageSpaces.get(space));
 					for(TreeItem<String> item : treeViewRoot.getChildren()) {
 						item.setExpanded(false);
 					}
-					chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+					chatTreeView.getSelectionModel().getSelectedItem()
+													.setExpanded(true);
 				}
+				else
+					chatTreeView.getSelectionModel()
+								.select(chatTreeView.getSelectionModel()
+												    .getSelectedItem()
+												    .getParent());
+					input.requestFocus();
 			}
 		});
 		
@@ -154,12 +153,15 @@ public class ClientGUI extends Application {
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				messageSpaces.get(chatListView.getSelectionModel().getSelectedItem())
+				messageSpaces.get(chatTreeView.getSelectionModel()
+											  .getSelectedItem()
+											  .getValue())
 							 .appendText("You>>> " + input.getText() + "\n");
 				MessageBox message = new MessageBox(Action.CHAT);
-				message.add(Data.CHAT_NAME, chatListView
+				message.add(Data.CHAT_NAME, chatTreeView
 											.getSelectionModel()
-											.getSelectedItem());
+											.getSelectedItem()
+											.getValue());
 				message.add(Data.USER_NAME, loggedInName);
 				message.add(Data.MESSAGE, input.getText());
 				input.clear();
@@ -479,10 +481,6 @@ public class ClientGUI extends Application {
 	
 	public ObservableList<String> getObservableChatList() {
 		return observableChatList;
-	}
-	
-	public ListView<String> getChatListView() {
-		return chatListView;
 	}
 	
 	public TreeView<String> getChatTreeView() {
