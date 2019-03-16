@@ -105,6 +105,7 @@ public class ClientHandler {
 			requestMembers.add(Data.CHAT_NAME, session);
 			client.sendMessage(requestMembers);
 		}
+		gui.getChatTreeView().getSelectionModel().selectFirst();
 		Platform.runLater(() -> gui.login());
 		MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
 		requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
