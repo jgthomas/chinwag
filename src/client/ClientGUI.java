@@ -472,8 +472,7 @@ public class ClientGUI extends Application {
 	
 	public void login() {
 		loggedInAs = new Text("Logged in as " + loggedInName);
-		//drawMainScreen(messageSpaces.get("global"));
-		drawMainScreen();
+		drawMainScreen(messageSpaces.get("global"));
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
