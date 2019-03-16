@@ -65,7 +65,7 @@ import java.util.Base64;
  * }
  *
  * */
-public final class Hasher {
+final class Hasher {
         /*
          * Nice answers here regarding the parts of the algorithm
          *
