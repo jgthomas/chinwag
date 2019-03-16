@@ -85,16 +85,24 @@ public class ClientGUI extends Application {
 		chatTreeView.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				if(!chatTreeView.getSelectionModel().getSelectedItem().getChildren().isEmpty()) {
-					String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+				if(!chatTreeView.getSelectionModel().getSelectedItem()
+													.getChildren()
+													.isEmpty()) {
+					String space = chatTreeView.getSelectionModel()
+											   .getSelectedItem()
+											   .getValue();
 					drawMainScreen(messageSpaces.get(space));
 					for(TreeItem<String> item : treeViewRoot.getChildren()) {
 						item.setExpanded(false);
 					}
-					chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+					chatTreeView.getSelectionModel().getSelectedItem()
+													.setExpanded(true);
 				}
 				else
-					chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
+					chatTreeView.getSelectionModel()
+								.select(chatTreeView.getSelectionModel()
+												    .getSelectedItem()
+												    .getParent());
 					input.requestFocus();
 			}
 		});
