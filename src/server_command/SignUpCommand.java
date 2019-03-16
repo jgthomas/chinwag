@@ -1,9 +1,10 @@
-package server;
+package server_command;
 
 import database.Database;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.*;
 
 /**
  * CONTRACT

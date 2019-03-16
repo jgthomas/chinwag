@@ -1,9 +1,13 @@
-package server;
+package server_command;
 
 import database.Database;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
 
 /**
@@ -15,10 +19,10 @@ import protocol.MessageBox;
  * Data.USER_NAME - username of friend
  *
  * */
-public class AddFriendCommand extends Command {
+class AddFriendCommand extends Command {
 
 	AddFriendCommand(MessageSender messageSender, UserState userState, AllChatSessions allChatSessions,
-			ConnectedClients connectedClients) 
+					 ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
@@ -30,7 +34,7 @@ public class AddFriendCommand extends Command {
 	 * If already a friend then just send a message back to inform client of this.
 	 */
 	@Override
-	void execute(MessageBox messageBox) {
+	public void execute(MessageBox messageBox) {
 		String friend = messageBox.get(Data.USER_NAME);
 		if(!Database.isFriend(getCurrentThreadUserName(), friend)) {
 			Database.insertFriend(getCurrentThreadUserName(), friend);

@@ -1,9 +1,13 @@
-package server;
+package server_command;
 
 import protocol.Action;
 import protocol.Data;
 import protocol.DataFormatter;
 import protocol.MessageBox;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +23,7 @@ class InfoCommand extends Command {
     }
 
     @Override
-    void execute(MessageBox messageBox) {
+    public void execute(MessageBox messageBox) {
         String chatName = messageBox.get(Data.CHAT_NAME);
         MessageBox mb = null;
 

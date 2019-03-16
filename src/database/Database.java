@@ -1,10 +1,9 @@
 package database;
 
-import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-import server.Hasher;
+import server_command.Hasher;
 
 public class Database {
 

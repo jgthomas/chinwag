@@ -1,7 +1,8 @@
-package server;
+package server_command;
 
 import database.Database;
 import protocol.MessageBox;
+import server.*;
 
 import static protocol.Data.CHAT_NAME;
 
@@ -30,7 +31,7 @@ class LeaveChatCommand extends Command {
      * @param messageBox the command from the client to perform
      * */
     @Override
-    void execute(MessageBox messageBox){
+    public void execute(MessageBox messageBox){
         String chatName = messageBox.get(CHAT_NAME);
         Database.removeUserFromChat(chatName, getCurrentThreadUserName());
         leaveChat(chatName);

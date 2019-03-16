@@ -17,11 +17,11 @@ import java.util.ArrayList;
  * and leaves a chat by removing its message sender object.
  *
  * */
-class ChatSession implements Iterable<MessageSender> {
+public class ChatSession implements Iterable<MessageSender> {
         private final String chatName;
         private final ConcurrentMap<String, MessageSender> usersInChat;
 
-        ChatSession(String chatName) {
+        public ChatSession(String chatName) {
                 this.chatName = chatName;
                 usersInChat = new ConcurrentHashMap<>();
         }
@@ -31,7 +31,7 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @return the name of the chat session
          **/
-        String getChatName() {
+        public String getChatName() {
                 return chatName;
         }
 
@@ -40,7 +40,7 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @param messageSender the messageSender object to add
          * */
-        void addUser(MessageSender messageSender) {
+        public void addUser(MessageSender messageSender) {
                 usersInChat.put(messageSender.getUserName(), messageSender);
         }
 
@@ -49,7 +49,7 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @param messageSender the messageSender to remove
          * */
-        void removeUser(MessageSender messageSender) {
+        public void removeUser(MessageSender messageSender) {
                 usersInChat.remove(messageSender.getUserName());
         }
 
@@ -58,7 +58,7 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @return true if empty, else false
          * */
-        boolean isEmpty() {
+        public boolean isEmpty() {
                 return usersInChat.size() == 0;
         }
 
@@ -77,7 +77,7 @@ class ChatSession implements Iterable<MessageSender> {
          *
          * @return a list of user names
          * */
-        List<String> allUserNames() {
+        public List<String> allUserNames() {
                 return new ArrayList<>(usersInChat.keySet());
         }
 

@@ -1,9 +1,11 @@
-package server;
+package server_command;
 
 import database.Image;
 import database.ImageQueue;
 import protocol.Data;
 import protocol.MessageBox;
+import server.*;
+
 import java.io.*;
 import java.sql.Timestamp;
 
@@ -23,9 +25,9 @@ import java.sql.Timestamp;
 public class ImageCommand extends Command {
 
     ImageCommand(MessageSender messageSender,
-                UserState userState,
-                AllChatSessions allChatSessions,
-                ConnectedClients connectedClients)
+                 UserState userState,
+                 AllChatSessions allChatSessions,
+                 ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }

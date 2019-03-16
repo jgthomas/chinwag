@@ -1,6 +1,10 @@
-package server;
+package server_command;
 
 import protocol.MessageBox;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
 class QuitCommand extends Command {
 

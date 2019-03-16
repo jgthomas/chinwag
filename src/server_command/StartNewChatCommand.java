@@ -1,9 +1,10 @@
-package server;
+package server_command;
 
 import database.Database;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.*;
 
 
 /**
@@ -33,7 +34,7 @@ class StartNewChatCommand extends Command {
      * @param messageBox the command from the client to perform
      * */
     @Override
-    void execute(MessageBox messageBox) {
+    public void execute(MessageBox messageBox) {
         String newChatName = messageBox.get(Data.CHAT_NAME);
         if (Database.chatExists(newChatName)){
             MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);

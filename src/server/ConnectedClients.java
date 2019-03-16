@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  * its username in the clientsByUserName map.
  *
  * */
-class ConnectedClients {
+public class ConnectedClients {
     private final ConcurrentMap<String, MessageHandler> clientsByID;
     private final ConcurrentMap<String, MessageHandler> clientsByUserName;
 
@@ -30,7 +30,7 @@ class ConnectedClients {
      * @param id              the id of the connected client
      * @param messageHandler  the thread handling the client
      */
-     void addClientByID(String id, MessageHandler messageHandler) {
+    void addClientByID(String id, MessageHandler messageHandler) {
         clientsByID.put(id, messageHandler);
      }
 
@@ -40,7 +40,7 @@ class ConnectedClients {
      * @param id       the client id
      * @param userName the username associated with that id
      */
-     void addClientByUserName(String id, String userName) {
+    public void addClientByUserName(String id, String userName) {
         MessageHandler mh = clientsByID.get(id);
         clientsByUserName.put(userName, mh);
      }
@@ -51,7 +51,7 @@ class ConnectedClients {
      * @param userName the client's username
      * @return the client thread object associated with that username
      */
-     MessageHandler getClientByUserName(String userName) {
+    public MessageHandler getClientByUserName(String userName) {
         return clientsByUserName.getOrDefault(userName, null);
      }
 
@@ -60,7 +60,7 @@ class ConnectedClients {
      *
      * @return a list of user names
      * */
-    List<String> allLoggedInUsers() {
+    public List<String> allLoggedInUsers() {
          return new ArrayList<>(clientsByUserName.keySet());
      }
 }

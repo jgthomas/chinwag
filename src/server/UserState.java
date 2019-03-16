@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
  * currently engaged involved with.
  *
  * */
-class UserState implements Iterable<ChatSession> {
+public class UserState implements Iterable<ChatSession> {
         private final ConcurrentMap<String, ChatSession> activeSessions;
         private final Set<String> allFriends;
 
@@ -29,7 +29,7 @@ class UserState implements Iterable<ChatSession> {
          * @param chat a chat session to add to the client's
          *             current sessions
          */
-        void addSession(ChatSession chat) {
+        public void addSession(ChatSession chat) {
                 activeSessions.put(chat.getChatName(), chat);
         }
 
@@ -37,7 +37,7 @@ class UserState implements Iterable<ChatSession> {
          * @param chatName the name of the chat session to remove
          *                    from the client's current sessions
          */
-        void removeSession(String chatName) {
+        public void removeSession(String chatName) {
                 activeSessions.remove(chatName);
         }
 
@@ -46,7 +46,7 @@ class UserState implements Iterable<ChatSession> {
          *
          * @param friendName the name of the friend to add
          * */
-        void addFriend(String friendName) {
+        public void addFriend(String friendName) {
                 allFriends.add(friendName);
         }
 
@@ -55,7 +55,7 @@ class UserState implements Iterable<ChatSession> {
          *
          * @param friendName the name of the friend to remove
          * */
-        void removeFriend(String friendName) {
+        public void removeFriend(String friendName) {
                 allFriends.remove(friendName);
         }
 
@@ -74,7 +74,7 @@ class UserState implements Iterable<ChatSession> {
          * @param chatName the name of the chat
          * @return true if user is in the chat, else false
          * */
-        boolean isInChat(String chatName) {
+        public boolean isInChat(String chatName) {
                 return activeSessions.containsKey(chatName);
         }
 
@@ -83,7 +83,7 @@ class UserState implements Iterable<ChatSession> {
          *
          * @return list of all sessions the user is currently in
          * */
-        List<String> allUserChatSessions() {
+        public List<String> allUserChatSessions() {
                 return new ArrayList<>(activeSessions.keySet());
         }
 
@@ -93,7 +93,7 @@ class UserState implements Iterable<ChatSession> {
          *
          * @param messageSender the message sender object to remove
          */
-        void exitAll(MessageSender messageSender) {
+        public void exitAll(MessageSender messageSender) {
                 for (ChatSession chat : this) {
                         chat.removeUser(messageSender);
                 }

@@ -1,11 +1,15 @@
-package server;
+package server_command;
 
 
 import protocol.Action;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
-class CommandFactory {
+public class CommandFactory {
 
-        static Command buildCommand
+        public static Command buildCommand
                 (Action action,
                  MessageSender messageSender,
                  UserState userState,

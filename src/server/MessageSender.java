@@ -3,7 +3,7 @@ package server;
 
 import protocol.MessageBox;
 
-interface MessageSender {
+public interface MessageSender {
 
         void postMessage(ChatSession chatContext, MessageBox messageBox);
 

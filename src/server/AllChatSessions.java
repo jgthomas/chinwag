@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
  * When a chat session is created, it is added here.
  *
 1 * */
-class AllChatSessions {
+public class AllChatSessions {
     private final ConcurrentMap<String, ChatSession> activeSessions;
 
     AllChatSessions() {
@@ -34,7 +34,7 @@ class AllChatSessions {
      *
      * @param chatSession the chat session object
      * */
-    void addSession(ChatSession chatSession) {
+    public void addSession(ChatSession chatSession) {
         activeSessions.put(chatSession.getChatName(), chatSession);
     }
 
@@ -43,7 +43,7 @@ class AllChatSessions {
      *
      * @param chatName the name off the chat session to remove
      * */
-    void removeSession(String chatName) {
+    public void removeSession(String chatName) {
         activeSessions.remove(chatName);
     }
 
@@ -53,11 +53,11 @@ class AllChatSessions {
      * @param sessionID the unique identifier of the chat session
      * @return the chat session object, null if not found
      * */
-    ChatSession getSession(String sessionID) {
+    public ChatSession getSession(String sessionID) {
         return activeSessions.getOrDefault(sessionID, null);
     }
 
-    boolean sessionExists(String chatname) {
+    public boolean sessionExists(String chatname) {
         return activeSessions.containsKey(chatname);
     }
 }

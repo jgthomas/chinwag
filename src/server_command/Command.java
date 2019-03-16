@@ -1,14 +1,15 @@
-package server;
+package server_command;
 
 import protocol.MessageBox;
+import server.*;
 
-abstract class Command {
+public abstract class Command {
         private final MessageSender messageSender;
         private final UserState userState;
         private final ConnectedClients connectedClients;
         private final AllChatSessions allChatSessions;
 
-        Command(MessageSender messageSender,
+        public Command(MessageSender messageSender,
                 UserState userState,
                 AllChatSessions allChatSessions,
                 ConnectedClients connectedClients)
@@ -112,5 +113,5 @@ abstract class Command {
          *
          * @param messageBox the command from the client to perform
          * */
-        abstract void execute(MessageBox messageBox);
+        public abstract void execute(MessageBox messageBox);
 }

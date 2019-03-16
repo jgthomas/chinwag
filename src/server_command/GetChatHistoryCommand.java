@@ -1,13 +1,16 @@
-package server;
+package server_command;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import database.Database;
 import database.Message;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
 /**
  * CONTRACT
@@ -20,10 +23,12 @@ import protocol.MessageBox;
  * message boxes.
  *
  * */
-public class GetChatHistoryCommand extends Command {
+class GetChatHistoryCommand extends Command {
 
-	GetChatHistoryCommand(MessageSender messageSender, UserState userState, AllChatSessions allChatSessions,
-			ConnectedClients connectedClients) 
+	GetChatHistoryCommand(MessageSender messageSender,
+						  UserState userState,
+						  AllChatSessions allChatSessions,
+						  ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
@@ -32,7 +37,7 @@ public class GetChatHistoryCommand extends Command {
 	 * Returns message history for a chat. 
 	 */
 	@Override
-	void execute(MessageBox messageBox) {
+	public void execute(MessageBox messageBox) {
 		String chatName = messageBox.get(Data.CHAT_NAME);
 		int messageLimit = 200;
 		ArrayList<Message> messageList = Database.retrieveMessages(chatName, messageLimit);

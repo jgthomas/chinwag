@@ -1,8 +1,12 @@
-package server;
+package server_command;
 
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.AllChatSessions;
+import server.ConnectedClients;
+import server.MessageSender;
+import server.UserState;
 
 /**
  * CONTRACT
@@ -18,7 +22,7 @@ import protocol.MessageBox;
 public class InviteUserToChatCommand extends Command {
 
 	InviteUserToChatCommand(MessageSender messageSender, UserState userState,
-			AllChatSessions allChatSessions, ConnectedClients connectedClients) 
+							AllChatSessions allChatSessions, ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
@@ -27,7 +31,7 @@ public class InviteUserToChatCommand extends Command {
 	 * Sends an invite to invitee to join a chat session
 	 */
 	@Override
-	void execute(MessageBox messageBox) {
+	public void execute(MessageBox messageBox) {
 		// pull out invitee username and chatname they're invited to
 		String chatName = messageBox.get(Data.CHAT_NAME);
 		String invitee = messageBox.get(Data.USER_NAME);

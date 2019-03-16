@@ -1,4 +1,4 @@
-package server;
+package server_command;
 
 
 import database.Database;
@@ -6,6 +6,7 @@ import database.Message;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
+import server.*;
 
 import java.util.ArrayList;
 import java.util.Date;
