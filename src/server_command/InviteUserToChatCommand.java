@@ -21,8 +21,10 @@ import server.UserState;
  * */
 public class InviteUserToChatCommand extends Command {
 
-	InviteUserToChatCommand(MessageSender messageSender, UserState userState,
-							AllChatSessions allChatSessions, ConnectedClients connectedClients)
+	InviteUserToChatCommand(MessageSender messageSender,
+							UserState userState,
+							AllChatSessions allChatSessions,
+							ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
