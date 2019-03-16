@@ -57,6 +57,9 @@ public class ClientHandler {
 			case GIVE_CHAT_HISTORY:
 				handleGiveChatHistory(mb, gui);
 				return;
+			case GIVE_FRIENDS:
+				handleGiveFriends(mb, gui);
+				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}
@@ -79,6 +82,9 @@ public class ClientHandler {
 		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
 		requestChatSessions.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(requestChatSessions);
+		MessageBox requestFriends = new MessageBox(Action.GET_FRIENDS);
+		requestFriends.add(Data.USER_NAME, client.getUser().getUserName());
+		client.sendMessage(requestFriends);
 	}
 	
 	public void handleInvite(MessageBox mb, ClientGUI gui) {
@@ -130,4 +136,9 @@ public class ClientHandler {
 		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
 	}
 	
+	public void handleGiveFriends(MessageBox mb, ClientGUI gui) {
+		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
+			gui.getFriendsList().add(friend);
+		}
+	}
 }
