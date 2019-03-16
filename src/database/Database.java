@@ -257,14 +257,14 @@ public class Database {
     	}
     }
 
-    public static synchronized void insertImage(String chatname, String sender, String path, Timestamp timestamp){
+    public static synchronized void insertImage(Image image){
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO image (chatname, sender, path, timestamp) VALUES (?, ?, ?, ?)"))
         {
-            statement.setString(1, chatname);
-            statement.setString(2, sender);
-            statement.setString(3, path);
-            statement.setTimestamp(4, timestamp);
+            statement.setString(1, image.getChatname());
+            statement.setString(2, image.getSender());
+            statement.setString(3, image.getPath());
+            statement.setTimestamp(4, image.getTimestamp());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

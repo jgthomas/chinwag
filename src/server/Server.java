@@ -1,6 +1,7 @@
 package server;
 
 import database.Database;
+import database.ImageQueue;
 import database.MessageQueue;
 
 import java.io.*;
@@ -17,7 +18,7 @@ import java.util.concurrent.*;
  *
  */
 public class Server {
-	private static final int MAX_THREADS = 4;
+	private static final int MAX_THREADS = 10;
 	private final int port;
 	private final ExecutorService threadPool;
 	private final ChatSession global;
@@ -48,7 +49,9 @@ public class Server {
 		System.out.println("Server available...");
 		Database.makeConnection();
 		MessageQueue messageQueue = new MessageQueue();
+		ImageQueue imageQueue = new ImageQueue();
 		threadPool.execute(messageQueue);
+		threadPool.execute(imageQueue);
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			while (true) {
 				System.out.println("Waiting for connection...");

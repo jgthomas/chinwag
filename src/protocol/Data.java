@@ -11,5 +11,6 @@ public enum Data {
     CHAT_NAME,
     IMAGE,
     IMAGE_FORMAT,
+    IMAGE_PATH,
     USER_FRIENDS;
 }

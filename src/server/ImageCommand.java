@@ -1,5 +1,7 @@
 package server;
 
+import database.Image;
+import database.ImageQueue;
 import protocol.Data;
 import protocol.MessageBox;
 import sun.misc.BASE64Decoder;
@@ -38,37 +40,16 @@ public class ImageCommand extends Command {
      *
      * @return  A file name of string type
      */
-    private String generateFileName(){
-        return new Timestamp(System.currentTimeMillis()) + ".jpg";
-    }
-
-    /**
-     * This method converts the string converted from an image back to the image.
-     * According to the image formate passed to it, it converts the string to either
-     * jpg, png or gif.
-     *
-     * @param string
-     * @param path
-     */
-    public void stringToImage(String string, String imageFormat, String path){
-        try {
-            BASE64Decoder decoder = new BASE64Decoder();
-            byte[] bytes = decoder.decodeBuffer(string);
-            ByteArrayInputStream by = new ByteArrayInputStream(bytes);
-            BufferedImage bi = ImageIO.read(by);
-            File file = new File(path);
-            switch (imageFormat) {
-                case "jpg":
-                    ImageIO.write(bi, "jpg", file);
-                case "png":
-                    ImageIO.write(bi, "png", file);
-                case "gif":
-                    ImageIO.write(bi, "gif", file);
-            }
-            ImageIO.write(bi, "jpg", file);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private String generateFileName(String imageFormat){
+        switch (imageFormat){
+            case "jpg":
+                return new Timestamp(System.currentTimeMillis()) + ".jpg";
+            case "png":
+                return new Timestamp(System.currentTimeMillis()) + ".png";
+            case "gif":
+                return new Timestamp(System.currentTimeMillis()) + ".gif";
         }
+        throw new IllegalArgumentException("Unsupported image format:" + imageFormat);
     }
 
     /**
@@ -79,14 +60,27 @@ public class ImageCommand extends Command {
      */
     @Override
     public void execute(MessageBox messageBox){
-        String fileName = generateFileName();
-        String image = messageBox.get(Data.IMAGE);
+
+        String imageString = messageBox.get(Data.IMAGE);
         String imageFormat = messageBox.get(Data.IMAGE_FORMAT);
         String chatname = messageBox.get(Data.CHAT_NAME);
-        String path = "src/server/image/" + fileName;
-        stringToImage(image, imageFormat, path);
+        String sender = getMessageSender().getUserName();
+
         // The following two lines are to send the image to all other users in the same group chat
         ChatSession chatSession = getAllChatSessions().getSession(chatname);
         getMessageSender().postMessage(chatSession, messageBox);
+
+        String fileName = generateFileName(imageFormat);
+        String path = "src/server/image/" + fileName;
+
+        File file;
+        file = new File(path);
+        while(file.exists()){
+            fileName = generateFileName(imageFormat);
+            path = "src/server/image/" + fileName;
+            file = new File(path);
+        }
+        Image image = new Image(imageString, imageFormat, chatname, sender, path, new Timestamp(System.currentTimeMillis()));
+        ImageQueue.addToQueue(image);
     }
 }
