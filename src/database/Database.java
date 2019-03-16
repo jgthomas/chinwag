@@ -3,8 +3,6 @@ package database;
 import java.sql.*;
 import java.util.*;
 
-import server_command.Hasher;
-
 public class Database {
 
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
