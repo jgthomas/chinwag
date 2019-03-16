@@ -4,10 +4,6 @@ import database.Image;
 import database.ImageQueue;
 import protocol.Data;
 import protocol.MessageBox;
-import sun.misc.BASE64Decoder;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Timestamp;
 
@@ -53,8 +49,8 @@ public class ImageCommand extends Command {
     }
 
     /**
-     * Stores image in a local server directory "image" and sends the message box to
-     * other members in the group chat.
+     * Stores image in a local server directory "image" and sends the image message box to
+     * other members in the group chat. The image saved will have a distinct file name.
      *
      * @param messageBox the command from the client to perform
      */
