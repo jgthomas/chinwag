@@ -153,8 +153,6 @@ class Login extends Command {
 	private void registerUserWithGlobal() {
 		ChatSession chatSession = getAllChatSessions().getSession("global");
 		registerUserWithChat(chatSession);
-		//getUserState().getSession("global").addUser(getMessageSender());
-		//getAllChatSessions().getSession("global").addUser(getMessageSender());
 	}
 
 	private void addAsLoggedInClient(String id, String userName) {
