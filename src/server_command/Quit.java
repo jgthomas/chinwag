@@ -1,17 +1,14 @@
 package server_command;
 
 import protocol.MessageBox;
-import server.AllChatSessions;
-import server.ConnectedClients;
-import server.MessageSender;
-import server.UserState;
+import server.*;
 
-class QuitCommand extends Command {
+class Quit extends Command {
 
-    QuitCommand(MessageSender messageSender,
-                UserState userState,
-                AllChatSessions allChatSessions,
-                ConnectedClients connectedClients)
+    Quit(MessageSender messageSender,
+         UserState userState,
+         AllChatSessions allChatSessions,
+         ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }
