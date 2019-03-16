@@ -145,7 +145,9 @@ public class ClientGUI extends Application {
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem())
+				messageSpaces.get(chatTreeView.getSelectionModel()
+											  .getSelectedItem()
+											  .getValue())
 							 .appendText("You>>> " + input.getText() + "\n");
 				MessageBox message = new MessageBox(Action.CHAT);
 				message.add(Data.CHAT_NAME, chatTreeView
