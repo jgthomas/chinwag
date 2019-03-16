@@ -22,7 +22,7 @@ public class CommandFactory {
                         case LOGIN:
                                 return new LoginCommand(messageSender, userState, allChatSessions, connectedClients);
                         case SIGN_UP:
-                                return new SignUpCommand(messageSender, userState, allChatSessions, connectedClients);
+                                return new SignUp(messageSender, userState, allChatSessions, connectedClients);
                         case START_NEW_CHAT:
                                 return new StartNewChatCommand(messageSender, userState, allChatSessions, connectedClients);
                         case LEAVE_CHAT:

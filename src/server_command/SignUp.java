@@ -16,12 +16,12 @@ import server.*;
  * Data.PASSWORD
  *
  **/
-class SignUpCommand extends Command {
+class SignUp extends Command {
 
-    SignUpCommand(MessageSender messageSender,
-                  UserState userState,
-                  AllChatSessions allChatSessions,
-                  ConnectedClients connectedClients)
+    SignUp(MessageSender messageSender,
+           UserState userState,
+           AllChatSessions allChatSessions,
+           ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }
