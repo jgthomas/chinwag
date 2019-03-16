@@ -32,6 +32,9 @@ class Sender implements MessageSender {
         /**
          * Sends a message to every other user in the passed-in chat.
          *
+         * @param chatSession the chat to which the message should be sent
+         * @param messageBox the message content to send
+         *
          * */
         @Override
         public void postMessage(ChatSession chatSession, MessageBox messageBox) {
@@ -46,6 +49,8 @@ class Sender implements MessageSender {
         /**
          * Sends a message to the current client.
          *
+         * @param messageBox the message content to send
+         *
          * */
         @Override
         public void sendMessage(MessageBox messageBox) {
@@ -56,6 +61,10 @@ class Sender implements MessageSender {
                 }
         }
 
+        /**
+         * Closes the sender object
+         *
+         * */
         @Override
         public void closeSender() {
                 try {
@@ -65,16 +74,31 @@ class Sender implements MessageSender {
                 }
         }
 
+        /**
+         * Gets the client's ID
+         *
+         * @return the client's ID
+         */
         @Override
         public String id() {
                 return id;
         }
 
+        /**
+         * Sets the client's username
+         *
+         * @param userName the new username
+         * */
         @Override
         public void setUserName(String userName) {
                 this.userName = userName;
         }
 
+        /**
+         * Gets the client's username
+         *
+         * @return the client's username
+         * */
         @Override
         public String getUserName() {
                 return userName;
