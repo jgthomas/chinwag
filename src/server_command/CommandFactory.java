@@ -38,7 +38,7 @@ public class CommandFactory {
                         case IMAGE:
                                 return new ImageCommand(messageSender, userState, allChatSessions, connectedClients);
                         case GET_CHAT_HISTORY:
-                        	return new GetChatHistoryCommand(messageSender, userState, allChatSessions, connectedClients);
+                        	return new GetChatHistory(messageSender, userState, allChatSessions, connectedClients);
                         case GET_CHAT_SESSIONS:
                         case GET_MEMBERS:
                         case GET_LOGGED_IN:

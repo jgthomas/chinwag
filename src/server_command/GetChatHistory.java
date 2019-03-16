@@ -23,12 +23,12 @@ import server.UserState;
  * message boxes.
  *
  * */
-class GetChatHistoryCommand extends Command {
+class GetChatHistory extends Command {
 
-	GetChatHistoryCommand(MessageSender messageSender,
-						  UserState userState,
-						  AllChatSessions allChatSessions,
-						  ConnectedClients connectedClients)
+	GetChatHistory(MessageSender messageSender,
+				   UserState userState,
+				   AllChatSessions allChatSessions,
+				   ConnectedClients connectedClients)
 	{
 		super(messageSender, userState, allChatSessions, connectedClients);
 	}
