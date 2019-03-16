@@ -155,6 +155,8 @@ final class Hasher {
          *
          * https://en.wikipedia.org/wiki/Salt_(cryptography)
          *
+         * @return a byte array of the salt
+         *
          * */
         static byte[] genSalt() {
                 SecureRandom random = new SecureRandom();
