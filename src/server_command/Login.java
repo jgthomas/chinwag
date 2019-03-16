@@ -132,13 +132,15 @@ class Login extends Command {
 	private void sendMessageHistory() {
 		List<String> chatNames = Database.retrieveChatSessions(getCurrentThreadUserName());
 		int messageLimit = 200;
-		for (String chat : chatNames) {
-			ArrayList<Message> messageList = Database.retrieveMessages(chat, messageLimit);
-			if (messageList != null) {
-				MessageBox mb = new MessageBox(Action.GIVE_CHAT_HISTORY);
-				mb.add(Data.CHAT_NAME, chat);
-				mb.addMessageHistory(messageList);
-				getMessageSender().sendMessage(mb);
+		if (chatNames != null) {
+			for (String chat : chatNames) {
+				ArrayList<Message> messageList = Database.retrieveMessages(chat, messageLimit);
+				if (messageList != null) {
+					MessageBox mb = new MessageBox(Action.GIVE_CHAT_HISTORY);
+					mb.add(Data.CHAT_NAME, chat);
+					mb.addMessageHistory(messageList);
+					getMessageSender().sendMessage(mb);
+				}
 			}
 		}
 	}
