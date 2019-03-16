@@ -16,12 +16,12 @@ import server.*;
  * Data.CHAT_NAME - the name of the new session
  *
  **/
-class StartNewChatCommand extends Command {
+class StartNewChat extends Command {
 
-    StartNewChatCommand(MessageSender messageSender,
-                        UserState userState,
-                        AllChatSessions allChatSessions,
-                        ConnectedClients connectedClients)
+    StartNewChat(MessageSender messageSender,
+                 UserState userState,
+                 AllChatSessions allChatSessions,
+                 ConnectedClients connectedClients)
     {
         super(messageSender, userState, allChatSessions, connectedClients);
     }
