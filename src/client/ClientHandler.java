@@ -86,7 +86,9 @@ public class ClientHandler {
 				.split(protocol.Token.SEPARATOR.getValue()));
 		for(String session : chatSessions) {
 			gui.getObservableChatList().add(session);
-			gui.getMessageSpaces().put(session, new TextArea());
+			TextArea newSpace = new TextArea();
+			newSpace.setEditable(false);
+			gui.getMessageSpaces().put(session, newSpace);
 		}
 		Platform.runLater(() -> gui.login());
 	}
