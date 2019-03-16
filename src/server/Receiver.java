@@ -25,6 +25,12 @@ class Receiver implements MessageReceiver {
                 this.messageHandler = messageHandler;
         }
 
+        /**
+         * Listens for incoming messages from the client.
+         *
+         * Runs until it receives the instruction to quit.
+         *
+         * */
         @Override
         public void listeningLoop() {
                 MessageBox messageBox = new MessageBox(Action.CHAT);
