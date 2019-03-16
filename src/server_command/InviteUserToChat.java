@@ -3,10 +3,7 @@ package server_command;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
-import server.AllChatSessions;
-import server.ConnectedClients;
-import server.MessageSender;
-import server.UserState;
+import server.*;
 
 /**
  * CONTRACT
