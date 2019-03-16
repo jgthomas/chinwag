@@ -11,7 +11,7 @@ import java.util.HashSet;
  * */
 public enum Action {
         CHAT("CHAT"),
-        IMAGE("IMAGE"),
+        SEND_IMAGE("SEND_IMAGE"),
         LOGIN("LOGIN"),
         START_NEW_CHAT("START_NEW_CHAT"),
         LEAVE_CHAT("LEAVE_CHAT"),
