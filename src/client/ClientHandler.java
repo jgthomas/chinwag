@@ -81,12 +81,17 @@ public class ClientHandler {
 	
 	public void handleAccept(MessageBox mb, ClientGUI gui) {
 		client.getUser().setUserName(mb.get(Data.USER_NAME));
+		
 		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
 		requestChatSessions.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(requestChatSessions);
+		
 		MessageBox requestFriends = new MessageBox(Action.GET_FRIENDS);
 		requestFriends.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(requestFriends);
+		
+		MessageBox requestLoggedIn = new MessageBox(Action.GET_LOGGED_IN);
+		client.sendMessage(requestLoggedIn);
 	}
 	
 	public void handleInvite(MessageBox mb, ClientGUI gui) {
@@ -135,8 +140,11 @@ public class ClientHandler {
 	}
 	
 	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
-		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
-		
+		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
+		client.getLoggedInUsers().clear();
+		for(String username : mb.get(Data.LOGGED_IN_MEMBERS).split(protocol.Token.SEPARATOR.getValue())) {
+			client.getLoggedInUsers().add(username);
+		}
 	}
 	
 	public void handleGiveFriends(MessageBox mb, ClientGUI gui) {

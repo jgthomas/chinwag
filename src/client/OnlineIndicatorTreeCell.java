@@ -11,8 +11,11 @@ public class OnlineIndicatorTreeCell extends TreeCell<String> {
 	private HBox h = new HBox(4);
 	private Label label = new Label();
 	private Circle indicator;
+	private Client client;
 	
-	public OnlineIndicatorTreeCell() {
+	public OnlineIndicatorTreeCell(Client client) {
+		this.client = client;
+		
 		h.setAlignment(Pos.CENTER_LEFT);
 		
 		indicator = new Circle(4);
@@ -31,7 +34,8 @@ public class OnlineIndicatorTreeCell extends TreeCell<String> {
 		}
 		else {
 			this.label.setText(label);
-			if(!this.getTreeItem().isLeaf()) {
+			if(!this.getTreeItem().isLeaf() ||
+					!client.getLoggedInUsers().contains(label)) {
 				indicator.setVisible(false);
 			}
 			else

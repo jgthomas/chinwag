@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -25,6 +26,7 @@ public class Client {
 	private ClientHandler handler;
 	private ClientGUI gui;
 	private User user;
+	private ArrayList<String> loggedInUsers;
 	
 	public Client(String hostname, int port, ClientGUI gui) {
 		this.hostname = hostname;
@@ -45,6 +47,7 @@ public class Client {
 		in = new Scanner(System.in);
 		this.user = new User(this);
 		handler = new ClientHandler(this, gui, user);
+		loggedInUsers = new ArrayList<String>();
 	}
 	
 	public void sendMessage(MessageBox mb) {
@@ -86,5 +89,9 @@ public class Client {
 	
 	public User getUser() {
 		return user;
+	}
+	
+	public ArrayList<String> getLoggedInUsers() {
+		return loggedInUsers;
 	}
 }

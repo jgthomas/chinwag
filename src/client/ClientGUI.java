@@ -52,7 +52,6 @@ public class ClientGUI extends Application {
 	private Button addFriend;
 	private Button sendRequest;
 	private Button leaveChat;
-	private Button acceptFriend;
 	private TextField chatName;
 	private TextField username;
 	private TextField friendName;
@@ -76,16 +75,16 @@ public class ClientGUI extends Application {
 	private String loggedInName;
 	private String inviteName;
 	private Stage addFriendStage;
-	private Stage requestStage;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		Client client = new Client("localhost", 6000, this);
+		
 		this.stage = stage;
 		createStage = new Stage();
 		addStage = new Stage();
 		inviteStage = new Stage();
 		addFriendStage = new Stage();
-		requestStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
 		
@@ -95,7 +94,7 @@ public class ClientGUI extends Application {
 		chatTreeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>(){
 			@Override
 			public TreeCell<String> call(TreeView<String> tv){
-				return new OnlineIndicatorTreeCell();
+				return new OnlineIndicatorTreeCell(client);
 			}
 		});
 		
@@ -104,7 +103,7 @@ public class ClientGUI extends Application {
 		friendsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>(){
 			@Override
 			public ListCell<String> call(ListView<String> lv){
-				return new OnlineIndicatorListCell();
+				return new OnlineIndicatorListCell(client);
 			}
 		});
 		
@@ -150,8 +149,6 @@ public class ClientGUI extends Application {
 		friendName = new TextField("Enter friend's username...");
 		
 		login = new Button("Login");
-		
-		Client client = new Client("localhost", 6000, this);
 		
 		login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -349,16 +346,7 @@ public class ClientGUI extends Application {
 		addFriend.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent valueevent) {
-				drawAddFriendScreen();	
-			}
-		});
-		
-		acceptFriend = new Button("Accept");
-		
-		acceptFriend.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				MessageBox accept = new MessageBox(Action.ACCEPT);
+				drawAddFriendScreen();
 			}
 		});
 		
@@ -369,6 +357,7 @@ public class ClientGUI extends Application {
 			public void handle(ActionEvent event) {
 				MessageBox request = new MessageBox(Action.ADD_FRIEND);
 				request.add(Data.USER_NAME, friendName.getText());
+				friendsList.add(friendName.getText());
 				friendName.clear();
 				client.sendMessage(request);
 			}
@@ -496,10 +485,6 @@ public class ClientGUI extends Application {
 		Scene scene = new Scene(root);
 		addFriendStage.setScene(scene);
 		addFriendStage.show();
-	}
-	
-	public void drawFriendRequestScreen() {
-		
 	}
 	
 	public void displayMessage(MessageBox mb) {

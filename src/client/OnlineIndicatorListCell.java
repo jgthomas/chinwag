@@ -11,8 +11,10 @@ public class OnlineIndicatorListCell extends ListCell<String> {
 	private HBox h = new HBox(8);
 	private Label user = new Label();
 	private Circle indicator;
+	private Client client;
 	
-	public OnlineIndicatorListCell() {
+	public OnlineIndicatorListCell(Client client) {
+		this.client = client;
 		h.setAlignment(Pos.CENTER_LEFT);
 		
 		indicator = new Circle(4);
@@ -33,6 +35,7 @@ public class OnlineIndicatorListCell extends ListCell<String> {
 		}
 		else {
 			this.user.setText(user);
+			indicator.setVisible(client.getLoggedInUsers().contains(user));
 			setGraphic(h);
 		}
 	}
