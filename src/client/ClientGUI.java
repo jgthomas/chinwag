@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
@@ -91,6 +92,12 @@ public class ClientGUI extends Application {
 		treeViewRoot = new TreeItem<String>();
 		chatTreeView = new TreeView<String>(treeViewRoot);
 		chatTreeView.setShowRoot(false);
+		chatTreeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>(){
+			@Override
+			public TreeCell<String> call(TreeView<String> tv){
+				return new OnlineIndicatorTreeCell();
+			}
+		});
 		
 		friendsList = FXCollections.observableArrayList();
 		friendsListView = new ListView<String>(friendsList);
