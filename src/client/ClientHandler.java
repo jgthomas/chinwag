@@ -144,4 +144,15 @@ public class ClientHandler {
 			gui.getFriendsList().add(friend);
 		}
 	}
+	
+	/**
+	 * Helper method to split the Strings sent by the server into a String array for processing
+	 * 
+	 * @param mb - MessageBox containing the data
+	 * @param dataType - type of data you want
+	 * @return Data split into individual elements of array
+	 */
+	public String[] retrieveJoinedData(MessageBox mb, Data dataType) {
+		return mb.get(dataType).split(protocol.Token.SEPARATOR.getValue());
+	}
 }
