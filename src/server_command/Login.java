@@ -129,8 +129,12 @@ class Login extends Command {
 	
 	private void notifyUsers() {
 		String username = getCurrentThreadUserName();
-		MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
-		mb.add(Data.MESSAGE, username + " has just logged in.");
+		
+//		MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
+//		mb.add(Data.MESSAGE, username + " has just logged in.");
+		
+		MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_IN);
+		mb.add(Data.USER_NAME, getCurrentThreadUserName());
 		
 		List<String> allUsers = getConnectedClients().allLoggedInUsers();
 		for (String user : allUsers) {
