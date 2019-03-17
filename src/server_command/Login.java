@@ -10,6 +10,7 @@ import server.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -81,6 +82,7 @@ class Login extends Command {
 			loadSessions();
 			loadFriends();
 			//sendMessageHistory();
+			notifyUsers();
 		} else {
 			sendDenyMessage();
 			if (Server.getFailedAttempts().get(username) == null) {
@@ -121,6 +123,19 @@ class Login extends Command {
 		if (friends != null) {
 			for (String friend : friends) {
 				getUserState().addFriend(friend);
+			}
+		}
+	}
+	
+	private void notifyUsers() {
+		String username = getCurrentThreadUserName();
+		MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
+		mb.add(Data.MESSAGE, username + " has just logged in.");
+		
+		List<String> allUsers = getConnectedClients().allLoggedInUsers();
+		for (String user : allUsers) {
+			if (!user.equals(username)) {
+				getUser(user).getMessageSender().sendMessage(mb);
 			}
 		}
 	}
