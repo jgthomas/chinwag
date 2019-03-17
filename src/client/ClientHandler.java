@@ -140,16 +140,35 @@ public class ClientHandler {
 	}
 	
 	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
-		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
-		client.getLoggedInUsers().clear();
-		for(String username : mb.get(Data.LOGGED_IN_MEMBERS).split(protocol.Token.SEPARATOR.getValue())) {
-			client.getLoggedInUsers().add(username);
+//<<<<<<< HEAD
+//		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
+//		client.getLoggedInUsers().clear();
+//		for(String username : mb.get(Data.LOGGED_IN_MEMBERS).split(protocol.Token.SEPARATOR.getValue())) {
+//			client.getLoggedInUsers().add(username);
+//		}
+//=======
+		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
+		TreeSet<String> loggedInUsersClient = new TreeSet<>();
+		for (String userName: loggedInUsersServer) {
+			loggedInUsersClient.add(userName);
 		}
+		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(loggedInUsersClient);
 	}
 	
 	public void handleGiveFriends(MessageBox mb, ClientGUI gui) {
 		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
 			gui.getFriendsList().add(friend);
 		}
+	}
+	
+	/**
+	 * Helper method to split the Strings sent by the server into a String array for processing
+	 * 
+	 * @param mb - MessageBox containing the data
+	 * @param dataType - type of data you want
+	 * @return Data split into individual elements of array
+	 */
+	public String[] retrieveJoinedData(MessageBox mb, Data dataType) {
+		return mb.get(dataType).split(protocol.Token.SEPARATOR.getValue());
 	}
 }
