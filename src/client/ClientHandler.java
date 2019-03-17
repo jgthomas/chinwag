@@ -100,15 +100,7 @@ public class ClientHandler {
 				.split(protocol.Token.SEPARATOR.getValue()));
 		for(String session : chatSessions) {
 			gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
-			TextArea newSpace = new TextArea();
-			newSpace.setOnMousePressed(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent e) {
-					gui.requestInputFocus();
-				}	
-			});
-			newSpace.setEditable(false);
-			gui.getMessageSpaces().put(session, newSpace);
+			Platform.runLater(() -> gui.addSessionSpace(session));
 			MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
 			requestMembers.add(Data.CHAT_NAME, session);
 			client.sendMessage(requestMembers);

@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.FocusModel;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -27,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
@@ -46,11 +48,13 @@ public class ClientGUI extends Application {
 	private Button cancel;
 	private Button accept;
 	private Button decline;
-	private Button viewFriends;
 	private Button addFriend;
+	private Button sendRequest;
 	private Button leaveChat;
+	private Button acceptFriend;
 	private TextField chatName;
 	private TextField username;
+	private TextField friendName;
 	private PasswordField password;
 	private TextField input;
 	private Text loggedInAs;
@@ -70,6 +74,8 @@ public class ClientGUI extends Application {
 	private Stage inviteStage;
 	private String loggedInName;
 	private String inviteName;
+	private Stage addFriendStage;
+	private Stage requestStage;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -77,6 +83,8 @@ public class ClientGUI extends Application {
 		createStage = new Stage();
 		addStage = new Stage();
 		inviteStage = new Stage();
+		addFriendStage = new Stage();
+		requestStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
 		
@@ -86,6 +94,12 @@ public class ClientGUI extends Application {
 		
 		friendsList = FXCollections.observableArrayList();
 		friendsListView = new ListView<String>(friendsList);
+		friendsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>(){
+			@Override
+			public ListCell<String> call(ListView<String> lv){
+				return new OnlineIndicatorListCell();
+			}
+		});
 		
 		messageSpaces = new HashMap<String, TextArea>();
 		
@@ -125,6 +139,8 @@ public class ClientGUI extends Application {
 		input.setPrefWidth(500);
 		input.setMinWidth(500);
 		input.setMaxWidth(500);
+		
+		friendName = new TextField("Enter friend's username...");
 		
 		login = new Button("Login");
 		
@@ -317,6 +333,7 @@ public class ClientGUI extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				inviteStage.close();
+				addFriendStage.close();
 			}
 		});
 		
@@ -324,8 +341,37 @@ public class ClientGUI extends Application {
 		
 		addFriend.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
+			public void handle(ActionEvent valueevent) {
+				drawAddFriendScreen();	
+			}
+		});
+		
+		acceptFriend = new Button("Accept");
+		
+		acceptFriend.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
 			public void handle(ActionEvent event) {
-				
+				MessageBox accept = new MessageBox(Action.ACCEPT);
+			}
+		});
+		
+		sendRequest = new Button("Add");
+		
+		sendRequest.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				MessageBox request = new MessageBox(Action.ADD_FRIEND);
+				request.add(Data.USER_NAME, friendName.getText());
+				friendName.clear();
+				client.sendMessage(request);
+			}
+		});
+		
+		leaveChat = new Button("Leave Chat");
+		
+		leaveChat.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
 				
 			}
 		});
@@ -380,6 +426,8 @@ public class ClientGUI extends Application {
 		h.getChildren().add(logout);
 		h.getChildren().add(requestCreateChat);
 		h.getChildren().add(add);
+		h.getChildren().add(addFriend);
+		h.getChildren().add(leaveChat);
 		hMain.getChildren().add(chatTreeView);
 		hMain.getChildren().add(ta);
 		hMain.getChildren().add(friendsListView);
@@ -427,6 +475,24 @@ public class ClientGUI extends Application {
 		inviteStage.setScene(scene);
 		inviteStage.show();
 		accept.setDefaultButton(true);
+	}
+	
+	public void drawAddFriendScreen() {
+		Group root = new Group();
+		VBox v = new VBox();
+		v.getChildren().add(friendName);
+		HBox h = new HBox();
+		h.getChildren().add(decline);
+		h.getChildren().add(sendRequest);
+		v.getChildren().add(h);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		addFriendStage.setScene(scene);
+		addFriendStage.show();
+	}
+	
+	public void drawFriendRequestScreen() {
+		
 	}
 	
 	public void displayMessage(MessageBox mb) {
@@ -478,12 +544,28 @@ public class ClientGUI extends Application {
 		return chatTreeView;
 	}
 	
+	public void requestInputFocus() {
+		input.requestFocus();
+	}
+	
 	public TreeItem<String> getTreeViewRoot() {
 		return treeViewRoot;
 	}
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
 		return messageSpaces;
+	}
+	
+	public void addSessionSpace(String session) {
+		TextArea newSpace = new TextArea();
+		newSpace.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				requestInputFocus();
+			}	
+		});
+		newSpace.setEditable(false);
+		getMessageSpaces().put(session, newSpace);
 	}
 	
 	public ObservableList<String> getFriendsList(){
