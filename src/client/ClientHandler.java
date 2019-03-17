@@ -8,8 +8,10 @@ import java.util.TreeSet;
 
 import database.Message;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.MouseEvent;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
@@ -99,6 +101,12 @@ public class ClientHandler {
 		for(String session : chatSessions) {
 			gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
 			TextArea newSpace = new TextArea();
+			newSpace.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					gui.requestInputFocus();
+				}	
+			});
 			newSpace.setEditable(false);
 			gui.getMessageSpaces().put(session, newSpace);
 			MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
