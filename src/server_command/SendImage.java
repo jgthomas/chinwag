@@ -22,9 +22,9 @@ import java.sql.Timestamp;
  * the message box is sent to other clients in the same group chat.
  */
 
-public class ImageSend extends Command {
+public class SendImage extends Command {
 
-    ImageSend(MessageSender messageSender,
+    SendImage(MessageSender messageSender,
               UserState userState,
               AllChatSessions allChatSessions,
               ConnectedClients connectedClients)
@@ -73,3 +73,4 @@ public class ImageSend extends Command {
         ImageQueue.addToQueue(image);
     }
 }
+
