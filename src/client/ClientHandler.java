@@ -135,8 +135,12 @@ public class ClientHandler {
 	}
 	
 	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
-		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
-		
+		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
+		TreeSet<String> loggedInUsersClient = new TreeSet<>();
+		for (String userName: loggedInUsersServer) {
+			loggedInUsersClient.add(userName);
+		}
+		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(loggedInUsersClient);
 	}
 	
 	public void handleGiveFriends(MessageBox mb, ClientGUI gui) {
