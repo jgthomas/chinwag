@@ -71,9 +71,15 @@ public class ClientHandler {
 		gui.displayMessage(mb);
 	}
 	
+	/**
+	 * ServerMessage means that the server refused to create the chat room specified by the user,
+	 * for example because it duplicates an existing chat room name
+	 * 
+	 * @param mb
+	 * @param gui
+	 */
 	public void handleServerMessage(MessageBox mb, ClientGUI gui) {
-		handleChat(mb, gui);
-		
+		gui.drawChatCreationRefusal();
 	}
 	
 	public void handleDeny(ClientGUI gui) {

@@ -76,6 +76,7 @@ public class ClientGUI extends Application {
 	private String loggedInName;
 	private String inviteName;
 	private Stage addFriendStage;
+	private Stage chatCreationRefusalStage;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -86,6 +87,7 @@ public class ClientGUI extends Application {
 		addStage = new Stage();
 		inviteStage = new Stage();
 		addFriendStage = new Stage();
+		chatCreationRefusalStage = new Stage();
 		
 		observableChatList = FXCollections.observableArrayList();
 		
@@ -512,6 +514,16 @@ public class ClientGUI extends Application {
 		drawFailedLogonScreen();
 	}
 	
+	public void drawChatCreationRefusal() {
+		Group root = new Group();
+		VBox v = new VBox();
+		Text warning = new Text("Cannot create chat with that name"); //tell them why?
+		v.getChildren().add(warning);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		chatCreationRefusalStage.setScene(scene);
+		chatCreationRefusalStage.show();
+	}
 	
 	public void drawFailedLogonScreen() {
 		Group root = new Group();
