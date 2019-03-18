@@ -71,7 +71,7 @@ public abstract class Command {
         void removeUserFromChat(ChatSession chatSession) {
                 if (getUserState().isInChat(chatSession.getChatName())) {
                      chatSession.removeUser(getMessageSender());
-                     getUserState().removeSession(chatSession.getChatName());
+                     getUserState().removeSession(chatSession);
                 }
         }
 

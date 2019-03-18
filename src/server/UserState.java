@@ -34,11 +34,11 @@ public class UserState implements Iterable<ChatSession> {
         }
 
         /**
-         * @param chatName the name of the chat session to remove
+         * @param chatSession the chat session to remove
          *                    from the client's current sessions
          */
-        public void removeSession(String chatName) {
-                activeSessions.remove(chatName);
+        public void removeSession(ChatSession chatSession) {
+                activeSessions.remove(chatSession.getChatName());
         }
 
         /**
