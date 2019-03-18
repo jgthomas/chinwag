@@ -18,12 +18,18 @@ import java.util.ArrayList;
  *
  * */
 public class ChatSession implements Iterable<MessageSender> {
+        private final String chatID;
         private final String chatName;
         private final ConcurrentMap<String, MessageSender> usersInChat;
 
-        public ChatSession(String chatName) {
+        public ChatSession(String chatID, String chatName) {
+                this.chatID = chatID;
                 this.chatName = chatName;
                 usersInChat = new ConcurrentHashMap<>();
+        }
+
+        public ChatSession(String chatName) {
+                this("", chatName);
         }
 
         /**
@@ -33,6 +39,15 @@ public class ChatSession implements Iterable<MessageSender> {
          **/
         public String getChatName() {
                 return chatName;
+        }
+
+        /**
+         * Gets the chat session's ID
+         *
+         * @return the chat ID
+         * */
+        public String getChatID() {
+                return chatID;
         }
 
         /**
