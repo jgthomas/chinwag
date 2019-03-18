@@ -4,17 +4,22 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.*;
+
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 
 public class ImageQueue implements Runnable {
 
-    private static ConcurrentLinkedQueue<Image> insertionQueue = new ConcurrentLinkedQueue<>();
+    private static BlockingQueue<Image> insertionQueue = new LinkedBlockingQueue<>();
 
     public static void addToQueue(Image image) {
-        insertionQueue.add(image);
+        try {
+			insertionQueue.put(image);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -39,16 +44,18 @@ public class ImageQueue implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        while (true) {
-            if(!insertionQueue.isEmpty()) {
-                Image image = insertionQueue.remove();
-                Database.insertImage(image);
-                stringToImage(image);
-            }
-        }
-    }
-
+	@Override
+	public void run() {
+		while (true) {
+			Image image;
+			try {
+				image = insertionQueue.take();
+				Database.insertImage(image);
+				stringToImage(image);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }
