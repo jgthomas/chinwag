@@ -28,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import protocol.Action;
@@ -508,8 +509,29 @@ public class ClientGUI extends Application {
 	}
 	
 	public void refuseLogin() {
+		drawFailedLogonScreen();
+	}
+	
+	
+	public void drawFailedLogonScreen() {
+		Group root = new Group();
+		v.getChildren().clear();
+		h.getChildren().clear();
+		Text failureMessage = new Text("Credentials refused.");
+		failureMessage.setStroke(Color.RED);
 		login.setTextFill(Color.RED);
-		messageSpace.appendText("Login refused." + "\n");
+		v.getChildren().add(failureMessage);
+		v.getChildren().add(username);
+		v.getChildren().add(password);
+		v.getChildren().add(h);
+		h.getChildren().add(exit);
+		h.getChildren().add(login);
+		h.getChildren().add(createAccount);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		login.setDefaultButton(true);
+		stage.show();
 	}
 	
 	public static void main(String[] args) {

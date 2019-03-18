@@ -73,6 +73,7 @@ public class ClientHandler {
 	
 	public void handleServerMessage(MessageBox mb, ClientGUI gui) {
 		handleChat(mb, gui);
+		
 	}
 	
 	public void handleDeny(ClientGUI gui) {
