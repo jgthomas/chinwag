@@ -41,10 +41,10 @@ public class AllChatSessions {
     /**
      * Removes the chat session from the master record
      *
-     * @param chatName the name off the chat session to remove
+     * @param chatSession the chat session to remove
      * */
-    public void removeSession(String chatName) {
-        activeSessions.remove(chatName);
+    public void removeSession(ChatSession chatSession) {
+        activeSessions.remove(chatSession.getChatName());
     }
 
     /**
