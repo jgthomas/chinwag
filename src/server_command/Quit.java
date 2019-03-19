@@ -30,5 +30,10 @@ class Quit extends Command {
         for (ChatSession chatSession : getUserState()) {
             getMessageSender().postMessage(chatSession, mb);
         }
+
+        for (String name : getUserState().getAllFriends()) {
+            MessageHandler user = getUser(name);
+            user.getMessageSender().sendMessage(mb);
+        }
     }
 }
