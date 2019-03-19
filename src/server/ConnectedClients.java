@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentMap;
  * its username in the clientsByUserName map.
  *
  * */
-public class ConnectedClients {
+public class ConnectedClients implements Iterable<MessageHandler> {
     private final ConcurrentMap<String, MessageHandler> clientsByID;
     private final ConcurrentMap<String, MessageHandler> clientsByUserName;
 
@@ -62,5 +63,10 @@ public class ConnectedClients {
      * */
     public List<String> allLoggedInUsers() {
          return new ArrayList<>(clientsByUserName.keySet());
+     }
+
+     @Override
+     public Iterator<MessageHandler> iterator() {
+         return clientsByUserName.values().iterator();
      }
 }

@@ -86,12 +86,7 @@ class ClientHandler implements MessageHandler {
                 MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_OUT);
                 mb.add(Data.USER_NAME, getMessageSender().getUserName());
 
-                for (ChatSession chatSession : getUserState()) {
-                        getMessageSender().postMessage(chatSession, mb);
-                }
-
-                for (String name : getUserState().getAllFriends()) {
-                        MessageHandler user = connectedClients.getClientByUserName(name);
+                for (MessageHandler user : connectedClients) {
                         user.getMessageSender().sendMessage(mb);
                 }
         }
