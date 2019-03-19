@@ -36,6 +36,7 @@ public class MainController {
 	private Stage stage;
 	private Scene scene;
 	private LoginController controller;
+	private String inviter;
 	
 	private String currentSpace;
 	private String inviteName;
@@ -259,6 +260,10 @@ public class MainController {
 	
 	public void setInviteName(String inviteName) {
 		this.inviteName = inviteName;
+	}
+	
+	public void setInviter(String inviter) {
+		this.inviter = inviter;
 	}
 	
 	public void requestInputFocus() {

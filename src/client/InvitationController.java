@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import protocol.Action;
 import protocol.Data;
@@ -17,17 +18,24 @@ public class InvitationController {
 	private TreeItem<String> treeViewRoot;
 	private HashMap<String, TextArea> messageSpaces;
 	private String inviteName;
+	private String inviter;
 	
+	@FXML private Text invite;
 	@FXML private Button accept;
 	@FXML private Button decline;
 	
 	public InvitationController(Client client, Stage stage, TreeItem<String> treeViewRoot,
-			HashMap<String, TextArea> messageSpaces, String inviteName) {
+			HashMap<String, TextArea> messageSpaces, String inviteName, String inviter) {
 		this.client = client;
 		this.stage = stage;
 		this.treeViewRoot = treeViewRoot;
 		this.messageSpaces = messageSpaces;
 		this.inviteName = inviteName;
+		this.inviter = inviter;
+	}
+	
+	public void initialize() {
+		invite.setText(inviter + " invited you to chat!");
 	}
 	
 	public void accept() {
