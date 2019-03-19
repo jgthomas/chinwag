@@ -96,7 +96,6 @@ public class MainController {
 	
 	@FXML
 	public void sendMessage(ActionEvent e) {
-		//messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue())
 		messageSpace.appendText("You>>> " + input.getText() + "\n");
 		MessageBox message = new MessageBox(Action.CHAT);
 		message.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().getValue());
@@ -108,15 +107,12 @@ public class MainController {
 	
 	@FXML
 	public void pressTreeView(MouseEvent e) {
-		if (!chatTreeView.getSelectionModel().getSelectedItem().getChildren().isEmpty()) {
+		if (chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
 			String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
-			//drawMainScreen(client.getGUI().getMessageSpaces().get(space));
 			messageSpaces.get(currentSpace)
 						 .setText(messageSpace.getText());
 			currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
 			messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
-//			clientMain.getStage().setScene(scene);
-//			clientMain.getStage().show();
 			for (TreeItem<String> item : treeViewRoot.getChildren()) {
 				item.setExpanded(false);
 			}
@@ -212,11 +208,6 @@ public class MainController {
 	}
 	
 	public void displayMessage(MessageBox mb) {
-//		if(mb.getAction() == Action.SERVER_MESSAGE) {
-//			messageSpaces.get("global")
-//			 .appendText(mb.get(Data.USER_NAME) + 
-//					 ">>> " + mb.get(Data.MESSAGE) + "\n");
-//		}
 		if(mb.get(Data.CHAT_NAME) == null) {
 			return;
 		}
@@ -243,7 +234,7 @@ public class MainController {
 	public void drawInviteScreen(MessageBox mb) {
 		Stage stage = new Stage();
 		InvitationController controller = new InvitationController(client, stage, 
-				treeViewRoot, messageSpaces, inviteName);
+				treeViewRoot, messageSpaces, inviteName, inviter);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Invitation.fxml"));
 		loader.setController(controller);
 		Parent root;

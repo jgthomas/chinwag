@@ -43,6 +43,15 @@ public class InvitationController {
 		accept.add(Data.USER_NAME, client.getUser().getUserName());
 		accept.add(Data.CHAT_NAME, inviteName);
 		client.sendMessage(accept);
+		
+		MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
+		requestMembers.add(Data.CHAT_NAME, inviteName);
+		client.sendMessage(requestMembers);
+		
+		MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
+		requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
+		client.sendMessage(requestChatHistory);
+		
 		treeViewRoot.getChildren().add(new TreeItem<String>(inviteName));
 		stage.close();
 		messageSpaces.put(inviteName, new TextArea());

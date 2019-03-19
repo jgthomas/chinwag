@@ -34,6 +34,7 @@ public class AddUserController {
 								   .getSelectedItem()
 								   .getValue());
 		client.sendMessage(invite);
+		stage.close();
 	}
 	
 	public void cancel(ActionEvent e) {

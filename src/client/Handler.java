@@ -3,7 +3,9 @@ package client;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -129,6 +131,9 @@ public class Handler {
 	
 	public void handleGiveChatHistory(MessageBox mb, LoginController controller) {
 		Collections.reverse(mb.getMessageHistory());
+		for(Map.Entry<String, TextArea> entry : controller.getMessageSpaces().entrySet()) {
+			entry.getValue().clear();
+		}
 		for(Message message : mb.getMessageHistory()) {
 			controller.getMessageSpaces().get(mb.get(Data.CHAT_NAME))
 								  .appendText(message.getSender() + ">>> " +
