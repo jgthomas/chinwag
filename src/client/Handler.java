@@ -95,6 +95,14 @@ public class Handler {
 	public void handleAccept(MessageBox mb, LoginController controller) {
 		client.getUser().setUserName(mb.get(Data.USER_NAME));
 		
+		Platform.runLater(() -> {
+			try {
+				controller.login();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
 		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
 		requestChatSessions.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(requestChatSessions);
@@ -131,21 +139,13 @@ public class Handler {
 	
 	public void handleGiveChatHistory(MessageBox mb, LoginController controller) {
 		Collections.reverse(mb.getMessageHistory());
-		for(Map.Entry<String, TextArea> entry : controller.getMessageSpaces().entrySet()) {
-			entry.getValue().clear();
-		}
+		controller.getMessageSpaces().get(mb.get(Data.CHAT_NAME)).clear();
 		for(Message message : mb.getMessageHistory()) {
 			controller.getMessageSpaces().get(mb.get(Data.CHAT_NAME))
 								  .appendText(message.getSender() + ">>> " +
 										  message.getContent() + "\n");
 		}
-		Platform.runLater(() -> {
-			try {
-				controller.login();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
+		
 	}
 	
 	public void handleGiveMembers(MessageBox mb, LoginController controller, User user) {

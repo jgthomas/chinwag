@@ -80,10 +80,8 @@ public class MainController {
 				return new OnlineIndicatorTreeCell(client);
 			}
 		});
-		chatTreeView.getSelectionModel().selectFirst();
-		chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
-		messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
-		currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+		//messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
+		//currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
 
 		friendsListView.setItems(friendsList);
 		friendsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>(){
@@ -107,10 +105,12 @@ public class MainController {
 	
 	@FXML
 	public void pressTreeView(MouseEvent e) {
-		if (chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
+		if(chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
 			String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
-			messageSpaces.get(currentSpace)
-						 .setText(messageSpace.getText());
+			if(!(currentSpace == null)) {
+				messageSpaces.get(currentSpace)
+							 .setText(messageSpace.getText());
+			}
 			currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
 			messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
 			for (TreeItem<String> item : treeViewRoot.getChildren()) {
@@ -265,4 +265,14 @@ public class MainController {
 		friendsListView.refresh();
 	}
 	
+	public TreeView<String> getChatTreeView() {
+		return chatTreeView;
+	}
+	
+	public void selectFirstChat() {
+		chatTreeView.getSelectionModel().selectFirst();
+		chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+		messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
+		currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+	}
 }
