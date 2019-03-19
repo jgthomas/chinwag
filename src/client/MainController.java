@@ -150,8 +150,8 @@ public class MainController {
 	@FXML
 	public void addUser(ActionEvent e) {
 		Stage stage = new Stage();
-		AddFriendController controller = new AddFriendController(client, friendsList, stage);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
+		AddUserController controller = new AddUserController(client, stage, chatTreeView);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddUser.fxml"));
 		loader.setController(controller);
 		Parent root;
 		try {
@@ -195,8 +195,8 @@ public class MainController {
 	@FXML
 	public void addFriend(ActionEvent e) {
 		Stage stage = new Stage();
-		AddUserController controller = new AddUserController(client, stage, chatTreeView);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddUser.fxml"));
+		AddFriendController controller = new AddFriendController(client, friendsList, stage);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
 		loader.setController(controller);
 		Parent root;
 		try {
@@ -240,19 +240,21 @@ public class MainController {
 	}
 	
 	public void drawInviteScreen(MessageBox mb) {
-		Group root = new Group();
-		VBox v = new VBox();
-		Text from = new Text(mb.get(Data.USER_NAME) + " invited you to chat.");
-		v.getChildren().add(from);
-		HBox h = new HBox();
-		//h.getChildren().add(accept);
-		//h.getChildren().add(decline);
-		v.getChildren().add(h);
-		root.getChildren().add(v);
-		Scene scene = new Scene(root);
-		//inviteStage.setScene(scene);
-		//inviteStage.show();
-		//accept.setDefaultButton(true);
+		Stage stage = new Stage();
+		InvitationController controller = new InvitationController(client, stage, 
+				treeViewRoot, messageSpaces, inviteName);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Invitation.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	public void setInviteName(String inviteName) {

@@ -106,8 +106,8 @@ public class ClientHandler {
 	}
 	
 	public void handleInvite(MessageBox mb, LoginController controller) {
-		Platform.runLater(() -> controller.getMainController().drawInviteScreen(mb));
 		controller.getMainController().setInviteName(mb.get(Data.CHAT_NAME));
+		Platform.runLater(() -> controller.getMainController().drawInviteScreen(mb));
 	}
 	
 	public void handleGiveSessions(MessageBox mb) {
