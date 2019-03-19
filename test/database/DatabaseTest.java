@@ -23,4 +23,10 @@ public class DatabaseTest {
 	public void test2(){
 
 	}
+
+	// This method tests the isValidUser(String username, String hash) method.
+	@Test
+	public void test3(){
+
+	}
 }
