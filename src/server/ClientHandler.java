@@ -1,6 +1,7 @@
 package server;
 
 import protocol.Action;
+import protocol.Data;
 import protocol.MessageBox;
 import server_command.Command;
 import server_command.CommandFactory;
@@ -43,6 +44,7 @@ class ClientHandler implements MessageHandler {
         @Override
         public void run() {
                 messageReceiver.listeningLoop();
+                notifyLogout();
                 getUserState().exitAllChats(getMessageSender());
                 messageSender.closeSender();
         }
@@ -78,5 +80,19 @@ class ClientHandler implements MessageHandler {
         @Override
         public MessageSender getMessageSender() {
                 return messageSender;
+        }
+
+        private void notifyLogout() {
+                MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_OUT);
+                mb.add(Data.USER_NAME, getMessageSender().getUserName());
+
+                for (ChatSession chatSession : getUserState()) {
+                        getMessageSender().postMessage(chatSession, mb);
+                }
+
+                for (String name : getUserState().getAllFriends()) {
+                        MessageHandler user = connectedClients.getClientByUserName(name);
+                        user.getMessageSender().sendMessage(mb);
+                }
         }
 }
