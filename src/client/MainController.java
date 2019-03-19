@@ -1,0 +1,200 @@
+package client;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
+import protocol.Action;
+import protocol.Data;
+import protocol.MessageBox;
+
+public class MainController {
+	private Client client;
+	private ClientMain clientMain;
+	private Scene scene;
+	private LoginController controller;
+	
+	private String currentSpace;
+	private String inviteName;
+	private ObservableList<String> friendsList;
+	private TreeItem<String> treeViewRoot;
+	private HashMap<String, TextArea> messageSpaces;
+	@FXML private Button send;
+	@FXML private TextField input;
+	@FXML private TreeView<String> chatTreeView;
+	@FXML private ListView<String> friendsListView;
+	@FXML private Label loggedIn;
+	@FXML private Button exit;
+	@FXML private TextArea messageSpace;
+	
+	public MainController(ClientMain clientMain, Client client, TreeItem<String> treeViewRoot,
+			TreeView<String> chatTreeView, HashMap<String, TextArea> messageSpaces,
+			Label loggedIn, ObservableList<String> friendsList, Scene scene, LoginController controller) {
+		this.client = client;
+		this.clientMain = clientMain;
+		this.scene = scene;
+		this.controller = controller;
+		
+		this.treeViewRoot = treeViewRoot;
+		this.messageSpaces = messageSpaces;
+		this.friendsList = friendsList;
+	}
+	
+	public void initialize() {
+		loggedIn.setText("Logged in as " + client.getUser().getUserName());
+		
+		chatTreeView.setRoot(treeViewRoot);
+		chatTreeView.setShowRoot(false);
+		chatTreeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>(){
+			@Override
+			public TreeCell<String> call(TreeView<String> tv){
+				return new OnlineIndicatorTreeCell(client);
+			}
+		});
+		chatTreeView.getSelectionModel().selectFirst();
+		chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+		messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
+		currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+
+		friendsListView.setItems(friendsList);
+		friendsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>(){
+			@Override
+			public ListCell<String> call(ListView<String> lv){
+				return new OnlineIndicatorListCell(client);
+			}
+		});
+	}
+	
+	@FXML
+	public void sendMessage(ActionEvent e) {
+		//messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue())
+		messageSpace.appendText("You>>> " + input.getText() + "\n");
+		MessageBox message = new MessageBox(Action.CHAT);
+		message.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().getValue());
+		message.add(Data.USER_NAME, client.getUser().getUserName());
+		message.add(Data.MESSAGE, input.getText());
+		input.clear();
+		client.sendMessage(message);
+	}
+	
+	@FXML
+	public void pressTreeView(MouseEvent e) {
+		if (!chatTreeView.getSelectionModel().getSelectedItem().getChildren().isEmpty()) {
+			String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+			//drawMainScreen(client.getGUI().getMessageSpaces().get(space));
+			messageSpaces.get(currentSpace)
+						 .setText(messageSpace.getText());
+			currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+			messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
+//			clientMain.getStage().setScene(scene);
+//			clientMain.getStage().show();
+			for (TreeItem<String> item : treeViewRoot.getChildren()) {
+				item.setExpanded(false);
+			}
+			chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+		} else
+			chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
+		input.requestFocus();
+	}
+	
+	@FXML
+	public void pressListView(MouseEvent e) {
+		
+	}
+	
+	@FXML
+	public void exit(ActionEvent e) {
+		MessageBox logout = new MessageBox(Action.QUIT);
+		logout.add(Data.USER_NAME, client.getUser().getUserName());
+		client.sendMessage(logout);
+		System.exit(1);
+	}
+	
+	@FXML
+	public void logout(ActionEvent e) {
+		MessageBox logout = new MessageBox(Action.QUIT);
+		logout.add(Data.USER_NAME, client.getUser().getUserName());
+		client.sendMessage(logout);
+		//drawLogonScreen();
+	}
+	
+	public void displayMessage(MessageBox mb) {
+//		if(mb.getAction() == Action.SERVER_MESSAGE) {
+//			messageSpaces.get("global")
+//			 .appendText(mb.get(Data.USER_NAME) + 
+//					 ">>> " + mb.get(Data.MESSAGE) + "\n");
+//		}
+		if(mb.get(Data.CHAT_NAME) == null) {
+			return;
+		}
+		messageSpaces.get(mb.get(Data.CHAT_NAME))
+					 .appendText(mb.get(Data.USER_NAME) + 
+							 ">>> " + mb.get(Data.MESSAGE) + "\n");
+		if(chatTreeView.getSelectionModel().getSelectedItem().getValue().equals(mb.get(Data.CHAT_NAME))) {
+			messageSpace.appendText(mb.get(Data.USER_NAME) + 
+							 ">>> " + mb.get(Data.MESSAGE) + "\n");
+		}
+	}
+	
+	public void drawChatCreationRefusal() {
+		Group root = new Group();
+		VBox v = new VBox();
+		Text warning = new Text("Cannot create chat with that name"); //tell them why?
+		v.getChildren().add(warning);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		//chatCreationRefusalStage.setScene(scene);
+		//chatCreationRefusalStage.show();
+	}
+	
+	public void drawInviteScreen(MessageBox mb) {
+		Group root = new Group();
+		VBox v = new VBox();
+		Text from = new Text(mb.get(Data.USER_NAME) + " invited you to chat.");
+		v.getChildren().add(from);
+		HBox h = new HBox();
+		//h.getChildren().add(accept);
+		//h.getChildren().add(decline);
+		v.getChildren().add(h);
+		root.getChildren().add(v);
+		Scene scene = new Scene(root);
+		//inviteStage.setScene(scene);
+		//inviteStage.show();
+		//accept.setDefaultButton(true);
+	}
+	
+	public void setInviteName(String inviteName) {
+		this.inviteName = inviteName;
+	}
+	
+	public void requestInputFocus() {
+		input.requestFocus();
+	}
+	
+	public void updateFriendsListView() {
+		friendsListView.refresh();
+	}
+	
+}

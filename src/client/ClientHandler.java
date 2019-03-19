@@ -1,5 +1,6 @@
 package client;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,15 +19,15 @@ import protocol.MessageBox;
 
 public class ClientHandler {
 	private Client client;
-	private ClientGUI gui;
+	private LoginController controller;
 	private User user;
 	private TreeSet<String> onlineUsers;
 	private TreeSet<String> sessionMembers;
 	
-	public ClientHandler(Client client, ClientGUI gui,
+	public ClientHandler(Client client, LoginController controller,
 			User user) {
 		this.client = client;
-		this.gui = gui;
+		this.controller = controller;
 		this.user = user;
 	}
 	
@@ -34,41 +35,44 @@ public class ClientHandler {
 		Action action = mb.getAction();
 		switch(action) {
 			case CHAT:
-				handleChat(mb, gui);
+				handleChat(mb, controller);
 				return;
 			case SERVER_MESSAGE:
-				handleServerMessage(mb, gui);
+				handleServerMessage(mb, controller);
 				return;
 			case DENY:
-				handleDeny(gui);
+				handleDeny(controller);
 				return;
 			case ACCEPT:
-				handleAccept(mb, gui);
+				handleAccept(mb, controller);
 				return;
 			case INVITE:
-				handleInvite(mb, gui);
+				handleInvite(mb, controller);
 				return;
 			case GIVE_CHAT_SESSIONS:
 				handleGiveSessions(mb);
 			case GIVE_MEMBERS:
-				handleGiveMembers(mb, gui, user);
+				handleGiveMembers(mb, controller, user);
 				return;
 			case GIVE_LOGGED_IN:
-				handleUpdateLoggedIn(mb, gui, user);
+				handleGiveLoggedIn(mb, controller, user);
 				return;
 			case GIVE_CHAT_HISTORY:
-				handleGiveChatHistory(mb, gui);
+				handleGiveChatHistory(mb, controller);
 				return;
 			case GIVE_FRIENDS:
-				handleGiveFriends(mb, gui);
+				handleGiveFriends(mb, controller);
+				return;
+			case UPDATE_LOGGED_IN:
+				handleUpdateLoggedIn(mb, controller, user);
 				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}
 	}
 	
-	public void handleChat(MessageBox mb, ClientGUI gui) {
-		gui.displayMessage(mb);
+	public void handleChat(MessageBox mb, LoginController controller) {
+		controller.getMainController().displayMessage(mb);
 	}
 	
 	/**
@@ -78,15 +82,15 @@ public class ClientHandler {
 	 * @param mb
 	 * @param gui
 	 */
-	public void handleServerMessage(MessageBox mb, ClientGUI gui) {
-		gui.drawChatCreationRefusal();
+	public void handleServerMessage(MessageBox mb, LoginController controller) {
+		controller.getMainController().drawChatCreationRefusal();
 	}
 	
-	public void handleDeny(ClientGUI gui) {
-		Platform.runLater(() -> gui.refuseLogin());
+	public void handleDeny(LoginController controller) {
+		Platform.runLater(() -> controller.refuseLogin());
 	}
 	
-	public void handleAccept(MessageBox mb, ClientGUI gui) {
+	public void handleAccept(MessageBox mb, LoginController controller) {
 		client.getUser().setUserName(mb.get(Data.USER_NAME));
 		
 		MessageBox requestChatSessions = new MessageBox(Action.GET_CHAT_SESSIONS);
@@ -101,9 +105,9 @@ public class ClientHandler {
 		client.sendMessage(requestLoggedIn);
 	}
 	
-	public void handleInvite(MessageBox mb, ClientGUI gui) {
-		Platform.runLater(() -> gui.drawInviteScreen(mb));
-		gui.setInviteName(mb.get(Data.CHAT_NAME));
+	public void handleInvite(MessageBox mb, LoginController controller) {
+		Platform.runLater(() -> controller.getMainController().drawInviteScreen(mb));
+		controller.getMainController().setInviteName(mb.get(Data.CHAT_NAME));
 	}
 	
 	public void handleGiveSessions(MessageBox mb) {
@@ -111,33 +115,37 @@ public class ClientHandler {
 		chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
 				.split(protocol.Token.SEPARATOR.getValue()));
 		for(String session : chatSessions) {
-			gui.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
-			Platform.runLater(() -> gui.addSessionSpace(session));
+			controller.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
+			controller.addSessionSpace(session);
 			MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
 			requestMembers.add(Data.CHAT_NAME, session);
 			client.sendMessage(requestMembers);
 		}
-		gui.getChatTreeView().getSelectionModel().selectFirst();
-		gui.getChatTreeView().getSelectionModel().getSelectedItem().setExpanded(true);
-		Platform.runLater(() -> gui.login());
 		MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
 		requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(requestChatHistory);
 	}
 	
-	public void handleGiveChatHistory(MessageBox mb, ClientGUI gui) {
+	public void handleGiveChatHistory(MessageBox mb, LoginController controller) {
 		Collections.reverse(mb.getMessageHistory());
 		for(Message message : mb.getMessageHistory()) {
-			gui.getMessageSpaces().get(mb.get(Data.CHAT_NAME))
+			controller.getMessageSpaces().get(mb.get(Data.CHAT_NAME))
 								  .appendText(message.getSender() + ">>> " +
 										  message.getContent() + "\n");
 		}
+		Platform.runLater(() -> {
+			try {
+				controller.login();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
-	public void handleGiveMembers(MessageBox mb, ClientGUI gui, User user) {
+	public void handleGiveMembers(MessageBox mb, LoginController controller, User user) {
 		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setOnlineUsers(onlineUsers);
 		String members = mb.get(Data.CHAT_MEMBERS);
-		for (TreeItem<String> t : gui.getTreeViewRoot().getChildren()) {
+		for (TreeItem<String> t : controller.getTreeViewRoot().getChildren()) {
 			if (t.getValue().equals(mb.get(Data.CHAT_NAME))) {
 				for (String member : members.split(protocol.Token.SEPARATOR.getValue())) {
 					t.getChildren().add(new TreeItem<String>(member));
@@ -146,25 +154,31 @@ public class ClientHandler {
 		}
 	}
 	
-	public void handleUpdateLoggedIn(MessageBox mb, ClientGUI gui, User user) {
-//<<<<<<< HEAD
-//		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
-//		client.getLoggedInUsers().clear();
-//		for(String username : mb.get(Data.LOGGED_IN_MEMBERS).split(protocol.Token.SEPARATOR.getValue())) {
-//			client.getLoggedInUsers().add(username);
-//		}
-//=======
-		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
-		TreeSet<String> loggedInUsersClient = new TreeSet<>();
-		for (String userName: loggedInUsersServer) {
-			loggedInUsersClient.add(userName);
+	public void handleGiveLoggedIn(MessageBox mb, LoginController controller, User user) {
+		//client.getLoggedInUsers().clear();
+		for(String username : mb.get(Data.LOGGED_IN_MEMBERS).split(protocol.Token.SEPARATOR.getValue())) {
+			client.getLoggedInUsers().add(username);
 		}
-		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(loggedInUsersClient);
 	}
 	
-	public void handleGiveFriends(MessageBox mb, ClientGUI gui) {
+	public void handleUpdateLoggedIn(MessageBox mb, LoginController controller, User user) {
+		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(sessionMembers);
+		//client.getLoggedInUsers().clear();
+		for(String username : mb.get(Data.USER_NAME).split(protocol.Token.SEPARATOR.getValue())) {
+			client.getLoggedInUsers().add(username);
+		}
+		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
+//		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
+//		TreeSet<String> loggedInUsersClient = new TreeSet<>();
+//		for (String userName: loggedInUsersServer) {
+//			loggedInUsersClient.add(userName);
+//		}
+//		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(loggedInUsersClient);
+	}
+	
+	public void handleGiveFriends(MessageBox mb, LoginController controller) {
 		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
-			gui.getFriendsList().add(friend);
+			controller.getFriendsList().add(friend);
 		}
 	}
 	
