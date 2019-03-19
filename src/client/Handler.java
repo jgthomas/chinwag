@@ -68,6 +68,8 @@ public class Handler {
 			case UPDATE_LOGGED_IN:
 				handleUpdateLoggedIn(mb, controller, user);
 				return;
+			case UPDATE_LOGGED_OUT:
+				handleUpdateLoggedOut(mb, controller, user);
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}
@@ -180,6 +182,11 @@ public class Handler {
 //			loggedInUsersClient.add(userName);
 //		}
 //		user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setSessionMembers(loggedInUsersClient);
+	}
+	
+	public void handleUpdateLoggedOut(MessageBox mb, LoginController controller, User user) {
+		client.getLoggedInUsers().remove(mb.get(Data.USER_NAME));
+		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
 	}
 	
 	public void handleGiveFriends(MessageBox mb, LoginController controller) {

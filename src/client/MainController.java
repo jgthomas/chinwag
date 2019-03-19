@@ -72,6 +72,8 @@ public class MainController {
 	public void initialize() {
 		loggedIn.setText("Logged in as " + client.getUser().getUserName());
 		
+		messageSpace.setEditable(false);
+		
 		chatTreeView.setRoot(treeViewRoot);
 		chatTreeView.setShowRoot(false);
 		chatTreeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>(){
