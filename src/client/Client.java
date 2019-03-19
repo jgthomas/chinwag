@@ -23,7 +23,7 @@ public class Client {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Scanner in;
-	private ClientHandler handler;
+	private Handler handler;
 	private User user;
 	private ArrayList<String> loggedInUsers;
 	private LoginController controller;
@@ -64,11 +64,11 @@ public class Client {
 			io.printStackTrace();
 		}
 		executor = Executors.newCachedThreadPool();
-		ClientListener cl = new ClientListener(this);
+		Listener cl = new Listener(this);
 		executor.execute(cl);
 		in = new Scanner(System.in);
 		this.user = new User(this);
-		handler = new ClientHandler(this, controller, user);
+		handler = new Handler(this, controller, user);
 		this.controller = controller;
 	}
 	
@@ -101,7 +101,7 @@ public class Client {
 		return port;
 	}
 	
-	public ClientHandler getHandler() {
+	public Handler getHandler() {
 		return handler;
 	}
 	

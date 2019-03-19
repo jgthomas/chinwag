@@ -6,11 +6,11 @@ import java.io.IOException;
 //import client_archive.CommandFactory;
 import protocol.MessageBox;
 
-public class ClientListener implements Runnable {
+public class Listener implements Runnable {
 	private Client client;
 //	private CommandFactory cf;
 
-	public ClientListener(Client client) {
+	public Listener(Client client) {
 		this.client = client;
 //		this.cf = new CommandFactory(client.getGUI());
 	}

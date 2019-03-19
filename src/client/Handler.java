@@ -17,14 +17,14 @@ import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 
-public class ClientHandler {
+public class Handler {
 	private Client client;
 	private LoginController controller;
 	private User user;
 	private TreeSet<String> onlineUsers;
 	private TreeSet<String> sessionMembers;
 	
-	public ClientHandler(Client client, LoginController controller,
+	public Handler(Client client, LoginController controller,
 			User user) {
 		this.client = client;
 		this.controller = controller;

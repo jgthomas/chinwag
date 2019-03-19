@@ -16,7 +16,7 @@ import protocol.MessageBox;
  */
 
 public class User {
-	private TreeMap<String, ClientChatSession> chatSessions; //Tracks the chats of which user is a member.
+	private TreeMap<String, ChatSession> chatSessions; //Tracks the chats of which user is a member.
 	private Client client;
 	private String userName;
 	
@@ -25,15 +25,15 @@ public class User {
 		this.client = client;
 	}
 	
-	public TreeMap<String, ClientChatSession> getChatSessions() {
+	public TreeMap<String, ChatSession> getChatSessions() {
 		return chatSessions;
 	}
 
-	public void setChatSessions(TreeMap<String, ClientChatSession> chatSessions) {
+	public void setChatSessions(TreeMap<String, ChatSession> chatSessions) {
 		this.chatSessions = chatSessions;
 	}
 	
-	public void addChatSession(ClientChatSession chatSession) {
+	public void addChatSession(ChatSession chatSession) {
 		chatSessions.put(chatSession.getName(), chatSession);
 	}
 	
@@ -41,13 +41,13 @@ public class User {
 		client.sendMessage(new MessageBox(Action.GET_CHAT_SESSIONS));
 	}
 
-	public void requestSessionMembers(ClientChatSession chatSession) {
+	public void requestSessionMembers(ChatSession chatSession) {
 		MessageBox mb = new MessageBox(Action.GET_MEMBERS);
 		mb.add(Data.CHAT_NAME, chatSession.getName());
 		client.sendMessage(mb);
 	}
 	
-	public void requestLoggedInMembers(ClientChatSession chatSession) {
+	public void requestLoggedInMembers(ChatSession chatSession) {
 		MessageBox mb = new MessageBox(Action.GET_LOGGED_IN);
 		mb.add(Data.CHAT_NAME, chatSession.getName());
 		client.sendMessage(mb);

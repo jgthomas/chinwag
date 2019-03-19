@@ -18,14 +18,14 @@ import java.util.TreeSet;
  *
  */
 
-public class ClientChatSession {
+public class ChatSession {
 	
 	private String name;
 	private TreeSet<String> sessionMembers; //TreeSet so they can be ordered
 	private TreeSet<String> onlineUsers; //Names of the users that are online
 	private ArrayList<ChatMessage> chatHistory;
 	
-	public ClientChatSession(String name) {
+	public ChatSession(String name) {
 		this.name = name;
 		sessionMembers = new TreeSet<>();
 		onlineUsers = new TreeSet<>();
