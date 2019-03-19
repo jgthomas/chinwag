@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import protocol.Action;
 import protocol.Data;
@@ -32,7 +33,7 @@ import protocol.MessageBox;
 
 public class MainController {
 	private Client client;
-	private ClientMain clientMain;
+	private Stage stage;
 	private Scene scene;
 	private LoginController controller;
 	
@@ -49,11 +50,11 @@ public class MainController {
 	@FXML private Button exit;
 	@FXML private TextArea messageSpace;
 	
-	public MainController(ClientMain clientMain, Client client, TreeItem<String> treeViewRoot,
+	public MainController(Stage stage, Client client, TreeItem<String> treeViewRoot,
 			TreeView<String> chatTreeView, HashMap<String, TextArea> messageSpaces,
 			Label loggedIn, ObservableList<String> friendsList, Scene scene, LoginController controller) {
 		this.client = client;
-		this.clientMain = clientMain;
+		this.stage = stage;
 		this.scene = scene;
 		this.controller = controller;
 		

@@ -14,7 +14,7 @@ public class ClientMain extends Application {
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
 		
-		LoginController controller = new LoginController(this);
+		LoginController controller = new LoginController(stage);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
 		Parent root = loader.load();

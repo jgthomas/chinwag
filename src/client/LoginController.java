@@ -21,6 +21,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import protocol.Action;
 import protocol.Data;
@@ -28,10 +29,11 @@ import protocol.MessageBox;
 
 public class LoginController {
 	private Client client;
-	private ClientMain clientMain;
+	private Stage stage;
 	private MainController controller;
 	private Scene scene;
-
+	
+	
 	private ObservableList<String> friendsList;
 	private TreeItem<String> treeViewRoot;
 	private TreeView<String> chatTreeView;
@@ -46,9 +48,9 @@ public class LoginController {
 	@FXML private TextField usernameField;
 	@FXML private TextField passwordField;
 	
-	public LoginController(ClientMain clientMain) {
+	public LoginController(Stage stage) {
 		client = new Client("localhost", 6000, this);
-		this.clientMain = clientMain;
+		this.stage = stage;
 	}
 	
 	public void initialize() {		
@@ -77,15 +79,23 @@ public class LoginController {
 	}
 	
 	@FXML
-	public void signup(MouseEvent e) {
+	public void signup(MouseEvent e) throws IOException {
+		CreateAccountController controller = new CreateAccountController(client, stage);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
+		loader.setController(controller);
+		Parent root = loader.load();
 		
+		Scene scene = new Scene(root);
+		stage.setTitle("MessengerClient");
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	public void login() throws IOException {
 		//loggedInAs = new Text("Logged in as " + loggedInName);
 		loggedIn = new Label();
 		loggedIn.setText("Logged in as " + client.getUser().getUserName());
-		controller = new MainController(clientMain, client, 
+		controller = new MainController(stage, client, 
 				treeViewRoot, chatTreeView, messageSpaces, loggedIn, friendsList,
 				scene, this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
@@ -93,9 +103,9 @@ public class LoginController {
 		Parent root = loader.load();
 		
 		scene = new Scene(root);
-		clientMain.getStage().setTitle("MessengerClient");
-		clientMain.getStage().setScene(scene);
-		clientMain.getStage().show();
+		stage.setTitle("MessengerClient");
+		stage.setScene(scene);
+		stage.show();
 		//drawMainScreen(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()));
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}

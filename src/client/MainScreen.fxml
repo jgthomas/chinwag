@@ -23,8 +23,9 @@
       <items>
         <AnchorPane>
           <children>
-                  <TreeView id="chatTreeView" fx:id="chatTreeView" layoutX="11.0" layoutY="35.0" onMousePressed="#pressTreeView" prefHeight="513.0" prefWidth="200.0" />
+                  <TreeView id="chatTreeView" fx:id="chatTreeView" layoutX="11.0" layoutY="35.0" onMousePressed="#pressTreeView" prefHeight="483.0" prefWidth="200.0" />
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat rooms" />
+                  <Button fx:id="createChat" layoutX="116.0" layoutY="518.0" mnemonicParsing="false" onAction="#createChat" text="Create chat" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -38,17 +39,20 @@
                            <textFill>
                       <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
                            </textFill></Label>
-                        <TextArea fx:id="messageSpace" layoutX="14.0" layoutY="14.0" prefHeight="504.0" prefWidth="400.0" />
-                        <TextField id="input" fx:id="input" layoutX="14.0" layoutY="518.0" prefHeight="2.0" prefWidth="320.0" promptText="Enter message..." />
-                        <Button id="send" fx:id="send" layoutX="334.0" layoutY="518.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="26.0" prefWidth="80.0" text="Send" />
+                        <TextArea fx:id="messageSpace" layoutX="14.0" layoutY="14.0" prefHeight="471.0" prefWidth="400.0" />
+                        <TextField id="input" fx:id="input" layoutX="14.0" layoutY="485.0" prefHeight="2.0" prefWidth="320.0" promptText="Enter message..." />
+                        <Button id="send" fx:id="send" layoutX="334.0" layoutY="485.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="26.0" prefWidth="80.0" text="Send" />
+                        <Button fx:id="leaveChat" layoutX="14.0" layoutY="518.0" mnemonicParsing="false" onAction="#leaveChat" text="Leave chat" />
+                        <Button fx:id="addUser" layoutX="336.0" layoutY="518.0" mnemonicParsing="false" onAction="#addUser" text="Add user" />
               </children>
             </AnchorPane>
           </content>
         </ScrollPane>
         <AnchorPane>
           <children>
-                  <ListView id="friendsListView" fx:id="friendsListView" layoutX="10.0" layoutY="35.0" onMousePressed="#pressListView" prefHeight="524.0" prefWidth="200.0" />
+                  <ListView id="friendsListView" fx:id="friendsListView" layoutX="10.0" layoutY="35.0" onMousePressed="#pressListView" prefHeight="483.0" prefWidth="200.0" />
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends list" />
+                  <Button fx:id="addFriend" layoutX="124.0" layoutY="518.0" mnemonicParsing="false" onAction="#addFriend" text="Add friend" />
           </children>
         </AnchorPane>
       </items>
@@ -56,7 +60,7 @@
       <HBox prefHeight="32.0" prefWidth="900.0">
          <children>
             <Button fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Exit" />
-            <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" text="Button" />
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" text="Logout" />
          </children>
       </HBox>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
