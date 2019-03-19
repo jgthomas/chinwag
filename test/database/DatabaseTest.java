@@ -1,10 +1,10 @@
 package database;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseTest {
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
@@ -14,12 +14,20 @@ public class DatabaseTest {
 	
 	@Before
 	public void before() {
-		connection = DriverManager.getConnection(url, username, password);
+		try {
+			connection = DriverManager.getConnection(url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@After
 	public void after() {
-		connection.close();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// test connection
