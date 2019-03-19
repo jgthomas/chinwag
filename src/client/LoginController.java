@@ -105,6 +105,7 @@ public class LoginController {
 		scene = new Scene(root);
 		stage.setTitle("MessengerClient");
 		stage.setScene(scene);
+		stage.centerOnScreen();
 		stage.show();
 		//drawMainScreen(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()));
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
