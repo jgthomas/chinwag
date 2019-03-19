@@ -1,6 +1,7 @@
 package server_command;
 
 import protocol.Action;
+import protocol.Data;
 import protocol.MessageBox;
 import server.*;
 
@@ -23,6 +24,11 @@ class Quit extends Command {
      * */
     @Override
     public void execute(MessageBox messageBox) {
-        getMessageSender().sendMessage(new MessageBox(Action.UPDATE_LOGGED_OUT));
+        MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_OUT);
+        mb.add(Data.USER_NAME, getCurrentThreadUserName());
+
+        for (ChatSession chatSession : getUserState()) {
+            getMessageSender().postMessage(chatSession, mb);
+        }
     }
 }
