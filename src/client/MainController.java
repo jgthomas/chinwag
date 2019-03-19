@@ -49,6 +49,11 @@ public class MainController {
 	@FXML private Label loggedIn;
 	@FXML private Button exit;
 	@FXML private TextArea messageSpace;
+	@FXML private Button leaveChat;
+	@FXML private Button addUser;
+	@FXML private Button logout;
+	@FXML private Button addFriend;
+	@FXML private Button createChat;
 	
 	public MainController(Stage stage, Client client, TreeItem<String> treeViewRoot,
 			TreeView<String> chatTreeView, HashMap<String, TextArea> messageSpaces,
@@ -115,9 +120,10 @@ public class MainController {
 				item.setExpanded(false);
 			}
 			chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
-		} else
-			chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
-		input.requestFocus();
+			input.requestFocus();
+		} //else
+		//	chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
+		
 	}
 	
 	@FXML
@@ -139,6 +145,69 @@ public class MainController {
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
 		//drawLogonScreen();
+	}
+	
+	@FXML
+	public void addUser(ActionEvent e) {
+		Stage stage = new Stage();
+		AddFriendController controller = new AddFriendController(client, friendsList, stage);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void leaveChat(ActionEvent e) {
+		MessageBox leave = new MessageBox(Action.LEAVE_CHAT);
+		TreeItem<String> toLeave = chatTreeView.getSelectionModel().getSelectedItem();
+		leave.add(Data.CHAT_NAME, toLeave.getValue());
+		client.sendMessage(leave);
+		treeViewRoot.getChildren().remove(toLeave);
+	}
+	
+	@FXML
+	public void createChat(ActionEvent e) {
+		Stage stage = new Stage();
+		CreateChatController controller = new CreateChatController(client, stage, this.controller);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateChat.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void addFriend(ActionEvent e) {
+		Stage stage = new Stage();
+		AddUserController controller = new AddUserController(client, stage, chatTreeView);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddUser.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	public void displayMessage(MessageBox mb) {
