@@ -1,5 +1,6 @@
 package server_command;
 
+import protocol.Action;
 import protocol.MessageBox;
 import server.*;
 
@@ -22,6 +23,6 @@ class Quit extends Command {
      * */
     @Override
     public void execute(MessageBox messageBox) {
-
+        getMessageSender().sendMessage(new MessageBox(Action.UPDATE_LOGGED_OUT));
     }
 }
