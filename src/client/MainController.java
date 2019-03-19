@@ -149,7 +149,20 @@ public class MainController {
 	
 	@FXML
 	public void addUser(ActionEvent e) {
-		
+		Stage stage = new Stage();
+		AddFriendController controller = new AddFriendController(client, friendsList, stage);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -163,14 +176,27 @@ public class MainController {
 	
 	@FXML
 	public void createChat(ActionEvent e) {
-		
+		Stage stage = new Stage();
+		CreateChatController controller = new CreateChatController(client, stage, this.controller);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateChat.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("MessengerClient");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@FXML
 	public void addFriend(ActionEvent e) {
 		Stage stage = new Stage();
-		AddFriendController controller = new AddFriendController(client, friendsList, stage);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
+		AddUserController controller = new AddUserController(client, stage, chatTreeView);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddUser.fxml"));
 		loader.setController(controller);
 		Parent root;
 		try {
