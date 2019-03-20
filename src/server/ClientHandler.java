@@ -32,7 +32,6 @@ class ClientHandler implements MessageHandler {
         {
                 messageReceiver = new Receiver(clientSocket, this);
                 messageSender = new Sender(clientSocket, socketID);
-                //userState = new UserState(global);
                 userState = new UserState();
                 this.connectedClients = connectedClients;
                 this.allChatSessions = allChatSessions;
