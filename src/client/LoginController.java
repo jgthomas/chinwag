@@ -16,6 +16,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -46,7 +47,7 @@ public class LoginController {
 	@FXML private Text username;
 	@FXML private Text password;
 	@FXML private TextField usernameField;
-	@FXML private TextField passwordField;
+	@FXML private PasswordField passwordField;
 	
 	public LoginController(Stage stage) {
 		client = new Client("localhost", 6000, this);
