@@ -41,7 +41,7 @@
                            </textFill></Label>
                         <TextArea fx:id="messageSpace" layoutX="15.0" layoutY="46.0" prefHeight="471.0" prefWidth="400.0" />
                         <TextField id="input" fx:id="input" layoutX="14.0" layoutY="518.0" prefHeight="2.0" prefWidth="320.0" promptText="Enter message..." />
-                        <Button id="send" fx:id="send" layoutX="334.0" layoutY="518.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="26.0" prefWidth="80.0" text="Send" />
+                        <Button id="send" fx:id="send" defaultButton="true" layoutX="334.0" layoutY="518.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="26.0" prefWidth="80.0" text="Send" />
                         <Button fx:id="leaveChat" layoutX="13.0" layoutY="12.0" mnemonicParsing="false" onAction="#leaveChat" text="Leave chat" />
                         <Button fx:id="addUser" layoutX="336.0" layoutY="12.0" mnemonicParsing="false" onAction="#addUser" text="Add user" />
               </children>
