@@ -12,7 +12,7 @@
       <Text fx:id="username" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
       <Text fx:id="password" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <PasswordField fx:id="passwordField" layoutX="14.0" layoutY="71.0" promptText="Enter password..." />
-      <Button fx:id="exit" layoutX="16.0" layoutY="104.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button fx:id="exit" cancelButton="true" layoutX="16.0" layoutY="104.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
       <Button fx:id="login" defaultButton="true" layoutX="131.0" layoutY="104.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <Text fx:id="noAccount" layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
       <Text fx:id="signup" fill="#247abf" layoutX="134.0" layoutY="159.0" onMouseClicked="#signup" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" underline="true" />
