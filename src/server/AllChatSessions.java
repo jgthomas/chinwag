@@ -18,18 +18,6 @@ public class AllChatSessions {
     }
 
     /**
-     * Temporary constructor to take the global chat on creation.
-     *
-     * When we remove the global chat we can remove this as well.
-     *
-     * @param global the global chat session
-     * */
-    //AllChatSessions(ChatSession global) {
-    //    activeSessions = new ConcurrentHashMap<>();
-    //    activeSessions.put(global.getChatName(), global);
-    //}
-
-    /**
      * Adds a new chat session to the server master record.
      *
      * @param chatSession the chat session object
