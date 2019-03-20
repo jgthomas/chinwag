@@ -2,15 +2,14 @@ package database;
 
 import org.junit.*;
 import server_command.Hasher;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DatabaseTest {
 
@@ -160,23 +159,18 @@ public class DatabaseTest {
 	@Test
 	public void test17(){
 		List<Message> expected = new ArrayList<>();
-		Timestamp ts1 = Timestamp.valueOf("2019-03-15 12:56:10.293000");
-		Message mg1 = new Message("multiline", "cheese", "how about this?", ts1);
-		Timestamp ts2 = Timestamp.valueOf("2019-03-15 12:56:15.420000");
-		Message mg2 = new Message("multiline", "cheese", "omg!", ts2);
-		Timestamp ts3 = Timestamp.valueOf("2019-03-15 12:56:36.021000");
-		Message mg3 = new Message("multiline", "cheese", "seems to work", ts3);
-		Timestamp ts4 = Timestamp.valueOf("2019-03-17 19:40:53.951000");
-		Message mg4 = new Message("multiline", "cheese", "holy fuckmothering chimps", ts4);
-		Timestamp ts5 = Timestamp.valueOf("2019-03-17 19:40:59.074000");
-		Message mg5 = new Message("multiline", "cheese", "it's a green circle!", ts5);
-		expected.add(mg1);
-		expected.add(mg2);
+		Timestamp ts1 = Timestamp.valueOf("2019-03-19 14:34:35.625000");
+		Message mg1 = new Message("davidisgreat", "aidan", "hey", ts1);
+		Timestamp ts2 = Timestamp.valueOf("2019-03-19 14:34:38.657000");
+		Message mg2 = new Message("davidisgreat", "aidan", "hi", ts2);
+		Timestamp ts3 = Timestamp.valueOf("2019-03-19 14:34:43.105000");
+		Message mg3 = new Message("davidisgreat", "aidan", "hello", ts3);
 		expected.add(mg3);
-		expected.add(mg4);
-		expected.add(mg5);
-		List<Message> actual = Database.retrieveMessages("multiline", 100);
-		assertEquals(expected, actual);
+		expected.add(mg2);
+		expected.add(mg1);
+		List<Message> actual = Database.retrieveMessages("davidisgreat", 3);
+		for (int i = 0; i < 3; i++){
+			assertTrue(expected.get(i).equals(actual.get(i)));
+		}
 	}
-
 }
