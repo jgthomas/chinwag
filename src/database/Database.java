@@ -240,7 +240,7 @@ public class Database {
      * Inserts a message into the database message history table.
      * @param message Message object containing chatname, sender, content, and timestamp.
      */
-    public static synchronized void insertMessage (Message message) {
+    public static synchronized void insertMessage(Message message) {
     	try (PreparedStatement statement = connection.prepareStatement(
     			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?)"))
     	{

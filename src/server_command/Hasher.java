@@ -65,7 +65,7 @@ import java.util.Base64;
  * }
  *
  * */
-final class Hasher {
+public final class Hasher {
         /*
          * Nice answers here regarding the parts of the algorithm
          *
@@ -143,7 +143,7 @@ final class Hasher {
          * @return a string representation of the hashed password and salt
          *
          * */
-        static String hashPassword(String password, byte[] salt) {
+        public static String hashPassword(String password, byte[] salt) {
                 return Base64.getEncoder()
                         .encodeToString(hashPasswordBytes(password, salt));
         }
@@ -174,7 +174,7 @@ final class Hasher {
          * @return a string representation of the salt
          *
          * */
-        static String bytesToString(byte[] salt) {
+        public static String bytesToString(byte[] salt) {
                 return Base64.getEncoder().encodeToString(salt);
         }
 
@@ -187,7 +187,7 @@ final class Hasher {
          * @return a byte array of the salt
          *
          * */
-        static byte[] stringToBytes(String saltString) {
+        public static byte[] stringToBytes(String saltString) {
                 return Base64.getDecoder().decode(saltString);
         }
 }
