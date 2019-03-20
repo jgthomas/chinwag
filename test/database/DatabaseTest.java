@@ -1,30 +1,32 @@
 package database;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
+import org.junit.*;
+import java.sql.SQLException;
+import static org.junit.Assert.assertEquals;
 
 public class DatabaseTest {
-    private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
-    private static String username = "group22";
-    private static String password = "group22";
-	Connection connection;
-	
-	@Before
-	public void before() {
-		connection = DriverManager.getConnection(url, username, password);
-	}
-	
-	@After
-	public void after() {
-		connection.close();
-	}
-	
-	// test connection
+
+	// This method tests the makeConnection() method.
 	@Test
-	public void test1a() {
-		
+	public void test1(){
+		try {
+			assertEquals(null, Database.connection);
+			Database.makeConnection();
+			assertEquals(true, Database.connection.isValid(0));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// This method tests the getSalt(String username) method.
+	@Test
+	public void test2(){
+
+	}
+
+	// This method tests the isValidUser(String username, String hash) method.
+	@Test
+	public void test3(){
+
 	}
 }
