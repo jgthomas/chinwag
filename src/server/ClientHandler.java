@@ -19,8 +19,6 @@ import java.net.Socket;
  *
  * */
 class ClientHandler implements MessageHandler {
-        private static final String THREAD_START = "Connected to client using: ";
-        private static final String THREAD_END = "Client connection terminated: ";
         private final MessageReceiver messageReceiver;
         private final MessageSender messageSender;
         private final UserState userState;
@@ -28,7 +26,6 @@ class ClientHandler implements MessageHandler {
         private final AllChatSessions allChatSessions;
 
         ClientHandler(Socket clientSocket,
-                      //ChatSession global,
                       ConnectedClients connectedClients,
                       AllChatSessions allChatSessions,
                       String socketID)
