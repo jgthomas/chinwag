@@ -19,12 +19,6 @@ public class UserState implements Iterable<ChatSession> {
                 allFriends = new HashSet<>();
         }
 
-        //UserState(ChatSession global) {
-        //        activeSessions = new ConcurrentHashMap<>();
-        //        allFriends = new HashSet<>();
-        //        activeSessions.put("global", global);
-        //}
-
         /**
          * @param chat a chat session to add to the client's
          *             current sessions
