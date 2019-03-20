@@ -58,3 +58,9 @@ atlassian-ide-plugin.xml
 .settings
 .metadata
 /bin/
+
+# UML
+*.uml
+*.jpg
+*.jpeg
+*.png
