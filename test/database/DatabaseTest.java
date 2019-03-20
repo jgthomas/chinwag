@@ -6,6 +6,7 @@ import server_command.Hasher;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,10 +129,53 @@ public class DatabaseTest {
 	// This method tests the retrieveChatSessions(String username) method.
 	@Test
 	public void test14(){
-		List<String> actual = new ArrayList<>();
-		actual.add("cheeseChat");
-		actual.add("nonsense");
-		List<String> expected = Database.retrieveChatSessions("bob");
+		List<String> expected = new ArrayList<>();
+		expected.add("cheeseChat");
+		expected.add("nonsense");
+		List<String> actual = Database.retrieveChatSessions("bob");
+		assertEquals(expected, actual);
+	}
+
+	// This method tests the retrieveUsersFromSessions(String chatName) method.
+	@Test
+	public void test15(){
+		List<String> expected = new ArrayList<>();
+		expected.add("billy");
+		expected.add("aidan");
+		List<String> actual = Database.retrieveUsersFromSessions("fwends");
+		assertEquals(expected, actual);
+	}
+
+	// This method tests the retrieveFriends(String username) method.
+	@Test
+	public void test16(){
+		List<String> expected = new ArrayList<>();
+		expected.add("bob");
+		expected.add("horse");
+		List<String> actual = Database.retrieveFriends("cheese");
+		assertEquals(expected, actual);
+	}
+
+	// This method tests the retrieveMessages(String chatname, int limit) method.
+	@Test
+	public void test17(){
+		List<Message> expected = new ArrayList<>();
+		Timestamp ts1 = Timestamp.valueOf("2019-03-15 12:56:10.293000");
+		Message mg1 = new Message("multiline", "cheese", "how about this?", ts1);
+		Timestamp ts2 = Timestamp.valueOf("2019-03-15 12:56:15.420000");
+		Message mg2 = new Message("multiline", "cheese", "omg!", ts2);
+		Timestamp ts3 = Timestamp.valueOf("2019-03-15 12:56:36.021000");
+		Message mg3 = new Message("multiline", "cheese", "seems to work", ts3);
+		Timestamp ts4 = Timestamp.valueOf("2019-03-17 19:40:53.951000");
+		Message mg4 = new Message("multiline", "cheese", "holy fuckmothering chimps", ts4);
+		Timestamp ts5 = Timestamp.valueOf("2019-03-17 19:40:59.074000");
+		Message mg5 = new Message("multiline", "cheese", "it's a green circle!", ts5);
+		expected.add(mg1);
+		expected.add(mg2);
+		expected.add(mg3);
+		expected.add(mg4);
+		expected.add(mg5);
+		List<Message> actual = Database.retrieveMessages("multiline", 100);
 		assertEquals(expected, actual);
 	}
 
