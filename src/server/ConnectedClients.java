@@ -62,7 +62,10 @@ public class ConnectedClients implements Iterable<MessageHandler> {
      * @return a list of user names
      * */
     public List<String> allLoggedInUsers() {
-         return new ArrayList<>(clientsByUserName.keySet());
+        if (clientsByUserName.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(clientsByUserName.keySet());
      }
 
      @Override
