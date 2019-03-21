@@ -20,7 +20,7 @@ public class Main extends Application {
 		Parent root = loader.load();
 		
 		scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.show();
 	}

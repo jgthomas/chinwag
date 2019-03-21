@@ -104,7 +104,7 @@ public class LoginController {
 		Parent root = loader.load();
 		
 		scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();

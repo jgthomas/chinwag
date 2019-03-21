@@ -156,7 +156,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -183,7 +183,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -201,7 +201,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -243,7 +243,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
