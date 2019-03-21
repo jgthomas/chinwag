@@ -93,6 +93,9 @@ public class ChatSession implements Iterable<MessageSender> {
          * @return a list of user names
          * */
         public List<String> allUserNames() {
+                if (usersInChat.isEmpty()) {
+                        return new ArrayList<>();
+                }
                 return new ArrayList<>(usersInChat.keySet());
         }
 
