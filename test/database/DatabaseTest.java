@@ -28,6 +28,15 @@ public class DatabaseTest {
 		}
 	}
 
+	@After
+	public void after(){
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	// This method tests if the connection with database if established.
 	@Test
 	public void test1(){
