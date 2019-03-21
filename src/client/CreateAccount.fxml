@@ -6,13 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="161.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="usernameField" layoutX="14.0" layoutY="36.0" />
-      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-      <Text layoutX="14.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Button fx:id="signupRequest" defaultButton="true" layoutX="118.0" layoutY="117.0" mnemonicParsing="false" onAction="#sendSignupRequest" text="Sign up" />
-      <Button fx:id="back" cancelButton="true" layoutX="14.0" layoutY="117.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <PasswordField fx:id="passwordField" layoutX="14.0" layoutY="78.0" />
+      <TextField fx:id="usernameField" layoutX="16.0" layoutY="71.0" promptText="Enter username..." />
+      <PasswordField fx:id="passwordField" layoutX="16.0" layoutY="119.0" promptText="Enter password..." />
+      <Text layoutX="16.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+      <Text layoutX="16.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Button fx:id="back" cancelButton="true" layoutX="16.0" layoutY="158.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="signupRequest" defaultButton="true" layoutX="120.0" layoutY="158.0" mnemonicParsing="false" onAction="#sendSignupRequest" text="Sign up" />
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account" />
    </children>
 </AnchorPane>
