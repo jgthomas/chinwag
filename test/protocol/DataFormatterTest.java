@@ -17,7 +17,7 @@ public class DataFormatterTest {
     }
 
     @Test
-    public void splitUserNames() {
+    public void userNameFormatting() {
         String expected = "dave£££paul£££jenny£££";
         List<String> userNames = new ArrayList<>();
         userNames.add("dave");
