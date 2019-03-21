@@ -17,7 +17,16 @@ public class DataFormatterTest {
     }
 
     @Test
-    public void userNameFormatting() {
+    public void singleNameFormatting() {
+        String expected = "dave£££";
+        List<String> userNames = new ArrayList<>();
+        userNames.add("dave");
+        String actual = DataFormatter.listToString(userNames);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void multiNameFormatting() {
         String expected = "dave£££paul£££jenny£££";
         List<String> userNames = new ArrayList<>();
         userNames.add("dave");
