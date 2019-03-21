@@ -58,3 +58,6 @@ atlassian-ide-plugin.xml
 .settings
 .metadata
 /bin/
+
+# Manifest files
+*.MF
