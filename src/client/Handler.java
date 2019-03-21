@@ -155,6 +155,9 @@ public class Handler {
 	public void handleGiveMembers(MessageBox mb, LoginController controller, User user) {
 		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setOnlineUsers(onlineUsers);
 		String members = mb.get(Data.CHAT_MEMBERS);
+		if(members == null) {
+			return;
+		}
 		for (TreeItem<String> t : controller.getTreeViewRoot().getChildren()) {
 			if (t.getValue().equals(mb.get(Data.CHAT_NAME))) {
 				for (String member : members.split(protocol.Token.SEPARATOR.getValue())) {

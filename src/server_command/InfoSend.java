@@ -52,12 +52,14 @@ class InfoSend extends Command {
     }
 
     private MessageBox sessionMembersMessage(String chatName) {
-        System.out.println(chatName);
-        String sessionMembersString =
-                buildStringMessage(getAllChatSessions().getSession(chatName).allUserNames());
+        System.out.println(chatName + "!");
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
-        messageBox.add(Data.CHAT_NAME, chatName);
-        messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
+        if (getAllChatSessions().getSession(chatName) != null) {
+        	String sessionMembersString =
+        			buildStringMessage(getAllChatSessions().getSession(chatName).allUserNames());
+        	messageBox.add(Data.CHAT_NAME, chatName);
+        	messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
+        }
         return messageBox;
     }
 
