@@ -52,7 +52,6 @@ class InfoSend extends Command {
     }
 
     private MessageBox sessionMembersMessage(String chatName) {
-        System.out.println(chatName + "!");
         MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
         if (getAllChatSessions().getSession(chatName) != null) {
         	String sessionMembersString =
