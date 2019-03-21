@@ -29,10 +29,8 @@ class InfoSend extends Command {
                 mb = currentSessionsMessage();
                 break;
             case GET_MEMBERS:
-                if (chatName != null) {
-                    mb = sessionMembersMessage(chatName);
-                    mb.add(Data.CHAT_NAME, chatName);
-                }
+                mb = sessionMembersMessage(chatName);
+                mb.add(Data.CHAT_NAME, chatName);
                 break;
             case GET_LOGGED_IN:
                 mb = loggedInUsersMessage();
