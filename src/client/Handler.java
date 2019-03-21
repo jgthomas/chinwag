@@ -70,6 +70,7 @@ public class Handler {
 				return;
 			case UPDATE_LOGGED_OUT:
 				handleUpdateLoggedOut(mb, controller, user);
+				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}

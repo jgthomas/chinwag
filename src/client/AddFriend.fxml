@@ -5,12 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="username" layoutX="14.0" layoutY="31.0" />
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friend's username" />
-      <Button fx:id="cancel" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-      <Button fx:id="addFriend" layoutX="100.0" layoutY="65.0" mnemonicParsing="false" onAction="#addFriend" text="Add friend" />
+      <Button fx:id="cancel" cancelButton="true" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Button fx:id="addFriend" defaultButton="true" layoutX="100.0" layoutY="65.0" mnemonicParsing="false" onAction="#addFriend" text="Add friend" />
    </children>
 </AnchorPane>

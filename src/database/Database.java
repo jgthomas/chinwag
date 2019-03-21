@@ -3,19 +3,31 @@ package database;
 import java.sql.*;
 import java.util.*;
 
+import javax.sql.DataSource;
+
+import org.postgresql.ds.PGSimpleDataSource;
+
 public class Database {
 
     private static String url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk/group22";
     private static String username = "group22";
     private static String password = "group22";
-    private static Connection connection;
-
+    public static Connection connection;
+    private static PGSimpleDataSource ds;
+    
     /**
      * Opens a connection between server and database.
      */
     public static void makeConnection(){
         try {
-            connection = DriverManager.getConnection(url, username, password);
+        	ds = new PGSimpleDataSource();
+            ds.setURL(url);
+            ds.setUser(username);
+            ds.setPassword(password);
+            DataSource dataSource = ds;
+            connection = ds.getConnection();
+            //connection = DriverManager.getConnection(url, username, password);
+            
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -240,7 +252,7 @@ public class Database {
      * Inserts a message into the database message history table.
      * @param message Message object containing chatname, sender, content, and timestamp.
      */
-    public static synchronized void insertMessage (Message message) {
+    public static synchronized void insertMessage(Message message) {
     	try (PreparedStatement statement = connection.prepareStatement(
     			"INSERT INTO message (chatname, sender, content, timestamp) VALUES (?, ?, ?, ?)"))
     	{
