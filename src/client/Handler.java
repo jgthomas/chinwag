@@ -88,7 +88,8 @@ public class Handler {
 	 * @param gui
 	 */
 	public void handleServerMessage(MessageBox mb, LoginController controller) {
-		controller.getMainController().drawChatCreationRefusal();
+		//controller.getLoginController().drawChatCreationRefusal();
+		System.out.println(mb.get(Data.MESSAGE));
 	}
 	
 	public void handleDeny(LoginController controller) {
