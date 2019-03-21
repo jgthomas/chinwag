@@ -59,7 +59,10 @@ public class UserState implements Iterable<ChatSession> {
          * @return a list of all the user's friends
          * */
         public List<String> getAllFriends() {
-			return new ArrayList<>(allFriends);
+                if (allFriends.isEmpty()) {
+                        return new ArrayList<>();
+                }
+                return new ArrayList<>(allFriends);
 		}
 
 		/**
@@ -78,6 +81,9 @@ public class UserState implements Iterable<ChatSession> {
          * @return list of all sessions the user is currently in
          * */
         public List<String> allUserChatSessions() {
+                if (activeSessions.isEmpty()) {
+                        return new ArrayList<>();
+                }
                 return new ArrayList<>(activeSessions.keySet());
         }
 
