@@ -1,10 +1,6 @@
 package database;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-
-import org.mockito.*;
-
 import org.junit.*;
 import server_command.Hasher;
 import java.sql.Connection;
