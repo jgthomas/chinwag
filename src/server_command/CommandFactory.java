@@ -28,6 +28,8 @@ public class CommandFactory {
                                 return new AddUserToChat(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_FRIEND:
                                 return new AddFriend(messageSender, userState, allChatSessions, connectedClients);
+                        case REMOVE_FRIEND:
+                                return new RemoveFriend(messageSender, userState, allChatSessions, connectedClients);
                         case QUIT:
                                 return new Quit(messageSender, userState, allChatSessions, connectedClients);
                         case INVITE:
