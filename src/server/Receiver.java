@@ -34,8 +34,10 @@ class Receiver implements MessageReceiver {
         @Override
         public void listeningLoop() {
                 MessageBox messageBox = new MessageBox(Action.CHAT);
-                try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream()))
+                try
                 {
+                	ObjectInputStream in = 
+                			new ObjectInputStream(clientSocket.getInputStream());
                         do {
                                 try {
                                         messageBox = (MessageBox) in.readObject();
