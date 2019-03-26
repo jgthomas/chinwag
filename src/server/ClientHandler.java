@@ -42,6 +42,8 @@ class ClientHandler implements MessageHandler {
                 messageReceiver.listeningLoop();
                 notifyLogout();
                 getUserState().exitAllChats(getMessageSender());
+                MessageBox mb = new MessageBox(Action.QUIT);
+                messageSender.sendMessage(mb);
                 messageSender.closeSender();
         }
 
