@@ -87,7 +87,7 @@ public class LoginController {
 		Parent root = loader.load();
 		
 		Scene scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.show();
 	}

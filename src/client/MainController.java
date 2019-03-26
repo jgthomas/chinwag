@@ -45,6 +45,7 @@ public class MainController {
 	private HashMap<String, TextArea> messageSpaces;
 	@FXML private Button send;
 	@FXML private TextField input;
+	@FXML private Button removeFriend;
 	@FXML private TreeView<String> chatTreeView;
 	@FXML private ListView<String> friendsListView;
 	@FXML private Label loggedIn;
@@ -73,6 +74,8 @@ public class MainController {
 		loggedIn.setText("Logged in as " + client.getUser().getUserName());
 		
 		messageSpace.setEditable(false);
+		
+		removeFriend.setVisible(false);
 		
 		chatTreeView.setRoot(treeViewRoot);
 		chatTreeView.setShowRoot(false);
@@ -127,7 +130,7 @@ public class MainController {
 	
 	@FXML
 	public void pressListView(MouseEvent e) {
-		
+		removeFriend.setVisible(true);
 	}
 	
 	@FXML
@@ -136,6 +139,16 @@ public class MainController {
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
 		System.exit(1);
+	}
+	
+	@FXML
+	public void removeFriend(ActionEvent e) {
+		MessageBox remove = new MessageBox(Action.REMOVE_FRIEND);
+		remove.add(Data.USER_NAME, friendsListView.getSelectionModel().getSelectedItem());
+		client.sendMessage(remove);
+		friendsList.remove(friendsListView.getSelectionModel().getSelectedItem());
+		friendsListView.getSelectionModel().clearSelection();
+		removeFriend.setVisible(false);
 	}
 	
 	@FXML
