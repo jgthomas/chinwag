@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 import protocol.Action;
 import protocol.Data;
@@ -37,6 +38,9 @@ public class CreateChatController {
 		TextArea newMessageSpace = new TextArea();
 		newMessageSpace.setEditable(false);
 		controller.getMessageSpaces().put(chatName.getText(), newMessageSpace);
+		TreeItem<String> chatTreeItem = new TreeItem<>(chatName.getText());
+		chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
+		controller.getTreeViewRoot().getChildren().add(chatTreeItem);
 		chatName.clear();
 		client.sendMessage(create);
 		stage.close();
