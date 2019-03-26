@@ -36,6 +36,8 @@ class Receiver implements MessageReceiver {
                 MessageBox messageBox = new MessageBox(Action.CHAT);
                 try
                 {
+                	// do not put this in resources because do not want to 
+                	//      auto-close after this method exits
                 	ObjectInputStream in = 
                 			new ObjectInputStream(clientSocket.getInputStream());
                         do {
