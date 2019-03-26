@@ -84,60 +84,18 @@ public class DatabaseTest {
 		assertEquals(false, Database.isFriend(username, friend2));
 	}
 
-	// This method tests the insertNewUser(String username, String salt, String pwHash) method.
-	@Test
-	public void test6(){
-
-	}
-
-	// This method tests the insertFriend(String username, String friend) method.
-	@Test
-	public void test7(){
-
-	}
-
-	// This method tests the removeFriend(String username, String friend) method.
-	@Test
-	public void test8(){
-
-	}
-
 	// This method tests the chatExists(String chatname) method.
 	@Test
-	public void test9(){
+	public void test6(){
 		String chatName1 = "fwends";
 		String chatName2 = "hellobrum";
 		assertEquals(true, Database.chatExists(chatName1));
 		assertEquals(false, Database.chatExists(chatName2));
 	}
 
-	// This method tests the addUserToChat(String chatname, String username) method.
-	@Test
-	public void test10(){
-
-	}
-
-	// This method tests the removeUserFromChat(String chatname, String username) method.
-	@Test
-	public void test11(){
-
-	}
-
-	// This method tests the insertMessage(Message message) method.
-	@Test
-	public void test12(){
-
-	}
-
-	// This method tests the insertImage(Image image) method.
-	@Test
-	public void test13(){
-
-	}
-
 	// This method tests the retrieveChatSessions(String username) method.
 	@Test
-	public void test14(){
+	public void test7(){
 		List<String> expected = new ArrayList<>();
 		expected.add("cheeseChat");
 		expected.add("nonsense");
@@ -147,7 +105,7 @@ public class DatabaseTest {
 
 	// This method tests the retrieveUsersFromSessions(String chatName) method.
 	@Test
-	public void test15(){
+	public void test8(){
 		List<String> expected = new ArrayList<>();
 		expected.add("billy");
 		expected.add("aidan");
@@ -157,7 +115,7 @@ public class DatabaseTest {
 
 	// This method tests the retrieveFriends(String username) method.
 	@Test
-	public void test16(){
+	public void test9(){
 		List<String> expected = new ArrayList<>();
 		expected.add("bob");
 		expected.add("horse");
@@ -167,7 +125,7 @@ public class DatabaseTest {
 
 	// This method tests the retrieveMessages(String chatname, int limit) method.
 	@Test
-	public void test17(){
+	public void test10(){
 		List<Message> expected = new ArrayList<>();
 		Timestamp ts1 = Timestamp.valueOf("2019-03-19 14:34:35.625000");
 		Message mg1 = new Message("davidisgreat", "aidan", "hey", ts1);
