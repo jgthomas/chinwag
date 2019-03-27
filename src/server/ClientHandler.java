@@ -61,13 +61,8 @@ class ClientHandler implements MessageHandler {
 		    System.out.println("Client disconnected.");
             connectedClients.removeClientByUserName(messageSender.getUserName());
             connectedClients.removeClientByID(messageSender.id());
-            MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_OUT);
-            mb.add(Data.USER_NAME, getMessageSender().getUserName());
-            for (MessageHandler mh: connectedClients){
-                mh.getMessageSender().sendMessage(mb);
-            }
+            notifyLogout();
             getUserState().exitAllChats(getMessageSender());
-
 		}
 	}
 
