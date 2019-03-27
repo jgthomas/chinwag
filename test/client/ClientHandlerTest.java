@@ -10,10 +10,5 @@ public class ClientHandlerTest {
 	public void setup() {
 		
 	}
-	
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 
 }
