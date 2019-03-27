@@ -34,15 +34,16 @@ class StartNewChat extends Command {
     @Override
     public void execute(MessageBox messageBox) {
         String newChatName = messageBox.get(Data.CHAT_NAME);
+        MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
         if (Database.chatExists(newChatName)){
-            MessageBox mb = new MessageBox(Action.SERVER_MESSAGE);
             mb.add(Data.MESSAGE, "This chat name already exists, please try another one.");
-            getMessageSender().sendMessage(mb);
         } else {
+            mb.add(Data.MESSAGE, "Chat successfully crated.");
             ChatSession newChat = new ChatSession(newChatName);
             registerUserWithChat(newChat);
             registerChatOnSystem(newChat);
             Database.addUserToChat(newChatName, getCurrentThreadUserName());
         }
+        getMessageSender().sendMessage(mb);
     }
 }
