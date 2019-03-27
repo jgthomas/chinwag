@@ -73,8 +73,11 @@ public class Handler {
 				return;
 			case QUIT:
 				return;
-			case CONFIRM:
-				handleConfirm(mb, controller);
+			case CONFIRM_JOIN:
+				handleConfirmJoin(mb, controller);
+				return;
+			case CONFIRM_LEAVE:
+				handleConfirmLeave(mb, controller);
 				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
@@ -205,10 +208,22 @@ public class Handler {
 		}
 	}
 	
-	private void handleConfirm(MessageBox mb, LoginController controller) {
+	private void handleConfirmJoin(MessageBox mb, LoginController controller) {
 		for(TreeItem<String> chat : controller.getTreeViewRoot().getChildren()) {
 			if(chat.getValue().equals(mb.get(Data.CHAT_NAME))) {
 				chat.getChildren().add(new TreeItem<>(mb.get(Data.USER_NAME)));
+			}
+		}
+	}
+	
+	private void handleConfirmLeave(MessageBox mb, LoginController controller) {
+		for(TreeItem<String> chat : controller.getTreeViewRoot().getChildren()) {
+			if(chat.getValue().equals(mb.get(Data.CHAT_NAME))) {
+				for(TreeItem<String> user : chat.getChildren()) {
+					if(user.getValue().equals(mb.get(Data.USER_NAME))) {
+						Platform.runLater(() -> chat.getChildren().remove(user));
+					}
+				}
 			}
 		}
 	}
