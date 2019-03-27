@@ -21,6 +21,7 @@ import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -48,6 +49,8 @@ public class LoginController {
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
 	@FXML private Text signupSuccessful;
+	@FXML private Text loginUnsuccessful;
+	@FXML private Text loginText;
 	
 	public LoginController(Stage stage, Client client) {
 		this.client = client;
@@ -59,6 +62,7 @@ public class LoginController {
 		friendsList = FXCollections.observableArrayList();
 		messageSpaces = new HashMap<String, TextArea>();
 		signupSuccessful.setVisible(false);
+		loginUnsuccessful.setVisible(false);
 	}
 
 	@FXML
@@ -72,8 +76,13 @@ public class LoginController {
 	@FXML 
 	public void login(ActionEvent e) {
 		signupSuccessful.setVisible(false);
+		String username = usernameField.getText();
+		if (username.length() > 10) {
+			refuseLogin(true);
+			return;
+		}
 		MessageBox login = new MessageBox(Action.LOGIN);
-		login.add(Data.USER_NAME, usernameField.getText());
+		login.add(Data.USER_NAME, username);
 		client.getUser().setUserName(usernameField.getText());
 		usernameField.clear();
 		login.add(Data.PASSWORD, passwordField.getText() + "");
@@ -114,8 +123,14 @@ public class LoginController {
 		//messageSpaces.get("global").appendText("Login successful!" + "\n");
 	}
 	
-	public void refuseLogin() {
-		//drawFailedLogonScreen();
+	public void refuseLogin(boolean nameTooLong) {
+		
+		loginUnsuccessful.setVisible(true);
+		loginText.setFill(Color.RED);
+		usernameField.clear();
+		passwordField.clear();
+		login.setDefaultButton(true);
+		usernameField.requestFocus();
 	}
 	
 	public MainController getMainController() {

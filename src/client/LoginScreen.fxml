@@ -16,7 +16,8 @@
       <Button fx:id="login" defaultButton="true" layoutX="131.0" layoutY="137.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <Text fx:id="noAccount" layoutX="14.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
       <Text fx:id="signup" fill="#247abf" layoutX="134.0" layoutY="192.0" onMouseClicked="#signup" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" underline="true" />
-      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+      <Text fx:id="loginText" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
       <Text fx:id="signupSuccessful" fill="GREEN" layoutX="60.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(signup successful!)" visible="false" wrappingWidth="141.97851870954037" />
+      <Text fx:id="loginUnsuccessful" fill="RED" layoutX="53.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="unsuccessful" visible="false" />
    </children>
 </AnchorPane>

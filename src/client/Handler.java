@@ -101,7 +101,7 @@ public class Handler {
 	}
 	
 	public void handleDeny(LoginController controller) {
-		Platform.runLater(() -> controller.refuseLogin());
+		Platform.runLater(() -> controller.refuseLogin(false));
 	}
 	
 	public void handleAccept(MessageBox mb, LoginController controller) {
