@@ -146,6 +146,7 @@ public class Hand implements Comparable {
 			groupByRank[card.getRank()-2].add(card);
 		}
 		
+		//Find counts that match desired N
 		for (ArrayList<Card> rank: groupByRank) {
 			if (rank.size() == n) {
 				for (int i = 0; i < n; i++) {
