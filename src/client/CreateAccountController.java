@@ -40,7 +40,8 @@ public class CreateAccountController {
 	}
 	
 	public void back(ActionEvent e) throws IOException {
-		drawLogonScreen();
+		stage.close();
+		drawLogonScreen(false);
 	}
 	
 	public void sendSignupRequest(ActionEvent e) {
@@ -51,7 +52,8 @@ public class CreateAccountController {
 			create.add(Data.PASSWORD, passwordField.getText());
 			passwordField.clear();
 			client.sendMessage(create);
-			drawLogonScreen();
+			stage.close();
+			drawLogonScreen(true);
 		}
 		else {
 			usernameField.clear();
@@ -60,7 +62,7 @@ public class CreateAccountController {
 		}
 	}
 	
-	private void drawLogonScreen(){
+	private void drawLogonScreen(boolean justSignedUpSuccessfully){
 		LoginController controller = new LoginController(stage, client);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
@@ -68,6 +70,9 @@ public class CreateAccountController {
 		try {
 			root = loader.load();
 			Scene scene = new Scene(root);
+			if (justSignedUpSuccessfully) {
+				controller.setSuccessfulSignupVisible();
+			}
 			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
