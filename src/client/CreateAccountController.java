@@ -56,6 +56,7 @@ public class CreateAccountController {
 		else {
 			usernameField.clear();
 			notLetters.setVisible(true);
+			usernameField.requestFocus();
 		}
 	}
 	
