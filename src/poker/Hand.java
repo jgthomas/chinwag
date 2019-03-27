@@ -137,8 +137,25 @@ public class Hand implements Comparable {
 	 * @param n
 	 * @return
 	 */
-	public Card[] getNofAKind(int n) {
-		return new Card[5];
+	public Card[] getNOfAKind(int n) {
+		Card[] outputHand = new Card[5];
+		
+		Card[] possibles = getPossibleCards();
+		ArrayList<Card>[] groupByRank = new ArrayList[13];
+		for (Card card: possibles) {
+			groupByRank[card.getRank()-2].add(card);
+		}
+		
+		//Find counts that match desired N
+		for (ArrayList<Card> rank: groupByRank) {
+			if (rank.size() == n) {
+				for (int i = 0; i < n; i++) {
+					outputHand[i] = rank.get(i);
+				}
+			}
+		}
+		//fill remainder of hand with high cards.
+		return outputHand;
 	}
 	
 	@Override
