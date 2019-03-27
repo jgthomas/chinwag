@@ -38,7 +38,7 @@ class StartNewChat extends Command {
         if (Database.chatExists(newChatName)){
             mb.add(Data.MESSAGE, "This chat name already exists, please try another one.");
         } else {
-            mb.add(Data.MESSAGE, "Chat successfully crated.");
+            mb.add(Data.MESSAGE, "Chat successfully created.");
             ChatSession newChat = new ChatSession(newChatName);
             registerUserWithChat(newChat);
             registerChatOnSystem(newChat);
