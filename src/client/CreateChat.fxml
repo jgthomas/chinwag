@@ -11,7 +11,7 @@
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a name for your chat" />
       <Button fx:id="cancel" cancelButton="true" layoutX="17.0" layoutY="137.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Button fx:id="createChat" defaultButton="true" layoutX="93.0" layoutY="137.0" mnemonicParsing="false" onAction="#createChat" text="Create chat" />
-      <Text fx:id="lettersOnly" fill="RED" layoutX="17.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat names can only contain letters" visible="false" wrappingWidth="170.99999935764936" />
+      <Text fx:id="lettersOnly" fill="RED" layoutX="17.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat names can only contain alphanumerics" visible="false" wrappingWidth="170.99999935764936" />
       <Text fx:id="duplicateChatNotification" fill="RED" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat name already taken" visible="false" />
    </children>
 </AnchorPane>
