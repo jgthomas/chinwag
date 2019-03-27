@@ -101,7 +101,7 @@ public class LoginController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
 		loader.setController(controller);
 		Parent root = loader.load();
-		
+		stage.close();
 		scene = new Scene(root);
 		stage.setTitle("ChinWag");
 		stage.setScene(scene);
