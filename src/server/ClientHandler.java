@@ -47,8 +47,9 @@ class ClientHandler implements MessageHandler {
 			// deregister from all currently connected chatsessions
 			getUserState().exitAllChats(getMessageSender());
 
-			// remove current client from list of connected clients
+			// remove current client from list of connected clients and connected IPs.
 			connectedClients.removeClientByUserName(messageSender.getUserName());
+			connectedClients.removeClientByID(messageSender.id());
 
 			// send messagebox to client to shutdown their listening loop
 			MessageBox mb = new MessageBox(Action.QUIT);
@@ -61,6 +62,7 @@ class ClientHandler implements MessageHandler {
             notifyLogout();
             getUserState().exitAllChats(getMessageSender());
             connectedClients.removeClientByUserName(messageSender.getUserName());
+			connectedClients.removeClientByID(messageSender.id());
             messageSender.closeSender();
 		}
 	}
