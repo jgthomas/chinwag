@@ -156,6 +156,7 @@ public class LoginController {
 //			}	
 //		});
 		newSpace.setEditable(false);
+		newSpace.setWrapText(true);
 		messageSpaces.put(session, newSpace);
 	}
 	

@@ -97,6 +97,12 @@ public class Handler {
 	 */
 	public void handleServerMessage(MessageBox mb, LoginController controller) {
 		//controller.getLoginController().drawChatCreationRefusal();
+		if(mb.get(Data.MESSAGE).equals("This chat name already exists, please try another one.")) {
+			
+		}
+		if(mb.get(Data.MESSAGE).equals("Chat successfully created.")) {
+			Platform.runLater(() -> controller.getMainController().createChat(mb.get(Data.CHAT_NAME)));
+		}
 		System.out.println(mb.get(Data.MESSAGE));
 	}
 	

@@ -74,6 +74,7 @@ public class MainController {
 		loggedIn.setText("Logged in as " + client.getUser().getUserName());
 		
 		messageSpace.setEditable(false);
+		messageSpace.setWrapText(true);
 		
 		removeFriend.setVisible(false);
 		
@@ -101,7 +102,9 @@ public class MainController {
 	public void sendMessage(ActionEvent e) {
 		messageSpace.appendText("You>>> " + input.getText() + "\n");
 		MessageBox message = new MessageBox(Action.CHAT);
-		message.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().getValue());
+		message.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().isLeaf() ?
+									chatTreeView.getSelectionModel().getSelectedItem().getParent().getValue() : 
+									chatTreeView.getSelectionModel().getSelectedItem().getValue());
 		message.add(Data.USER_NAME, client.getUser().getUserName());
 		message.add(Data.MESSAGE, input.getText());
 		input.clear();
@@ -110,22 +113,23 @@ public class MainController {
 	
 	@FXML
 	public void pressTreeView(MouseEvent e) {
-		if(chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
-			String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
-			if(!(currentSpace == null)) {
-				messageSpaces.get(currentSpace)
-							 .setText(messageSpace.getText());
-			}
-			currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
-			messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
-			for (TreeItem<String> item : treeViewRoot.getChildren()) {
-				item.setExpanded(false);
-			}
-			chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
-			input.requestFocus();
-		} //else
-		//	chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
-		
+		if(chatTreeView.getSelectionModel().getSelectedItem() != null) {
+			if(chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
+				String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+				if(!(currentSpace == null)) {
+					messageSpaces.get(currentSpace)
+								 .setText(messageSpace.getText());
+				}
+				currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+				messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
+				for (TreeItem<String> item : treeViewRoot.getChildren()) {
+					item.setExpanded(false);
+				}
+				chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
+				input.requestFocus();
+			} //else
+			//	chatTreeView.getSelectionModel().select(chatTreeView.getSelectionModel().getSelectedItem().getParent());
+		}
 	}
 	
 	@FXML
@@ -321,6 +325,15 @@ public class MainController {
 			}
 		}
 		return true;
+	}
+	
+	public void createChat(String name) {
+		TextArea newMessageSpace = new TextArea();
+		newMessageSpace.setEditable(false);
+		controller.getMessageSpaces().put(name, newMessageSpace);
+		TreeItem<String> chatTreeItem = new TreeItem<>(name);
+		chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
+		controller.getTreeViewRoot().getChildren().add(chatTreeItem);
 	}
 	
 	public void updateTreeView() {
