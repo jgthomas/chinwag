@@ -59,8 +59,13 @@ atlassian-ide-plugin.xml
 .metadata
 /bin/
 
+<<<<<<< HEAD
 # UML
 *.uml
 *.jpg
 *.jpeg
 *.png
+=======
+# Manifest files
+*.MF
+>>>>>>> d5212ef0f4b788ad6e61c478f7afcd98bdb638ec

@@ -16,6 +16,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -33,7 +34,6 @@ public class LoginController {
 	private MainController controller;
 	private Scene scene;
 	
-	
 	private ObservableList<String> friendsList;
 	private TreeItem<String> treeViewRoot;
 	private TreeView<String> chatTreeView;
@@ -46,10 +46,11 @@ public class LoginController {
 	@FXML private Text username;
 	@FXML private Text password;
 	@FXML private TextField usernameField;
-	@FXML private TextField passwordField;
+	@FXML private PasswordField passwordField;
+	@FXML private Text signupSuccessful;
 	
-	public LoginController(Stage stage) {
-		client = new Client("localhost", 6000, this);
+	public LoginController(Stage stage, Client client) {
+		this.client = client;
 		this.stage = stage;
 	}
 	
@@ -57,6 +58,7 @@ public class LoginController {
 		treeViewRoot = new TreeItem<String>();
 		friendsList = FXCollections.observableArrayList();
 		messageSpaces = new HashMap<String, TextArea>();
+		signupSuccessful.setVisible(false);
 	}
 
 	@FXML
@@ -69,6 +71,7 @@ public class LoginController {
 	
 	@FXML 
 	public void login(ActionEvent e) {
+		signupSuccessful.setVisible(false);
 		MessageBox login = new MessageBox(Action.LOGIN);
 		login.add(Data.USER_NAME, usernameField.getText());
 		client.getUser().setUserName(usernameField.getText());
@@ -86,7 +89,7 @@ public class LoginController {
 		Parent root = loader.load();
 		
 		Scene scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -103,7 +106,7 @@ public class LoginController {
 		Parent root = loader.load();
 		
 		scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();
@@ -133,6 +136,10 @@ public class LoginController {
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
 		return messageSpaces;
+	}
+	
+	public void setSuccessfulSignupVisible() {
+		signupSuccessful.setVisible(true);
 	}
 	
 	public void addSessionSpace(String session) {

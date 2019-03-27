@@ -9,19 +9,24 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private Stage stage;
 	private Scene scene;
+	private Client client;
+	private LoginController controller;
 	
 	@Override 
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
 		
-		LoginController controller = new LoginController(stage);
+		client = new Client("localhost", 6000);
+		controller = new LoginController(stage, client);
+		client.setController(controller);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
 		Parent root = loader.load();
 		
 		scene = new Scene(root);
-		stage.setTitle("MessengerClient");
+		stage.setTitle("ChinWag");
 		stage.setScene(scene);
+		stage.setOnCloseRequest(ActionEvent -> System.exit(1));
 		stage.show();
 	}
 	
@@ -36,4 +41,5 @@ public class Main extends Application {
 	public Scene getScene() {
 		return scene;
 	}
+	
 }

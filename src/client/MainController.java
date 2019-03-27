@@ -45,6 +45,7 @@ public class MainController {
 	private HashMap<String, TextArea> messageSpaces;
 	@FXML private Button send;
 	@FXML private TextField input;
+	@FXML private Button removeFriend;
 	@FXML private TreeView<String> chatTreeView;
 	@FXML private ListView<String> friendsListView;
 	@FXML private Label loggedIn;
@@ -73,6 +74,8 @@ public class MainController {
 		loggedIn.setText("Logged in as " + client.getUser().getUserName());
 		
 		messageSpace.setEditable(false);
+		
+		removeFriend.setVisible(false);
 		
 		chatTreeView.setRoot(treeViewRoot);
 		chatTreeView.setShowRoot(false);
@@ -127,7 +130,7 @@ public class MainController {
 	
 	@FXML
 	public void pressListView(MouseEvent e) {
-		
+		removeFriend.setVisible(true);
 	}
 	
 	@FXML
@@ -139,10 +142,35 @@ public class MainController {
 	}
 	
 	@FXML
+	public void removeFriend(ActionEvent e) {
+		MessageBox remove = new MessageBox(Action.REMOVE_FRIEND);
+		remove.add(Data.USER_NAME, friendsListView.getSelectionModel().getSelectedItem());
+		client.sendMessage(remove);
+		friendsList.remove(friendsListView.getSelectionModel().getSelectedItem());
+		friendsListView.getSelectionModel().clearSelection();
+		removeFriend.setVisible(false);
+	}
+	
+	@FXML
 	public void logout(ActionEvent e) {
-		MessageBox logout = new MessageBox(Action.QUIT);
+		MessageBox logout = new MessageBox(Action.LOGOUT);
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
+		stage.close();
+		Stage stage = new Stage();
+		LoginController controller = new LoginController(stage, client);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("ChinWag");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		//drawLogonScreen();
 	}
 	
@@ -156,7 +184,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -183,7 +211,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -201,7 +229,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -243,7 +271,7 @@ public class MainController {
 		try {
 			root = loader.load();
 			scene = new Scene(root);
-			stage.setTitle("MessengerClient");
+			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
@@ -276,5 +304,25 @@ public class MainController {
 		chatTreeView.getSelectionModel().getSelectedItem().setExpanded(true);
 		messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
 		currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
+	}
+	
+	/**
+	 * Used to make sure users can't create usernames or chat names with non-letter characters.
+	 * 
+	 * @param user's input
+	 * @return true iff user's input consists only of letters.
+	 */
+	public static boolean checkUserInput(String input) {
+		char[] characters = input.toCharArray();
+		for (char character: characters) {
+			if (!Character.isLetter(character)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void updateTreeView() {
+		chatTreeView.refresh();
 	}
 }

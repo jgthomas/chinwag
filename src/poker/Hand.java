@@ -130,6 +130,17 @@ public class Hand implements Comparable {
 		return new Card[5];
 	}
 
+	/**
+	 * User specifies N, e.g. when N = 3, method returns the best 3 of a kind hand the player can
+	 * make, or the null array if they can't make this kind of hand.
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public Card[] getNofAKind(int n) {
+		return new Card[5];
+	}
+	
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub

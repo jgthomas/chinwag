@@ -29,10 +29,11 @@ public class AddUserController {
 		MessageBox invite = new MessageBox(Action.INVITE);
 		invite.add(Data.USER_NAME, username.getText());
 		username.clear();
-		invite.add(Data.CHAT_NAME, chatTreeView
-								   .getSelectionModel()
-								   .getSelectedItem()
-								   .getValue());
+		invite.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().isLeaf() ? 
+				chatTreeView.getSelectionModel().getSelectedItem().getParent().getValue() : 
+				chatTreeView.getSelectionModel()
+							.getSelectedItem()
+							.getValue());
 		client.sendMessage(invite);
 		stage.close();
 	}

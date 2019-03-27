@@ -1,9 +1,12 @@
 package server_command;
 
 import database.Database;
+import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 import server.*;
+
+import java.util.concurrent.ConcurrentMap;
 
 
 /**
@@ -13,12 +16,12 @@ import server.*;
  *
  * Data Required
  * Data.CHAT_NAME - the name of the chat
- * Data.USER_NAME - the user to add to the chat
+ * Data.USER_NAME - the username of invite sender
  *
  * */
-class AddUserToChat extends Command {
+class JoinChat extends Command {
 
-    AddUserToChat(MessageSender messageSender,
+    JoinChat(MessageSender messageSender,
                   UserState userState,
                   AllChatSessions allChatSessions,
                   ConnectedClients connectedClients)
@@ -27,7 +30,7 @@ class AddUserToChat extends Command {
     }
 
     /**
-     * Adds another user to an existing chat session
+     * Adds current user to an existing chat session
      *
      * @param messageBox the command from the client to perform
      * */
@@ -37,6 +40,13 @@ class AddUserToChat extends Command {
 		String username = getCurrentThreadUserName();
 		Database.addUserToChat(chatName, username);
 		ChatSession chat = getAllChatSessions().getSession(chatName);
-		registerUserWithChat(chat);
+		MessageBox mb = new MessageBox(Action.CONFIRM_JOIN);
+		mb.add(Data.CHAT_NAME, chatName);
+		mb.add(Data.USER_NAME, username);
+		ChatSession chatSession = getAllChatSessions().getSession(chatName);
+		for (MessageSender ms: chatSession) {
+			ms.sendMessage(mb);
+		}
+        registerUserWithChat(chat);
 	}
 }

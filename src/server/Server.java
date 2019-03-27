@@ -46,9 +46,9 @@ public class Server {
 		Socket clientSocket;
 		Database.makeConnection();
 		MessageQueue messageQueue = new MessageQueue();
-		ImageQueue imageQueue = new ImageQueue();
 		threadPool.execute(messageQueue);
-		threadPool.execute(imageQueue);
+		//ImageQueue imageQueue = new ImageQueue();
+		//threadPool.execute(imageQueue);
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			while (true) {
 				clientSocket = serverSocket.accept();

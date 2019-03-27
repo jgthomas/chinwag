@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="chatName" layoutX="14.0" layoutY="42.0" />
+      <TextField fx:id="chatName" layoutX="17.0" layoutY="100.0" />
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a name for your chat" />
-      <Button fx:id="cancel" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-      <Button fx:id="createChat" layoutX="90.0" layoutY="79.0" mnemonicParsing="false" onAction="#createChat" text="Create chat" />
+      <Button fx:id="cancel" cancelButton="true" layoutX="17.0" layoutY="137.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Button fx:id="createChat" defaultButton="true" layoutX="93.0" layoutY="137.0" mnemonicParsing="false" onAction="#createChat" text="Create chat" />
+      <Text fx:id="lettersOnly" fill="RED" layoutX="17.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat names can only contain letters" visible="false" wrappingWidth="170.99999935764936" />
    </children>
 </AnchorPane>

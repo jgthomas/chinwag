@@ -70,6 +70,15 @@ public class Handler {
 				return;
 			case UPDATE_LOGGED_OUT:
 				handleUpdateLoggedOut(mb, controller, user);
+				return;
+			case QUIT:
+				return;
+			case CONFIRM_JOIN:
+				handleConfirmJoin(mb, controller);
+				return;
+			case CONFIRM_LEAVE:
+				handleConfirmLeave(mb, controller);
+				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}
@@ -87,7 +96,8 @@ public class Handler {
 	 * @param gui
 	 */
 	public void handleServerMessage(MessageBox mb, LoginController controller) {
-		controller.getMainController().drawChatCreationRefusal();
+		//controller.getLoginController().drawChatCreationRefusal();
+		System.out.println(mb.get(Data.MESSAGE));
 	}
 	
 	public void handleDeny(LoginController controller) {
@@ -153,6 +163,9 @@ public class Handler {
 	public void handleGiveMembers(MessageBox mb, LoginController controller, User user) {
 		//user.getChatSessions().get(mb.get(Data.CHAT_NAME)).setOnlineUsers(onlineUsers);
 		String members = mb.get(Data.CHAT_MEMBERS);
+		if(members == null) {
+			return;
+		}
 		for (TreeItem<String> t : controller.getTreeViewRoot().getChildren()) {
 			if (t.getValue().equals(mb.get(Data.CHAT_NAME))) {
 				for (String member : members.split(protocol.Token.SEPARATOR.getValue())) {
@@ -175,7 +188,9 @@ public class Handler {
 		for(String username : mb.get(Data.USER_NAME).split(protocol.Token.SEPARATOR.getValue())) {
 			client.getLoggedInUsers().add(username);
 		}
-		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
+		Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
+		 						 controller.getMainController().updateTreeView();
+		});
 //		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
 //		TreeSet<String> loggedInUsersClient = new TreeSet<>();
 //		for (String userName: loggedInUsersServer) {
@@ -186,12 +201,34 @@ public class Handler {
 	
 	public void handleUpdateLoggedOut(MessageBox mb, LoginController controller, User user) {
 		client.getLoggedInUsers().remove(mb.get(Data.USER_NAME));
-		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
+		Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
+								 controller.getMainController().updateTreeView();
+		});
 	}
 	
 	public void handleGiveFriends(MessageBox mb, LoginController controller) {
 		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
 			controller.getFriendsList().add(friend);
+		}
+	}
+	
+	private void handleConfirmJoin(MessageBox mb, LoginController controller) {
+		for(TreeItem<String> chat : controller.getTreeViewRoot().getChildren()) {
+			if(chat.getValue().equals(mb.get(Data.CHAT_NAME))) {
+				chat.getChildren().add(new TreeItem<>(mb.get(Data.USER_NAME)));
+			}
+		}
+	}
+	
+	private void handleConfirmLeave(MessageBox mb, LoginController controller) {
+		for(TreeItem<String> chat : controller.getTreeViewRoot().getChildren()) {
+			if(chat.getValue().equals(mb.get(Data.CHAT_NAME))) {
+				for(TreeItem<String> user : chat.getChildren()) {
+					if(user.getValue().equals(mb.get(Data.USER_NAME))) {
+						Platform.runLater(() -> chat.getChildren().remove(user));
+					}
+				}
+			}
 		}
 	}
 	
@@ -204,5 +241,9 @@ public class Handler {
 	 */
 	public String[] retrieveJoinedData(MessageBox mb, Data dataType) {
 		return mb.get(dataType).split(protocol.Token.SEPARATOR.getValue());
+	}
+	
+	public void setController(LoginController controller) {
+		this.controller = controller;
 	}
 }

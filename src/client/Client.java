@@ -50,7 +50,7 @@ public class Client {
 //		loggedInUsers = new ArrayList<String>();
 //	}
 	
-	public Client(String hostname, int port, LoginController controller) {
+	public Client(String hostname, int port) {
 		loggedInUsers = new ArrayList<String>();
 		this.hostname = hostname;
 		this.port = port;
@@ -69,7 +69,6 @@ public class Client {
 		in = new Scanner(System.in);
 		this.user = new User(this);
 		handler = new Handler(this, controller, user);
-		this.controller = controller;
 	}
 	
 	public void sendMessage(MessageBox mb) {
@@ -111,5 +110,10 @@ public class Client {
 	
 	public ArrayList<String> getLoggedInUsers() {
 		return loggedInUsers;
+	}
+	
+	public void setController(LoginController controller) {
+		this.controller = controller;
+		this.handler.setController(controller);
 	}
 }

@@ -18,6 +18,8 @@ public class CommandFactory {
                                 return new ChatSend(messageSender, userState, allChatSessions, connectedClients);
                         case LOGIN:
                                 return new Login(messageSender, userState, allChatSessions, connectedClients);
+                        case LOGOUT:
+                        	    return new Logout(messageSender, userState, allChatSessions, connectedClients);
                         case SIGN_UP:
                                 return new SignUp(messageSender, userState, allChatSessions, connectedClients);
                         case START_NEW_CHAT:
@@ -25,9 +27,11 @@ public class CommandFactory {
                         case LEAVE_CHAT:
                                 return new LeaveChat(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_USER:
-                                return new AddUserToChat(messageSender, userState, allChatSessions, connectedClients);
+                                return new JoinChat(messageSender, userState, allChatSessions, connectedClients);
                         case ADD_FRIEND:
                                 return new AddFriend(messageSender, userState, allChatSessions, connectedClients);
+                        case REMOVE_FRIEND:
+                                return new RemoveFriend(messageSender, userState, allChatSessions, connectedClients);
                         case QUIT:
                                 return new Quit(messageSender, userState, allChatSessions, connectedClients);
                         case INVITE:

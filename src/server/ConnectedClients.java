@@ -45,6 +45,16 @@ public class ConnectedClients implements Iterable<MessageHandler> {
         MessageHandler mh = clientsByID.get(id);
         clientsByUserName.put(userName, mh);
      }
+    
+    public void removeClientByUserName(String username) {
+    	if (username != null) {
+    		clientsByUserName.remove(username);
+    	}
+    }
+    
+    public void removeClientByID(String id) {
+    	clientsByID.remove(id);
+    }
 
     /**
      * Gets the thread for the named client
@@ -62,7 +72,10 @@ public class ConnectedClients implements Iterable<MessageHandler> {
      * @return a list of user names
      * */
     public List<String> allLoggedInUsers() {
-         return new ArrayList<>(clientsByUserName.keySet());
+        if (clientsByUserName.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(clientsByUserName.keySet());
      }
 
      @Override

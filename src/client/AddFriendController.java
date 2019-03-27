@@ -39,5 +39,6 @@ public class AddFriendController {
 		friendsList.add(username.getText());
 		username.clear();
 		client.sendMessage(add);
+		stage.close();
 	}
 }
