@@ -249,7 +249,8 @@ public class MainController {
 		messageSpaces.get(mb.get(Data.CHAT_NAME))
 					 .appendText(mb.get(Data.USER_NAME) + 
 							 ">>> " + mb.get(Data.MESSAGE) + "\n");
-		if(chatTreeView.getSelectionModel().getSelectedItem().getValue().equals(mb.get(Data.CHAT_NAME))) {
+		if(chatTreeView.getSelectionModel().getSelectedItem() != null && 
+				chatTreeView.getSelectionModel().getSelectedItem().getValue().equals(mb.get(Data.CHAT_NAME))) {
 			messageSpace.appendText(mb.get(Data.USER_NAME) + 
 							 ">>> " + mb.get(Data.MESSAGE) + "\n");
 		}
