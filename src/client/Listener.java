@@ -25,17 +25,17 @@ public class Listener implements Runnable {
 				mb = (MessageBox)client.getInput().readObject();
 				client.getHandler().handle(mb);
 			} catch(EOFException eof) {
-				eof.printStackTrace();
+				//eof.printStackTrace();
 				System.out.println("Connection to server dropped.");
 				System.exit(1);
 				break;
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				System.out.println("Connection to server dropped.");
 				System.exit(1);
 				break;
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				System.out.println("Connection to server dropped.");
 				System.exit(1);
 				break;
