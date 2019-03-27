@@ -26,11 +26,17 @@ public class CreateAccountController {
 	@FXML private Button signup;
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
-	@FXML private Text invalidUsernameText; 
+	@FXML private Text notLetters;
+	@FXML private Text duplicateUsername;
 	
 	public CreateAccountController(Client client, Stage stage) {
 		this.client = client;
 		this.stage = stage;
+	}
+	
+	public void initialize() {
+		notLetters.setVisible(false);
+		duplicateUsername.setVisible(false);
 	}
 	
 	public void back(ActionEvent e) throws IOException {
@@ -49,7 +55,7 @@ public class CreateAccountController {
 		}
 		else {
 			usernameField.clear();
-			invalidUsernameText.setText("Username must contain letters only");
+			notLetters.setVisible(true);
 		}
 	}
 	
