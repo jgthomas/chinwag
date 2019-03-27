@@ -13,20 +13,20 @@ public class Database {
     private static String username = "group22";
     private static String password = "group22";
     public static Connection connection;
-    private static PGSimpleDataSource ds;
+    //private static PGSimpleDataSource ds;
     
     /**
      * Opens a connection between server and database.
      */
     public static void makeConnection(){
         try {
-        	ds = new PGSimpleDataSource();
-            ds.setURL(url);
-            ds.setUser(username);
-            ds.setPassword(password);
-            DataSource dataSource = ds;
-            connection = ds.getConnection();
-            //connection = DriverManager.getConnection(url, username, password);
+//        	ds = new PGSimpleDataSource();
+//            ds.setURL(url);
+//            ds.setUser(username);
+//            ds.setPassword(password);
+//            DataSource dataSource = ds;
+//            connection = ds.getConnection();
+            connection = DriverManager.getConnection(url, username, password);
             
         } catch (SQLException e){
             e.printStackTrace();

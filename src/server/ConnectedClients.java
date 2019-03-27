@@ -49,6 +49,10 @@ public class ConnectedClients implements Iterable<MessageHandler> {
     public void removeClientByUserName(String username) {
     	clientsByUserName.remove(username);
     }
+    
+    public void removeClientByID(String id) {
+    	clientsByID.remove(id);
+    }
 
     /**
      * Gets the thread for the named client

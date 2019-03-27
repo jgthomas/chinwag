@@ -19,6 +19,7 @@ public enum Action {
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),
         DENY("DENY"),
+        CONFIRM("CONFIRM"),
         SERVER_MESSAGE("SERVER_MESSAGE"),
         ADD_USER("ADD_USER"),
         ADD_FRIEND("ADD_FRIEND"),

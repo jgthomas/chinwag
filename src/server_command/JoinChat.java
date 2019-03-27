@@ -1,6 +1,7 @@
 package server_command;
 
 import database.Database;
+import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
 import server.*;
@@ -13,12 +14,12 @@ import server.*;
  *
  * Data Required
  * Data.CHAT_NAME - the name of the chat
- * Data.USER_NAME - the user to add to the chat
+ * Data.USER_NAME - the username of invite sender
  *
  * */
-class AddUserToChat extends Command {
+class JoinChat extends Command {
 
-    AddUserToChat(MessageSender messageSender,
+    JoinChat(MessageSender messageSender,
                   UserState userState,
                   AllChatSessions allChatSessions,
                   ConnectedClients connectedClients)
@@ -27,16 +28,21 @@ class AddUserToChat extends Command {
     }
 
     /**
-     * Adds another user to an existing chat session
+     * Adds current user to an existing chat session
      *
      * @param messageBox the command from the client to perform
      * */
     @Override
     public void execute(MessageBox messageBox) {
 		String chatName = messageBox.get(Data.CHAT_NAME);
+		String sender = messageBox.get(Data.USER_NAME);
 		String username = getCurrentThreadUserName();
 		Database.addUserToChat(chatName, username);
 		ChatSession chat = getAllChatSessions().getSession(chatName);
 		registerUserWithChat(chat);
+		
+		MessageBox mb = new MessageBox(Action.CONFIRM);
+		mb.add(Data.CHAT_NAME, chatName);
+		getUser(sender).getMessageSender().sendMessage(mb);
 	}
 }
