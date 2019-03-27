@@ -16,6 +16,7 @@ public enum Action {
         START_NEW_CHAT("START_NEW_CHAT"),
         LEAVE_CHAT("LEAVE_CHAT"),
         QUIT("QUIT"),
+        LOGOUT("LOGOUT"),
         SIGN_UP("SIGN_UP"),
         ACCEPT("ACCEPT"),
         DENY("DENY"),
