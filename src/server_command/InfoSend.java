@@ -9,6 +9,8 @@ import server.*;
 import java.util.Collections;
 import java.util.List;
 
+import database.Database;
+
 class InfoSend extends Command {
 
     InfoSend(MessageSender messageSender,
@@ -51,16 +53,28 @@ class InfoSend extends Command {
         return messageBox;
     }
 
-    private MessageBox sessionMembersMessage(String chatName) {
-        MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
-        if (getAllChatSessions().getSession(chatName) != null) {
-        	String sessionMembersString =
-        			buildStringMessage(getAllChatSessions().getSession(chatName).allUserNames());
-        	messageBox.add(Data.CHAT_NAME, chatName);
-        	messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
-        }
-        return messageBox;
-    }
+//    private MessageBox sessionMembersMessage(String chatName) {
+//        MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
+//        if (getAllChatSessions().getSession(chatName) != null) {
+//        	String sessionMembersString =
+//        			buildStringMessage(getAllChatSessions().getSession(chatName).allUserNames());
+//        	messageBox.add(Data.CHAT_NAME, chatName);
+//        	messageBox.add(Data.CHAT_MEMBERS, sessionMembersString);
+//        }
+//        return messageBox;
+//    }
+    
+	private MessageBox sessionMembersMessage(String chatName) {
+		MessageBox messageBox = new MessageBox(Action.GIVE_MEMBERS);
+		String members = "";
+		if (chatName != null) {
+			List<String> chatMembers = Database.retrieveUsersFromSessions(chatName);
+			members = buildStringMessage(chatMembers);
+		}
+		messageBox.add(Data.CHAT_NAME, chatName);
+		messageBox.add(Data.CHAT_MEMBERS, members);
+		return messageBox;
+	}
 
     private MessageBox loggedInUsersMessage() {
         String loggedInString =

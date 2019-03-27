@@ -31,24 +31,20 @@ class Receiver implements MessageReceiver {
 	 *
 	 */
 	@Override
-	public void listeningLoop() {
+	public void listeningLoop() throws IOException{
 		MessageBox messageBox = new MessageBox(Action.CHAT);
-		try {
-			// do not put this in resources because do not want to
-			// auto-close after this method exits
-			ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-			do {
-				try {
-					messageBox = (MessageBox) in.readObject();
-					messageHandler.handle(messageBox);
 
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			} while (messageBox.getAction() != Action.QUIT);
-		} catch (IOException ioException) {
-			System.out.println("Client connection lost.");
-			System.exit(1);
-		}
+		// do not put this in resources because do not want to
+		// auto-close after this method exits
+		ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+		do {
+			try {
+				messageBox = (MessageBox) in.readObject();
+				messageHandler.handle(messageBox);
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} while (messageBox.getAction() != Action.QUIT);
 	}
 }

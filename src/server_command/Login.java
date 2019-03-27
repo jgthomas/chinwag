@@ -5,10 +5,12 @@ import database.Database;
 import database.Message;
 import protocol.Action;
 import protocol.Data;
+import protocol.DataFormatter;
 import protocol.MessageBox;
 import server.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -113,6 +115,7 @@ class Login extends Command {
 			}
 		}
 	}
+	
 	
 	/**
 	 * Loads from database the usernames of friends into UserState object 
