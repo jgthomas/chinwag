@@ -52,6 +52,7 @@ public class InvitationController {
 		client.sendMessage(requestChatHistory);
 		
 		treeViewRoot.getChildren().add(new TreeItem<String>(inviteName));
+		//client.getController().getChatTreeView().setRoot(treeViewRoot);
 		stage.close();
 		messageSpaces.put(inviteName, new TextArea());
 	}

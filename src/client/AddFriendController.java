@@ -37,6 +37,8 @@ public class AddFriendController {
 		MessageBox add = new MessageBox(Action.ADD_FRIEND);
 		add.add(Data.USER_NAME, username.getText());
 		friendsList.add(username.getText());
+		client.getController().getMainController().getFriendsListView().setItems(friendsList);
+		client.getController().getMainController().updateFriendsListView();
 		username.clear();
 		client.sendMessage(add);
 		stage.close();

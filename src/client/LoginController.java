@@ -55,12 +55,12 @@ public class LoginController {
 	public LoginController(Stage stage, Client client) {
 		this.client = client;
 		this.stage = stage;
-	}
-	
-	public void initialize() {		
 		treeViewRoot = new TreeItem<String>();
 		friendsList = FXCollections.observableArrayList();
 		messageSpaces = new HashMap<String, TextArea>();
+	}
+	
+	public void initialize() {		
 		signupSuccessful.setVisible(false);
 		loginUnsuccessful.setVisible(false);
 	}

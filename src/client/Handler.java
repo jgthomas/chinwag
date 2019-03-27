@@ -140,19 +140,21 @@ public class Handler {
 	}
 	
 	public void handleGiveSessions(MessageBox mb) {
-		List<String> chatSessions;
-		chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
-				.split(protocol.Token.SEPARATOR.getValue()));
-		for(String session : chatSessions) {
-			controller.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
-			controller.addSessionSpace(session);
-			MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
-			requestMembers.add(Data.CHAT_NAME, session);
-			client.sendMessage(requestMembers);
+		if(!mb.get(Data.CHAT_SESSIONS).isEmpty()) {
+			List<String> chatSessions;
+			chatSessions = Arrays.asList(mb.get(Data.CHAT_SESSIONS)
+					.split(protocol.Token.SEPARATOR.getValue()));
+			for(String session : chatSessions) {
+				controller.getTreeViewRoot().getChildren().add(new TreeItem<String>(session));
+				controller.addSessionSpace(session);
+				MessageBox requestMembers = new MessageBox(Action.GET_MEMBERS);
+				requestMembers.add(Data.CHAT_NAME, session);
+				client.sendMessage(requestMembers);
+			}
+			MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
+			requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
+			client.sendMessage(requestChatHistory);
 		}
-		MessageBox requestChatHistory = new MessageBox(Action.GET_CHAT_HISTORY);
-		requestChatHistory.add(Data.USER_NAME, client.getUser().getUserName());
-		client.sendMessage(requestChatHistory);
 	}
 	
 	public void handleGiveChatHistory(MessageBox mb, LoginController controller) {
@@ -215,8 +217,10 @@ public class Handler {
 	}
 	
 	public void handleGiveFriends(MessageBox mb, LoginController controller) {
-		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
-			Platform.runLater(() -> controller.getFriendsList().add(friend));
+		if(!mb.get(Data.USER_FRIENDS).isEmpty()) {
+			for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
+				Platform.runLater(() -> controller.getFriendsList().add(friend));
+			}
 		}
 	}
 	

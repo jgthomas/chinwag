@@ -79,6 +79,11 @@ public class MainController {
 		removeFriend.setVisible(false);
 		
 		chatTreeView.setRoot(treeViewRoot);
+//		if(treeViewRoot.getChildren().isEmpty()) {
+//			chatTreeView.getSelectionModel().selectFirst();
+//			treeViewRoot.getChildren().remove(chatTreeView.getSelectionModel().getSelectedItem());
+//			treeViewRoot.getChildren().clear();
+//		}
 		chatTreeView.setShowRoot(false);
 		chatTreeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>(){
 			@Override
@@ -86,9 +91,9 @@ public class MainController {
 				return new OnlineIndicatorTreeCell(client);
 			}
 		});
+		
 		//messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
 		//currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
-
 		friendsListView.setItems(friendsList);
 		friendsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>(){
 			@Override
@@ -341,5 +346,9 @@ public class MainController {
 	
 	public void updateTreeView() {
 		chatTreeView.refresh();
+	}
+	
+	public ListView<String> getFriendsListView() {
+		return friendsListView;
 	}
 }

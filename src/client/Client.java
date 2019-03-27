@@ -116,4 +116,8 @@ public class Client {
 		this.controller = controller;
 		this.handler.setController(controller);
 	}
+	
+	public LoginController getController() {
+		return controller;
+	}
 }
