@@ -46,7 +46,7 @@ public class CreateAccountController {
 	}
 	
 	private void drawLogonScreen(){
-		LoginController controller = new LoginController(stage);
+		LoginController controller = new LoginController(stage, client);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
 		Parent root;
