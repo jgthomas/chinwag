@@ -204,6 +204,7 @@ public class MainController {
 		leave.add(Data.CHAT_NAME, toLeave.getValue());
 		client.sendMessage(leave);
 		treeViewRoot.getChildren().remove(toLeave);
+		messageSpace.clear();
 	}
 	
 	@FXML
