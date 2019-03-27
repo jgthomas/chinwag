@@ -73,6 +73,9 @@ public class Handler {
 				return;
 			case QUIT:
 				return;
+			case CONFIRM:
+				handleConfirm(mb, controller);
+				return;
 			default:
 				throw new IllegalStateException("Unrecognised command: " + action);
 		}
@@ -202,6 +205,14 @@ public class Handler {
 		}
 	}
 	
+	private void handleConfirm(MessageBox mb, LoginController controller) {
+		for(TreeItem<String> chat : controller.getTreeViewRoot().getChildren()) {
+			if(chat.getValue().equals(mb.get(Data.CHAT_NAME))) {
+				chat.getChildren().add(new TreeItem<>(mb.get(Data.USER_NAME)));
+			}
+		}
+	}
+	
 	/**
 	 * Helper method to split the Strings sent by the server into a String array for processing
 	 * 
@@ -211,5 +222,9 @@ public class Handler {
 	 */
 	public String[] retrieveJoinedData(MessageBox mb, Data dataType) {
 		return mb.get(dataType).split(protocol.Token.SEPARATOR.getValue());
+	}
+	
+	public void setController(LoginController controller) {
+		this.controller = controller;
 	}
 }

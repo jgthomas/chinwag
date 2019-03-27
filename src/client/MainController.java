@@ -156,6 +156,20 @@ public class MainController {
 		MessageBox logout = new MessageBox(Action.QUIT);
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
+		Stage stage = new Stage();
+		LoginController controller = new LoginController(stage, client);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+		loader.setController(controller);
+		Parent root;
+		try {
+			root = loader.load();
+			scene = new Scene(root);
+			stage.setTitle("ChinWag");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		//drawLogonScreen();
 	}
 	

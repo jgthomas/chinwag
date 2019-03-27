@@ -34,7 +34,6 @@ public class LoginController {
 	private MainController controller;
 	private Scene scene;
 	
-	
 	private ObservableList<String> friendsList;
 	private TreeItem<String> treeViewRoot;
 	private TreeView<String> chatTreeView;
@@ -49,8 +48,8 @@ public class LoginController {
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
 	
-	public LoginController(Stage stage) {
-		client = new Client("localhost", 6000, this);
+	public LoginController(Stage stage, Client client) {
+		this.client = client;
 		this.stage = stage;
 	}
 	
