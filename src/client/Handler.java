@@ -188,7 +188,9 @@ public class Handler {
 		for(String username : mb.get(Data.USER_NAME).split(protocol.Token.SEPARATOR.getValue())) {
 			client.getLoggedInUsers().add(username);
 		}
-		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
+		Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
+		 						 controller.getMainController().updateTreeView();
+		});
 //		String[] loggedInUsersServer = retrieveJoinedData(mb, Data.LOGGED_IN_MEMBERS);
 //		TreeSet<String> loggedInUsersClient = new TreeSet<>();
 //		for (String userName: loggedInUsersServer) {
