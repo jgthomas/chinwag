@@ -40,7 +40,6 @@ public class InvitationController {
 	
 	public void accept() {
 		MessageBox accept = new MessageBox(Action.ADD_USER);
-		accept.add(Data.USER_NAME, inviter);
 		accept.add(Data.CHAT_NAME, inviteName);
 		client.sendMessage(accept);
 		
