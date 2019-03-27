@@ -59,11 +59,11 @@ class ClientHandler implements MessageHandler {
 			messageSender.closeSender();
 		} catch (IOException e) {
 		    System.out.println("Client disconnected.");
-            notifyLogout();
+		    // logout can no longer be notified because the connection is already forcibly closed.
+            // notifyLogout();
             getUserState().exitAllChats(getMessageSender());
             connectedClients.removeClientByUserName(messageSender.getUserName());
 			connectedClients.removeClientByID(messageSender.id());
-            messageSender.closeSender();
 		}
 	}
 
