@@ -321,4 +321,8 @@ public class MainController {
 		}
 		return true;
 	}
+	
+	public void updateTreeView() {
+		chatTreeView.refresh();
+	}
 }
