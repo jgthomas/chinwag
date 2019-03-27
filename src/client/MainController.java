@@ -153,7 +153,7 @@ public class MainController {
 	
 	@FXML
 	public void logout(ActionEvent e) {
-		MessageBox logout = new MessageBox(Action.QUIT);
+		MessageBox logout = new MessageBox(Action.LOGOUT);
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
 		stage.close();
