@@ -27,7 +27,6 @@ public class Logout extends Command {
 		}
 		
 		getConnectedClients().removeClientByUserName(getMessageSender().getUserName());
-		getConnectedClients().removeClientByID(getMessageSender().id());
 		
         getUserState().exitAllChats(getMessageSender());
 	}
