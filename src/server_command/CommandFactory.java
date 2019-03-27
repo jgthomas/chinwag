@@ -18,6 +18,8 @@ public class CommandFactory {
                                 return new ChatSend(messageSender, userState, allChatSessions, connectedClients);
                         case LOGIN:
                                 return new Login(messageSender, userState, allChatSessions, connectedClients);
+                        case LOGOUT:
+                        	    return new Logout(messageSender, userState, allChatSessions, connectedClients);
                         case SIGN_UP:
                                 return new SignUp(messageSender, userState, allChatSessions, connectedClients);
                         case START_NEW_CHAT:

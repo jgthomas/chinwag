@@ -42,19 +42,4 @@ public class Main extends Application {
 		return scene;
 	}
 	
-	/**
-	 * Used to make sure users can't create usernames or chat names with non-letter characters.
-	 * 
-	 * @param user's input
-	 * @return true iff user's input consists only of letters.
-	 */
-	public static boolean checkUserInput(String input) {
-		char[] characters = input.toCharArray();
-		for (char character: characters) {
-			if (!Character.isLetter(character)) {
-				return false;
-			}
-		}
-		return true;
-	}
 }
