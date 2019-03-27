@@ -6,6 +6,7 @@ import protocol.MessageBox;
 import server_command.Command;
 import server_command.CommandFactory;
 
+import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -36,24 +37,32 @@ class ClientHandler implements MessageHandler {
 
 	@Override
 	public void run() {
-		// listen for communication from client
-		messageReceiver.listeningLoop();
-		
-		// notify all other connected clients of logout
-		notifyLogout();
-		
-		// deregister from all currently connected chatsessions
-		getUserState().exitAllChats(getMessageSender());
+		try {
+			// listen for communication from client
+			messageReceiver.listeningLoop();
 
-		// remove current client from list of connected clients
-		connectedClients.removeClientByUserName(messageSender.getUserName());
+			// notify all other connected clients of logout
+			notifyLogout();
 
-		// send messagebox to client to shutdown their listening loop
-		MessageBox mb = new MessageBox(Action.QUIT);
-		messageSender.sendMessage(mb);
+			// deregister from all currently connected chatsessions
+			getUserState().exitAllChats(getMessageSender());
 
-		// close stream
-		messageSender.closeSender();
+			// remove current client from list of connected clients
+			connectedClients.removeClientByUserName(messageSender.getUserName());
+
+			// send messagebox to client to shutdown their listening loop
+			MessageBox mb = new MessageBox(Action.QUIT);
+			messageSender.sendMessage(mb);
+
+			// close stream
+			messageSender.closeSender();
+		} catch (IOException e) {
+		    System.out.println("Client disconnected.");
+            notifyLogout();
+            getUserState().exitAllChats(getMessageSender());
+            connectedClients.removeClientByUserName(messageSender.getUserName());
+            messageSender.closeSender();
+		}
 	}
 
 	/**

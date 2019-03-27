@@ -1,8 +1,10 @@
 package server;
 
 
+import java.io.IOException;
+
 interface MessageReceiver {
 
-        void listeningLoop();
+        void listeningLoop() throws IOException;
 
 }
