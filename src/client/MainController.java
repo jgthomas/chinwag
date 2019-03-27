@@ -36,6 +36,7 @@ public class MainController {
 	private Stage stage;
 	private Scene scene;
 	private LoginController controller;
+	private CreateChatController chatController;
 	private String inviter;
 	
 	private String currentSpace;
@@ -217,6 +218,7 @@ public class MainController {
 	public void createChat(ActionEvent e) {
 		Stage stage = new Stage();
 		CreateChatController controller = new CreateChatController(client, stage, this.controller);
+		chatController = controller;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateChat.fxml"));
 		loader.setController(controller);
 		Parent root;
@@ -320,7 +322,7 @@ public class MainController {
 	}
 	
 	/**
-	 * Used to make sure users can't create usernames or chat names with non-letter characters.
+	 * Used to make sure users can't create usernames or chat names with non-alphanumberic characters.
 	 * 
 	 * @param user's input
 	 * @return true iff user's input consists only of letters.
@@ -328,7 +330,7 @@ public class MainController {
 	public static boolean checkUserInput(String input) {
 		char[] characters = input.toCharArray();
 		for (char character: characters) {
-			if (!Character.isLetter(character)) {
+			if (!(Character.isLetter(character) || Character.isDigit(character))) {
 				return false;
 			}
 		}
@@ -350,5 +352,9 @@ public class MainController {
 	
 	public ListView<String> getFriendsListView() {
 		return friendsListView;
+	}
+
+	public CreateChatController getChatController() {
+		return chatController;
 	}
 }
