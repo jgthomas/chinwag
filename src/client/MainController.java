@@ -305,4 +305,20 @@ public class MainController {
 		messageSpace.setText(messageSpaces.get(chatTreeView.getSelectionModel().getSelectedItem().getValue()).getText());
 		currentSpace = chatTreeView.getSelectionModel().getSelectedItem().getValue();
 	}
+	
+	/**
+	 * Used to make sure users can't create usernames or chat names with non-letter characters.
+	 * 
+	 * @param user's input
+	 * @return true iff user's input consists only of letters.
+	 */
+	public static boolean checkUserInput(String input) {
+		char[] characters = input.toCharArray();
+		for (char character: characters) {
+			if (!Character.isLetter(character)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import protocol.Action;
 import protocol.Data;
@@ -25,10 +26,17 @@ public class CreateAccountController {
 	@FXML private Button signup;
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
+	@FXML private Text notLetters;
+	@FXML private Text duplicateUsername;
 	
 	public CreateAccountController(Client client, Stage stage) {
 		this.client = client;
 		this.stage = stage;
+	}
+	
+	public void initialize() {
+		notLetters.setVisible(false);
+		duplicateUsername.setVisible(false);
 	}
 	
 	public void back(ActionEvent e) throws IOException {
@@ -36,13 +44,20 @@ public class CreateAccountController {
 	}
 	
 	public void sendSignupRequest(ActionEvent e) {
-		MessageBox create = new MessageBox(Action.SIGN_UP);
-		create.add(Data.USER_NAME, usernameField.getText());
-		usernameField.clear();
-		create.add(Data.PASSWORD, passwordField.getText());
-		passwordField.clear();
-		client.sendMessage(create);
-		drawLogonScreen();
+		if (MainController.checkUserInput(usernameField.getText())) {
+			MessageBox create = new MessageBox(Action.SIGN_UP);
+			create.add(Data.USER_NAME, usernameField.getText());
+			usernameField.clear();
+			create.add(Data.PASSWORD, passwordField.getText());
+			passwordField.clear();
+			client.sendMessage(create);
+			drawLogonScreen();
+		}
+		else {
+			usernameField.clear();
+			notLetters.setVisible(true);
+			usernameField.requestFocus();
+		}
 	}
 	
 	private void drawLogonScreen(){
