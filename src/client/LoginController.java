@@ -127,7 +127,7 @@ public class LoginController {
 	public void refuseLogin(boolean nameTooLong) {
 		
 		loginUnsuccessful.setVisible(true);
-		loginText.setFill(Color.RED);
+		loginText.setFill(Color.RED); //notifies user
 		usernameField.clear();
 		passwordField.clear();
 		login.setDefaultButton(true);
