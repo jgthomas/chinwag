@@ -36,6 +36,7 @@ public class MainController {
 	private Stage stage;
 	private Scene scene;
 	private LoginController controller;
+	private CreateChatController chatController;
 	private String inviter;
 	
 	private String currentSpace;
@@ -212,6 +213,7 @@ public class MainController {
 	public void createChat(ActionEvent e) {
 		Stage stage = new Stage();
 		CreateChatController controller = new CreateChatController(client, stage, this.controller);
+		chatController = controller;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateChat.fxml"));
 		loader.setController(controller);
 		Parent root;
@@ -341,5 +343,9 @@ public class MainController {
 	
 	public void updateTreeView() {
 		chatTreeView.refresh();
+	}
+	
+	public CreateChatController getChatController() {
+		return chatController;
 	}
 }

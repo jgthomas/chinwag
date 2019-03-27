@@ -21,6 +21,7 @@ public class CreateChatController {
 	@FXML private Button createChat;
 	@FXML private Button cancel;
 	@FXML private Text lettersOnly;
+	@FXML private Text duplicateChatNotification;
 	
 	public CreateChatController(Client client, Stage stage,
 			LoginController controller) {
@@ -31,6 +32,7 @@ public class CreateChatController {
 	
 	public void initialize() {
 		lettersOnly.setVisible(false);
+		duplicateChatNotification.setVisible(false);
 	}
 	
 	public void cancel(ActionEvent e) {
@@ -50,12 +52,19 @@ public class CreateChatController {
 //			controller.getTreeViewRoot().getChildren().add(chatTreeItem);
 			chatName.clear();
 			client.sendMessage(create);
-			stage.close();
 		} else {
 			chatName.clear();
 			chatName.requestFocus();
 			lettersOnly.setVisible(true);
 		}
 		
+	}
+	
+	public void notifyDuplicateChat() {
+		duplicateChatNotification.setVisible(true);
+	}
+	
+	public Stage getStage() {
+		return stage;
 	}
 }
