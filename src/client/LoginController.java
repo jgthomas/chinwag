@@ -101,6 +101,7 @@ public class LoginController {
 		controller = new MainController(stage, client, 
 				treeViewRoot, chatTreeView, messageSpaces, loggedIn, friendsList,
 				scene, this);
+		setMainController(controller);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
 		loader.setController(controller);
 		Parent root = loader.load();
@@ -120,6 +121,10 @@ public class LoginController {
 	
 	public MainController getMainController() {
 		return controller;
+	}
+	
+	public void setMainController(MainController controller) {
+		this.controller = controller;
 	}
 	
 	public TreeView<String> getChatTreeView() {

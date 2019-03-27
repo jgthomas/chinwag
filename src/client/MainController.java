@@ -159,6 +159,7 @@ public class MainController {
 		stage.close();
 		Stage stage = new Stage();
 		LoginController controller = new LoginController(stage, client);
+		client.setController(controller);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
 		Parent root;
