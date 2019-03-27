@@ -242,7 +242,7 @@ public class Database {
 	    {
 	        statement.setString(1, chatname);
 	        statement.setString(2, username);
-	        statement.executeQuery();
+	        statement.executeUpdate();
         } catch (SQLException e) {
 	        e.printStackTrace();
         }

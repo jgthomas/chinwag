@@ -1,6 +1,8 @@
 package server_command;
 
 import database.Database;
+import protocol.Action;
+import protocol.Data;
 import protocol.MessageBox;
 import server.*;
 
@@ -34,7 +36,15 @@ class LeaveChat extends Command {
     public void execute(MessageBox messageBox){
         String chatName = messageBox.get(CHAT_NAME);
         Database.removeUserFromChat(chatName, getCurrentThreadUserName());
-        leaveChat(chatName);
+        String username = getCurrentThreadUserName();
+        MessageBox mb = new MessageBox(Action.CONFIRM_LEAVE);
+        mb.add(Data.CHAT_NAME, chatName);
+        mb.add(Data.USER_NAME, username);
+        ChatSession chatSession = getAllChatSessions().getSession(chatName);
+        for (MessageSender ms: chatSession) {
+            ms.sendMessage(mb);
+        }
+        leaveChat(chatSession);
     }
 
     /**
@@ -46,10 +56,9 @@ class LeaveChat extends Command {
      *
      * Second it removes the chat from the user's current sessions
      *
-     * @param chatName the chat from which the user is to be removed
+     * @param chatSession the chat from which the user is to be removed
      * */
-    private void leaveChat(String chatName) {
-        ChatSession chatSession = getAllChatSessions().getSession(chatName);
+    private void leaveChat(ChatSession chatSession) {
         removeUserFromChat(chatSession);
 
         if (chatSession.isEmpty()) {
