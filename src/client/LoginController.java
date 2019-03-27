@@ -47,6 +47,7 @@ public class LoginController {
 	@FXML private Text password;
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
+	@FXML private Text signupSuccessful;
 	
 	public LoginController(Stage stage, Client client) {
 		this.client = client;
@@ -57,6 +58,7 @@ public class LoginController {
 		treeViewRoot = new TreeItem<String>();
 		friendsList = FXCollections.observableArrayList();
 		messageSpaces = new HashMap<String, TextArea>();
+		signupSuccessful.setVisible(false);
 	}
 
 	@FXML
@@ -69,6 +71,7 @@ public class LoginController {
 	
 	@FXML 
 	public void login(ActionEvent e) {
+		signupSuccessful.setVisible(false);
 		MessageBox login = new MessageBox(Action.LOGIN);
 		login.add(Data.USER_NAME, usernameField.getText());
 		client.getUser().setUserName(usernameField.getText());
@@ -133,6 +136,10 @@ public class LoginController {
 	
 	public HashMap<String, TextArea> getMessageSpaces() {
 		return messageSpaces;
+	}
+	
+	public void setSuccessfulSignupVisible() {
+		signupSuccessful.setVisible(true);
 	}
 	
 	public void addSessionSpace(String session) {
