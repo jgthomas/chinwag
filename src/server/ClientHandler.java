@@ -59,11 +59,15 @@ class ClientHandler implements MessageHandler {
 			messageSender.closeSender();
 		} catch (IOException e) {
 		    System.out.println("Client disconnected.");
-		    // logout can no longer be notified because the connection is already forcibly closed.
-            // notifyLogout();
-            getUserState().exitAllChats(getMessageSender());
             connectedClients.removeClientByUserName(messageSender.getUserName());
-			connectedClients.removeClientByID(messageSender.id());
+            connectedClients.removeClientByID(messageSender.id());
+            MessageBox mb = new MessageBox(Action.UPDATE_LOGGED_OUT);
+            mb.add(Data.USER_NAME, getMessageSender().getUserName());
+            for (MessageHandler mh: connectedClients){
+                mh.getMessageSender().sendMessage(mb);
+            }
+            getUserState().exitAllChats(getMessageSender());
+
 		}
 	}
 
