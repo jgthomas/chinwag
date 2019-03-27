@@ -114,7 +114,8 @@ public class MainController {
 	@FXML
 	public void pressTreeView(MouseEvent e) {
 		if(chatTreeView.getSelectionModel().getSelectedItem() != null) {
-			if(chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
+			if(chatTreeView.getSelectionModel().getSelectedItem().getParent() != null && 
+					chatTreeView.getSelectionModel().getSelectedItem().getParent().getParent() == null) {
 				String space = chatTreeView.getSelectionModel().getSelectedItem().getValue();
 				if(!(currentSpace == null)) {
 					messageSpaces.get(currentSpace)
