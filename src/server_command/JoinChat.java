@@ -40,7 +40,6 @@ class JoinChat extends Command {
 		Database.addUserToChat(chatName, username);
 		ChatSession chat = getAllChatSessions().getSession(chatName);
 		registerUserWithChat(chat);
-		
 		MessageBox mb = new MessageBox(Action.CONFIRM);
 		mb.add(Data.CHAT_NAME, chatName);
 		getUser(sender).getMessageSender().sendMessage(mb);
