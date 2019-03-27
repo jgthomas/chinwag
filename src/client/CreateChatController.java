@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import protocol.Action;
 import protocol.Data;
@@ -19,6 +20,7 @@ public class CreateChatController {
 	@FXML private TextField chatName;
 	@FXML private Button createChat;
 	@FXML private Button cancel;
+	@FXML private Text lettersOnly;
 	
 	public CreateChatController(Client client, Stage stage,
 			LoginController controller) {
@@ -27,22 +29,33 @@ public class CreateChatController {
 		this.controller = controller;
 	}
 	
+	public void initialize() {
+		lettersOnly.setVisible(false);
+	}
+	
 	public void cancel(ActionEvent e) {
 		stage.close();
 	}
 	
 	public void createChat(ActionEvent e) {
-		MessageBox create = new MessageBox(Action.START_NEW_CHAT);
-		create.add(Data.CHAT_NAME, chatName.getText());
-		create.add(Data.USER_NAME, client.getUser().getUserName());
-		TextArea newMessageSpace = new TextArea();
-		newMessageSpace.setEditable(false);
-		controller.getMessageSpaces().put(chatName.getText(), newMessageSpace);
-		TreeItem<String> chatTreeItem = new TreeItem<>(chatName.getText());
-		chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
-		controller.getTreeViewRoot().getChildren().add(chatTreeItem);
-		chatName.clear();
-		client.sendMessage(create);
-		stage.close();
+		if (MainController.checkUserInput(chatName.getText())) {
+			MessageBox create = new MessageBox(Action.START_NEW_CHAT);
+			create.add(Data.CHAT_NAME, chatName.getText());
+			create.add(Data.USER_NAME, client.getUser().getUserName());
+			TextArea newMessageSpace = new TextArea();
+			newMessageSpace.setEditable(false);
+			controller.getMessageSpaces().put(chatName.getText(), newMessageSpace);
+			TreeItem<String> chatTreeItem = new TreeItem<>(chatName.getText());
+			chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
+			controller.getTreeViewRoot().getChildren().add(chatTreeItem);
+			chatName.clear();
+			client.sendMessage(create);
+			stage.close();
+		} else {
+			chatName.clear();
+			chatName.requestFocus();
+			lettersOnly.setVisible(true);
+		}
+		
 	}
 }
