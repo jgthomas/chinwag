@@ -199,7 +199,9 @@ public class Handler {
 	
 	public void handleUpdateLoggedOut(MessageBox mb, LoginController controller, User user) {
 		client.getLoggedInUsers().remove(mb.get(Data.USER_NAME));
-		Platform.runLater(() -> controller.getMainController().updateFriendsListView());
+		Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
+								 controller.getMainController().updateTreeView();
+		});
 	}
 	
 	public void handleGiveFriends(MessageBox mb, LoginController controller) {
