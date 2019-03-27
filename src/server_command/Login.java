@@ -77,6 +77,7 @@ class Login extends Command {
     	 * failed attempts counter and/or locked accounts.
     	 */
 		if (Database.isValidUser(username, hash)){
+			Server.getFailedAttempts().remove(username);
 			sendAcceptMessage(username);
 			setUserName(username);
 			addAsLoggedInClient(getCurrentThreadID(), username);

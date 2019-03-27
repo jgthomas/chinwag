@@ -42,12 +42,12 @@ public class CreateChatController {
 			MessageBox create = new MessageBox(Action.START_NEW_CHAT);
 			create.add(Data.CHAT_NAME, chatName.getText());
 			create.add(Data.USER_NAME, client.getUser().getUserName());
-			TextArea newMessageSpace = new TextArea();
-			newMessageSpace.setEditable(false);
-			controller.getMessageSpaces().put(chatName.getText(), newMessageSpace);
-			TreeItem<String> chatTreeItem = new TreeItem<>(chatName.getText());
-			chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
-			controller.getTreeViewRoot().getChildren().add(chatTreeItem);
+//			TextArea newMessageSpace = new TextArea();
+//			newMessageSpace.setEditable(false);
+//			controller.getMessageSpaces().put(chatName.getText(), newMessageSpace);
+//			TreeItem<String> chatTreeItem = new TreeItem<>(chatName.getText());
+//			chatTreeItem.getChildren().add(new TreeItem<>(client.getUser().getUserName()));
+//			controller.getTreeViewRoot().getChildren().add(chatTreeItem);
 			chatName.clear();
 			client.sendMessage(create);
 			stage.close();

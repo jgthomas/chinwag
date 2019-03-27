@@ -97,6 +97,12 @@ public class Handler {
 	 */
 	public void handleServerMessage(MessageBox mb, LoginController controller) {
 		//controller.getLoginController().drawChatCreationRefusal();
+		if(mb.get(Data.MESSAGE).equals("This chat name already exists, please try another one.")) {
+			
+		}
+		if(mb.get(Data.MESSAGE).equals("Chat successfully created.")) {
+			Platform.runLater(() -> controller.getMainController().createChat(mb.get(Data.CHAT_NAME)));
+		}
 		System.out.println(mb.get(Data.MESSAGE));
 	}
 	
@@ -201,14 +207,16 @@ public class Handler {
 	
 	public void handleUpdateLoggedOut(MessageBox mb, LoginController controller, User user) {
 		client.getLoggedInUsers().remove(mb.get(Data.USER_NAME));
-		Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
-								 controller.getMainController().updateTreeView();
-		});
+		if(controller.getMainController()!=null) {
+			Platform.runLater(() -> {controller.getMainController().updateFriendsListView();
+									 controller.getMainController().updateTreeView();
+			});
+		}
 	}
 	
 	public void handleGiveFriends(MessageBox mb, LoginController controller) {
 		for(String friend : mb.get(Data.USER_FRIENDS).split(protocol.Token.SEPARATOR.getValue())) {
-			controller.getFriendsList().add(friend);
+			Platform.runLater(() -> controller.getFriendsList().add(friend));
 		}
 	}
 	
