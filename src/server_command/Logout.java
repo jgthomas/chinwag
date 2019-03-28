@@ -3,11 +3,7 @@ package server_command;
 import protocol.Action;
 import protocol.Data;
 import protocol.MessageBox;
-import server.AllChatSessions;
-import server.ConnectedClients;
-import server.MessageHandler;
-import server.MessageSender;
-import server.UserState;
+import server.*;
 
 public class Logout extends Command {
 
@@ -29,6 +25,13 @@ public class Logout extends Command {
 		getConnectedClients().removeClientByUserName(getMessageSender().getUserName());
 		
         getUserState().exitAllChats(getMessageSender());
+
+        for (String friend: getUserState().getAllFriends()) {
+        	getUserState().removeFriend(friend);
+		}
+		// Clears the user's chat session map
+		getUserState().getActiveSessions().clear();
+
 	}
 
 }
