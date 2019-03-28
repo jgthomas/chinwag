@@ -34,6 +34,7 @@ public class LoginController {
 	private Stage stage;
 	private MainController controller;
 	private Scene scene;
+	private CreateAccountController createAccountController;
 	
 	private ObservableList<String> friendsList;
 	private TreeItem<String> treeViewRoot;
@@ -92,12 +93,14 @@ public class LoginController {
 	
 	@FXML
 	public void signup(MouseEvent e) throws IOException {
-		CreateAccountController controller = new CreateAccountController(client, stage);
+		CreateAccountController controller = new CreateAccountController(client, stage, this);
+		createAccountController = controller;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
 		loader.setController(controller);
 		Parent root = loader.load();
 		
 		Scene scene = new Scene(root);
+		stage.close();
 		stage.setTitle("ChinWag");
 		stage.setScene(scene);
 		stage.show();
@@ -160,6 +163,10 @@ public class LoginController {
 	
 	public void setSuccessfulSignupVisible() {
 		signupSuccessful.setVisible(true);
+	}
+	
+	public CreateAccountController getCreateAccountController() {
+		return createAccountController;
 	}
 	
 	public void addSessionSpace(String session) {

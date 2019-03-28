@@ -17,7 +17,7 @@ import protocol.Data;
 import protocol.MessageBox;
 
 public class CreateAccountController {
-	Client client;
+	private Client client;
 	private Stage stage;
 	private LoginController controller;
 	
@@ -29,9 +29,10 @@ public class CreateAccountController {
 	@FXML private Text notLetters;
 	@FXML private Text duplicateUsername;
 	
-	public CreateAccountController(Client client, Stage stage) {
+	public CreateAccountController(Client client, Stage stage, LoginController controller) {
 		this.client = client;
 		this.stage = stage;
+		this.controller = controller;
 	}
 	
 	public void initialize() {
@@ -52,8 +53,6 @@ public class CreateAccountController {
 			create.add(Data.PASSWORD, passwordField.getText());
 			passwordField.clear();
 			client.sendMessage(create);
-			stage.close();
-			drawLogonScreen(true);
 		}
 		else {
 			usernameField.clear();
@@ -62,8 +61,9 @@ public class CreateAccountController {
 		}
 	}
 	
-	private void drawLogonScreen(boolean justSignedUpSuccessfully){
+	public void drawLogonScreen(boolean justSignedUpSuccessfully){
 		LoginController controller = new LoginController(stage, client);
+		client.setController(controller);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
 		loader.setController(controller);
 		Parent root;
@@ -73,11 +73,20 @@ public class CreateAccountController {
 			if (justSignedUpSuccessfully) {
 				controller.setSuccessfulSignupVisible();
 			}
+			stage.close();
 			stage.setTitle("ChinWag");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void displayDuplicateUser() {
+		duplicateUsername.setVisible(true);
+	}
+	
+	public void displaySuccessfulSignUp() {
+		controller.setSuccessfulSignupVisible();
 	}
 }

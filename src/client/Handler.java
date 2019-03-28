@@ -100,11 +100,20 @@ public class Handler {
 		if(mb.get(Data.MESSAGE).equals("This chat name already exists, please try another one.")) {
 			Platform.runLater(() -> controller.getMainController().getChatController().notifyDuplicateChat());
 		}
-		if(mb.get(Data.MESSAGE).equals("Chat successfully created.")) {
+		else if(mb.get(Data.MESSAGE).equals("Chat successfully created.")) {
 			Platform.runLater(() -> {controller.getMainController().createChat(mb.get(Data.CHAT_NAME));
 					controller.getMainController().getChatController().getStage().close();});
 			
 		}
+		else if(mb.get(Data.MESSAGE).equals("The username already exists.")) {
+			Platform.runLater(() -> controller.getCreateAccountController().displayDuplicateUser());
+		}
+		else if(mb.get(Data.MESSAGE).equals("Successfully signed up.")) {
+			Platform.runLater(() -> {controller.getCreateAccountController().drawLogonScreen(true);
+			controller.getCreateAccountController().displaySuccessfulSignUp();});
+		}
+		
+		
 		System.out.println(mb.get(Data.MESSAGE));
 	}
 	
