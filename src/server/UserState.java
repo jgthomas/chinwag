@@ -20,6 +20,15 @@ public class UserState implements Iterable<ChatSession> {
         }
 
         /**
+         * Gets all the chat sessions the user is in.
+         *
+         * @return a map that contains all the chat sessions the user is in
+         */
+        public ConcurrentMap<String, ChatSession> getActiveSessions(){
+                return activeSessions;
+        }
+
+        /**
          * @param chat a chat session to add to the client's
          *             current sessions
          */
