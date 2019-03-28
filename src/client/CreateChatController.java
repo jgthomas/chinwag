@@ -55,12 +55,14 @@ public class CreateChatController {
 		} else {
 			chatName.clear();
 			chatName.requestFocus();
+			duplicateChatNotification.setVisible(false);
 			lettersOnly.setVisible(true);
 		}
 		
 	}
 	
 	public void notifyDuplicateChat() {
+		lettersOnly.setVisible(false);
 		duplicateChatNotification.setVisible(true);
 	}
 	
