@@ -56,6 +56,7 @@ public class CreateAccountController {
 		}
 		else {
 			usernameField.clear();
+			duplicateUsername.setVisible(false);
 			notLetters.setVisible(true);
 			usernameField.requestFocus();
 		}
@@ -83,6 +84,7 @@ public class CreateAccountController {
 	}
 	
 	public void displayDuplicateUser() {
+		notLetters.setVisible(false);
 		duplicateUsername.setVisible(true);
 	}
 	
