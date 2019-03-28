@@ -26,6 +26,7 @@ public class Main extends Application {
 		scene = new Scene(root);
 		stage.setTitle("ChinWag");
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.setOnCloseRequest(ActionEvent -> System.exit(1));
 		stage.show();
 	}

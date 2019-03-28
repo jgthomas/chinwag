@@ -168,7 +168,6 @@ public class MainController {
 		logout.add(Data.USER_NAME, client.getUser().getUserName());
 		client.sendMessage(logout);
 		stage.close();
-		Stage stage = new Stage();
 		LoginController controller = new LoginController(stage, client);
 		client.setController(controller);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
@@ -189,6 +188,7 @@ public class MainController {
 	@FXML
 	public void addUser(ActionEvent e) {
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		AddUserController controller = new AddUserController(client, stage, chatTreeView);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddUser.fxml"));
 		loader.setController(controller);
@@ -217,6 +217,7 @@ public class MainController {
 	@FXML
 	public void createChat(ActionEvent e) {
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		CreateChatController controller = new CreateChatController(client, stage, this.controller);
 		chatController = controller;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateChat.fxml"));
@@ -236,6 +237,7 @@ public class MainController {
 	@FXML
 	public void addFriend(ActionEvent e) {
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		AddFriendController controller = new AddFriendController(client, friendsList, stage);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriend.fxml"));
 		loader.setController(controller);
@@ -278,6 +280,7 @@ public class MainController {
 	
 	public void drawInviteScreen(MessageBox mb) {
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		InvitationController controller = new InvitationController(client, stage, 
 				treeViewRoot, messageSpaces, inviteName, inviter);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Invitation.fxml"));
