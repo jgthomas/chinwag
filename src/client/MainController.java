@@ -106,7 +106,7 @@ public class MainController {
 	
 	@FXML
 	public void sendMessage(ActionEvent e) {
-		messageSpace.appendText("You>>> " + input.getText() + "\n");
+		messageSpace.appendText(client.getUser().getUserName() + ">>> " + input.getText() + "\n");
 		MessageBox message = new MessageBox(Action.CHAT);
 		message.add(Data.CHAT_NAME, chatTreeView.getSelectionModel().getSelectedItem().isLeaf() ?
 									chatTreeView.getSelectionModel().getSelectedItem().getParent().getValue() : 
