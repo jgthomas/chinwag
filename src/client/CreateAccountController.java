@@ -28,6 +28,7 @@ public class CreateAccountController {
 	@FXML private PasswordField passwordField;
 	@FXML private Text notLetters;
 	@FXML private Text duplicateUsername;
+	@FXML private Text usernameTooLong;
 	
 	public CreateAccountController(Client client, Stage stage, LoginController controller) {
 		this.client = client;
@@ -38,6 +39,7 @@ public class CreateAccountController {
 	public void initialize() {
 		notLetters.setVisible(false);
 		duplicateUsername.setVisible(false);
+		usernameTooLong.setVisible(false);
 	}
 	
 	public void back(ActionEvent e) throws IOException {
@@ -46,7 +48,14 @@ public class CreateAccountController {
 	}
 	
 	public void sendSignupRequest(ActionEvent e) {
-		if (MainController.checkUserInput(usernameField.getText())) {
+		if (usernameField.getText().length() > 10) {
+			notLetters.setVisible(false);
+			duplicateUsername.setVisible(false);
+			usernameTooLong.setVisible(true);
+			usernameField.clear();
+			return;
+		}
+		else if (MainController.checkUserInput(usernameField.getText())) {
 			MessageBox create = new MessageBox(Action.SIGN_UP);
 			create.add(Data.USER_NAME, usernameField.getText());
 			usernameField.clear();
@@ -56,6 +65,7 @@ public class CreateAccountController {
 		}
 		else {
 			usernameField.clear();
+			usernameTooLong.setVisible(false);
 			duplicateUsername.setVisible(false);
 			notLetters.setVisible(true);
 			usernameField.requestFocus();
@@ -84,6 +94,7 @@ public class CreateAccountController {
 	}
 	
 	public void displayDuplicateUser() {
+		usernameTooLong.setVisible(false);
 		notLetters.setVisible(false);
 		duplicateUsername.setVisible(true);
 	}

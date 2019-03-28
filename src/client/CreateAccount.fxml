@@ -8,8 +8,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="notLetters" fill="RED" layoutX="13.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username can only contain alphanumerics" visible="false" wrappingWidth="177.0" />
-      <Text fx:id="duplicateUsername" fill="RED" layoutX="23.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username already taken" visible="false" wrappingWidth="177.0" />
+      <Text fx:id="notLetters" fill="RED" layoutX="16.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username can only contain alphanumerics" visible="false" wrappingWidth="177.0" />
+      <Text fx:id="duplicateUsername" fill="RED" layoutX="16.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username already taken" visible="false" wrappingWidth="177.0" />
       <TextField fx:id="usernameField" layoutX="16.0" layoutY="93.0" promptText="Enter username..." />
       <PasswordField fx:id="passwordField" layoutX="16.0" layoutY="141.0" promptText="Enter password..." />
       <Text layoutX="16.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
@@ -17,5 +17,6 @@
       <Button fx:id="back" cancelButton="true" layoutX="16.0" layoutY="180.0" mnemonicParsing="false" onAction="#back" text="Back" />
       <Button fx:id="signupRequest" defaultButton="true" layoutX="120.0" layoutY="180.0" mnemonicParsing="false" onAction="#sendSignupRequest" text="Sign up" />
       <Text layoutX="16.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account" />
+      <Text fx:id="usernameTooLong" fill="RED" layoutX="16.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name must be &lt;10 characters" visible="false" wrappingWidth="177.0" />
    </children>
 </AnchorPane>
