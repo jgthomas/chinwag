@@ -15,4 +15,4 @@ MSc Java group project: chat application.
 
 ## Account creation and login windows
 
-![create account](images/CreateAccount.png) | ![login](images/Login.png)
+![create account](images/CreateAccount.png) ![login](images/Login.png)
