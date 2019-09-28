@@ -2,13 +2,10 @@
 
 ## Other team members
 
-|[SkyCoderr](https://github.com/SkyCoderr)|[benhkmn](https://github.com/benhkmn)        | 
-|[wilkoaid](https://github.com/wilkoaid)  |[wormingtone](https://github.com/wormingtone)|
-
-| First Header  | Second Header |
+| Server & DB | Client & GUI |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| [SkyCoderr](https://github.com/SkyCoderr)  | [benhkmn](https://github.com/benhkmn)  |
+| [wilkoaid](https://github.com/wilkoaid)  | [wormingtone](https://github.com/wormingtone)  |
 
 
 ## Major features
