@@ -1,6 +1,4 @@
-# chinwag
-
-MSc Java group project: chat application.
+# chinwag - MSc Java group project chat application
 
 * Multi-threaded, using dynamic thread pool
 * Client-server architecture
