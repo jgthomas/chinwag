@@ -2,7 +2,9 @@
 
 ## Team members
 
-I worked mainly on the server and the communicaiton protocol. The table below indicates the areas other team members worked on.
+I worked mainly on the server and the communicaiton protocol.
+
+The table below indicates the areas other team members worked on.
 
 | Server & DB | Client & GUI |
 | ------------- | ------------- |
