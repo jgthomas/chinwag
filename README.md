@@ -1,5 +1,15 @@
 # chinwag - MSc Java group project chat application
 
+## Other team members
+
+[SkyCoderr](https://github.com/SkyCoderr)
+[benhkmn](https://github.com/benhkmn)
+[wilkoaid](https://github.com/wilkoaid)
+[wormingtone](https://github.com/wormingtone)
+
+
+## Major features
+
 * Client-server architecture
 * Multi-threaded, using dynamic thread pool
 * Communication over socket connection
