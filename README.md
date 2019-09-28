@@ -1,4 +1,4 @@
-# ChinWag - MSc Java group project chat application
+# ChinWag chat application - MSc Java group project
 
 ## Team members
 
