@@ -1,6 +1,8 @@
 # ChinWag - MSc Java group project chat application
 
-## Other team members
+## Team members
+
+I worked mainly on the server and the communicaiton protocol. The table below indicates the areas other team members worked on.
 
 | Server & DB | Client & GUI |
 | ------------- | ------------- |
