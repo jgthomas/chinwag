@@ -8,3 +8,7 @@ MSc Java group project: chat application.
 * Chat history stored in PostgreSQL database
 * Passwords stored as salted hashes in database
 * GUI client written in JavaFX
+
+## Main application window
+
+![main](images/Main.png)
